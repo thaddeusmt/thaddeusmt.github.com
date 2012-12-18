@@ -1,0 +1,102 @@
+---
+layout: post
+date: 2009-09-23 18:24
+title: "Custom Loops for Custom Taxonomies in WordPress 2.8"
+categories: [CMS, Web-Development]
+keywords: [wordpress,the loop,custom taxonomy,taxonomies,custom loop,custom query,sql,where clause,join,custom field,wordpress 2.8]
+permalink: custom-loops-for-custom-taxonomies-in-wordpress-28
+---
+
+"WordPress 2.8":http://codex.wordpress.org/Version_2.8 saw a big expansion and enhancement of it's "Taxonomy API":http://codex.wordpress.org/WordPress_Taxonomy, allowing for easy creation of custom taxonomies. The default WordPress "category" and "tag" taxonomies are sufficient for most blogs, but the ability to define additional sets of terms ("vocabularies") makes the platform a much more flexible and powerful Content Management System than it was before. Ever since "Justin Tadlock":http://justintadlock.com/archives/2009/05/06/custom-taxonomies-in-wordpress-28 opened my eyes to how to create and use additional taxonomies, it seems like every WordPress project I work on needs one or two extra vocabularies. :)
+
+Working with Drupal as much as I have, I became very accustomed to having multiple taxonomies. It's incredibly useful. A classic example is Movies: each movie has a director, some actors, a year it was made, etc. You _could_ just lump all these together with a bunch of "tags" in WordPress, but grouping "Actor" and "Year" tags together into taxonomies makes site organization and navigation much simpler (and more sensible).
+
+But there are some challenges still to using WordPress taxonomies. While there is some support in the new API word making queries based on specific taxonomies, there is not a lot. You _can_ filter your Loop by a term in a single taxonomy via the _query_posts()_, as "Justin":http://justintadlock.com/archives/2009/05/06/custom-taxonomies-in-wordpress-28 shows in this example:
+
+<pre><code><?php 
+query_posts( array( 'people' => 'will-smith', 'showposts' => 10 ) ); 
+?></code></pre>
+
+Only posts tagged with actor "Will Smith" in the "people" taxonomy will be returned. But what if you want to return posts that tagged with multiple tags in your taxonomy? Or if you want to return posts that are tagged in _two_ custom taxonomies? What about posts with a specific custom field _and_ custom taxonomy?
+
+For advanced WordPress post ("Loop") queries it's necessary to roll up your sleeves and write some SQL. There are two ways to do this. The first is to add a filter function to the regular _query_posts()_ method:
+
+<pre><code><?php
+function filter_where($where = '') {
+    $where .= " AND post_date <= '".date('Y-m-d')."'";
+    return $where;
+}
+add_filter('posts_where', 'filter_where');
+query_posts($query_string);
+if (have_posts()) : 
+    while (have_posts()) : 
+        the_post();
+        //display your post data with the usual functions like the_title(), etc
+    endwhile;
+endif;
+?></code></pre>
+
+The other way - which is less verbose and easier to comprehend - is to straight-up write your own SQL statement, a la this WordPress Codex "article on Custom Queries":http://codex.wordpress.org/Custom_Queries. Rather than try to teach any SQL, I'll just provide a couple examples.
+
+Here is a query that selects posts which have the MyCustomField custom field value set to "my custom value" _and_ are tagged "mytag" in the custom "mytaxonomy":
+
+<pre><code><?php
+$querystr = "
+    SELECT *
+    FROM $wpdb->posts as wpost
+    INNER JOIN $wpdb->postmeta  ON (wpost.ID = $wpdb->postmeta.post_id)
+    AND $wpdb->postmeta.meta_key = 'MyCustomField' 
+    AND $wpdb->postmeta.meta_value = 'my custom value' 
+    INNER JOIN $wpdb->term_relationships  ON (wpost.ID = $wpdb->term_relationships.object_id)
+    INNER JOIN $wpdb->term_taxonomy ON ($wpdb->term_relationships.term_taxonomy_id = $wpdb->term_taxonomy.term_taxonomy_id)
+    AND $wpdb->term_taxonomy.taxonomy = 'mytaxonomy'
+    AND $wpdb->term_taxonomy.term_id IN (mytag)
+    WHERE wpost.post_status IN ('publish')
+    ORDER BY wpost.post_date ASC
+    ";
+$pageposts = $wpdb->get_results($querystr, OBJECT);
+if ($pageposts): 
+    foreach ($pageposts as $post): 
+        setup_postdata($post);
+        //display your post data with the usual functions like the_title(), etc
+    endforeach;
+endif;
+?></code></pre>
+
+_Notice that the Loop is set up differently! It is a _foreach_ instead of a _while_, and you must call _setup_postdata($post)_ instead of _just the_post()_ to set up the global post variables._
+
+Here is one more example that queries posts with terms in _two_ different custom taxonomies, and with which the MyCustomField custom field value is set to anything _but_ "my custom value" (just to make it interesting):
+
+<pre><code><?php
+$querystr = "
+SELECT *
+    FROM $wpdb->posts as wpost		
+    INNER JOIN $wpdb->term_relationships r1
+    ON (wpost.ID = r1.object_id)
+    INNER JOIN $wpdb->term_taxonomy t1
+    ON (r1.term_taxonomy_id = t1.term_taxonomy_id)
+    AND t1.taxonomy IN ('firstcustomtaxonomy')
+    AND t1.term_id IN ('aTaxonomyTerm')
+    INNER JOIN $wpdb->term_relationships r2
+    ON (wpost.ID = r2.object_id)
+    INNER JOIN $wpdb->term_taxonomy t2
+    ON (r2.term_taxonomy_id = t2.term_taxonomy_id)
+    AND t2.taxonomy IN ('secondcustomtaxonomy')
+    AND t2.term_id IN ('anotherTaxonomyTerm')
+    WHERE wpost.ID NOT IN 
+        (SELECT m.post_id FROM wp_postmeta m 
+         WHERE m.meta_key = 'MyCustomField' 
+         AND m.meta_value = 'my custom value')
+    AND post_status IN ('publish')
+    ORDER BY wpost.post_date ASC
+    ";
+$pageposts = $wpdb->get_results($querystr, OBJECT);
+if ($pageposts): 
+    foreach ($pageposts as $post): 
+        setup_postdata($post);
+        //display your post data with the usual functions like the_title(), etc
+    endforeach;
+endif;
+?></code></pre>
+
+Have fun making powerful, custom websites with the new WordPress 2.8 and it's custom taxonomies!

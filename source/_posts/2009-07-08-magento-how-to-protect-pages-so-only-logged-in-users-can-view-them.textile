@@ -1,0 +1,78 @@
+---
+layout: post
+date: 2009-07-08 23:03
+title: "Magento: How to protect pages so only logged in users can view them"
+categories: [e-Commerce, Web-Development]
+keywords: [magento,ecommerce,private pages,logged in,authorized,wholesale,only logged in,protection,security]
+permalink: magento-how-to-protect-pages-so-only-logged-in-users-can-view-them
+---
+
+There are times when you want all or part of your Magento online store to only be visible to customers who are logged in to the website. Once such example is a "wholesale" website where only approved wholesale users should be able to view products and checkout. This functionality is not built in to Magento, but it's a just a few simple little code hacks away.
+
+*_NOTE: On 8.25.09 I updated this post since I have improved the technique._*
+
+<h2>Create a redirect .phtml template</h2>
+
+First, create a small file in the _/template/page/html_ directory of your active theme. Call it something like _auth-redirect.phtml_. The contents are just:
+
+<pre><code>==&lt?php== Mage::getSingleton('customer/session')->setBeforeAuthUrl($this->getRequest()->getRequestUri());  //save requested URL for later redirection
+if(!Mage::getSingleton('customer/session')->isLoggedIn()) {  // if not logged in
+    header("Status: 301");
+    header('Location: '.Mage::helper('core/url')->getHomeUrl(customer/account/login)) ;  // send to the login page
+    exit; 
+} ?></code></pre>
+
+*Note:* Apparently, for Magento 1.4, you should use this code (but I have not tested it):
+
+<pre><code>==&lt?php== Mage::getSingleton('customer/session')->setBeforeAuthUrl($this->getRequest()->getRequestUri());  //save requested URL for later redirection
+if(!Mage::getSingleton('customer/session')->isLoggedIn()) {  // if not logged in
+    header("Status: 301");
+    header('Location: '.$this->getUrl('customer/account/login')) ;  // send to the login page
+    exit; 
+} ?></code></pre>
+
+Right now the 301 redirects to the login page, but it could be the homepage or somewhere else as well. The first line ensures that after logging in, the user is redirected to the page they first tried to access. Removing that line means the user gets redirected to their Account page after logging in, I believe.
+
+<h2>Edit page.xml</h2>
+
+Now we want to make the redirect code in _auth-redirect.phtml_ available to all of the page templates on our website. In _layout/page.xml_ in your active theme, add the following line of code:
+
+<pre><code><block type="page/html" name="auth-redirect" as="auth-redirect" template="page/html/auth-redirect.phtml"/></code></pre>
+
+Insert this as the first item under the "root" Block (i.e. &lt;block type="page/html" name="root" output="toHtml">)
+
+<h2>Edit page layout templates</h2>
+
+Now that the redirect code in _auth-redirect.phtml_ is available, we need to include it in all of the page templates. The "page templates" I'm referring to, in the _page_ directory of your theme, are:
+
+* 1column.phtml
+* 2columns-left.phtml
+* 2columns-right.phtml
+* 3columns.phtml
+* etc etc
+
+Insert the following line into all of them, at the top of the file just after the "<?php" tag.
+
+<pre><code>echo $this->getChildHtml('auth-redirect')</code></pre>
+
+This ensures that the redirect is included before any of the page HTML renders.
+
+<h2>Add exceptions (or: public pages)</h2>
+
+Finally, we need to add "exceptions" - public pages like the "login" page which don't need to be protected. On a site that is only accessible to logged in users, the login page needs to be public!! To enable the login page, go to _layout/customer.xml_ and add the following to the <code><customer_account_login></code> block: 
+
+<pre><code><remove name="auth-redirect" /></code></pre>
+
+If you want users to be able to create an account, another good one to make public might be <code><customer_account_create></code> in _layout/customer.xml_.
+
+If you want to make the home (front) page public, add the "remove" code to the <code><cms_index_index></code> block in _layout/page.xml_.
+
+You can also add this code to the custom "Layout Update XML" on any category, product or CMS page to make them public.
+
+<h2>And your done!</h2>
+
+That's it. Now, if you want to protect just certain parts of a Magento store, or control access based on user Roles, you will have to get a little fancier. I'm not covering that here, but... 
+
+One way to do that might be to NOT add the auth-redirect block to the master _page.xml_ (and then do exceptions), but instead to only place it on certain pages like the Cart and Checkout (so the catalog is visible, but you can't _purchase_ without logging in).
+
+Alternatively, you can control access by placing the conditional with  <code>==&lt?php== Mage::getSingleton('customer/session')->isLoggedIn()  ?></code> right in specific PHP of pages you want to protect. Some folks check for specific pages by URL using <code>$_SERVER['REQUEST_URI']</code> with this technique. There's more on this in the Magento forums "here":http://www.magentocommerce.com/boards/viewthread/2574/.

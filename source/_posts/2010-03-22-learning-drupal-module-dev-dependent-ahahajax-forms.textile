@@ -1,0 +1,146 @@
+---
+layout: post
+date: 2010-03-22 01:32
+title: "Learning Drupal Module Dev: Dependent AHAH/AJAX Forms"
+categories: [Web-Development, CMS]
+keywords: [AHAH,AJAX,Drupal,Forms API,AHAH forms,ajax fields,dependent fields,AJAX forms]
+permalink: learning-drupal-module-dev-dependent-ahahajax-forms
+---
+
+<p>So, I've been working on a simple module for a Drupal project lately. I wanted to have two administrator settings for the module, the second of which depends on the first. A "dependent dropdown". It would be cool if it was "AJAXy" too, I thought. Well, it just so turns out that in Drupal 6 there are built in <a href="http://ajax.phpmagazine.net/2005/11/ahah_asychronous_html_and_http.html">AHAH</a> (Asychronous HTML and HTTP) functions in the Forms API to do just this. Easy! Or is it?</p>
+
+<p>It also turns out there is a steep learning curve to making "Ajax forms" with the Drupal Forms API. I got it working, but it took a fair amount of effort. So, to help out future Drupal AHAH developers I am providing my code below, along with a list of links to resources that were a great help in unraveling this problem.</p>
+
+<p>First, to help provide an "aerial view" of what's going on here, this is a list of the components involved:</p>
+
+<ul>
+<li>A form that has the AHAH fields (<em>ahahtestmodule_admin_settings</em> in this example)</li>
+<li>The first field in the form (<em>ahahtestmodule_types</em>), which will change the contents of the second field</li>
+<li>The second, "dependent" field (<em>ahahtestmodule_ahah_field</em>)</li>
+<li>The function that provides the options of the AHAH field based on the first field (<em>ahahtestmodule_get_ahah_fields()</em>)</li>  
+<li>The AHAH function that updates the AHAH field (<em>ahahtestmodule_ahah_field_js()</em>)</li>
+<li>menu callback function for the AHAH function (<em>ahahtestmodule/ahahjs</em>)</li>
+</ul>
+
+<p>To start out, here is the example admin settings form <em>ahahtestmodule_admin_settings</em> with both fields (<em>ahahtestmodule_types</em> and <em>ahahtestmodule_ahah_field</em>):</p>
+
+<pre><code>&lt;?php 
+function ahahtestmodule_admin_settings() {
+  $form = array();
+  $form['settings'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('ahahtestmodule Settings'),
+  );
+  $form['settings']['ahahtestmodule_types'] = array(
+    '#type' => 'radios',
+    '#title' => t('First Field'),
+    '#description' => t('Change this field to change the options in the next field.'),
+    '#options' => array('one' => t('Option 1'), 'two' => t('Option 2'), 'three' => t('Option 3')),
+    '#default_value' => variable_get('ahahtestmodule_types', 'one'),
+    '#ahah' => array(
+      'path' => 'ahahtestmodule/ahahjs',
+      'wrapper' => 'ahah-wrapper',
+      'method' => 'replace',
+    ),
+  );
+  $form['settings']['ahahtestmodule_ahah_field'] = array(
+    '#type' => 'select',
+    '#title' => t('Dependent Second Field'),
+    '#options' => ahahtestmodule_get_ahah_fields(variable_get('ahahtestmodule_types', 'one')),
+    '#default_value' => variable_get('ahahtestmodule_ahah_field', 'none'),
+    '#description' => t('This fields content depends on what is selected in the first field.'),
+    '#prefix' => '&lt;div id="ahah-wrapper">',
+    '#suffix' => '&lt;/div>',
+  );
+  return system_settings_form($form);
+}
+?></code></pre>
+
+<p>Next, here is the dummy function that gets the right content for <em>ahahtestmodule_ahah_field</em> based on <em>ahahtestmodule_types</em>:</p>
+
+<pre><code>&lt;?php 
+function ahahtestmodule_get_ahah_fields($first_variable) {
+  $ahah_fields = array();
+  switch ($first_variable) {
+    case 'one':
+        $ahah_fields['one'] = 'Option 1 Was Selected';
+        break;
+    case 'two':
+        $ahah_fields['two'] = 'Option 2 Was Selected';
+        $ahah_fields['two_bonus'] = 'Bonus Option!';
+        break;
+    case 'three':
+        $ahah_fields['three'] = 'Option 3 Was Selected';
+        break;
+    default:
+        $ahah_fields['none'] = 'Please Select...';
+  }
+  return $ahah_fields;
+}
+?></code></pre>
+
+<p>Then, here is the magic AHAH callback function that I don't fully understand and ripped right off this article at drupal.org: <a href="http://drupal.org/node/331941">Adding dynamic form elements using AHAH</a>:</p>
+
+<pre><code>&lt;?php 
+// The AHAH callback function
+function ahahtestmodule_ahah_field_js() {
+  // The AHAH callback function triggered by the user changing the first field, "ahahtestmodule_types"
+  $form_state = array('storage' => NULL, 'submitted' => FALSE);
+  $form_build_id = $_POST['form_build_id'];
+  // Get for the form from the cache
+  $form = form_get_cache($form_build_id, $form_state);
+  // Get the form set up to process
+  $args = $form['#parameters'];
+  $form_id = array_shift($args);
+  $form_state['post'] = $form['#post'] = $_POST;
+  $form['#programmed'] = $form['#redirect'] = FALSE;
+  // Process the form with drupal_process_form(), which calls the submit handlers that put whatever was worthy of keeping in the $form_state
+  drupal_process_form($form_id, $form, $form_state);
+  // Call drupal_rebuild_form(), which destroys $_POST, creates the form again with hook_form, gets the new form cached and processed again
+  $form = drupal_rebuild_form($form_id, $form_state, $args, $form_build_id);
+  // THIS IS WHAT YOU WILL CUSTOMIZE FOR YOUR OWN FORM
+  // Choose the field you want to update with AHAH and render it
+  $ahah_form = $form['settings']['ahahtestmodule_ahah_field'];
+  unset($ahah_form['#prefix'], $ahah_form['#suffix']);
+  $output = drupal_render($ahah_form);
+  // Final rendering callback.
+  drupal_json(array('status' => TRUE, 'data' => $output));
+}
+?></code></pre>
+
+<p>Lastly, be sure to add the menu callback for <em>ahahtestmodule_ahah_field_js()</em>:
+
+<pre><code>&lt;?php 
+function ahahtestmodule_menu() {
+  $items = array();
+  $items['ahahtestmodule/ahahjs'] = array(
+    'page callback' => 'ahahtestmodule_ahah_field_js',
+    'access arguments' => array('administer ahahtestmodule'),
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+?></code></pre>
+
+<p>I rolled this whole thing up into a little demo module that does nothing except run all this code:</p>
+
+<p><strong><a href="http://www.chilipepperdesign.com/examples/ahahtestmodule.zip">Download the Drupal Ahah Test Module</a></strong></p>
+
+<p>Here are some links that I used to figure this out that will hopefully help you too:</p>
+
+<ul>
+<li><a href="http://api.drupal.org/api/drupal/developer--topics--forms_api_reference.html/6#ahah">The Drupal Form API Manual Page (the AHAH section)</a></li>
+<li><a href="http://drupal.org/node/331941 ">Adding dynamic form elements using AHAH (GREAT)</a></li>
+<li><a href="http://thedrupalblog.com/using-ahah-dynamically-generate-form-elements-and-integration-multi-tiered-taxonomy">Using AHAH to dynamically generate form elements </a></li>
+<li><a href="http://wimleers.com/blog/ahah-helper-module">AHAH helper module</a></li>
+<li><a href="http://www.drupaler.co.uk/blog/ahah-node-forms-and-select-lists/434">AHAH, Node Forms And Select Lists</a></li>
+<li><a href="http://maxeydevbox.org/blogs/geoffmaxey/adventure-ahah-and-drupal-form-api">An Adventure with AHAH and the Drupal Form API</a></li>
+<li><a href="http://www.stellapower.net/content/ajax-ifying-drupal-node-forms">AJAX-ifying Drupal Node Forms</a></li>
+<li><a href="http://katbailey.net/blog/ahah-drupal-may-it-one-day-live-its-acronym">AHAH in Drupal: may it one day live up to its acronym</a></li>
+<li><a href="http://blog.menhir.be/2008/09/27/ahah-forms-in-drupal-6/">Ahah forms in drupal 6</a></li>
+<li><a href="http://drupalsn.com/learn-drupal/drupal-tutorials/getting-going-ahah-and-drupal-6">Getting going with AHAH and Drupal 6</a></li>
+<li><a href="http://www.nicklewis.org/node/967">Drupal 6 AHAH forms: Making New Fields Work</a></li>
+</ul>
+
+<p>A big thanks to the Drupal community as always for putting so much helpful support up online for free!</p>
+

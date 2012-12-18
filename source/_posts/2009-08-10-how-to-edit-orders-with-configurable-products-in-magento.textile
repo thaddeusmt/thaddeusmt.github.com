@@ -1,0 +1,71 @@
+---
+layout: post
+date: 2009-08-10 19:35
+title: "How to edit orders with Configurable Products in Magento"
+categories: [e-Commerce, Web-Development]
+keywords: [magento,ecommerce,configurable products,edit order,simple products,edit configurable product,order management,tutorial,how to]
+permalink: how-to-edit-orders-with-configurable-products-in-magento
+---
+
+Up to and including the current release of Magento (1.3.2.3), an admin cannot properly edit an order containing configurable products. Magento warns you of this when you click the "Edit" button, and if you proceed the order appears on the edit screen containing only the Simple and Virtual products. _Configurable, Bundled, and other products are removed from the order._
+
+I am finding this more and more with Magento: it is the most feature-rich and impressive of all Open Source commerce solutions, but it is still a young piece of software and the result is that all of these great features are only about 80% operational. But enough ranting about Magento (for now).
+
+You need to be able to edit an orders containing configurable products! The code below allows you to do this by converting the Configurable products into their respective Simple products. This is not the same as actually being able to edit the Configurable products. This approach _is_ the same one that Varien takes when allowing an admin to create new orders: you _cannot_ add Configurable products, but you _can_ add any of the Simple products that constitute the Configurable ones.
+
+*NOTE:* As always, it's better to roll these into extensions for future upgradability, and _do not attempt this on a production server without backing everything up!_ I don't have to time to provide support if my little hack causes problems for you, so be careful!
+
+Now on to the code!
+
+First, we want to create a new list of product types that can be edited. We don't want to mess with the list of product types that can be _created_ however, so we need to make a new list. In _Adminhtml/etc/config.xml_, add the following code around line 399 (below the _adminhtml->sales->order->create_ list of product types):
+
+<pre><code><edit>
+   <available_product_types>
+      <simple/>
+      <virtual/>
+      <configurable/>
+   </available_product_types>
+</edit></code></pre>
+
+This puts Configurable products on the "guest list", as it were, allowing them to be edited.
+
+Then in _Adminhtml/Block/Sales/Order/View.php_, in the<em>__construct</em> method, change the code in the "if ($this->_isAllowedAction('edit') && $this->getOrder()->canEdit()) {" block from:
+
+<pre><code>Mage::getConfig()->getNode('adminhtml/sales/order/create/available_product_types')->asArray())</code></pre>
+
+to:
+
+<pre><code>Mage::getConfig()->getNode('adminhtml/sales/order/edit/available_product_types')->asArray())</code></pre>
+
+This code bypasses the JS warning you get when trying to edit an order containing configurable products, since it will not be needed. The warning about Bundled and other non-editable product types will still appear.
+
+And finally (this is the real guts of the hack), in _Mage/Adminhtml/Model/Sales/Order/Create.php_, in the  _initFromOrder()_ method, change the code in the "foreach ($order->getItemsCollection" block as follows:
+
+<pre><code>foreach ($order->getItemsCollection(
+            array_keys(Mage::getConfig()->getNode('adminhtml/sales/order/edit/available_product_types')->asArray()),
+            false
+            ) as $orderItem) {
+                if ($order->getReordered()) {
+                    $qty = $orderItem->getQtyOrdered();
+                }
+                else {
+                    $qty = $orderItem->getQtyOrdered() - $orderItem->getQtyShipped() - $orderItem->getQtyInvoiced();
+                }
+                if ($qty > 0) {
+                     //if it's a child configurable product
+                    if ($orderItem->_getData("product_type") != "configurable") {
+                        $item = $this->initFromOrderItem($orderItem, $qty);
+                        if (is_string($item)) {
+                            Mage::throwException($item);
+                        }
+                    }
+                }
+        }</code></pre>
+
+This code grabs the Configurable product's child Simple products and adds _them_ to the cart instead. This may look a little strange if a front end customer created the order, then re-orders it after the admin has edited it... but otherwise it works fine. *The correct number of the correct Simple products are in the order - not lost to the void as they were previously.*
+
+It seems to me like it would have been easier for Varien to include this functionality rather than all of the code checking to ignore Configurable products? Who knows. But I hope my code snippet can help someone out!
+
+*UPDATE 9.1.09* There is a known issue with Catalog Price Rule sale prices using this hack. To get around it, just remember to hit the "Update Item's and Qtys" button as soon as you have opened up the order for editing. This re-applies the sale price rules to the Simple items (which replaced the Configurable item).
+
+P.S. I doubt this is compatible with "OrganicInternet's Simple Configurable Products":http://www.magentocommerce.com/extension/596/simple-configurable-products module, but I never tested against it so I don't know.

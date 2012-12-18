@@ -1,0 +1,40 @@
+---
+layout: post
+date: 2010-03-22 16:19
+title: "Insert Flash Media Embed Code TinyMCE Plugin"
+categories: [Web-Development, JavaScript]
+keywords: [tinymce,media embed,embed code,youtube embed,video embed,insert video,embed object,tincymce plugin,flash embed plugin,google maps]
+permalink: insert-flash-media-embed-code-tinymce-plugin
+---
+
+I've run into a problem providing my clients good, easy-to-use media embed functionality with the existing JavaScript WYSIWYG editors. The big players, "CKEditor":http://ckeditor.com/ (formery FCKEditor) and "TinyMCE":http://tinymce.moxiecode.com/ both provide a "Flash" button which works okay with YouTube and other large video providers, but what about embedding a Picasa slideshow? None of the WYSIWYG editors come with plugin to just insert some HTML code. If you want to embed something like a Picasa slideshow,  customized YouTube player, or Google Map you have open up the source code, find the location you want to insert it, and paste in the code. Fine for some, but difficult and scary for most as it breaks the WYSIWYG paradigm.
+
+On one of my latest Drupal websites there are multiple bloggers, none of whom are particularly tech savvy. I set up the CMS with TinyMCE because I like how they can drag and drop images around (I just wish Drupal had an image embed uploader like WordPress!). After a while they complained that the Insert Flash button in TinyMCE just wasn't cutting it. So I set about fixing it. How hard could it be to make a plugin that just inserts some HTML code where your cursor is? Like it already does for images? 
+
+It turns out it is very easy. I was able to just edit the TinyMCE "Example" plug-in, which already did basically exactly what I wanted. So here I provide it to you, Internet. I hope it is useful, and please let me know if it's broken (or could work better). Thanks!
+
+*UPDATED*: (9-17-2010) I fixed some bugs with IE. It should work better cross-browse now.
+
+Download the plugin:
+
+* <strong>"From SourceForge":http://sourceforge.net/tracker/?func=detail&aid=2974843&group_id=103281&atid=738747 </strong>
+* <strong>"From Chili Pepper Design":http://www.chilipepperdesign.com/examples/tinymce-embed-plugin-v2.zip </strong>
+
+I found some tips on installing TinyCME plugins here: "Installing Plugin Newbie Question":http://tinymce.moxiecode.com/punbb/viewtopic.php?id=3349
+Here is the official guide to creating a plugin for TinyMCE 3: "TinyMCE:Create plugin/3.x":http://wiki.moxiecode.com/index.php/TinyMCE:Create_plugin/3.x
+
+*To use this plugin, install it in the TinyMCE plugin folder and just include it in the _TinyMCE.init()_ call like you would the other plugins*. Example ("*embed*" is the name of the plugin):
+
+<pre><code>
+<script type="text/javascript" src="<your installation path>/tiny_mce/tiny_mce.js"></script>
+<script type="text/javascript">
+  tinyMCE.init({
+    theme : "advanced",
+    mode : "textareas",
+    plugins : "embed, fullscreen, emotions, preview",
+    theme_advanced_buttons3_add : "embed, fullscreen, emotions, preview"
+  });
+</script></code></pre>
+
+
+*_Disclaimer_: I am not a TinyMCE guru, and not even that hot at JavaScript. I probably cannot help you with other TinyMCE plugins, or even this one. I only got this to work because the Example plugin was so close to what I already needed. But thanks for stopping by!*

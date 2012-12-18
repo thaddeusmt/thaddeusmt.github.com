@@ -1,0 +1,70 @@
+---
+layout: post
+date: 2010-03-24 00:58
+title: "A Facebook Content Management System (CMS) for Facebook Page Templates"
+categories: [CMS, Social-Media]
+keywords: [facebook,facebook cms,facebook templates,facebook page templates,facebook tab templates,facebook content management system,custom tab cms]
+permalink: a-facebook-content-management-system-cms-for-facebook-page-templates
+---
+
+<a href="http://www.splashlabsocial.com"><img src="http://www.chilipepperdesign.com/images/53t.jpg" style="float: left; margin-right: 10px;" /></a>
+<p style="font-size:1.2em;"><strong>Update: The project is now live and ready for signups! Head over to <a href="http://splashlabsocial.com">SplashLab Social</a> to learn more and get started. It's the easiest way to create and manage content on your Facebook Page's iframe tabs!</strong></p>
+
+<br />
+<br />
+<br />
+<p>There's something big in the works here at Chili Pepper Design I wanted to share on my blog quickly:</p>
+
+<h3><strike>Coming Soon:</strike> A Facebook Fan Page CMS!</h3>
+
+<p>Right now the social networking site <a href="http://www.facebook.com">Facebook</a> is quickly becoming the king of the web. Some sources claim that Facebook has <a href="http://www.guardian.co.uk/technology/blog/2010/mar/15/facebook-passes-google-share-us">passed Google</a> as the most visited website on the web. For this reason <a href="http://www.facebook.com/advertising/?pages">Fan Pages</a> are becoming an important part of the marketing strategies of small businesses and large corporations alike. Setting up a Fan Page is faster and cheaper than setting up a website, and allows customers to interact with the business/brand (and share it with their friends) in ways that traditional web pages do not.</p>
+
+<p>These Facebook Fan Pages consist of a series of "tabs". In addition to the Wall, and the usual Photos, Videos, Discussion and Reviews tabs, many businesses are adding custom FBML tabs. These provide additional information and a touch of that business' personality and brand. These nicely designed tabs offer special promotions, games, contests, product information, shopping options, blog and twitter feeds, and much more. For some great examples of what can be accomplished with custom FBML tabs check out the <a href="http://facebookshowcase.net">Facebook Showcase</a>.</p>
+
+<p>The one drawback to these otherwise-awesome custom page tabs is that they require a bit of technical savvy to set up. Some require the creation of a custom application, and even making a simple tab with the <a href="http://www.facebook.com/apps/application.php?id=4949752878">Static FBML</a> application requires FBML coding. There are many tutorials that cover how to set up custom tabs (like my own <a href="http://www.chilipepperdesign.com/2009/10/11/how-to-make-custom-facebook-fan-page-tabs-with-fbml-part-2">FBML tab tutorial here</a>), but frankly it's easier to set up an <em>entire new website</em> with services like <a href="http://wordpress.com">WordPress.com</a> and <a href="http://www.blogger.com/">Blogger</a> than to set up a custom FBML tab.</p>
+
+<p>And even once a tab is set up, it is difficult to update it. The FBML code must be edited again, just like when it was first set up. This is one area where websites running Content Management Systems (CMSs) like Drupal and Wordpress are far ahead of custom facebook tabs. Editing a page in Drupal is as easy as composing an email - no coding needed!
+
+<p><em>But what if creating a custom FBML tab was just as simple as setting up blog on Blogger? Just sign up, choose a design template, enter the content, and you're done?</em></p>
+
+<p><em>What if updating a custom FBML tab was as simple as updating a page on a Drupal website? Just log in, change the content, and hit "Update"?</em></p>
+
+<h2>Enter the Facebook CMS</h2>
+
+<p>This is exactly the problem that Chili Pepper Design is working on addressing. With the <strong>Facebook Content Management System</strong> currently in development it will be easy as pie to create and update custom FBML tabs with nice templates on a Fan Page.</p>
+
+<p>Here's how it will work:</p>
+
+<ol>
+<li>Create a Facebook Fan Page</li>
+<li>Go to the Facebook CMS website and create an account</li>
+<li>Choose a template for your tab</li>
+<li>Enter the content for the tab (using an easy WYSIWYG editor like Word)</li>
+<li>Save the new Tab</li>
+<li>Add the Facebook Application to the Fan Page (one click "Add to Page")</li>
+<li>DONE!</li>
+</ol>
+
+<p>Here are some of the many components that the templates will have (in various combinations):</p>
+
+<ul>
+<li>company logo</li>
+<li>multiple tabs/sub navigation</li>
+<li>body content</li>
+<li>custom images</li>
+<li>flash videos</li>
+<li>sidebar blocks</li>
+<li>Twitter feeds</li>
+<li>blog feeds</li>
+<li>comment area</li>
+<li>share buttons</li>
+<li>invite fiends</li>
+</ul>
+
+<p>The templates will be professionally designed, optimized for SEO, and have the ability to customize some of the colors.</p>
+
+<h3>For Facebook Designers</h3>
+
+<p>Are you a Facebook designer? Would like to provide your clients with an easy way to update the pages you have created for them? In addition to the standard templates, the Facebook CMS will offer a special product for designers to plug the CMS into their designs. The details on this have not been worked out, but it is a service I very much want to offer, along the lines of <a href="http://cushycms.com/">Cushy CMS</a> or <a href="http://surrealcms.com/">Surreal CMS</a>.</p>
+
+<p><strong>Check out <a href="http://www.splashlabsocial.com">SplashLab Social</a> to learn more!</strong></p>

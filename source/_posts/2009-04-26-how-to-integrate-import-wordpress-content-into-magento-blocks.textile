@@ -1,0 +1,73 @@
+---
+layout: post
+date: 2009-04-26 23:10
+title: "How to Integrate (Import) WordPress Content into Magento Blocks"
+categories: [e-Commerce, CMS]
+keywords: [magento,maintainable websites,blogs,content management system,e-commerce,static block,wordpress,integration,wordpress integration,import content,ecommerce]
+permalink: how-to-integrate-import-wordpress-content-into-magento-blocks
+---
+
+This is the technique I use to integrate "WordPress":http://wordpress.org/ content into "Magento":http://www.magentocommerce.com/. This can be useful for bringing in posts related to a product, or having recent blog posts on the Magento home page... whatever you can dream up. No modules, plugins or extensions are needed for this technique - just a good grasp of PHP and the Magento and WordPress theming/templating systems. There are probably many other ways to do this, but this is an easy way that I figured out which works well for my purposes so far.
+
+*First, the WordPress side of the process.*
+
+Step #1 is to create a wordpress page which will have the content we want to show in Magento. The trick is that we don't want the WordPress header or footer - we just want the content. To do this we will create a new page template. In your WordPress theme directory, copy a file with a "Loop":http://codex.wordpress.org/The_Loop in it (_index.php_ or _page.php_ are a good ones to start with) and rename the new file something like _MagentoContent.php_. Edit this new file, and place at the top something like: 
+
+<pre><code><?php
+/*
+Template Name: MagentoContent
+*/
+?></code></pre>
+
+This declares _MagentoContent.php_ as a page template file. Then remove the function calls that pull in the Header, Footer and Sidebar. They usually look like this:
+
+<pre><code><?php get_header(); ?>
+<?php get_sidebar(); ?>
+<?php get_footer(); ?></code></pre>
+
+And finally customize the Loop so it retrieves just the content you want. For instance, if you want to get the three most recent posts tagged "Magento" and show the title and excerpt it would look something like this: 
+
+<pre><code><?php query_posts('tag=Magento&limit=3'); ?>
+<?php if (have_posts()) : ?>
+	<?php while (have_posts()) : the_post(); ?>
+		<a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
+			<?php the_title(); ?>
+		</a>
+		<p><?php the_excerpt(); ?></p>
+		<p><a href="<?php the_permalink(); ?>">Read more...</a></p>
+	<?php endwhile; ?>
+<?php else : ?>
+	<p>Sorry no content found.</p>
+<?php endif; ?></code></pre>
+
+Do whatever you want here though. Get to know your way around "query_posts":http://codex.wordpress.org/Template_Tags/query_posts and go to town. 
+
+The final step on the WordPress side is to login to the backend and create a Page. Select the _MagentoContent_ page template we created and Publish the page. If you used a custom post query it doesn't matter what it's called or what the content is. (If you actually want to bring the page's content in to Magento, instead of the custom query, then it does of course.) Make a note of the URL of this page. If you have nice "Permalinks":http://codex.wordpress.org/Using_Permalinks set up and called the page _Mage_content_ it will probably be something like this: http://example.com/wordpress/Mage_content. Visit the URL to make sure it's returning the content you want. It will be an ugly page without the Header and Footer, but the content is what's important. When this content is in Magento the Magento stylesheets can be used to style it.
+
+*Now let's do the Magento side of things.*
+
+Create a new Magento template file. For this example, we'll create one called _wordpress_block.phtml_ and put it in the _/cms_ folder of our theme directory. The file will just contain a short snippit of PHP code that uses the "CURL":http://us.php.net/curl library to get the contents of the WordPress page we just created (You can do this other ways, but Magneto already requires the CURL library so we know it's at our disposal). 
+
+Technically code like this should be in a Controller function in a custom Magento extension, but it's *way* faster to just throw it in the .phtml file. Here's the code, using the WordPress page URL from our example:
+
+<pre><code><?php 
+$content = '';
+$url = "http://example.com/wordpress/Mage_content";
+$ch = curl_init();
+curl_setopt ($ch, CURLOPT_URL, $url);
+curl_setopt ($ch, CURLOPT_HEADER, 0);
+ob_start();
+curl_exec ($ch);
+curl_close ($ch);
+$content = ob_get_contents();
+ob_end_clean();
+echo $content; 
+?></code></pre>
+
+Now that we have our block, just add it to a Layout file in your Magento theme (or to the Custom Layout options on an individual CMS or Category page):
+
+<pre><code><block type="core/template" name="wordpress_block" template="cms/wordpress_block.phtml" /></code></pre>
+
+And voila - we are now pulling WordPress content into Magento. It is probably a good idea to install a wordpress caching plugin like "WP Super Cache":http://wordpress.org/extend/plugins/wp-super-cache/ to speed up requests for _Mage_content_. In fact, the proper way to do this would be to also create a Magento module which caches it... but that's beyond the scope of this little tutorial. This is a barebones proof of concept which can be adapted to specific needs.
+
+Happy coding!

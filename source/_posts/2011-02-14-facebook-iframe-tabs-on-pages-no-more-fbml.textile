@@ -1,0 +1,45 @@
+---
+layout: post
+date: 2011-02-14 23:43
+title: "Facebook iframe tabs on Pages - No more FBML!"
+categories: [Social-Media, Web-Development]
+keywords: []
+permalink: facebook-iframe-tabs-on-pages-no-more-fbml
+---
+
+The long awaited transition from FBML tabs to iframe tabs has finally happened. As of this writing on Feb 14th 2011 (Valentines Day!) you can choose the "iframe" option for Facebook application tabs. The official word from the "Facebook developer roadmap":http://developers.facebook.com/roadmap/ is that "as of March 11th developers will no longer be able to create FBML tabs":http://developers.facebook.com/blog/post/462#fbml_roadmap (although existing FBML apps will be supported indefinitely - or at least until the end of 2011 I heard in the comments).
+
+<img src="http://www.chilipepperdesign.com/images/52.jpg" style="width: 415px" />
+
+<h3>The Good</h3>
+
+The great thing about iframe tabs is that you are working with a real webpage now. No more fighting with FBJS and finicky FBML tags!
+
+# *External JS like JQuery and TinyMCE* - You can finally do all of the things that Canvas iframe apps have been able to do for a while, like include handy JavaScript libraries!
+# *onLoad JS events* - One of the frustrating things with FBML apps was always that you couldn't start JS on the page load, so things like automatic slideshows were impossible. You should be able to have content auto-play now!
+# *Facebook JS SDK for XFBML Social Plugins* - You can import the JavaScript SDK and still have Request popups, Like buttons, make Open Graph API requests... the whole 9 yards.
+
+<h3>The Bad</h3>
+
+One of the interesting things is that the ubiquitous "Static FBML":http://www.facebook.com/apps/application.php?id=4949752878 app is going away too, apparently. This application has a been a great shortcut for many developers and page owners, allowing them to just install the app and paste in HTML and FBML code without creating a special custom application. (Hopefully more people will use the "custom facebook tab creation":http://www.splashlabsocial.com service I built, "SplashLab Social":http://www.splashlabsocial.com ;)
+
+This will be a pain for many users. It's a big leap to have to create a custom application and host the code on your own server! I will be curious to see if Facebook creates a new app that does some of the same things?
+
+<h3>The Ugly</h3>
+
+Naturally, like any new (and many old) Facebook features iframe tabs have bugs still. My preliminary tests turned up the following problems:
+
+# <s>*Tabs not visible to logged-out users* - If a user is not logged in to Facebook they cannot see your tab. Official bug is here: "http://bugs.developers.facebook.net/show_bug.cgi?id=15166":http://bugs.developers.facebook.net/show_bug.cgi?id=15166</s> <br />This has been fixed now!
+# <s>*SSL/https problems* - My iframe tabs do not load properly when using Facebook over https. Here is the bug on Facebook if you want to track progress: "http://bugs.developers.facebook.net/show_bug.cgi?id=15200":http://bugs.developers.facebook.net/show_bug.cgi?id=15200</s><br /> This has been fixed now
+# <s>*Renaming tab titles not working*</s> - Changing the "Tab name" does not appear to working at this time. The official bug is here: "http://bugs.developers.facebook.net/show_bug.cgi?id=15155":http://bugs.developers.facebook.net/show_bug.cgi?id=15155 UPDATE: Apparently this is a feature, not a bug! Users can now set custom Tab Titles for each tab!
+# <s>*Max height scrollbar issues*</s> (my mistake) - The iframe tabs appear to have a maximum height of 800px, which gives a scrollbar for taller content. The problem with this is that when the scroll bar appears the tab is width is now smaller than 520px, essentially. This means if you have images which are 520px wide, you get a horizontal scroll bar at the bottom. It's kind of ugly right now, hopefully Facebook will enable and auto-resize like regular Canvas apps have.
+
+*Iframe tab height:* This is not a bug, but I DO think it's a little weird and not very obvious. You can fix this with the FB.Canvas.setAutoResize() method, as "detailed in the bug I filed":http://bugs.developers.facebook.net/show_bug.cgi?id=15210.
+
+<h3>Beyond Static FBML</h3>
+
+In summary, the new iframe tabs are more powerful and flexible than the FBML ones, and open up a lot of great new possibilities. There are a LOT of FBML apps out there, however, so it will be interesting to watch the transition.
+
+Please, post any comments or corrections you have below! Are there any other new features of iframe tabs you are excited for? Anything you will miss from FBML?
+
+<em><strong>Update: <a href="http://www.splashlabsocial.com">SplashLab Social</a> has been released!</strong> <a href="http://www.splashlabsocial.com">If you are looking for an easier way to set up iframe tabs, look no further!</a> My new service makes it easy - check it out!</em>

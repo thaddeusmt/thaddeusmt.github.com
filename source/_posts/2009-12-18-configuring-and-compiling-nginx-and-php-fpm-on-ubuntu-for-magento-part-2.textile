@@ -1,0 +1,75 @@
+---
+layout: post
+date: 2009-12-18 19:17
+title: "Configuring and compiling Nginx and PHP-FPM on Ubuntu for Magento, Part 2"
+categories: [Web-Development, e-Commerce]
+keywords: [php-fpm,nginx,magento]
+permalink: configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-2
+---
+
+<p>This is the second part of my little guide to get Magento running on Nginx with PHP-FPM and APC. Check out <a href="http://www.chilipepperdesign.com/2009/12/14/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-1">Part 1 here</a> and <a href="http://www.chilipepperdesign.com/2010/01/03/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-3">Part 3 here</a>.</p>
+
+<p>In this part, we compile <a href="http://php-fpm.org/">PHP-FPM</a> and get it working with the <a href="http://php.net/manual/en/book.apc.php">APC</a> "Accelerator" cache for Nginx. The first step is to compile PHP-FPM. Some of this is taken almost verbatim from the FPM <a href="http://github.com/dreamcat4/php-fpm/blob/master/readme.markdown">readme</a>:</p>
+
+<pre><code># aptitude install -y libxml2-dev libevent-dev libjpeg-dev
+# export LE_VER=1.4.12-stable
+# wget "http://www.monkey.org/~provos/libevent-$LE_VER.tar.gz"
+# tar -zxvf "libevent-$LE_VER.tar.gz"
+# cd "libevent-$LE_VER"
+# ./configure && make
+# DESTDIR=$PWD make install
+# export LIBEVENT_SEARCH_PATH="$PWD/usr/local"
+# export PHP_VER=5.2.11
+# cd ~/sources
+# wget "http://launchpad.net/php-fpm/master/0.6/+download/php-fpm-0.6~$PHP_VER.tar.gz"
+# tar -zxvf "php-fpm-0.6~$PHP_VER.tar.gz"
+# ./php-fpm-0.6-5.2.11/generate-fpm-patch
+# wget "http://us.php.net/get/php-$PHP_VER.tar.gz/from/us.php.net/mirror"
+# tar xvfz "php-$PHP_VER.tar.gz"
+# cd "php-$PHP_VER"
+# patch -p1 < ../fpm.patch
+# ./buildconf --force
+# mkdir fpm-build && cd fpm-build
+# aptitude install libxml2-dev libbz2-dev libpcre3-dev libmcrypt-dev libmhash-dev libmhash2 libcurl4-openssl-dev libsyck0-dev libgd-dev zlib1g-dev
+# ../configure --with-fpm --with-libevent="$LIBEVENT_SEARCH_PATH" --enable-mbstring --with-zlib --enable-zip --with-mcrypt --with-jpeg-dir=/usr/lib --with-gd --without-sqlite --without-pdo_sqlite --enable-fastcgi --with-curl --with-mhash --with-mysql=/etc/mysql/ --enable-pdo=shared --with-pdo-mysql=shared
+# make all install
+# make test
+# aptitude install m4 autoconf
+# mount -o remount,exec,suid /tmp
+# pecl install apc
+# cp /root/sources/php-5.2.11/php.ini-recommended /usr/local/lib/php.ini
+# ln -s /usr/local/lib/php.ini /etc/php/php.ini
+# ln -s /etc/php-fpm.conf /etc/php/php-fpm.conf
+</code></pre>
+
+<p>At the end of the commands above, you will notice we installed APC. Now, in <em>/etc/php/php-fpm.conf</em> there are four places you need to change the user and group to the correct ones for the web server. On my install, the user and group were both <em>www-data</em>:</p>
+<pre><code>&lt;value name="owner"&gt;www-data&lt;/value&gt;
+&lt;value name="group"&gt;www-data&lt;/value&gt;
+&lt;value name="user"&gt;www-data&lt;/value&gt;
+&lt;value name="group"&gt;www-data&lt;/value&gt;
+</code></pre>
+
+<p>To set up some basic parameters for the PHP-FPM FastCGI install, create the file <em>/etc/nginx/fastcgi_params</em>. We will be importing this into the Nginx config files later. This is what I am using, but you may need to tweak yours for better performance:</p>
+<pre><code>fastcgi_connect_timeout 60;
+fastcgi_send_timeout 180;
+fastcgi_read_timeout 180;
+fastcgi_buffer_size 128k;
+fastcgi_buffers 4 256k;
+fastcgi_busy_buffers_size 256k;
+fastcgi_temp_file_write_size 256k;
+fastcgi_intercept_errors on;
+</code></pre>
+
+<p>Lastly, edit your php.ini file <em>/etc/php/php.ini</em> to enable PDO on mySql (which Magento needs) and APC. To do so, add the following lines:</p>
+<pre><code>extension_dir = /usr/local/lib/php/extensions/no-debug-non-zts-20060613
+extension = pdo.so
+extension = mysql_pdo.so
+extension = apc.so
+apc.enabled = 1
+apc.shm_size = 96
+apc.include_once_override = 1
+</code></pre>
+
+<p>I remember there being some sort of confusion the first time I tried setting the extension_dir, so check and make sure that it's correct for your environment. It might also be <em>/usr/lib/php5/20060613</em>.</p>
+
+<p>There, nothing to it! You should have PHP-FPM running now. The final step is to create the Nginx config files so requests for PHP are passed over to PHP-FPM for processing. This is covered in <a href="http://www.chilipepperdesign.com/2010/01/03/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-3">Part 3</a>, along with some Magento specific Nginx config options.</p>

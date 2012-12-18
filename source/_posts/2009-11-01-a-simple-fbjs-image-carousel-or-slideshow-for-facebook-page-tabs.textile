@@ -1,0 +1,85 @@
+---
+layout: post
+date: 2009-11-01 23:19
+title: "A simple FBJS image carousel (or slideshow) for Facebook page tabs"
+categories: [Social-Media, Web-Development]
+keywords: [fbml,fan page tab,facebook app,facebook,fan page,fbjs,javascript,animate,slideshow,carousel]
+permalink: a-simple-fbjs-image-carousel-or-slideshow-for-facebook-page-tabs
+---
+
+<span style="font-size: .9em; font-style: italic;">(*Plug*: Looking for an easy, fast, affordable way to create custom Facebook landing tabs? Check out my new product: "http://splashtab.com":http://www.splashtab.com Thanks!)</span>
+
+This little code snippet is really basic, and not actually that good or clever. You can make a much nicer slideshow or carousel if you put a little time into it. But I just want to demonstrate how many of the nice JavaScript effects we are used to on the "Web 2.0" are also possible on a Facebook Page via Facebook's "Animate library":http://wiki.developers.facebook.com/index.php/FBJS/Animation. It's not as robust as "jQuery":http://jquery.com/ or "Scriptaculous":http://script.aculo.us/, but since you can't import those libraries to a Tab the Animate library will have to do. :)
+
+The final result looks like this:
+<img width=" alt="Screenshot of the Chili Pepper Design Facebook image carousel" src="http://www.chilipepperdesign.com/images/46.jpg" />
+
+<strong>And you can view a <a href="http://www.facebook.com/pages/Bozeman-MT/Chili-Pepper-Design/59282833907?v=app_154473727596">live demo on the CPD Facebook Page</a></strong>
+
+For instructions on how to create your own custom Facebook tabs, "read my tutorial here":http://www.chilipepperdesign.com/2009/10/11/how-to-make-custom-facebook-fan-page-tabs-with-fbml-part-2.
+
+To begin, here is the simple FBJS &lt;script> code:
+
+<pre><code>==
+var numslides = 7;
+var slidesvisible = 3;
+var currentslide = 0;
+var slidewidth = 147;==
+function goright() {
+	if (currentslide <= (numslides-slidesvisible-1)) {
+		Animation(document.getElementById('slideshow_inner')).by('right', slidewidth+'px').by('left', '-'+slidewidth+'px').go();
+		if (currentslide ====== (numslides-slidesvisible-1)) {
+			Animation(document.getElementById('right_button')).to('opacity', '0.3').go();
+			Animation(document.getElementById('left_button')).to('opacity', '1').go();
+		} 
+		if (currentslide < (numslides-slidesvisible-1)) { Animation(document.getElementById('left_button')).to('opacity', '1').go(); }
+		currentslide++;
+	}
+}
+function goleft() {
+	if (currentslide > 0) {
+		Animation(document.getElementById('slideshow_inner')).by('left', slidewidth+'px').by('right', '-'+slidewidth+'px').go();
+		if (currentslide ====== 1) {
+			Animation(document.getElementById('left_button')).to('opacity', '0.3').go();
+			Animation(document.getElementById('right_button')).to('opacity', '1').go();
+		}
+		if (currentslide > 1) { Animation(document.getElementById('right_button')).to('opacity', '1').go(); }
+		currentslide--;
+	}
+}
+</code></pre>
+
+Here is the CSS:
+
+<pre><code>
+	#slideshow_wrapper { width:530px; clear: both; margin-bottom: 20px; }
+	#slideshow { overflow: hidden; width: 435px; float: left; position:relative; margin-right: 5px; }
+	#slideshow_inner { position: relative; width: 1250px; }
+	#slideshow_inner a { opacity:0.7; margin: 0 7px; }
+	#slideshow_inner a:hover { opacity: 1; }
+</code></pre>
+
+And finally, here is the markup:
+
+<pre><code>
+<div id="slideshow_wrapper">
+			<img id="left_button" src="http:/yoururl.com/images/left_button.gif" onclick="goleft(); return false;" style="float: left; display: block; width: 41px; cursor: pointer; opacity: 0.3;" />
+		    <div id="slideshow">
+		        <div id="slideshow_inner">
+		            <a id="slide1" href="http://yoururl.com/link1" title="Oronaut Outdoor Blog"><img src="<?php echo $basepath ?>images/slide1.jpg" /></a> 
+		            <a id="slide2" href="http://yoururl.com/link2" title="Colorado Ski Mountaineering Cup"><img src="<?php echo $basepath ?>images/slide2.jpg" /></a> 
+		            <a id="slide3" href="http://yoururl.com/link3" title="PowderBlog"><img src="<?php echo $basepath ?>images/slide3.jpg" /></a> 
+		            <a id="slide4" href="yoururl.com/link4" title="Highland Meadows HOA"><img src="http:/yoururl.com/images/slide4.jpg" /></a> 
+		            <a id="slide5" href="http://yoururl.com/link5" title="United State Ski Mountaineering Association"><img src="http:/yoururl.com/images/slide5.jpg" /></a> 
+		            <a id="slide6" href="http://yoururl.com/link6" title="Circle S Seeds"><img src="http:/yoururl.com/images/slide6.jpg" /></a> 
+		            <a id="slide7" href="http://yoururl.com/link7" title="Rita Designs"><img src="http:/yoururl.com/images/slide7.jpg" /></a> 
+		        </div>
+		    </div>
+		    <img id="right_button" src="http:/yoururl.com/images/right_button2.gif" onclick="goright(); return false;" style="float: left; display: block; width: 41px; cursor: pointer;" />
+			<p>Click on an image to leave Facebook and visit the Portfolio.</p>
+		</div>
+</code></pre>
+
+(One thing to note when scripting FBJS for Tabs: onLoad does not work. All JS must be started with a trigger event of some sort, even if it is as simple as a mouseOver.)
+
+This is just a starting point. My code is not very generalized, the opacity effects have IE issues (as usual), and there are probably other issues besides. But have fun building on this, and create some sexy animated Facebook tabs!

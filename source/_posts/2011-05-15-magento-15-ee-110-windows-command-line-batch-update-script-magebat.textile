@@ -1,0 +1,41 @@
+---
+layout: post
+date: 2011-05-15 23:00
+title: "Magento 1.5 / EE 1.10 Windows Command Line Batch Update Script mage.bat"
+categories: [CSS, Web-Development]
+keywords: []
+permalink: magento-15-ee-110-windows-command-line-batch-update-script-magebat
+---
+
+So, this might be for kind of a narrow audience, but I'm pretty stoked on it so I wanted to share.
+
+In the newest version of the Magento ecommerce platform, Magento 1.5, they have redone their update script. In "Magento Connect 2.0":http://www.yireo.com/blog/1294-magento-15-mage-command-line, what was called "pear" is now "mage". 
+
+Old and busted:
+<pre><code>./pear mage-setup .</code></pre>
+
+New Hotness:
+<pre><code>./mage mage-setup .</code></pre>
+
+They basically work the same, but the name has changed and - more importantly if you are reading this - there is no windows batch file to run. There is a Bash shell script, so you can download and update Magento and it's many Extensions via the command line in _Linux_, but not Windows.
+
+So, looking at the mage.sh script and working from the pear.bat script, I made mage.bat. It lets you do command line downloads and updates of Magento in Windows, just like you can on Linux.
+
+Not that anyone is actually hosting Magento on a WAMP setup, but I find it useful to be able to download and install Extensions and modules on my Windows development box.
+
+"Download mage.bat - Windows Magento Connect 2.0 Update Script":http://www.chilipepperdesign.com/file_download/1/mage.zip
+
+One you have mage.bat installed in the root directory of your Magento install (right next to the mage bash script), you are ready to go! Just run "mage" from the Windows command line. 
+
+<pre><code>mage help</code></pre>
+
+The Yiero blog has a nice article about "using Magento Connect 2.0 over command line":http://www.yireo.com/blog/1294-magento-15-mage-command-line.
+
+Here is a good article about "upgrading Magento from 1.4 to 1.5":http://blog.nexcess.net/2011/03/11/upgrading-to-magento-1-5-0-1 as well.
+
+TROUBLESHOOTING TIPS:
+
+* Make sure you have "PEAR installed":http://pear.php.net/manual/en/installation.getting.php on the machine you are running this on
+* Make sure PEAR is in your Windows Path
+* Be sure to install mage.bat in your Magento root directory
+* In the command line, make sure you are in your Magento root when you run mage.bat

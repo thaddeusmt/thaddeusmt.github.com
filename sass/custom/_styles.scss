@@ -1,0 +1,70 @@
+// This File is imported last, and will override other styles in the cascade
+// Add styles here to make changes without digging in too much
+
+html {
+  background: $page-bg;
+}
+body {
+	> header {
+    @media only screen and (min-width: 992px) {
+      float: left;
+      height: 100px;
+      padding-right: 1em;
+      padding-top: 1em;
+      padding-bottom: 1em;
+    }
+	}
+	> nav {
+		@media only screen and (min-width: 992px) {
+		  padding-left: $pad-wide;
+		  padding-right: $pad-wide;
+      float: right;
+      padding-top: 1em;
+      padding-left: 1em;
+      border: 0;
+		}
+	}
+}
+@media only screen and (min-width: 992px) {
+  body { font-size: 1em; }
+  h1 { font-size: 2.6em; line-height: .8em; }
+}
+#profile-image {
+  float: left;
+  margin-right: .6em;
+}
+#stackoverflow-badge {
+  display: block;
+  padding-top: .6em;
+}
+ul, ol {
+  margin-left: 1.3em;
+}
+#content {
+  @extend .sans;
+}
+.entry-content {
+  h1, h2, h3, h4, h5 {
+    @extend .sans;
+    border-bottom: 1px dotted #ccc;
+  }
+}
+p, blockquote, ul, ol { margin-bottom: 1.2em; }
+#content .blog-index {
+  article h1 {
+    a { color: $title-color; text-decoration: none;  }
+  }
+}
+body > nav form .search {
+  margin-top: 0;
+  @media only screen and (min-width: 600px) {
+    font-size: 1.1em;
+    line-height: 1.5em;
+  }
+}
+body > nav ul.subscription {
+  margin-left: 1em;
+}
+pre {
+  padding-bottom: .5em;
+}

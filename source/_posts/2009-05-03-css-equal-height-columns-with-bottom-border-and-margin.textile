@@ -1,0 +1,86 @@
+---
+layout: post
+date: 2009-05-03 02:53
+title: "CSS Equal Height Columns with Bottom Border and Margin"
+categories: [CSS, Web-Design]
+keywords: [css columns,equal height columns,pure css,table-less equal height,no javascript,equal height background,equal height column border,equal height column margin,equal height column padding,overflow hidden,large margin,large padding]
+permalink: css-equal-height-columns-with-bottom-border-and-margin
+---
+
+The saga of CSS "equal height columns" is long and frustrating. It's a common and attractive design element, but ever since we stopped using HTML Tables for our 2 and 3 column web page layouts in favor of Divs containers, it's been a real challenge to implement them using standards based CSS and markup.
+
+My favorite of the many clever techniques so far devised to solve this problem is the "Position Is Everything One True Layout":http://www.positioniseverything.net/articles/onetruelayout/equalheight method (although don't try to use internal anchor links with this!). Another favorite is the "Equal Height Columns with Cross-Browser CSS & No Hacks":http://matthewjamestaylor.com/blog/equal-height-columns-cross-browser-css-no-hacks, but it actually seems a little more complicated and hack-ish to me (despite the name). And if you really want it to _just work_ to no extra markup and don't mind a little inelegance, the good old "Faux Columns":http://www.alistapart.com/articles/fauxcolumns/ approach with a background image works well too.
+
+But the P.I.E. One True Layout method is my favorite and that's the one I'm using in this example. To review, the basic gist of the P.I.E. method is that each column has a huge bottom padding to extend it's background color, a huge negative margin to pull the effective bottom of the column back to where it should be, and the container hides the overflow: 
+
+<pre><code><style type="text/css">
+.column-1, .column-2 {
+	padding-bottom: 32767px;
+	margin-bottom: -32767px;
+	}
+.column-container {
+	overflow: hidden;
+	}
+</style>
+<div class="column-container">
+	<div class="column-1">
+		...
+	</div>
+	<div class="column-2">
+		...
+	</div>
+</div></code></pre>
+
+Pretty simple, and easy to implement. But because of the way the overflow is hidden, you can't add a border or margin (without the background color) to the bottom of your columns! You can add padding (with the background color), but no border or margin because it's hidden. So to add a bottom border or margin you have to cheat a little and add an extra div for each column with some special css sauce. But it _is_ possible, and without any actual "hacks", JavaScript or images! Take a look:
+
+"EXAMPLE: CSS Equal Height Columns 5px Bottom Border":http://www.chilipepperdesign.com/examples/eq-height-col-borders/5px-example.html
+
+Taking care of the bottom margin problem is easy: just add some extra margin to the top of the footer. If you care about IE6, be sure to add "zoom: 1;" to the column-container element (the one with _overflow_ set to _hidden_). It would be nice if this extra margin property was on the column-container like it _should_ be, but it's not awful to have to add it to the footer instead.
+
+But what about the bottom border? The top, left, and right column borders are fine, it's just the bottom one that get's hidden. One extra div and a little absolute positioning is all it takes to give us a bottom border. Here is an outline of the additions we need to make to the original P.I.E. method:
+
+<pre><code><style type="text/css">
+.column-1, .column-2 {
+	padding-bottom: 32767px;
+	margin-bottom: -32767px;
+	width: 200px;
+	border: #fff 1px solid;
+	}
+.column-container {
+	position: relative; /* put this here on the container, NOT the column! */
+	overflow: hidden;
+	zoom: 1;
+	}
+.column-1-bottom {
+	position: absolute; /* relative to the container, NOT the column! */
+	bottom: 0;
+	left: 0; /* if column-1 is floated left */
+	height: 1px;  /* same size as border on column-1 */
+	width: 202px;  /* (width of column-1) + (2 * (border size of column-1))  */
+	background: #fff; /* same color as border on column-1 */
+} 
+.column-2-bottom { 
+	position: absolute; /* relative to the container, NOT the column! */
+	bottom: 0;
+	right: 0; /* if column-2 is floated right */
+	height: 1px;  /* same size as border on column-2 */
+	width: 202px;  /* (width of column-2) + (2 * (border size of column-2))  */
+	background: #fff; /* same color as border on column-2 */
+} 
+</style>
+<div class="column-container">
+	<div class="column-1">
+		...
+		<div class="column-1-bottom"><!-- ie needs this comment for small div heights --></div>
+	</div>
+	<div class="column-2">
+		...
+		<div class="column-2-bottom"><!-- ie needs this comment for small div heights --></div>
+	</div>
+</div></code></pre>
+
+And there you have it. Equal height columns surrounded by borders without using any images. Here is another example of the technique in action:
+
+"EXAMPLE: CSS Equal Height Columns 1px Bottom Border":http://www.chilipepperdesign.com/examples/eq-height-col-borders/1px-example.html
+
+I've tested this in Firefox 3, IE6, IE7, Chrome 1 and Safari 3. Just make sure the page is being displayed in "standards mode" and not "quirks mode"! With that in mind the only glitch I can't seem to get around is that the bottom div is 1px too high in IE6, making the bottom border look a tiny bit off (the left and right borders go 1px past the "bottom border").

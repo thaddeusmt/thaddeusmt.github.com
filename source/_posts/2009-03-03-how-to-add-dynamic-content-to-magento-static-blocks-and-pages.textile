@@ -1,0 +1,36 @@
+---
+layout: post
+date: 2009-03-03 23:06
+title: "How to Add Dynamic Content to Magento Static Blocks and Pages"
+categories: [e-Commerce, Web-Development]
+keywords: [magento,e-commerce,content management system,Zend Framework,store]
+permalink: how-to-add-dynamic-content-to-magento-static-blocks-and-pages
+---
+
+Magento provides an easy way to create blocks of static content which, with a little Layout-XML-Fu, can be added to any page in Magento. Even better, these blocks can be added to any category page with no programming at all. This is great if you want to have a banner image with monthly specials and deals, or if you want to add a header image or descriptive text to a category.
+
+Magento also makes it really easy to create static SEO landing pages. In just a few clicks you have a new static page, ready to lace with images and tasty keyword laden text, and to link to any product or category in the Store proper.
+
+*But you can't put PHP code in these blocks or pages.*
+
+Not directly at least...
+
+Magento Static Blocks and Pages _will_ process some predefined template tags. For instance, to make a link to your Magento store's front page you can use the "store" template tag:
+
+<pre><code><a href="{{store url=""}}">Home</a></code></pre>
+
+Similarly, you can use the "block" tag to load _any dynamic theme template_ into a static block! This means you _can_ put dynamic content in static blocks and pages. You can use existing Magento template "blocks", or create your own custom ones. Here is an example of inserting the Newsletter Subscribe form template into a static block or page:
+
+<pre><code>{{block type='core/template' name='contactForm' template='newsletter/subscribe.phtml'}}</code></pre>
+
+You can also insert dynamic template blocks from custom modules you wrote. You can basically write any PHP your heart desires in a custom module, and load it into a static block or page as easy as this:
+
+<pre><code>{{block type="mycompany_subcatthumbs/thumbview" template="subcatthumbs/thumbview.phtml"}}</code></pre>
+
+The syntax for these "block" tags is basically the same as in the Layout XML files, with _type_, _template_ and other parameters:
+
+<pre><code><block type="core/template" name="right.permanent.callout" template="callouts/right_col.phtml"/></code></pre>
+
+Why would you want to this though? They are called "static blocks" after all, so why should they ever need to be dynamic? One example of a situation where I use this trick is to display a category's _sub_-categories as thumbnails under the main category. I wrote a small custom module for this (thanks "Jake Rutter":http://onerutter.com/web/magento-custom-category-images-listing-block-tutorial.html ), which has a template block called "thumbview.phtml". Most of the time, it's true, it's better practice to add this block via Layout XML, either directly in the file or though the Layout Update XML under the Custom Design tab. But if I added that to the catalog.xml layout file then it would appear on _all_ category pages (not just the ones with sub-categories) and I would have to add logic to fix this, etc. I had to add Static Blocks with header images to the categories already, so it was easier to just paste the {{block}} tag in at the same time. This way I didn't have to alter the core Catalog/List logic and I don't have to keep track of Layout Update XML changes: if the client wants to just show products instead of subcategories they can just turn off the Static Block, removing the header image _and_ the subcategory list in one fell swoop.
+
+I'm 99% sure there is always a way to achieve the effect you want in Magento without using this trick/hack, but sometimes it's just easier and faster.

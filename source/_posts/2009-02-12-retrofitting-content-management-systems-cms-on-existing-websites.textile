@@ -1,0 +1,24 @@
+---
+layout: post
+date: 2009-02-12 23:42
+title: "Retrofitting Content Management Systems (CMS) on Existing Websites"
+categories: [CMS, Web-Development]
+keywords: [cms made simple,content management system,maintainable websites,open source cms,easy to update websites]
+permalink: retrofitting-content-management-systems-cms-on-existing-websites
+---
+
+This past week I retrofit the "Montana Seed Trade Association":http://www.mtseedtrade.com website with "CMS Made Simple":http://www.cmsmadesimple.org/. Previously, it was a "flat" website that consisted of some basic HTML and a couple of simple dynamic PHP pages populated from a mySQL database. Every time they wanted to update the site with new events or meeting dates, they had to call up the original web developer and pay them the standard (not cheap) hourly rate to make the changes.
+
+Now that I have put a CMS "administrative back-end (back-end)":http://en.wikipedia.org/wiki/Front-end behind the website, they can just log in at any time and make the changes themselves, without any HTML programming. Even though they only need to update their website a couple of times a year, using the CMS to do it themselves will pay off the cost of the retrofit in just two years. Imagine if they had to update the site weekly, or even daily!
+
+One of the core web design principles at Chili Pepper Design is "easy-to-update, maintainable content":http://www.chilipepperdesign.com/about#design, because we strive to make good websites and good websites have fresh content. The fastest, easiest and most cost effective way to keep websites up to date is with "Content Management Systems (CMS)":http://en.wikipedia.org/wiki/Web_content_management_system. CMSs allow website owners to update their sites without any coding or programming, and without the possibility of accidentally screwing up the website design. The modern web design principle of separating the _content_ of a website from its _form_ enables website owners to save time and money by taking the geeks out of the content management process and letting them do what they do best: design, program and build the actual website. This leaves content production to those who do _it_ best: marketers, SEO experts, copywriters, or DIY business owners.
+
+Yes, content needs to be provided to the designer during the initial website production. Good design takes in to account the type of content (images, movies, text), the frequency of updates (daily, yearly), the intended content audience, and much more. But once the nature of the content is known and the design perfected, there is no need for further designer involvement - until the purpose of the website changes, or the design eventually needs an update (as all designs will).
+
+Because CMSs allow you to separate the form of a website from its content so well, it's possible to take and existing website's _form_ and put a CMS under it. Or  "put a different engine under the hood". I call this "CMS retrofitting". I can take the design (the HTML and CSS code) off of most websites, lay it over a CMS, and then re-enter the content via the CMS. The result is a website identical to the original - but now updating it is a simple task like writing an email!
+
+For people who want to be able to update their websites more easily but can't afford a whole new design (or if they really like their current design) CMS retrofitting is a great option. Depending on the website size and the number of complex features the existing website has (event calendars, product libraries, etc), retrofitting is usually fast and very affordable. 
+
+To see a CMS in action, watch this short screencast video I made of "CMS Made Simple (CMSMS Screencast Demo)":http://www.screentoaster.com/watch/stUEhRQkVIR1pdRF5fXV5eX1FX/short_cms_made_simple_demo.
+
+Please, feel free to "contact me":contact if you might be interested in this service. I'll be happy to provide you with a free quote.

@@ -1,0 +1,47 @@
+---
+layout: post
+date: 2009-07-09 17:23
+title: "Changing Magento Order, Invoice and Shipping Number"
+categories: [e-Commerce, Web-Development]
+keywords: [magento,ecommerce,order number,invoice number,credit memo number,shipping number,change order number,shorten order number,how to,tutorial]
+permalink: changing-magento-order-invoice-and-shipping-numbers
+---
+
+A client needed to change the default order numbering scheme in Magento 1.3. There is no simple administrative backend setting to do this, however. The order, invoice, shipping and credit memo numbers are fixed - 9 digits long prefixed with a 1. The client wanted all of their order numbers in the form "AZ-xxxxx" - two fixed letters, a dash, and then 5 digits. So... how go about changing this?
+
+Looking around the Magento forums and a few other websites (listed at the bottom), combined with poking around the in Magento code and database ("phpmyadmin":http://www.phpmyadmin.net was very helpful), I eventually figured out a way to do it fairly simply, and without modifying any code! All that is required is running a few SQL statements against the database.
+
+_DISCLAIMER: Don't run these on a live/production server, and backup your database before you run them! This works for me, but I have not rigorously tested this and it may break certain functionality and/or extensions. *NOT TESTED WITH 1.4 OR ABOVE!* You have been warned!_
+
+<pre><code>update eav_entity_type set increment_pad_length=5 where entity_type_code='order';
+update eav_entity_store inner join eav_entity_type on eav_entity_type.entity_type_id = eav_entity_store.entity_type_id set eav_entity_store.increment_last_id='00001',eav_entity_store.increment_prefix='AZ-' where eav_entity_type.entity_type_code='order';
+update eav_entity_type set increment_pad_length=5 where entity_type_code='invoice';
+update eav_entity_store inner join eav_entity_type on eav_entity_type.entity_type_id = eav_entity_store.entity_type_id set eav_entity_store.increment_last_id='00001',eav_entity_store.increment_prefix='AZ-' where eav_entity_type.entity_type_code='invoice';
+update eav_entity_type set increment_pad_length=5 where entity_type_code='shipment';
+update eav_entity_store inner join eav_entity_type on eav_entity_type.entity_type_id = eav_entity_store.entity_type_id set eav_entity_store.increment_last_id='00001',eav_entity_store.increment_prefix='AZ-' where eav_entity_type.entity_type_code='shipment';
+update eav_entity_type set increment_pad_length=5 where entity_type_code='creditmemo';
+update eav_entity_store inner join eav_entity_type on eav_entity_type.entity_type_id = eav_entity_store.entity_type_id set eav_entity_store.increment_last_id='00001',eav_entity_store.increment_prefix='AZ-' where eav_entity_type.entity_type_code='creditmemo';</code></pre>
+
+Just make sure that, in the SQL statements above: 
+
+* _increment_pad_length_ is set to the length you want the number to be (not counting the prefix)
+* _increment_last_id_ is the number you want to start from from (padded correctly with zeros)
+* _increment_prefix_ is set to whatever prefix you want (it's AZ- in this example)
+
+For extra credit, combine this with "Fooman's Invoice=Order Number":http://www.magentocommerce.com/extension/957/fooman-invoice-order-number module to make the order/invoice/shipping numbers all the same.
+
+Resources for changing order numbers:
+* "http://www.magentocommerce.com/boards/viewthread/5893/":http://www.magentocommerce.com/boards/viewthread/5893/
+* "http://www.magentocommerce.com/boards/viewthread/10985/":http://www.magentocommerce.com/boards/viewthread/10985/
+* "http://eliasinteractive.com/blog/magento-ecommerce-how-to-reset-all-test-order-information-and-set-unique-prefix-for-orders-invoices-shipments-and-credit-memos/":http://eliasinteractive.com/blog/magento-ecommerce-how-to-reset-all-test-order-information-and-set-unique-prefix-for-orders-invoices-shipments-and-credit-memos/
+
+*UPDATE 8.18.2009:* 
+One bug I noticed is that if you have alphabet characters in your prefix (instead of just numbers), the order numbers do not display properly on the "Invoices", "Shipments" and "Credit Memos"  admin Grid views. They work fine on the "Orders" grid view however. To fix this bug on the other admin Grid views you need make a small edit to each of their Grid.php files:
+* app/code/core/Mage/Adminhtml/Block/Sales/Invoice/Grid.php
+* app/code/core/Mage/Adminhtml/Block/Sales/Shipment/Grid.php
+* app/code/core/Mage/Adminhtml/Block/Sales/Creditmemo/Grid.php
+
+In each of those, simply change the "increment_id" and "order_increment_id" columns _type_ from "number" to "text". Problem solved.
+
+*UPDATE 5.12.2010:* 
+There has been one report that this DB hack does not work with Magento 1.4, and may cause problems with your installation. Proceed with caution!!!

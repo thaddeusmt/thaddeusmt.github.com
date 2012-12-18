@@ -1,0 +1,94 @@
+---
+layout: post
+date: 2009-03-23 19:57
+title: "Magento: How to list all the products in a single category in a sidebar block"
+categories: [e-Commerce, Web-Development]
+keywords: [magento,zend framework,e-commerce,store,custom module,product list,static block,sidebar]
+permalink: magento-how-to-list-all-the-products-in-a-single-category-in-a-sidebar-block
+---
+
+The website I'm currently developing wants to have all of the products in "CategoryX" displaying in the left sidebar on all pages. It's a small category with their 5 core products, and they want to make sure no matter where the visitor is on the site, they are just a click away from viewing these products. The sidebar block only consists of a header with the Category name, and a simple list of the products with links to their product information page. It's just links in this case - no images or prices or "Add to Cart" buttons - but you could add these easily.
+
+I tried to simply use the "Catalog/Product_List" controller with a modified view based off of "catalog/product/list.phtml". The problem I ran into is that "Catalog/Product_List" uses the session's current Category/Layer to populate the list, so I couldn't show the products in CategoryX in the sidebar when I was viewing CategoryY. I "read":http://www.magentocommerce.com/boards/viewthread/14857/ that you _can_ specify which category it uses, but this only seems to work on pages without a Category/Layer, like the Home/Front page and similar CMS pages.
+
+Fortunately I found a nice snippet of code on "exploremagento.com":http://www.exploremagento.com/magento/some-custom-blocks-to-help-you-show-products.php, which gave me a clue about how to do this. I've modified this code to better suit my needs, and make it a little more general at the same time. You will need to know how to create a simple Magento module to implement this, and there is a good guide "here":http://www.exploremagento.com/magento/simple-custom-module.php.
+
+Anyway, here it is the code:
+
+<pre><code>class Mycompany_ProdList_Block_Left extends Mage_Catalog_Block_Product_Abstract  
+{  
+    public $_collection;
+    public $_catName;
+    private $_theCat;
+ 
+      public function setCat($category) {  
+        $this->_theCat = $category;
+    }
+    
+    public function getCatName() {  
+        return $this->_catName;
+    }
+ 
+    protected function _getProductCollection() {  
+        $storeId    = Mage::app()->getStore()->getId();  
+        $product    = Mage::getModel('catalog/product');  
+        $category   = Mage::getModel('catalog/category')->load($this->_theCat);
+        $this->_catName = $category->getName();
+ 
+        $visibility = array(  
+            Mage_Catalog_Model_Product_Visibility::VISIBILITY_BOTH,  
+            Mage_Catalog_Model_Product_Visibility::VISIBILITY_IN_CATALOG  
+        );  
+ 
+        $products   = $product->setStoreId($storeId)  
+                              ->getCollection()  
+            ->addAttributeToFilter('visibility', $visibility)  
+            ->addCategoryFilter($category)  
+            ->addAttributeToSelect(array('name'), 'inner') //you need to select "name" or you won't be able to call getName() on the product 
+            ->setOrder('name', 'asc')
+        ;  
+ 
+        $this->_collection = $products;  
+        return $this->_collection;  
+    }  
+ 
+    public function getCurrentCategory() {  
+        return Mage::getModel('catalog/category')->load($this->_theCat);  
+    }  
+ 
+    public function getProductCollection() {  
+        return $this->_getProductCollection();  
+    }</code></pre>
+
+And this is how you pass in the category you want to show (in this case, category ID 4), via Layout XML:
+
+<pre><code><block type="mycompany_prodlist/left" name="leftprodlist" template="prodlist/left.phtml" />
+<reference name="leftprodlist">
+                <action method="setCat"><category>4</category></action>
+</reference>
+</code></pre>
+
+And finally here is the template file I used to display it (prodlist/left.phtml):
+
+<pre><code>
+<?php
+$this->_getProductCollection();
+if(!$this->_collection->count()): ?>
+<div class="note-msg">
+    <?php echo $this->__('There are no products matching the selection.') ?>
+</div>
+<?php else: ?>
+<div class="box base-mini mini-list">
+<div class="head">
+<h4><?php echo $this->getCatName(); ?></h4>
+</div>
+<?php //echo Mage::registry('current_category')->getId(); ?>
+<ul>
+<?php foreach ($this->_collection as $_product): ?>
+            <li><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->htmlEscape($_product->getName()) ?>"><?php echo $this->htmlEscape($_product->getName()) ?></a></li>
+<?php endforeach; ?>
+</ul>
+</div>
+<?php endif; ?></code></pre>
+
+The "_product" model returned is similar to the one used by Catalog/Product_List, so you can work from that example to give your list images, prices, etc. One thing to note though: it looks like you might need to "select" all the variables you're going use. For instance, the call $_product->getName() didn't work unless I called addAttributeToSelect(array('name'), 'inner') when getting the product collection.

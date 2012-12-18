@@ -1,0 +1,39 @@
+---
+layout: post
+date: 2009-08-25 15:32
+title: "WordPress: A Loop inside of a Loop with working Comments"
+categories: [Web-Development, Blogs]
+keywords: [wordpress,the loop,loop in a loop,loop inside of a loop,loop hack,list posts in post,wordpress php,blogs,blog customization,wordpress themes]
+permalink: wordpress-a-loop-inside-of-a-loop-with-working-comments
+---
+
+I was faced with a problem while creating a WordPress theme the other day. I was grouping posts together using a 2.8 "custom taxonomy":http://justintadlock.com/archives/2009/05/06/custom-taxonomies-in-wordpress-28 (which is my new favorite thing in WordPress), and wanted to display a list of all related posts above the Comments template. Basically wanted a small "Loop":http://codex.wordpress.org/The_Loop inside of the main Loop - a loop within a loop. 
+
+I found a few pages online which address this, such as "WordPress Loop Inside of a Loop":http://lohmantrading.com/Fourced/2009/08/wordpress-loop-inside-of-a-loop/ and "Calling a WordPress Loop from inside a WordPress Loop":http://www.tyssendesign.com.au/articles/calling-a-wordpress-loop-from-inside-a-wordpress-loop/. The idea is pretty simple, and these techniques work fine most of the time.
+
+Everything looked fine to me, as well, until I hit "Submit Comment" to test it... _and the comment appeared on the wrong post_.
+ 
+The problem is that inner loop sets the global _$post_ object to the last item in that loop. The methods _the_post()_ and _setup_postdata($post)_ set up the global variables which are needed by _the_permalink()_, _the_title()_, _comments_template()_, etc. So if you call any of these usual "Loop" methods again AFTER the inner loop, they are operating on the _last post in the inner loop_ instead of the _current post in the main loop_.
+
+The trick is to save the _$post_ objects before the inner loop and to reset them again after the inner loop. To do this, change the Loop structure to follow this template:
+<br />
+
+notextile.. <div><pre><code>$posts = get_posts($wp_query->query);  //get the posts
+foreach($posts as $post) :   // cycle through them in the main loop
+	$currentPost = $post;  // save the current "main loop" post 
+	setup_postdata($post);  // instantiate the global post variables to the main loop post
+	the_title();    // use your usual Loop methods 
+	the_content();
+
+	$innerposts = get_posts('order=asc&mytaxonomy=mycustomerterm);  //get the posts from my custom taxonomy
+	foreach($innerposts as $post) :   // cycle through them in the main loop
+		setup_postdata($post);  // instantiate the global post variables to the inner loop post
+		the_title();    // the inner loop post's title
+	endforeach;  // end of inner loop
+
+	$post = $currentPost;  // reset the post from the main loop
+	$id = $post->ID;  // reset the post from the main loop
+	comments_template();  // now, the comments for the post in the main loop
+endforeach;  // end of main loop</code></pre></div>
+
+p.  Another way to do this might be to NOT set the global variables in the inner loop, thus avoiding this issue with the comments entirely. You would just have to directly access the post variables in the inner loop, i.e. _$rel_post->post_title_ instead of _the_title()_. It would work for simple things, like the title and slug. Check out "custom select query":http://codex.wordpress.org/Displaying_Posts_Using_a_Custom_Select_Query in the WordPress Codex to figure out how to get all of the fields you need from the DB to use this method.

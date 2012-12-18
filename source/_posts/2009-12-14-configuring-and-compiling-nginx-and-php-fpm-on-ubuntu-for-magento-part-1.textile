@@ -1,0 +1,126 @@
+---
+layout: post
+date: 2009-12-14 21:08
+title: "Configuring and compiling Nginx and PHP-FPM on Ubuntu for Magento, Part 1"
+categories: [Web-Development, e-Commerce]
+keywords: [php-fpm,magento,nginx,performance,speed,fastcgi,apc,ecommerce,apache]
+permalink: configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-1
+---
+
+<p>So, Magento is a huge piece of modular and extensible PHP code. Each request takes a lot of CPU cycles and memory to kick out a Magento page. This means it is <em>slow</em>. The performance of Magento is a frequent complaint, and rightfully so: consumers won't wait around all day for an ecommerce store to load. They will bail out and try another store if a page doesn't load in just a few seconds. A default Magento 1.3 install on budget web hosting can have page load times of up to 10secs, which is unacceptable. </p>
+
+<p>So what can be done to speed up Magento?</p>
+
+<p>There are a <a href="http://www.magentocommerce.com/wiki/groups/168/optimising_your_web_stack_performance_for_magento">number</a> of <a href="http://www.magentocommerce.com/blog/comments/understanding-magento-scalability-and-performance-1/">things</a>. I have tried almost all of them at this point. And I did reduce the page load time greatly, at least on the front end. But all of the AJAXy scripts on the backend (which has no caching, as far as I know) meant store maintenance and order fulfillment remained a tedious process. So I decided to try one final thing: make the switch from trusty old <a href="http://www.apache.org/">Apache</a> to <a href="http://wiki.nginx.org">Nginx</a>.</p>
+
+<p>I did have Apache2 tweaked out and running quite fast, but Apache has a big memory footprint (especially when running mod_php), and this Magento install is on a 256MB "slice" in the <a href="http://www.rackspacecloud.com/">Rackspace Cloud</a> so I want to keep the amount of RAM needed to run the store as low possible without sacrificing performance. Nginx is a really lightweight web server, and when paired with <a href="http://php-fpm.org/">PHP-FPM</a> ("FastCGI Process Manager", a patch for FastCGI) supposedly it's the fastest and most memory efficient way around to serve up PHP scripts. Sounds like just what I need!</p>
+
+<p>I got Magento running on Nginx with PHP-FPM and APC and it runs about as fast as my Apache install. I was hoping for a miracle and didn't get it, but considering it's on an anorexic little 256MB Cloud Server I would say it is performing admirably. Perhaps with more time to tune the performance (and bumping up to a bigger slice) it would really be fast, but I worked a long time on the previous Apache install so it was a tough act to follow. This article is the first of three that will explain what I did to get Magento running on this stack.</p>
+
+<p><strong>DISCALIMER:</strong> I am a pretty serious linux n00b. I'm sure I installed unnecessary packages, added extra compile flags, and what have you. <em>You might bork your server trying this stuff, so don't do it in a production environment!!</em> However, I did get Magento running on Nginx with PHP-FPM and APC. It was a struggle, but I did it. So I thought I would share my notes in hopes they will help others. I do not claim that these same commands will work for you in your unique environment, and I probably won't be help troubleshooting when they fail. Also, please add a comment and correct me if anything is wrong here, or if there is a better way to do anything. Thanks!</p>
+
+<p>Here are some of the resources I used to figure this out the first time around:</p>
+<ul>
+<li><a href="http://articles.slicehost.com/2009/3/4/ubuntu-intrepid-installing-nginx-from-source">Slidehost: Installing Nginx from source</a></li>
+<li><a href="http://interfacelab.com/nginx-php-fpm-apc-awesome/">NGINX + PHP-FPM + APC = Awesome</a></li>
+<li><a href="http://codeshepherd.blogspot.com/2009/05/nginx-phpfpm-memcache-mysql-xcache.html">Nginx + PHPFPM + Memcache + Mysql + XCache + Monit + Logrotate</a></li>
+<li><a href="http://www.yawn.it/2008/04/30/nginx-php-php-fpm-on-debian-etch-40/">Nginx + PHP + PHP-FPM on Debian Etch 4.0</a></li>
+</ul>
+
+<p>And here is the start of the compile and install process (note: you might need to sudo these commands):</p>
+
+<pre><code>
+# aptitude install make bison flex gcc patch autoconf subversion locate libc6 libpcre3 libpcre3-dev libpcrecpp0 libssl0.9.8 zlib1g lsb-base
+# mkdir ~/sources
+# cd ~/sources/
+# wget http://sysoev.ru/nginx/nginx-0.7.63.tar.gz
+# tar -zxvf nginx-0.7.63.tar.gz
+# cd nginx-0.7.63/
+# ./configure --sbin-path=/usr/local/sbin --with-http_ssl_module
+# make
+# make install
+# ln -s /usr/local/nginx/conf /etc/nginx
+# /usr/local/sbin/nginx
+# kill `cat /usr/local/nginx/logs/nginx.pid`
+</code></pre>
+
+<p>Then, I created the following init script at <em>/etc/init.d/nginx</em>.</p>
+
+<pre><code>
+#! /bin/sh
+
+### BEGIN INIT INFO
+# Provides: nginx
+# Required-Start: $all
+# Required-Stop: $all
+# Default-Start: 2 3 4 5
+# Default-Stop: 0 1 6
+# Short-Description: starts the nginx web server
+# Description: starts nginx using start-stop-daemon
+### END INIT INFO
+
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+DAEMON=/usr/local/sbin/nginx
+NAME=nginx
+DESC=nginx
+
+test -x $DAEMON || exit 0
+
+# Include nginx defaults if available
+if [ -f /etc/default/nginx ] ; then
+. /etc/default/nginx
+fi
+
+set -e
+
+. /lib/lsb/init-functions
+
+case "$1" in
+start)
+echo -n "Starting $DESC: "
+start-stop-daemon --start --quiet --pidfile /usr/local/nginx/logs/$NAME.pid \
+--exec $DAEMON -- $DAEMON_OPTS || true
+echo "$NAME."
+;;
+stop)
+echo -n "Stopping $DESC: "
+start-stop-daemon --stop --quiet --pidfile /usr/local/nginx/logs/$NAME.pid \
+--exec $DAEMON || true
+echo "$NAME."
+;;
+restart|force-reload)
+echo -n "Restarting $DESC: "
+start-stop-daemon --stop --quiet --pidfile \
+/usr/local/nginx/logs/$NAME.pid --exec $DAEMON || true
+sleep 1
+start-stop-daemon --start --quiet --pidfile \
+/usr/local/nginx/logs/$NAME.pid --exec $DAEMON -- $DAEMON_OPTS || true
+echo "$NAME."
+;;
+reload)
+echo -n "Reloading $DESC configuration: "
+start-stop-daemon --stop --signal HUP --quiet --pidfile /usr/local/nginx/logs/$NAME.pid \
+--exec $DAEMON || true
+echo "$NAME."
+;;
+status)
+status_of_proc -p /usr/local/nginx/logs/$NAME.pid "$DAEMON" nginx && exit 0 || exit $?
+;;
+*)
+N=/etc/init.d/$NAME
+echo "Usage: $N {start|stop|restart|reload|force-reload|status}" >&2
+exit 1
+;;
+esac
+
+exit 0
+</code></pre>
+
+<p>Now we can easily start and stop Nginx with familiar commands like <em>/etc/init.d/nginx start</em>. To install the init script, do the following:</p>
+
+<pre><code>
+# chmod +x /etc/init.d/nginx
+# /usr/sbin/update-rc.d -f nginx defaults
+</code></pre>
+
+<p>You should have Nginx compiled, installed, and running now. Yay! Next, <a href="http://www.chilipepperdesign.com/2009/12/18/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-2">Part 2</a> will be about installing and compiling PHP-FPM. Finally, <a href="http://www.chilipepperdesign.com/2010/01/03/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-3">Part 3</a> is about setting up Magneto with Nginx and PHP-FPM (including mod-rewrite issues). I will not be covering the other aspects of setting up a Magento server like MySql and sendmail, because these are the same for an Apache stack which has plenty of documentation out on the Internet already.</p>

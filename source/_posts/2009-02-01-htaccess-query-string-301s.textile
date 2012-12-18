@@ -1,0 +1,40 @@
+---
+layout: post
+date: 2009-02-01 13:14
+title: "htaccess 301 Redirects from one URL query string to another"
+categories: [SEO, Web-Development]
+keywords: [htaccess,301 redirect,mod_rewrite,moved permanently,query string,dynamic page,dynamic url]
+permalink: htaccess-query-string-301s
+---
+
+The other day I was trying to set up a "301 Moved Permanently":http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.3 redirect that took one dynamic url and redirected to _another_ dynamic url.
+
+Searching around I found "plenty":http://www.seobook.com/archives/001714.shtml of "tips":http://www.webproworld.com/discussion-forum/73178-how-do-you-301-redirect-dynamic-url-url-question-mark.html on how to redirect from older "ugly" style dynamic urls like "test.php?id=999" to new "clean" dynamic urls like "test/999", but that wasn't exactly what I needed. I needed to go from something like "page.php?id=999" to something like"page.php?id=111". Basically just a parameter substitution.
+
+There are two ways to do 301s in an .htaccess file. One is to do a standard "redirect 301", and the other is to use the Apache _mod_rewrite_ module. For reference, this is what a standard "redirect 301" looks like:
+
+<pre><code>redirect 301 /testpage.htm http://www.example.com/testpage2.php
+</code></pre>
+
+This won't work with a dynamic URL like "/testpage.htm?id=blah" though. To handle query strings properly you need to use _mod_rewrite_. Here is the code that ended up working:
+
+<pre><code># redirect testpage.php?id=string1 to testpage.php?id=string2
+RewriteCond %{QUERY_STRING} ^id=string1$ [NC]
+RewriteRule testpage http://www.example.com/testpage.php\?id=string2 [L,R=301]
+</code></pre>
+
+*The trick is that the second part of the RewriteRule - the URL to redirect to - is evaluated as a Regular Expression but _has a "?" in it_. This is a RegEx operator, and will break the command unless it is escaped with a "\".*
+
+Look close at our destination URL "http://www.example.com/testpage.php<span style="color:#f00; font-weight: bold;">\?</span>id=string2". The URL we actually want to redirect to is "http://www.example.com/testpage.php<span style="color:#f00; font-weight: bold;">?</span>id=string2". Forgetting this one tiny little escape character will blow the whole thing up. :)
+
+*The dirty details:*
+
+There are plenty of good resources on mod_rewrite conditionals if you want to learn more, but it basically works like this: Apache looks at the RewriteRule, which is a pair of two Regular Expressions (RegEx): the URL we want to change, and what we want to change it to. If mod_rewrite matches the first RegEx expression then it looks at the RewriteCond to see if it should apply the RewriteRule. In this case we are just looking at the QUERY_STRING (everything after the "?"), and doing a case-insensitive [NC] match for "id=string1". If the RewriteCond is true, then the RewriteRule goes in to effect and "testpage" is redirected to "http://www.example.com/testpage.php\?id=string2". Just don't forget to escape that pesky "?" in the query string!
+
+301 Redirects are an important part of SEO and maintaining search engine rankings, so it's nice to have another trick up your sleeve like this. 
+
+Here are some very helpful additional resources to improve your htaccess mod_rewrite-fu:
+
+* "Basic Guide":http://check-these.info/mod_rewrite-basic.html
+* "Cheat Sheet":http://www.askapache.com/htaccess/mod_rewrite-variables-cheatsheet.html
+* "Official Guide":http://askapache.info/trunk/misc/rewriteguide.html

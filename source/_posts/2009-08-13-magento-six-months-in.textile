@@ -1,0 +1,52 @@
+---
+layout: post
+date: 2009-08-13 01:48
+title: "Magento - Six Months In"
+categories: [e-Commerce, Web-Development]
+keywords: [ecommerce,e-commerce,magento,experience,rating,warnings,problems,issues]
+permalink: magento-six-months-in
+---
+
+Yes, this basically amounts to a good old fashioned rant post. But there is a purpose behind it: to educate those thinking of using Magento to power their ecommerce store about potential concerns and pitfalls. Read on, and enjoy.
+
+<h2>Magento is an ambitious, promising ecommerce platform.</h2>
+
+"Magento":http://www.magentocommerce.com/ really is a neat piece of software. "Varien":http://www.varien.com/ has really outdone itself. It is one of the most feature rich ecommerce platforms out right now and =drumroll= it's "Open Source":http://en.wikipedia.org/wiki/Open_source_software!
+
+After comparing prices and features a year ago, Magento was chosen from amongst all of the other ecommerce solutions available for some upcoming projects. I have now helped setup, develop, maintain and run four Magento stores. I've been working with Magento almost exclusively for the past 6 months. 
+
+It's pretty great! 
+
+But it is not perfect.
+
+<h3>Magento, while open source, is not community developed.</h3>
+
+If I find a bug in Magento, I can submit it to Varien. Hopefully they will fix it in the next release? I can also fix it myself. This is the beauty of Open Source, right? Except that all development of the core branch is still controlled by Varien. There is no means by which I can patch the core myself, test other patches, etc. The best I  can do is include my fix with the bug report. Perhaps this isn't unusual... but compared to other OSS I'm familiar with like "Drupal":http://drupal.org/, it means that the speed with which bugs are patched is much slower. This lack of collaborative development will hold Magento back, making it more a "good free product" than a "great open source" one.
+
+<h3>Magento is terrible for backend order management and fulfillment.</h3>
+
+The biggest issue I've had with Magento is order management and fulfillment in the backend. The slow, restrictive, clunky process of creating an Invoice and then a Shipment to complete an Order is just bad. It is not scalable. Magento runs slow enough as it is - having to click (and wait) 4+ times _per order_ just to print a packing slip is unsustainable. It could take 5 minutes to print 10 packing slips! One of the first things I've had to do to make Magento really usable for a store with any volume of orders is create bulk actions for the order page which allow faster order processing.
+
+But that's not all! If you want to "Edit" and order in Magento because, say, the shipping address was incorrect what Magento actually does is create a whole new order. The comment history is lost, a new email is fired off to the admin account, the order number is even different! And if the order had Configurable or Bundled items in it - Magento doesn't support editing them so it actually removes them from the order. You better remember to re-add them if they were important!
+
+Then there is order management. If you have printed the Invoice and the Packing Slip, the order is automatically marked complete. This is fine - except that if you end up _not_ shipping it out, you cannot change the status back to "Processing". You cannot "Cancel" the order. It is just "Complete". The order status management is terrible. This is just one example of the many problems with it. You cannot do bulk status changes, and you are too restricted about which statuses you can move from and to.
+
+<h3>Magento is still "Beta" buggy.</h3>
+
+Magento is at it's 1.3 release now, and Varien even offers their "Enterprise":http://www.magentocommerce.com/product/enterprise-edition version as well, but it's still a Beta release at heart. The problem is that there are just too many features. Any single feature works okay most of the time: configurable products, catalog price rules, pricing tiers, tax calculations, etc. But when you start to utilize multiple features at the same time, you will run into trouble. 
+
+An example: "percent off" catalog price rules don't apply properly to Configurable products. "Percent off" catalog price rules and Configurable products work fine _on their own_, but fail when combined. If one Configurable option is more expensive, the "percent off" of the cheaper base item is still used. Not a bug most people run into most of the time, but if your Magento store has configurable products and you are running a "20% off" sale, the sale price is probably wrong on those items right now. Which is what you expect! From _Beta_ software. Frankly, I'm not sure a monster chunk of code the size of Magento can ever come out of Beta. :)
+
+<h3>Magento is getting faster, but it's still slow.</h3>
+
+Varien has been working very hard on this, and its getting faster, but be prepared to deal with speed issues. I've learned how to make Magento fly - but it was long process and I know more now about Apache, KeepAlives, Query Caching and other performance tuning than I ever wanted to. Don't expect speed if you run a default Magento install on cheap shared hosting. The reason Magento is so great is also the reason it's so slow: features, features, features. PHP chews through CPU cycles like crazy to make Magento do all the great stuff it does, and the price paid is long load times.
+
+<h3>Magento is still (too) young.</h3>
+
+More than anything, the problem is that Magento is still so young. It's only been a little over a year since the 1.0 release. The whole project is less than three years old. Considering that Varien carries all of the development weight on their shoulders it's impressive how far Magento _has_ come - but it's not "there" yet. I don't mean to sound accusing or disappointed - I just want to give a word of warning to prospective users.
+
+<h2>What does Magento do right?</h2>
+
+Everything NOT listed here. *Which is a lot.* I admit I have very little experience with other ecommerce platforms, but I know most of them have a much longer list of problems than Magento does. Magento will continue to be refined over time, and in the mean time many of the issues here are already addressed (or will be soon) by "community extensions":http://www.magentocommerce.com/magento-connect. 
+
+So Magento does a lot right, and is doing more right every day. Just be aware of the pitfalls of running such complicated, young software.

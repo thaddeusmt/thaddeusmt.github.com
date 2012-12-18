@@ -1,0 +1,74 @@
+---
+layout: post
+date: 2010-01-08 14:37
+title: "Adding the \"rel\" and \"title\" attributes to image links in CKEditor 3"
+categories: [Web-Development, JavaScript]
+keywords: [ckeditor,javascript,lightbox,rel,title,attribute,wysiwyg]
+permalink: adding-the-rel-and-title-attributes-to-image-links-in-ckeditor-3
+---
+
+<p><a href="http://ckeditor.com/">CKEditor</a> is the new and improved successor to the venerable <a href="http://sourceforge.net/projects/fckeditor/files/FCKeditor/">FCKeditor</a> JavaScript WYSIWYG editor. I've used <a href="http://tinymce.moxiecode.com/">TinyMCE</a> and FCKeditor before, but this was my first time trying out the new CKEditor 3.1. I am using it on a new Drupal website via the <a href="http://drupal.org/project/ckeditor">Drupal CKEditor module</a>. The problem I ran into, however, is using <a href="http://www.huddletogether.com/projects/lightbox2/">Lightbox2</a> on images inserted via CKEditor. CK does not provide a way to add the "rel" attribute to image links (or any links for that matter). CK also doesn't allow adding the "title" attribute to image links. Lightbox uses both of these to determine which images to display, group together in galleries, provide a caption, etc. I found <a href="http://dev.fckeditor.net/attachment/ticket/2627/fck-rel.patch">a patch for FCKeditor</a> which allows adding a "rel" attribute to image links, but I couldn't find one for the new CKEditor. So here we are. :)</p>
+
+<p>This is a total hack, since I have not looked in to how to properly make a plugin for the new CKEditor, but it works pretty well. Maybe someone who knows how to make plugins to CKEditor can show me the way.</p>
+
+<p>To start hacking, we need to first copy over the minified <em>ckeditor\plugins\image\dialogs\image.js</em> with the indented <em>ckeditor\_source\plugins\image\dialogs\image.js</em>, since it's really hard to work with the minified <em>image.js</em>.</p>
+
+<p>In <em>image.js</em> all of the tabs and fields in the Image popup dialog are defined in the "contents" array (below the onHide function). We will add our new "rel" and "title" fields to the content array, in the "Link" tab's sub-array. I added the new code at the end of the Link tab's definition array after the <em>txtUrl</em>, <em>browse</em>, and <em>cmbTarget</em> fields (around line 1146). The code I added is:</p>
+
+<pre><code>{
+id : 'txtTitle',
+type : 'text',
+label : editor.lang.link.advisoryTitle,
+'default' : '',
+setup : function( type, element )
+{
+	if ( type == LINK )
+	{
+		this.setValue( element.getAttribute( 'title' ) );
+	}
+},
+commit : function( type, element )
+{
+	if ( type == LINK )
+	{
+		if ( this.getValue() || this.isChanged() )
+		{
+			element.setAttribute( 'title', this.getValue() );
+		}
+	}
+}
+},
+{
+id : 'txtRel',
+type : 'text',
+label : editor.lang.link.rel,
+'default' : '',
+setup : function( type, element )
+{
+	if ( type == LINK )
+	{
+		this.setValue( element.getAttribute( 'rel' ) );
+	}
+},
+commit : function( type, element )
+{
+	if ( type == LINK )
+	{
+		if ( this.getValue() || this.isChanged() )
+		{
+			element.setAttribute( 'rel', this.getValue() );
+		}
+	}
+}
+},
+</code></pre>
+
+<p>This adds a _txtTitle_ and _txtRel_ field to the Link tab on the Insert Image CKEditor dialog. <strong>Look out for commas!</strong> The first time I did this I missed a comma between the cmbTarget and txtTitle declarations, which borked everything.</p>
+
+<p>The final thing we need to do is create the "editor.lang.link.rel" English translation definition so the new _txtRel_ field is properly labeled in the dialog (I re-used the existing "editor.lang.link.advisoryTitle" translation for _txtTitle_). To do this, open up _ckeditor\lang\en.js_. I added the following snipped between _styles_ and _selectAnchor_ in the "Link" block, but just make sure it's in the "Link" block of translations.</p>
+
+<pre><code>rel:'Rel',</code></pre>
+
+<p>You could probably hard-code this label, but I kept with the translation system. I didn't do any labels except the English one, but you get the idea. If you are using another language insert the "rel" label into the appropriate file for that language.</p>
+
+<p>You can now set the "rel" and "title" attributes on the image link, and use them with the Lightbox of your choice!</p>

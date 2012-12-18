@@ -1,0 +1,20 @@
+---
+layout: post
+date: 2009-01-29 22:23
+title: "The New Blog"
+categories: [Web-Design, Web-Development]
+keywords: [blogs,Chili Pepper Design]
+permalink: the-new-blog
+---
+
+So I've decided to start blogging about web design and development. Look out!
+
+One reason for doing so is that I love both web design and web development, and have started to want an outlet for this love. Let's face it: no one at dinner wants to hear about the new version of Wordpress, or the latest CSS trick I figured out. But perhaps there are folks out there on the "intertubes" who do? Well, I know there are, because these "folks" are _me_. So I hope to have this conversation with other web geeks here.
+
+The other reason, and perhaps the largest impetus for actually re-vamping my site to allow for a blog, is that I want to give back to the "intertubes". Every time I run into a strange IE bug, or need to figure out how to modify a Drupal View just so, I search on Google for it. And I find the answers on the countless blog and forums that make the Internet such a great resource. It's time to stop simply "taking" from this resource, and start adding to it. The Internet is great because of how many people contribute to it, so I figure I should do my and contribute so it stays great. :)
+
+So watch this space for web design and development tips, tricks, how-tos, tutorials, rants and all things inter-web. Don't look for Chili Pepper Design news here - that goes on the "front page":http://www.chilipepperdesign.com/ of this website. Also, don't look for personal posts and updates here, I have a personal blog for all that over at "oronaut.com":http://www.oronaut.com/. This space is just for seriously nerdy web stuff.
+
+So wish me luck on this whole "giving back to the Internet" thing, and I'd love to hear what _you_ think about any of my posts so feel free to comment - I'll try my best to get back to you.
+
+Thanks!

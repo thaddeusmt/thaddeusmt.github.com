@@ -1,0 +1,36 @@
+---
+layout: post
+date: 2010-01-14 12:49
+title: "Unobtrusive jCarousel page/tab external controls with jQuery"
+categories: [JavaScript, Web-Development]
+keywords: [jquery,jcarousel,unobtrusive,progressive enhancement]
+permalink: unobtrusive-jcarousel-pagetab-external-controls-with-jquery
+---
+
+I am using the very slick and enjoyable "jCarousel":http://sorgalla.com/projects/jcarousel/ plugin for "jQuery":http://jquery.com/ on a new project to display featured content on the front page. I wanted to use the "external controls":http://sorgalla.com/projects/jcarousel/examples/static_controls.html to allow users to easily jump between slides. However, all the examples I found required hard-coding the control links into the document HTML. This is not best practice because when JavaScript is disabled and the carousel degrades to a simple list you have a bunch of control links that do nothing sitting there on the page. Better to create the controls in JS and append them to the DOM with jQuery! This way the controls only appear when the jCarousel script is loaded and ready to use them.
+
+To do this I just had to add a little extra code to the _initCallback_ method I was already using to bind the external controls. Here is the JS needed to unobtrusively create a jCarousel with 4 external control links:
+
+<pre><code><script type="text/javascript">
+//this function creates the control links and binds them
+function mycarousel_initCallback(carousel) {
+    // add the controls here
+    carousel.container.before('<div class="jcarousel-control"><a href="#">1</a><a href="#">2</a><a href="#">3</a><a href="#">4</a></div>');
+    // now bind the controls
+    jQuery('.jcarousel-control a').bind('click', function() {
+        carousel.scroll(jQuery.jcarousel.intval(jQuery(this).text()));
+        return false;
+    });
+};
+//create the jCarousel on the #mycarousel element with the initCallback above
+jQuery(document).ready(function() {
+    jQuery("#mycarousel").jcarousel({
+        initCallback: mycarousel_initCallback,
+    });
+});
+</script>
+</code></pre>
+
+I simply append the _.jcarousel-control_ div before the carousel container using _carousel.container.before()_. You could just as easily add it after the carousel by using _carousel.container.after()_.
+
+I love how easy jQuery make "progressive enhancement":http://www.alistapart.com/articles/understandingprogressiveenhancement/! Enjoy.

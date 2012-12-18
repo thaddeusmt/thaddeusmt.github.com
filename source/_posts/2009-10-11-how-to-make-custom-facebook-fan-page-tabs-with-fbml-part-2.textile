@@ -1,0 +1,85 @@
+---
+layout: post
+date: 2009-10-11 22:26
+title: "How to make custom Facebook Fan Page tabs with FBML, Part 2"
+categories: [Social-Media, Web-Development]
+keywords: [facebook,facebook app,applications,fan page,custom tab,tabbed profile,fan page tab,fbml,static fmlb]
+permalink: how-to-make-custom-facebook-fan-page-tabs-with-fbml-part-2
+---
+
+<strong style="font-size: 1.1em;">UPDATE 2-14-2011: "FBML is going away - learn about Facebook iframe tabs on Facebook Pages here":http://www.chilipepperdesign.com/2011/02/14/facebook-iframe-tabs-on-pages-no-more-fbml </strong>
+
+<strong style="font-size: 1.1em;">UPDATE 3-10-2011: "Easily create and manage custom Facebook Page Tabs with SplashLab Social - Now available!":http://www.splashlabsocial.com </strong>
+
+* "Read Part 1 Here":http://www.chilipepperdesign.com/2009/10/06/how-to-make-custom-facebook-fan-page-tabs-with-fbml-part-1.
+* Check out some "*great custom Facebook Pages*":http://facebookshowcase.net
+
+<h2>Quick and Dirty Custom Facebook Page Tabs and Boxes</h2>
+
+The fastest and easiest way to add custom Tabs to a Page is with the "Static FBML application":http://www.facebook.com/apps/application.php?id=4949752878. A nice visual tutorial of this method is posted on "lorrainesiew.wordpress.com":http://lorrainesiew.wordpress.com/2009/07/04/facebook-pages-introduction-to-fbml/. I will also quickly outline the process here:
+
+# Assuming you have a Facebook Fan Page already, you can get started by visiting the "Static FBML App's Page":http://www.facebook.com/apps/application.php?id=4949752878, and click on "Add to my Page" underneath the logo in the top left.
+# Once you have added the application to your Page, go edit the Settings for that Page and you should see "FBML" listed under your _Applications_. Click on the "Admin Options" pencil icon to the right, and then click on "Edit".
+# On the next page enter the name you want for your Tab, then enter some simple HTML to test it out. Click on "Save Changes".
+# View your Fan Page. Click on the "+" sign to the right of your Tabs to add the new Tab you just created to the list of visible Tabs. You can drag it around to reorder your Tabs.
+
+It's hard to beat the Static FBML app in terms of speed and simplicity. The only problem with it is that it really is _static_. When I tried to add a Comments form with the &lt;fb:comments> tag it threw errors. Other dynamic FBML tags have the same problem. This is fine most of the time since you can do a _lot_ with static images, links and videos. (Web 1.0!) But if you want to have a Comment area or import Twitter or RSS feeds you'll need a dynamic page. A "dynamic tab" requires  it's own special Facebook Application to be created. Next I cover how to make a Facebook app that adds a Tab to your Page.
+
+<h2>Advanced Custom Facebook Page Tabs</h2>
+
+To make a "fancy", dynamic Tab like I did for the "Chili Pepper page on Facebook":http://www.facebook.com/pages/Bozeman-MT/Chili-Pepper-Design/59282833907?v=app_154473727596, you need to create a new Facebook Application. A Facebook App is, at it's core, just a web page hosted on a server which is loaded into Facebook via AJAX. You can make very advanced apps that hook into the Facebook Feed and other things, but all I want to talk about here is making a very simple one that just displays HTML on a Tab. The basic process of creating an App are:
+
+# Download a "Facebook API Client Library":http://wiki.developers.facebook.com/index.php/Client_Libraries in the language of your choice
+# Upload the library to your web host
+# Create a basic "index" page to test that your app is working
+# Create a new App using the "Facebook Developer Application":http://www.facebook.com/developers/
+# Change your App's settings on Facebook to point to the URL where you uploaded your App's "index" page
+# Add your new App to your Page as a Tab to test it out
+
+There are many great tutorials that provide detailed instructions on how to do all this, so rather than reinvent the wheel I'll provide some links to these resources:
+
+* "Official Facebook 'Get Started' Page":http://developers.facebook.com/get_started.php
+* "Anatomy of a Facebook App":http://wiki.developers.facebook.com/index.php/Anatomy_of_a_Facebook_App
+* "Write Your Own Facebook App in 5 Minutes":http://www.labnol.org/internet/tutorial-write-a-facebook-application/10116/
+* Good "Facebook PHP Tutorial":http://www.merchantos.com/makebeta/facebook/facebook-php-tutorial/
+* NetTuts "Build Your First Facebook App":http://net.tutsplus.com/tutorials/tools-and-tips/build-your-first-facebook-app/
+* "Write a FaceBook App in 10 mintures":http://gathadams.com/2007/06/18/how-to-write-a-facebook-application-in-10-minutes/
+* "10 Things To Know About Facebook Apps Before Starting":http://padrenel.blogs.experienceproject.com/3459.html
+
+All you really need is the official "Get Started":http://developers.facebook.com/get_started.php page, in my opinion. But even with all the tutorials in the world you'll find yourself searching through the "Forums":http://forum.developers.facebook.com/ to figure out errors and problems, since the Documentation is just so-so.
+
+Using the resources above you can create a Facebook App. Here are the steps necessary to create a Tab with yourApp and add it to your Page:
+
+# To create a Tab, create another file (such as _tab.php_) in your App's "Canvas Callback URL" directory on your host.
+# In your App's settings, under the *Canvas* section, _make sure that your Canvas Callback URL has a trailing slash on it_.
+# Make sure that, under the *Authentication* section, _Facebook Pages_ is checked as "Installable To".
+# Then, still in your Settings page, under the *Profile* section, fill out the _Tab URL_ field. In this example we would just add _tab.php_.
+# If you have not done this already, add your App to your Page. This is done by going to your App's "Application Profile" (which is linked off of your App dashboard page at the bottom, after the links to Edit Settings, Feed Template, etc). On the right side the screen on your Application Profile page, under the "Go To Application" button, there is a link to "Add to Page". (If it's not visible, click the "More" arrow).
+# Now visit your _Page's_ Settings page. Under the Applications heading you should see your App listed. Click on the "Edit" Pencil to the right of it, and select "Application Settings". In the little lightbox/popup-window you should see "Tab (+Add+)". Click on "Add" to add the Tab to your page!
+
+You now have a custom App Tab on your Page! Creating a nice Tab with dynamic content is beyond the scope of this post, but I hope to give some short tutorials in later posts about that. To help you start out making your Tab though, here are two things to remember:
+
+* Tabs don't need to including _facebook.php_ and instantiate the $facebook object. Also, they don't need (or want) _require_login()_ to be called. If you call _require_login()_ you may get an error, or users may be forced to "install" your app to view the tab, neither of which make a good first impression. For _most_ applications you need the $facebook object, but not for a simple Tab-centric one like this.
+* Remember that a Tab is not a regular Canvas. You cannot us &lt;fb:iframe> and some other FBML tags. Tab pages have to be FBML applications, and a limited subset of FBML at that. On the "Test console":http://developers.facebook.com/tools.php?fbml you can select "Tab" from the _Position_ dropdown to test which tags will work.
+* To check if your tab is really being viewed as a Tab, use this code:
+
+<pre><code>if( !isset($_POST['fb_sig_in_profile_tab']) ) { echo "tab only code here"; }</code></pre>
+
+* To check if the user viewing your Tab is logged in to Facebook or not, use this code:
+
+<pre><code>if ($_REQUEST['fb_sig_logged_out_facebook']) { echo "code for logged out users"; }</code></pre>
+
+* To display something only to Fans of your page:
+
+<pre><code><fb:visible-to-connection>Welcome, fans!</fb:visible-to-connection></code></pre>
+
+<h3>Bonus Points: Make your custom tab the default "landing" tab</h3>
+
+# On your Page's Settings, click the Pencil icon to the right of *Wall Settings* and select "Edit". 
+# Look for the _Default Landing Tab for Everyone Else_ dropdown. Select the landing Tab of your choice from the list! Assuming you have successfully created and added your Tab to your Page, you can choose your custom Tab as the default "landing page".
+
+<h3>Inspiration</h3>
+
+And finally, for some inspiration for your own custom page check out the great things designers are doing with Facebook Pages over on the<strong> "Facebook Showcase":http://facebookshowcase.net </strong>
+
+<div style="color: #808080; font-size: .9em;">Facebook is a registered trademark of Facebook, Inc.</div>

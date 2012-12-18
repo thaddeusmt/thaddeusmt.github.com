@@ -1,0 +1,98 @@
+---
+layout: post
+date: 2011-02-15 00:37
+title: " Reveal / Fan-Gate / Like-Gate Facebook iframe tab tutorial (with PHP)"
+categories: [Social-Media, Web-Development]
+keywords: []
+permalink: reveal-fan-gate-like-gate-facebook-iframe-tab-tutorial-with-php
+---
+
+<em><strong>Update: <a href="http://www.splashlabsocial.com">SplashLab Social</a> has been released!</strong> <a href="http://www.splashlabsocial.com">If you are looking for an easier way to set up Fans-only/Reveal tabs, look no further!</a> My new service makes it easy to create custom fan-gate tabs, check it out!</em>
+
+"FBML is going away":http://developers.facebook.com/blog/post/462#fbml_roadmap. Is the popular (and effective) strategy of "fan-gating" content to encourage visitors to Like you page going away with the "&lt;fb:visible-to-connection>":http://developers.facebook.com/docs/reference/fbml/visible-to-connection/ FBML tag?
+
+No! Facebook has been kind enough to provide a new method for implementing "reveal tabs" on the new iframe tabs. Follow along in the tutorial below to learn how to do this.
+
+(This tutorial assumes you are creating a PHP Facebook application, but you can follow the spirit of it in any language.)
+
+<h3>1. Set up an iframe tab application</h3>
+
+I won't cover all of the details here, but you need to set up an iframe tab application on Facebook first. Assuming you have access to put PHP files up on a public server, follow these steps:
+
+# Go to the "Facebook Developer application":http://www.facebook.com/apps/application.php?id=2345053339
+# Create a new application
+# On the *"Facebook Integration"* tab of the application settings:
+## Set the *Canvas Page* URL slug
+## Point the *Canvas URL* to your PHP script's base URL
+## Set the *Tab Name* to something (Welcome!)
+## *Make sure the *Page Tab Type* is set to iframe*
+## Set the *Tab URL* to the specific PHP file for this tab
+# On the *"Advanced"* tab of the application settings:
+## Make sure the *"OAuth 2.0 for Canvas"* option is set
+# Save the application
+# Add the application to a Page to test it out
+
+*NOTE:* There is some confusion about Canvas URL and the Tab URL. The Canvas URL is the PHP file that get's hit when the users views the Canvas app. This is different than the PHP script which generates the Tab, which is defined by the Tab URL. The Tab URL has to be relative to the Canvas URL. What I usually do is have the Canvas PHP file be "index.php" and point the Canvas URL to the directory it's in. Then I make a "tab.php" file for the Tab URL in the same directory.
+
+* *Canvas URL*: http://mysite.com/myfbappdirectory/
+** This points to the file http://mysite.com/myfbappdirectory/index.php
+* *Tab URL*: tab.php
+** This points to the file http://mysite.com/myfbappdirectory/tab.php
+
+<h3>2. Get the signed_request</h3>
+
+Facebook now passes an encoded POST variable to tab applications, called the "signed_request":http://developers.facebook.com/docs/authentication/signed_request. The content of a tab's signed_request is covered "here in the canvas guide":http://developers.facebook.com/docs/guides/canvas#tabs. General details about Facebook's signed requests can be found "here":http://developers.facebook.com/docs/authentication/signed_request.
+
+To get the signed_request, make sure the "OAuth 2.0 for Canvas" option is set in your application's settings. Then just grab it out of PHP's $_REQUEST array global.
+
+<pre><code>$signed_request = $_REQUEST['signed_request'];</code></pre>
+
+<h3>3. Decode the signed_request</h3>
+
+The signed request is encoded for security. "Read more about this here.":http://developers.facebook.com/docs/authentication/signed_request. We are not really interested in security on this app though. We just want to tell if a visitor is a fan or not. So we are going to do the "cheater" method of decoding the signed_request, which ignores some of the security features (like the signature). Here is the cheater code (you will need the PHP json_decode() method!):
+
+<pre><code>function parsePageSignedRequest() {
+    if (isset($_REQUEST['signed_request'])) {
+      $encoded_sig = null;
+      $payload = null;
+      list($encoded_sig, $payload) = explode('.', $_REQUEST['signed_request'], 2);
+      $sig = base64_decode(strtr($encoded_sig, '-_', '+/'));
+      $data = json_decode(base64_decode(strtr($payload, '-_', '+/'), true));
+      return $data;
+    }
+    return false;
+  }
+  print_r(parsePageSignedRequest());</code></pre>
+
+<h3>4. Switch content based on the signed_request</h3>
+
+The signed_request on iframe tabs has a "pages" object, which holds a "liked" variable. If the user viewing your tab has Liked your page, it is set to TRUE. If they have not, it is set to FALSE. So:
+
+<pre><code>function parsePageSignedRequest() {
+    if (isset($_REQUEST['signed_request'])) {
+      $encoded_sig = null;
+      $payload = null;
+      list($encoded_sig, $payload) = explode('.', $_REQUEST['signed_request'], 2);
+      $sig = base64_decode(strtr($encoded_sig, '-_', '+/'));
+      $data = json_decode(base64_decode(strtr($payload, '-_', '+/'), true));
+      return $data;
+    }
+    return false;
+  }
+  if($signed_request = parsePageSignedRequest()) {
+    if($signed_request->page->liked) {
+      echo "This content is for Fans only!";
+    } else {
+      echo "Please click on the Like button to view this tab!";
+    }
+  }</code></pre>
+
+<h3>You now have a reveal tab with fans-only content!</h3>
+
+This new method is actually better than the old method in a couple of ways:
+
+# You no longer need to do devious "position: absolute" CSS hacks to get your fan and non-fan content to look nice! With &lt;fb:visible-to-connection>, the content for BOTH was printed out, the non-fan content was just "hidden", which was a nightmare to style.
+# The page doesn't blow up when viewed as an Admin
+# Your content for fans-only is REALLY for _fans-only_ - clever folks can no longer "View Source" to see the hidden content.
+
+Good luck, and happy Facebook developing!
