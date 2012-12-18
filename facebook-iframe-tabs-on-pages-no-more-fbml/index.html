@@ -1,0 +1,420 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Facebook iframe tabs on Pages - No more FBML! - Chili Pepper Design</title>
+  <meta name="author" content="Evan Johnson">
+
+  
+  <meta name="description" content="The long awaited transition from FBML tabs to iframe tabs has finally happened. As of this writing on Feb 14th 2011 (Valentines Day!) you can choose &hellip;">
+  <meta name="keywords" content="">
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://thaddeusmt.github.comfacebook-iframe-tabs-on-pages-no-more-fbml">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Chili Pepper Design" type="application/atom+xml">
+  
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-6058373-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Chili Pepper Design</a></h1>
+  
+    <h2>Free-range web development</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:thaddeusmt.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <br style="clear: both" />
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Facebook Iframe Tabs on Pages - No More FBML!</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-02-14T23:43:00-07:00" pubdate data-updated="true">Feb 14<span>th</span>, 2011</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>The long awaited transition from <span class="caps">FBML</span> tabs to iframe tabs has finally happened. As of this writing on Feb 14th 2011 (Valentines Day!) you can choose the &#8220;iframe&#8221; option for Facebook application tabs. The official word from the <a href="http://developers.facebook.com/roadmap/">Facebook developer roadmap</a> is that <a href="http://developers.facebook.com/blog/post/462#fbml_roadmap">as of March 11th developers will no longer be able to create <span class="caps">FBML</span> tabs</a> (although existing <span class="caps">FBML</span> apps will be supported indefinitely &#8211; or at least until the end of 2011 I heard in the comments).</p>
+<p><img src="http://www.chilipepperdesign.com/images/52.jpg" style="width: 415px" /></p>
+<h3>The Good</h3>
+<p>The great thing about iframe tabs is that you are working with a real webpage now. No more fighting with <span class="caps">FBJS</span> and finicky <span class="caps">FBML</span> tags!</p>
+<ol>
+	<li><strong>External JS like JQuery and TinyMCE</strong> &#8211; You can finally do all of the things that Canvas iframe apps have been able to do for a while, like include handy JavaScript libraries!</li>
+	<li><strong>onLoad JS events</strong> &#8211; One of the frustrating things with <span class="caps">FBML</span> apps was always that you couldn&#8217;t start JS on the page load, so things like automatic slideshows were impossible. You should be able to have content auto-play now!</li>
+	<li><strong>Facebook JS <span class="caps">SDK</span> for <span class="caps">XFBML</span> Social Plugins</strong> &#8211; You can import the JavaScript <span class="caps">SDK</span> and still have Request popups, Like buttons, make Open Graph <span class="caps">API</span> requests&#8230; the whole 9 yards.</li>
+</ol>
+<h3>The Bad</h3>
+<p>One of the interesting things is that the ubiquitous <a href="http://www.facebook.com/apps/application.php?id=4949752878">Static <span class="caps">FBML</span></a> app is going away too, apparently. This application has a been a great shortcut for many developers and page owners, allowing them to just install the app and paste in <span class="caps">HTML</span> and <span class="caps">FBML</span> code without creating a special custom application. (Hopefully more people will use the <a href="http://www.splashlabsocial.com">custom facebook tab creation</a> service I built, <a href="http://www.splashlabsocial.com">SplashLab Social</a> ;)</p>
+<p>This will be a pain for many users. It&#8217;s a big leap to have to create a custom application and host the code on your own server! I will be curious to see if Facebook creates a new app that does some of the same things?</p>
+<h3>The Ugly</h3>
+<p>Naturally, like any new (and many old) Facebook features iframe tabs have bugs still. My preliminary tests turned up the following problems:</p>
+<ol>
+	<li><s><strong>Tabs not visible to logged-out users</strong> &#8211; If a user is not logged in to Facebook they cannot see your tab. Official bug is here: <a href="http://bugs.developers.facebook.net/show_bug.cgi?id=15166">http://bugs.developers.facebook.net/show_bug.cgi?id=15166</a></s> <br />This has been fixed now!</li>
+	<li><s><strong><span class="caps">SSL</span>/https problems</strong> &#8211; My iframe tabs do not load properly when using Facebook over https. Here is the bug on Facebook if you want to track progress: <a href="http://bugs.developers.facebook.net/show_bug.cgi?id=15200">http://bugs.developers.facebook.net/show_bug.cgi?id=15200</a></s><br /> This has been fixed now</li>
+	<li><s><strong>Renaming tab titles not working</strong></s> &#8211; Changing the &#8220;Tab name&#8221; does not appear to working at this time. The official bug is here: <a href="http://bugs.developers.facebook.net/show_bug.cgi?id=15155">http://bugs.developers.facebook.net/show_bug.cgi?id=15155</a> <span class="caps">UPDATE</span>: Apparently this is a feature, not a bug! Users can now set custom Tab Titles for each tab!</li>
+	<li><s><strong>Max height scrollbar issues</strong></s> (my mistake) &#8211; The iframe tabs appear to have a maximum height of 800px, which gives a scrollbar for taller content. The problem with this is that when the scroll bar appears the tab is width is now smaller than 520px, essentially. This means if you have images which are 520px wide, you get a horizontal scroll bar at the bottom. It&#8217;s kind of ugly right now, hopefully Facebook will enable and auto-resize like regular Canvas apps have.</li>
+</ol>
+<p><strong>Iframe tab height:</strong> This is not a bug, but I DO think it&#8217;s a little weird and not very obvious. You can fix this with the FB.Canvas.setAutoResize() method, as <a href="http://bugs.developers.facebook.net/show_bug.cgi?id=15210">detailed in the bug I filed</a>.</p>
+<h3>Beyond Static <span class="caps">FBML</span></h3>
+<p>In summary, the new iframe tabs are more powerful and flexible than the <span class="caps">FBML</span> ones, and open up a lot of great new possibilities. There are a <span class="caps">LOT</span> of <span class="caps">FBML</span> apps out there, however, so it will be interesting to watch the transition.</p>
+<p>Please, post any comments or corrections you have below! Are there any other new features of iframe tabs you are excited for? Anything you will miss from <span class="caps">FBML</span>?</p>
+<p><em><strong>Update: <a href="http://www.splashlabsocial.com">SplashLab Social</a> has been released!</strong> <a href="http://www.splashlabsocial.com">If you are looking for an easier way to set up iframe tabs, look no further!</a> My new service makes it easy &#8211; check it out!</em></p></div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Evan Johnson</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-02-14T23:43:00-07:00" pubdate data-updated="true">Feb 14<span>th</span>, 2011</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/social-media/'>Social-Media</a>, <a class='category' href='/blog/categories/web-development/'>Web-Development</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://thaddeusmt.github.comfacebook-iframe-tabs-on-pages-no-more-fbml" data-via="thaddeusmt" data-counturl="http://thaddeusmt.github.comfacebook-iframe-tabs-on-pages-no-more-fbml" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="a-facebook-content-management-system-cms-for-facebook-page-templates" title="Previous Post: A Facebook Content Management System (CMS) for Facebook Page Templates">&laquo; A Facebook Content Management System (CMS) for Facebook Page Templates</a>
+      
+      
+        <a class="basic-alignment right" href="reveal-fan-gate-like-gate-facebook-iframe-tab-tutorial-with-php" title="Next Post:  Reveal / Fan-Gate / Like-Gate Facebook iframe tab tutorial (with PHP)"> Reveal / Fan-Gate / Like-Gate Facebook iframe tab tutorial (with PHP) &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p><img id="profile-image" src="http://www.gravatar.com/avatar/02bee2f91e0a8c3aefbfa6bfb5304c51" alt="Gravatar of thaddeusmt " title="Gravatar of thaddeusmt" />My name is Evan Johnson. I'm a software developer from Montana, who spent some time in Nebraska. I'm the chief software architect at <a href="http://splashlabsocial.com">SplashLab Social</a>, but I am blogging here on my old freelance web design URL for fun. I hope you find something useful here, thanks for visiting! Cheers</p>
+</section><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="magento-15-ee-110-windows-command-line-batch-update-script-magebat">Magento 1.5 / EE 1.10 Windows Command Line Batch Update Script mage.bat</a>
+      </li>
+    
+      <li class="post">
+        <a href="reveal-fan-gate-like-gate-facebook-iframe-tab-tutorial-with-php"> Reveal / Fan-Gate / Like-Gate Facebook iframe tab tutorial (with PHP)</a>
+      </li>
+    
+      <li class="post">
+        <a href="facebook-iframe-tabs-on-pages-no-more-fbml">Facebook iframe tabs on Pages - No more FBML!</a>
+      </li>
+    
+      <li class="post">
+        <a href="a-facebook-content-management-system-cms-for-facebook-page-templates">A Facebook Content Management System (CMS) for Facebook Page Templates</a>
+      </li>
+    
+      <li class="post">
+        <a href="insert-flash-media-embed-code-tinymce-plugin">Insert Flash Media Embed Code TinyMCE Plugin</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("thaddeusmt", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/thaddeusmt" class="twitter-follow-button" data-show-count="false">Follow @thaddeusmt</a>
+  
+</section>
+
+<section>
+  <h1>StackOverflow</h1>
+  <a id="stackoverflow-badge" href="http://stackoverflow.com/users/164439/thaddeusmt"><img src="http://stackoverflow.com/users/flair/164439.png" width="208" height="58" alt="profile for thaddeusmt at Stack Overflow, Q&amp;A for professional and enthusiast programmers" title="profile for thaddeusmt at Stack Overflow, Q&amp;A for professional and enthusiast programmers"></a>
+</section>
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/thaddeusmt">@thaddeusmt</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'thaddeusmt',
+            count: 4,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+<section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/blogs/'>Blogs (2)</a></li>
+<li class='category'><a href='/blog/categories/cms/'>CMS (6)</a></li>
+<li class='category'><a href='/blog/categories/css/'>CSS (2)</a></li>
+<li class='category'><a href='/blog/categories/javascript/'>JavaScript (3)</a></li>
+<li class='category'><a href='/blog/categories/seo/'>SEO (2)</a></li>
+<li class='category'><a href='/blog/categories/social-media/'>Social-Media (6)</a></li>
+<li class='category'><a href='/blog/categories/web-design/'>Web-Design (2)</a></li>
+<li class='category'><a href='/blog/categories/web-development/'>Web-Development (25)</a></li>
+<li class='category'><a href='/blog/categories/e-commerce/'>e-Commerce (11)</a></li>
+
+  </ul>
+</section>
+<section>
+  <h1>Coderwall</h1>
+  <ul id="cw_badges">
+    <li class="loading">Status updating...</li>
+  </ul>
+
+  <script type="text/javascript">
+    var coderwall = (function(){
+      function render(options, badges){
+        var fragment = '',
+            t = $(options.target)[0],
+            height = 65,
+            width = 65,
+            index;
+
+        for (index in badges) {
+          fragment += '<a class="cw_badge"title="' + badges[index].description + '" href="http://coderwall.com/' + options.user + '">';
+          fragment +=   '<img alt="' + badges[index].description + '" height="' + width + '" width="' + height + '" src="' + badges[index].badge + '"/>';
+          fragment += '</a>';
+        }
+
+        t.innerHTML = fragment;
+      }
+      return {
+        showBadges: function(options){
+          $.ajax({
+              url: 'http://coderwall.com/' + options.user + '.json?callback=?'
+            , type: 'jsonp'
+            , error: function (err) { $(options.target + ' li.loading').addClass('error').text("Error loading feed"); }
+            , success: function(res) {
+                render(options, res.data.badges);
+            }
+          });
+        }
+      };
+    })();
+
+    $.domReady(function(){
+      if (!window.jXHR){
+        var jxhr = document.createElement('script');
+        jxhr.type = 'text/javascript';
+        jxhr.src = '/javascripts/libs/jXHR.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(jxhr, s);
+      }
+      if (!window.$){
+        var b = document.createElement('script');
+        b.type = 'text/javascript';
+        b.src = '/javascripts/ender.js';
+        var sc = document.getElementsByTagName('script')[0];
+        sc.parentNode.insertBefore(jxhr, s);
+      }
+      coderwall.showBadges({
+        user: 'thaddeusmt',
+        target: '#cw_badges'
+      });
+    });
+  </script>
+  <style type="text/css">
+    .cw_badge img {
+      padding: 5px;
+      border: 0 none !important;
+      -moz-box-shadow: none !important;
+      -webkit-box-shadow: none !important;
+      -o-box-shadow: none !important;
+      box-shadow: none !important;
+    }
+  </style>
+</section>
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Evan Johnson -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'chilipepperdesign';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

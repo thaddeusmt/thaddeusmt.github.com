@@ -1,0 +1,476 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title> Reveal / Fan-Gate / Like-Gate Facebook iframe tab tutorial (with PHP) - Chili Pepper Design</title>
+  <meta name="author" content="Evan Johnson">
+
+  
+  <meta name="description" content="Update: SplashLab Social has been released! If you are looking for an easier way to set up Fans-only/Reveal tabs, look no further! My new service &hellip;">
+  <meta name="keywords" content="">
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://thaddeusmt.github.comreveal-fan-gate-like-gate-facebook-iframe-tab-tutorial-with-php">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Chili Pepper Design" type="application/atom+xml">
+  
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-6058373-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Chili Pepper Design</a></h1>
+  
+    <h2>Free-range web development</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:thaddeusmt.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <br style="clear: both" />
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Reveal / Fan-Gate / Like-Gate Facebook Iframe Tab Tutorial (With PHP)</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-02-15T00:37:00-07:00" pubdate data-updated="true">Feb 15<span>th</span>, 2011</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><em><strong>Update: <a href="http://www.splashlabsocial.com">SplashLab Social</a> has been released!</strong> <a href="http://www.splashlabsocial.com">If you are looking for an easier way to set up Fans-only/Reveal tabs, look no further!</a> My new service makes it easy to create custom fan-gate tabs, check it out!</em></p>
+<p><a href="http://developers.facebook.com/blog/post/462#fbml_roadmap"><span class="caps">FBML</span> is going away</a>. Is the popular (and effective) strategy of &#8220;fan-gating&#8221; content to encourage visitors to Like you page going away with the &#8220;&lt;fb:visible-to-connection&gt;&#8221;:http://developers.facebook.com/docs/reference/fbml/visible-to-connection/ <span class="caps">FBML</span> tag?</p>
+<p>No! Facebook has been kind enough to provide a new method for implementing &#8220;reveal tabs&#8221; on the new iframe tabs. Follow along in the tutorial below to learn how to do this.</p>
+<p>(This tutorial assumes you are creating a <span class="caps">PHP</span> Facebook application, but you can follow the spirit of it in any language.)</p>
+<h3>1. Set up an iframe tab application</h3>
+<p>I won&#8217;t cover all of the details here, but you need to set up an iframe tab application on Facebook first. Assuming you have access to put <span class="caps">PHP</span> files up on a public server, follow these steps:</p>
+<ol>
+	<li>Go to the <a href="http://www.facebook.com/apps/application.php?id=2345053339">Facebook Developer application</a></li>
+	<li>Create a new application</li>
+	<li>On the <strong>&#8220;Facebook Integration&#8221;</strong> tab of the application settings:
+	<ol>
+		<li>Set the <strong>Canvas Page</strong> <span class="caps">URL</span> slug</li>
+		<li>Point the <strong>Canvas <span class="caps">URL</span></strong> to your <span class="caps">PHP</span> script&#8217;s base <span class="caps">URL</span></li>
+		<li>Set the <strong>Tab Name</strong> to something (Welcome!)</li>
+		<li><strong>Make sure the *Page Tab Type</strong> is set to iframe*</li>
+		<li>Set the <strong>Tab <span class="caps">URL</span></strong> to the specific <span class="caps">PHP</span> file for this tab</li>
+	</ol></li>
+	<li>On the <strong>&#8220;Advanced&#8221;</strong> tab of the application settings:
+	<ol>
+		<li>Make sure the <strong>&#8220;OAuth 2.0 for Canvas&#8221;</strong> option is set</li>
+	</ol></li>
+	<li>Save the application</li>
+	<li>Add the application to a Page to test it out</li>
+</ol>
+<p><strong><span class="caps">NOTE</span>:</strong> There is some confusion about Canvas <span class="caps">URL</span> and the Tab <span class="caps">URL</span>. The Canvas <span class="caps">URL</span> is the <span class="caps">PHP</span> file that get&#8217;s hit when the users views the Canvas app. This is different than the <span class="caps">PHP</span> script which generates the Tab, which is defined by the Tab <span class="caps">URL</span>. The Tab <span class="caps">URL</span> has to be relative to the Canvas <span class="caps">URL</span>. What I usually do is have the Canvas <span class="caps">PHP</span> file be &#8220;index.php&#8221; and point the Canvas <span class="caps">URL</span> to the directory it&#8217;s in. Then I make a &#8220;tab.php&#8221; file for the Tab <span class="caps">URL</span> in the same directory.</p>
+<ul>
+	<li><strong>Canvas <span class="caps">URL</span></strong>: http://mysite.com/myfbappdirectory/
+	<ul>
+		<li>This points to the file http://mysite.com/myfbappdirectory/index.php</li>
+	</ul></li>
+	<li><strong>Tab <span class="caps">URL</span></strong>: tab.php
+	<ul>
+		<li>This points to the file http://mysite.com/myfbappdirectory/tab.php</li>
+	</ul></li>
+</ul>
+<h3>2. Get the signed_request</h3>
+<p>Facebook now passes an encoded <span class="caps">POST</span> variable to tab applications, called the <a href="http://developers.facebook.com/docs/authentication/signed_request">signed_request</a>. The content of a tab&#8217;s signed_request is covered <a href="http://developers.facebook.com/docs/guides/canvas#tabs">here in the canvas guide</a>. General details about Facebook&#8217;s signed requests can be found <a href="http://developers.facebook.com/docs/authentication/signed_request">here</a>.</p>
+<p>To get the signed_request, make sure the &#8220;OAuth 2.0 for Canvas&#8221; option is set in your application&#8217;s settings. Then just grab it out of PHP&#8217;s $_REQUEST array global.</p>
+<pre><code>$signed_request = $_REQUEST['signed_request'];</code></pre>
+<h3>3. Decode the signed_request</h3>
+<p>The signed request is encoded for security. <a href="http://developers.facebook.com/docs/authentication/signed_request">Read more about this here.</a>. We are not really interested in security on this app though. We just want to tell if a visitor is a fan or not. So we are going to do the &#8220;cheater&#8221; method of decoding the signed_request, which ignores some of the security features (like the signature). Here is the cheater code (you will need the <span class="caps">PHP</span> json_decode() method!):</p>
+<pre><code>function parsePageSignedRequest() {
+    if (isset($_REQUEST['signed_request'])) {
+      $encoded_sig = null;
+      $payload = null;
+      list($encoded_sig, $payload) = explode('.', $_REQUEST['signed_request'], 2);
+      $sig = base64_decode(strtr($encoded_sig, '-_', '+/'));
+      $data = json_decode(base64_decode(strtr($payload, '-_', '+/'), true));
+      return $data;
+    }
+    return false;
+  }
+  print_r(parsePageSignedRequest());</code></pre>
+<h3>4. Switch content based on the signed_request</h3>
+<p>The signed_request on iframe tabs has a &#8220;pages&#8221; object, which holds a &#8220;liked&#8221; variable. If the user viewing your tab has Liked your page, it is set to <span class="caps">TRUE</span>. If they have not, it is set to <span class="caps">FALSE</span>. So:</p>
+<pre><code>function parsePageSignedRequest() {
+    if (isset($_REQUEST['signed_request'])) {
+      $encoded_sig = null;
+      $payload = null;
+      list($encoded_sig, $payload) = explode('.', $_REQUEST['signed_request'], 2);
+      $sig = base64_decode(strtr($encoded_sig, '-_', '+/'));
+      $data = json_decode(base64_decode(strtr($payload, '-_', '+/'), true));
+      return $data;
+    }
+    return false;
+  }
+  if($signed_request = parsePageSignedRequest()) {
+    if($signed_request-&gt;page-&gt;liked) {
+      echo "This content is for Fans only!";
+    } else {
+      echo "Please click on the Like button to view this tab!";
+    }
+  }</code></pre>
+<h3>You now have a reveal tab with fans-only content!</h3>
+<p>This new method is actually better than the old method in a couple of ways:</p>
+<ol>
+	<li>You no longer need to do devious &#8220;position: absolute&#8221; <span class="caps">CSS</span> hacks to get your fan and non-fan content to look nice! With &lt;fb:visible-to-connection&gt;, the content for <span class="caps">BOTH</span> was printed out, the non-fan content was just &#8220;hidden&#8221;, which was a nightmare to style.</li>
+	<li>The page doesn&#8217;t blow up when viewed as an Admin</li>
+	<li>Your content for fans-only is <span class="caps">REALLY</span> for <em>fans-only</em> &#8211; clever folks can no longer &#8220;View Source&#8221; to see the hidden content.</li>
+</ol>
+<p>Good luck, and happy Facebook developing!</p></div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Evan Johnson</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-02-15T00:37:00-07:00" pubdate data-updated="true">Feb 15<span>th</span>, 2011</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/social-media/'>Social-Media</a>, <a class='category' href='/blog/categories/web-development/'>Web-Development</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://thaddeusmt.github.comreveal-fan-gate-like-gate-facebook-iframe-tab-tutorial-with-php" data-via="thaddeusmt" data-counturl="http://thaddeusmt.github.comreveal-fan-gate-like-gate-facebook-iframe-tab-tutorial-with-php" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="facebook-iframe-tabs-on-pages-no-more-fbml" title="Previous Post: Facebook iframe tabs on Pages - No more FBML!">&laquo; Facebook iframe tabs on Pages - No more FBML!</a>
+      
+      
+        <a class="basic-alignment right" href="magento-15-ee-110-windows-command-line-batch-update-script-magebat" title="Next Post: Magento 1.5 / EE 1.10 Windows Command Line Batch Update Script mage.bat">Magento 1.5 / EE 1.10 Windows Command Line Batch Update Script mage.bat &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p><img id="profile-image" src="http://www.gravatar.com/avatar/02bee2f91e0a8c3aefbfa6bfb5304c51" alt="Gravatar of thaddeusmt " title="Gravatar of thaddeusmt" />My name is Evan Johnson. I'm a software developer from Montana, who spent some time in Nebraska. I'm the chief software architect at <a href="http://splashlabsocial.com">SplashLab Social</a>, but I am blogging here on my old freelance web design URL for fun. I hope you find something useful here, thanks for visiting! Cheers</p>
+</section><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="magento-15-ee-110-windows-command-line-batch-update-script-magebat">Magento 1.5 / EE 1.10 Windows Command Line Batch Update Script mage.bat</a>
+      </li>
+    
+      <li class="post">
+        <a href="reveal-fan-gate-like-gate-facebook-iframe-tab-tutorial-with-php"> Reveal / Fan-Gate / Like-Gate Facebook iframe tab tutorial (with PHP)</a>
+      </li>
+    
+      <li class="post">
+        <a href="facebook-iframe-tabs-on-pages-no-more-fbml">Facebook iframe tabs on Pages - No more FBML!</a>
+      </li>
+    
+      <li class="post">
+        <a href="a-facebook-content-management-system-cms-for-facebook-page-templates">A Facebook Content Management System (CMS) for Facebook Page Templates</a>
+      </li>
+    
+      <li class="post">
+        <a href="insert-flash-media-embed-code-tinymce-plugin">Insert Flash Media Embed Code TinyMCE Plugin</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("thaddeusmt", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/thaddeusmt" class="twitter-follow-button" data-show-count="false">Follow @thaddeusmt</a>
+  
+</section>
+
+<section>
+  <h1>StackOverflow</h1>
+  <a id="stackoverflow-badge" href="http://stackoverflow.com/users/164439/thaddeusmt"><img src="http://stackoverflow.com/users/flair/164439.png" width="208" height="58" alt="profile for thaddeusmt at Stack Overflow, Q&amp;A for professional and enthusiast programmers" title="profile for thaddeusmt at Stack Overflow, Q&amp;A for professional and enthusiast programmers"></a>
+</section>
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/thaddeusmt">@thaddeusmt</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'thaddeusmt',
+            count: 4,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+<section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/blogs/'>Blogs (2)</a></li>
+<li class='category'><a href='/blog/categories/cms/'>CMS (6)</a></li>
+<li class='category'><a href='/blog/categories/css/'>CSS (2)</a></li>
+<li class='category'><a href='/blog/categories/javascript/'>JavaScript (3)</a></li>
+<li class='category'><a href='/blog/categories/seo/'>SEO (2)</a></li>
+<li class='category'><a href='/blog/categories/social-media/'>Social-Media (6)</a></li>
+<li class='category'><a href='/blog/categories/web-design/'>Web-Design (2)</a></li>
+<li class='category'><a href='/blog/categories/web-development/'>Web-Development (25)</a></li>
+<li class='category'><a href='/blog/categories/e-commerce/'>e-Commerce (11)</a></li>
+
+  </ul>
+</section>
+<section>
+  <h1>Coderwall</h1>
+  <ul id="cw_badges">
+    <li class="loading">Status updating...</li>
+  </ul>
+
+  <script type="text/javascript">
+    var coderwall = (function(){
+      function render(options, badges){
+        var fragment = '',
+            t = $(options.target)[0],
+            height = 65,
+            width = 65,
+            index;
+
+        for (index in badges) {
+          fragment += '<a class="cw_badge"title="' + badges[index].description + '" href="http://coderwall.com/' + options.user + '">';
+          fragment +=   '<img alt="' + badges[index].description + '" height="' + width + '" width="' + height + '" src="' + badges[index].badge + '"/>';
+          fragment += '</a>';
+        }
+
+        t.innerHTML = fragment;
+      }
+      return {
+        showBadges: function(options){
+          $.ajax({
+              url: 'http://coderwall.com/' + options.user + '.json?callback=?'
+            , type: 'jsonp'
+            , error: function (err) { $(options.target + ' li.loading').addClass('error').text("Error loading feed"); }
+            , success: function(res) {
+                render(options, res.data.badges);
+            }
+          });
+        }
+      };
+    })();
+
+    $.domReady(function(){
+      if (!window.jXHR){
+        var jxhr = document.createElement('script');
+        jxhr.type = 'text/javascript';
+        jxhr.src = '/javascripts/libs/jXHR.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(jxhr, s);
+      }
+      if (!window.$){
+        var b = document.createElement('script');
+        b.type = 'text/javascript';
+        b.src = '/javascripts/ender.js';
+        var sc = document.getElementsByTagName('script')[0];
+        sc.parentNode.insertBefore(jxhr, s);
+      }
+      coderwall.showBadges({
+        user: 'thaddeusmt',
+        target: '#cw_badges'
+      });
+    });
+  </script>
+  <style type="text/css">
+    .cw_badge img {
+      padding: 5px;
+      border: 0 none !important;
+      -moz-box-shadow: none !important;
+      -webkit-box-shadow: none !important;
+      -o-box-shadow: none !important;
+      box-shadow: none !important;
+    }
+  </style>
+</section>
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Evan Johnson -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'chilipepperdesign';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

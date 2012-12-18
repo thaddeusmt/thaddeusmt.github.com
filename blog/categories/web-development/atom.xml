@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Web-Development | Chili Pepper Design]]></title>
+  <link href="http://thaddeusmt.github.com/blog/categories/web-development/atom.xml" rel="self"/>
+  <link href="http://thaddeusmt.github.com/"/>
+  <updated>2012-12-18T12:28:17-07:00</updated>
+  <id>http://thaddeusmt.github.com/</id>
+  <author>
+    <name><![CDATA[Evan Johnson]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Magento 1.5 / EE 1.10 Windows Command Line Batch Update Script mage.bat]]></title>
+    <link href="http://thaddeusmt.github.commagento-15-ee-110-windows-command-line-batch-update-script-magebat"/>
+    <updated>2011-05-15T23:00:00-06:00</updated>
+    <id>http://thaddeusmt.github.com./magento-15-ee-110-windows-command-line-batch-update-script-magebat</id>
+    <content type="html"><![CDATA[<p>So, this might be for kind of a narrow audience, but I'm pretty stoked on it so I wanted to share.</p>
+
+<p>In the newest version of the Magento ecommerce platform, Magento 1.5, they have redone their update script. In "Magento Connect 2.0":http://www.yireo.com/blog/1294-magento-15-mage-command-line, what was called "pear" is now "mage".</p>
+
+<p>Old and busted:</p>
+
+<pre><code>./pear mage-setup .</code></pre>
+
+
+<p>New Hotness:</p>
+
+<pre><code>./mage mage-setup .</code></pre>
+
+
+<p>They basically work the same, but the name has changed and - more importantly if you are reading this - there is no windows batch file to run. There is a Bash shell script, so you can download and update Magento and it's many Extensions via the command line in <em>Linux</em>, but not Windows.</p>
+
+<p>So, looking at the mage.sh script and working from the pear.bat script, I made mage.bat. It lets you do command line downloads and updates of Magento in Windows, just like you can on Linux.</p>
+
+<p>Not that anyone is actually hosting Magento on a WAMP setup, but I find it useful to be able to download and install Extensions and modules on my Windows development box.</p>
+
+<p>"Download mage.bat - Windows Magento Connect 2.0 Update Script":http://www.chilipepperdesign.com/file_download/1/mage.zip</p>
+
+<p>One you have mage.bat installed in the root directory of your Magento install (right next to the mage bash script), you are ready to go! Just run "mage" from the Windows command line.</p>
+
+<pre><code>mage help</code></pre>
+
+
+<p>The Yiero blog has a nice article about "using Magento Connect 2.0 over command line":http://www.yireo.com/blog/1294-magento-15-mage-command-line.</p>
+
+<p>Here is a good article about "upgrading Magento from 1.4 to 1.5":http://blog.nexcess.net/2011/03/11/upgrading-to-magento-1-5-0-1 as well.</p>
+
+<p>TROUBLESHOOTING TIPS:</p>
+
+<ul>
+<li>Make sure you have "PEAR installed":http://pear.php.net/manual/en/installation.getting.php on the machine you are running this on</li>
+<li>Make sure PEAR is in your Windows Path</li>
+<li>Be sure to install mage.bat in your Magento root directory</li>
+<li>In the command line, make sure you are in your Magento root when you run mage.bat</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ Reveal / Fan-Gate / Like-Gate Facebook iframe tab tutorial (with PHP)]]></title>
+    <link href="http://thaddeusmt.github.comreveal-fan-gate-like-gate-facebook-iframe-tab-tutorial-with-php"/>
+    <updated>2011-02-15T00:37:00-07:00</updated>
+    <id>http://thaddeusmt.github.com./reveal-fan-gate-like-gate-facebook-iframe-tab-tutorial-with-php</id>
+    <content type="html"><![CDATA[<p><em><strong>Update: <a href="http://www.splashlabsocial.com">SplashLab Social</a> has been released!</strong> <a href="http://www.splashlabsocial.com">If you are looking for an easier way to set up Fans-only/Reveal tabs, look no further!</a> My new service makes it easy to create custom fan-gate tabs, check it out!</em></p>
+
+<p>"FBML is going away":http://developers.facebook.com/blog/post/462#fbml_roadmap. Is the popular (and effective) strategy of "fan-gating" content to encourage visitors to Like you page going away with the "&lt;fb:visible-to-connection>":http://developers.facebook.com/docs/reference/fbml/visible-to-connection/ FBML tag?</p>
+
+<p>No! Facebook has been kind enough to provide a new method for implementing "reveal tabs" on the new iframe tabs. Follow along in the tutorial below to learn how to do this.</p>
+
+<p>(This tutorial assumes you are creating a PHP Facebook application, but you can follow the spirit of it in any language.)</p>
+
+<h3>1. Set up an iframe tab application</h3>
+
+
+<p>I won't cover all of the details here, but you need to set up an iframe tab application on Facebook first. Assuming you have access to put PHP files up on a public server, follow these steps:</p>
+
+<h1>Go to the "Facebook Developer application":http://www.facebook.com/apps/application.php?id=2345053339</h1>
+
+<h1>Create a new application</h1>
+
+<h1>On the <em>"Facebook Integration"</em> tab of the application settings:</h1>
+
+<h2>Set the <em>Canvas Page</em> URL slug</h2>
+
+<h2>Point the <em>Canvas URL</em> to your PHP script's base URL</h2>
+
+<h2>Set the <em>Tab Name</em> to something (Welcome!)</h2>
+
+<h2><em>Make sure the </em>Page Tab Type<em> is set to iframe</em></h2>
+
+<h2>Set the <em>Tab URL</em> to the specific PHP file for this tab</h2>
+
+<h1>On the <em>"Advanced"</em> tab of the application settings:</h1>
+
+<h2>Make sure the <em>"OAuth 2.0 for Canvas"</em> option is set</h2>
+
+<h1>Save the application</h1>
+
+<h1>Add the application to a Page to test it out</h1>
+
+<p><em>NOTE:</em> There is some confusion about Canvas URL and the Tab URL. The Canvas URL is the PHP file that get's hit when the users views the Canvas app. This is different than the PHP script which generates the Tab, which is defined by the Tab URL. The Tab URL has to be relative to the Canvas URL. What I usually do is have the Canvas PHP file be "index.php" and point the Canvas URL to the directory it's in. Then I make a "tab.php" file for the Tab URL in the same directory.</p>
+
+<ul>
+<li><em>Canvas URL</em>: http://mysite.com/myfbappdirectory/
+** This points to the file http://mysite.com/myfbappdirectory/index.php</li>
+<li><em>Tab URL</em>: tab.php
+** This points to the file http://mysite.com/myfbappdirectory/tab.php</li>
+</ul>
+
+
+<h3>2. Get the signed_request</h3>
+
+
+<p>Facebook now passes an encoded POST variable to tab applications, called the "signed_request":http://developers.facebook.com/docs/authentication/signed_request. The content of a tab's signed_request is covered "here in the canvas guide":http://developers.facebook.com/docs/guides/canvas#tabs. General details about Facebook's signed requests can be found "here":http://developers.facebook.com/docs/authentication/signed_request.</p>
+
+<p>To get the signed_request, make sure the "OAuth 2.0 for Canvas" option is set in your application's settings. Then just grab it out of PHP's $_REQUEST array global.</p>
+
+<pre><code>$signed_request = $_REQUEST['signed_request'];</code></pre>
+
+
+
+
+<h3>3. Decode the signed_request</h3>
+
+
+<p>The signed request is encoded for security. "Read more about this here.":http://developers.facebook.com/docs/authentication/signed_request. We are not really interested in security on this app though. We just want to tell if a visitor is a fan or not. So we are going to do the "cheater" method of decoding the signed_request, which ignores some of the security features (like the signature). Here is the cheater code (you will need the PHP json_decode() method!):</p>
+
+<pre><code>function parsePageSignedRequest() {
+    if (isset($_REQUEST['signed_request'])) {
+      $encoded_sig = null;
+      $payload = null;
+      list($encoded_sig, $payload) = explode('.', $_REQUEST['signed_request'], 2);
+      $sig = base64_decode(strtr($encoded_sig, '-_', '+/'));
+      $data = json_decode(base64_decode(strtr($payload, '-_', '+/'), true));
+      return $data;
+    }
+    return false;
+  }
+  print_r(parsePageSignedRequest());</code></pre>
+
+
+
+
+<h3>4. Switch content based on the signed_request</h3>
+
+
+<p>The signed_request on iframe tabs has a "pages" object, which holds a "liked" variable. If the user viewing your tab has Liked your page, it is set to TRUE. If they have not, it is set to FALSE. So:</p>
+
+<pre><code>function parsePageSignedRequest() {
+    if (isset($_REQUEST['signed_request'])) {
+      $encoded_sig = null;
+      $payload = null;
+      list($encoded_sig, $payload) = explode('.', $_REQUEST['signed_request'], 2);
+      $sig = base64_decode(strtr($encoded_sig, '-_', '+/'));
+      $data = json_decode(base64_decode(strtr($payload, '-_', '+/'), true));
+      return $data;
+    }
+    return false;
+  }
+  if($signed_request = parsePageSignedRequest()) {
+    if($signed_request->page->liked) {
+      echo "This content is for Fans only!";
+    } else {
+      echo "Please click on the Like button to view this tab!";
+    }
+  }</code></pre>
+
+
+
+
+<h3>You now have a reveal tab with fans-only content!</h3>
+
+
+<p>This new method is actually better than the old method in a couple of ways:</p>
+
+<h1>You no longer need to do devious "position: absolute" CSS hacks to get your fan and non-fan content to look nice! With &lt;fb:visible-to-connection>, the content for BOTH was printed out, the non-fan content was just "hidden", which was a nightmare to style.</h1>
+
+<h1>The page doesn't blow up when viewed as an Admin</h1>
+
+<h1>Your content for fans-only is REALLY for <em>fans-only</em> - clever folks can no longer "View Source" to see the hidden content.</h1>
+
+<p>Good luck, and happy Facebook developing!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Facebook iframe tabs on Pages - No more FBML!]]></title>
+    <link href="http://thaddeusmt.github.comfacebook-iframe-tabs-on-pages-no-more-fbml"/>
+    <updated>2011-02-14T23:43:00-07:00</updated>
+    <id>http://thaddeusmt.github.com./facebook-iframe-tabs-on-pages-no-more-fbml</id>
+    <content type="html"><![CDATA[<p>The long awaited transition from FBML tabs to iframe tabs has finally happened. As of this writing on Feb 14th 2011 (Valentines Day!) you can choose the "iframe" option for Facebook application tabs. The official word from the "Facebook developer roadmap":http://developers.facebook.com/roadmap/ is that "as of March 11th developers will no longer be able to create FBML tabs":http://developers.facebook.com/blog/post/462#fbml_roadmap (although existing FBML apps will be supported indefinitely - or at least until the end of 2011 I heard in the comments).</p>
+
+<p><img src="http://www.chilipepperdesign.com/images/52.jpg" style="width: 415px" /></p>
+
+<h3>The Good</h3>
+
+
+<p>The great thing about iframe tabs is that you are working with a real webpage now. No more fighting with FBJS and finicky FBML tags!</p>
+
+<h1><em>External JS like JQuery and TinyMCE</em> - You can finally do all of the things that Canvas iframe apps have been able to do for a while, like include handy JavaScript libraries!</h1>
+
+<h1><em>onLoad JS events</em> - One of the frustrating things with FBML apps was always that you couldn't start JS on the page load, so things like automatic slideshows were impossible. You should be able to have content auto-play now!</h1>
+
+<h1><em>Facebook JS SDK for XFBML Social Plugins</em> - You can import the JavaScript SDK and still have Request popups, Like buttons, make Open Graph API requests... the whole 9 yards.</h1>
+
+<h3>The Bad</h3>
+
+
+<p>One of the interesting things is that the ubiquitous "Static FBML":http://www.facebook.com/apps/application.php?id=4949752878 app is going away too, apparently. This application has a been a great shortcut for many developers and page owners, allowing them to just install the app and paste in HTML and FBML code without creating a special custom application. (Hopefully more people will use the "custom facebook tab creation":http://www.splashlabsocial.com service I built, "SplashLab Social":http://www.splashlabsocial.com ;)</p>
+
+<p>This will be a pain for many users. It's a big leap to have to create a custom application and host the code on your own server! I will be curious to see if Facebook creates a new app that does some of the same things?</p>
+
+<h3>The Ugly</h3>
+
+
+<p>Naturally, like any new (and many old) Facebook features iframe tabs have bugs still. My preliminary tests turned up the following problems:</p>
+
+<h1><s><em>Tabs not visible to logged-out users</em> - If a user is not logged in to Facebook they cannot see your tab. Official bug is here: "http://bugs.developers.facebook.net/show_bug.cgi?id=15166":http://bugs.developers.facebook.net/show_bug.cgi?id=15166</s> <br />This has been fixed now!</h1>
+
+<h1><s><em>SSL/https problems</em> - My iframe tabs do not load properly when using Facebook over https. Here is the bug on Facebook if you want to track progress: "http://bugs.developers.facebook.net/show_bug.cgi?id=15200":http://bugs.developers.facebook.net/show_bug.cgi?id=15200</s><br /> This has been fixed now</h1>
+
+<h1><s><em>Renaming tab titles not working</em></s> - Changing the "Tab name" does not appear to working at this time. The official bug is here: "http://bugs.developers.facebook.net/show_bug.cgi?id=15155":http://bugs.developers.facebook.net/show_bug.cgi?id=15155 UPDATE: Apparently this is a feature, not a bug! Users can now set custom Tab Titles for each tab!</h1>
+
+<h1><s><em>Max height scrollbar issues</em></s> (my mistake) - The iframe tabs appear to have a maximum height of 800px, which gives a scrollbar for taller content. The problem with this is that when the scroll bar appears the tab is width is now smaller than 520px, essentially. This means if you have images which are 520px wide, you get a horizontal scroll bar at the bottom. It's kind of ugly right now, hopefully Facebook will enable and auto-resize like regular Canvas apps have.</h1>
+
+<p><em>Iframe tab height:</em> This is not a bug, but I DO think it's a little weird and not very obvious. You can fix this with the FB.Canvas.setAutoResize() method, as "detailed in the bug I filed":http://bugs.developers.facebook.net/show_bug.cgi?id=15210.</p>
+
+<h3>Beyond Static FBML</h3>
+
+
+<p>In summary, the new iframe tabs are more powerful and flexible than the FBML ones, and open up a lot of great new possibilities. There are a LOT of FBML apps out there, however, so it will be interesting to watch the transition.</p>
+
+<p>Please, post any comments or corrections you have below! Are there any other new features of iframe tabs you are excited for? Anything you will miss from FBML?</p>
+
+<p><em><strong>Update: <a href="http://www.splashlabsocial.com">SplashLab Social</a> has been released!</strong> <a href="http://www.splashlabsocial.com">If you are looking for an easier way to set up iframe tabs, look no further!</a> My new service makes it easy - check it out!</em></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Insert Flash Media Embed Code TinyMCE Plugin]]></title>
+    <link href="http://thaddeusmt.github.cominsert-flash-media-embed-code-tinymce-plugin"/>
+    <updated>2010-03-22T16:19:00-06:00</updated>
+    <id>http://thaddeusmt.github.com./insert-flash-media-embed-code-tinymce-plugin</id>
+    <content type="html"><![CDATA[<p>I've run into a problem providing my clients good, easy-to-use media embed functionality with the existing JavaScript WYSIWYG editors. The big players, "CKEditor":http://ckeditor.com/ (formery FCKEditor) and "TinyMCE":http://tinymce.moxiecode.com/ both provide a "Flash" button which works okay with YouTube and other large video providers, but what about embedding a Picasa slideshow? None of the WYSIWYG editors come with plugin to just insert some HTML code. If you want to embed something like a Picasa slideshow,  customized YouTube player, or Google Map you have open up the source code, find the location you want to insert it, and paste in the code. Fine for some, but difficult and scary for most as it breaks the WYSIWYG paradigm.</p>
+
+<p>On one of my latest Drupal websites there are multiple bloggers, none of whom are particularly tech savvy. I set up the CMS with TinyMCE because I like how they can drag and drop images around (I just wish Drupal had an image embed uploader like WordPress!). After a while they complained that the Insert Flash button in TinyMCE just wasn't cutting it. So I set about fixing it. How hard could it be to make a plugin that just inserts some HTML code where your cursor is? Like it already does for images?</p>
+
+<p>It turns out it is very easy. I was able to just edit the TinyMCE "Example" plug-in, which already did basically exactly what I wanted. So here I provide it to you, Internet. I hope it is useful, and please let me know if it's broken (or could work better). Thanks!</p>
+
+<p><em>UPDATED</em>: (9-17-2010) I fixed some bugs with IE. It should work better cross-browse now.</p>
+
+<p>Download the plugin:</p>
+
+<ul>
+<li><strong>"From SourceForge":http://sourceforge.net/tracker/?func=detail&amp;aid=2974843&amp;group_id=103281&amp;atid=738747 </strong></li>
+<li><strong>"From Chili Pepper Design":http://www.chilipepperdesign.com/examples/tinymce-embed-plugin-v2.zip </strong></li>
+</ul>
+
+
+<p>I found some tips on installing TinyCME plugins here: "Installing Plugin Newbie Question":http://tinymce.moxiecode.com/punbb/viewtopic.php?id=3349
+Here is the official guide to creating a plugin for TinyMCE 3: "TinyMCE:Create plugin/3.x":http://wiki.moxiecode.com/index.php/TinyMCE:Create_plugin/3.x</p>
+
+<p><em>To use this plugin, install it in the TinyMCE plugin folder and just include it in the <em>TinyMCE.init()</em> call like you would the other plugins</em>. Example ("<em>embed</em>" is the name of the plugin):</p>
+
+<pre><code>
+<script type="text/javascript" src="<your installation path>/tiny_mce/tiny_mce.js"></script>
+<script type="text/javascript">
+  tinyMCE.init({
+    theme : "advanced",
+    mode : "textareas",
+    plugins : "embed, fullscreen, emotions, preview",
+    theme_advanced_buttons3_add : "embed, fullscreen, emotions, preview"
+  });
+</script></code></pre>
+
+
+<p><em><em>Disclaimer</em>: I am not a TinyMCE guru, and not even that hot at JavaScript. I probably cannot help you with other TinyMCE plugins, or even this one. I only got this to work because the Example plugin was so close to what I already needed. But thanks for stopping by!</em></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Learning Drupal Module Dev: Dependent AHAH/AJAX Forms]]></title>
+    <link href="http://thaddeusmt.github.comlearning-drupal-module-dev-dependent-ahahajax-forms"/>
+    <updated>2010-03-22T01:32:00-06:00</updated>
+    <id>http://thaddeusmt.github.com./learning-drupal-module-dev-dependent-ahahajax-forms</id>
+    <content type="html"><![CDATA[<p>So, I've been working on a simple module for a Drupal project lately. I wanted to have two administrator settings for the module, the second of which depends on the first. A "dependent dropdown". It would be cool if it was "AJAXy" too, I thought. Well, it just so turns out that in Drupal 6 there are built in <a href="http://ajax.phpmagazine.net/2005/11/ahah_asychronous_html_and_http.html">AHAH</a> (Asychronous HTML and HTTP) functions in the Forms API to do just this. Easy! Or is it?</p>
+
+
+
+
+<p>It also turns out there is a steep learning curve to making "Ajax forms" with the Drupal Forms API. I got it working, but it took a fair amount of effort. So, to help out future Drupal AHAH developers I am providing my code below, along with a list of links to resources that were a great help in unraveling this problem.</p>
+
+
+
+
+<p>First, to help provide an "aerial view" of what's going on here, this is a list of the components involved:</p>
+
+
+
+
+<ul>
+<li>A form that has the AHAH fields (<em>ahahtestmodule_admin_settings</em> in this example)</li>
+<li>The first field in the form (<em>ahahtestmodule_types</em>), which will change the contents of the second field</li>
+<li>The second, "dependent" field (<em>ahahtestmodule_ahah_field</em>)</li>
+<li>The function that provides the options of the AHAH field based on the first field (<em>ahahtestmodule_get_ahah_fields()</em>)</li>  
+<li>The AHAH function that updates the AHAH field (<em>ahahtestmodule_ahah_field_js()</em>)</li>
+<li>menu callback function for the AHAH function (<em>ahahtestmodule/ahahjs</em>)</li>
+</ul>
+
+
+
+
+<p>To start out, here is the example admin settings form <em>ahahtestmodule_admin_settings</em> with both fields (<em>ahahtestmodule_types</em> and <em>ahahtestmodule_ahah_field</em>):</p>
+
+
+
+
+<pre><code>&lt;?php 
+function ahahtestmodule_admin_settings() {
+  $form = array();
+  $form['settings'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('ahahtestmodule Settings'),
+  );
+  $form['settings']['ahahtestmodule_types'] = array(
+    '#type' => 'radios',
+    '#title' => t('First Field'),
+    '#description' => t('Change this field to change the options in the next field.'),
+    '#options' => array('one' => t('Option 1'), 'two' => t('Option 2'), 'three' => t('Option 3')),
+    '#default_value' => variable_get('ahahtestmodule_types', 'one'),
+    '#ahah' => array(
+      'path' => 'ahahtestmodule/ahahjs',
+      'wrapper' => 'ahah-wrapper',
+      'method' => 'replace',
+    ),
+  );
+  $form['settings']['ahahtestmodule_ahah_field'] = array(
+    '#type' => 'select',
+    '#title' => t('Dependent Second Field'),
+    '#options' => ahahtestmodule_get_ahah_fields(variable_get('ahahtestmodule_types', 'one')),
+    '#default_value' => variable_get('ahahtestmodule_ahah_field', 'none'),
+    '#description' => t('This fields content depends on what is selected in the first field.'),
+    '#prefix' => '&lt;div id="ahah-wrapper">',
+    '#suffix' => '&lt;/div>',
+  );
+  return system_settings_form($form);
+}
+?></code></pre>
+
+
+
+
+<p>Next, here is the dummy function that gets the right content for <em>ahahtestmodule_ahah_field</em> based on <em>ahahtestmodule_types</em>:</p>
+
+
+
+
+<pre><code>&lt;?php 
+function ahahtestmodule_get_ahah_fields($first_variable) {
+  $ahah_fields = array();
+  switch ($first_variable) {
+    case 'one':
+        $ahah_fields['one'] = 'Option 1 Was Selected';
+        break;
+    case 'two':
+        $ahah_fields['two'] = 'Option 2 Was Selected';
+        $ahah_fields['two_bonus'] = 'Bonus Option!';
+        break;
+    case 'three':
+        $ahah_fields['three'] = 'Option 3 Was Selected';
+        break;
+    default:
+        $ahah_fields['none'] = 'Please Select...';
+  }
+  return $ahah_fields;
+}
+?></code></pre>
+
+
+
+
+<p>Then, here is the magic AHAH callback function that I don't fully understand and ripped right off this article at drupal.org: <a href="http://drupal.org/node/331941">Adding dynamic form elements using AHAH</a>:</p>
+
+
+
+
+<pre><code>&lt;?php 
+// The AHAH callback function
+function ahahtestmodule_ahah_field_js() {
+  // The AHAH callback function triggered by the user changing the first field, "ahahtestmodule_types"
+  $form_state = array('storage' => NULL, 'submitted' => FALSE);
+  $form_build_id = $_POST['form_build_id'];
+  // Get for the form from the cache
+  $form = form_get_cache($form_build_id, $form_state);
+  // Get the form set up to process
+  $args = $form['#parameters'];
+  $form_id = array_shift($args);
+  $form_state['post'] = $form['#post'] = $_POST;
+  $form['#programmed'] = $form['#redirect'] = FALSE;
+  // Process the form with drupal_process_form(), which calls the submit handlers that put whatever was worthy of keeping in the $form_state
+  drupal_process_form($form_id, $form, $form_state);
+  // Call drupal_rebuild_form(), which destroys $_POST, creates the form again with hook_form, gets the new form cached and processed again
+  $form = drupal_rebuild_form($form_id, $form_state, $args, $form_build_id);
+  // THIS IS WHAT YOU WILL CUSTOMIZE FOR YOUR OWN FORM
+  // Choose the field you want to update with AHAH and render it
+  $ahah_form = $form['settings']['ahahtestmodule_ahah_field'];
+  unset($ahah_form['#prefix'], $ahah_form['#suffix']);
+  $output = drupal_render($ahah_form);
+  // Final rendering callback.
+  drupal_json(array('status' => TRUE, 'data' => $output));
+}
+?></code></pre>
+
+
+
+
+<p>Lastly, be sure to add the menu callback for <em>ahahtestmodule_ahah_field_js()</em>:
+
+<pre><code>&lt;?php 
+function ahahtestmodule_menu() {
+  $items = array();
+  $items['ahahtestmodule/ahahjs'] = array(
+    'page callback' => 'ahahtestmodule_ahah_field_js',
+    'access arguments' => array('administer ahahtestmodule'),
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+?></code></pre>
+
+<p>I rolled this whole thing up into a little demo module that does nothing except run all this code:</p>
+
+<p><strong><a href="http://www.chilipepperdesign.com/examples/ahahtestmodule.zip">Download the Drupal Ahah Test Module</a></strong></p>
+
+<p>Here are some links that I used to figure this out that will hopefully help you too:</p>
+
+<ul>
+<li><a href="http://api.drupal.org/api/drupal/developer--topics--forms_api_reference.html/6#ahah">The Drupal Form API Manual Page (the AHAH section)</a></li>
+<li><a href="http://drupal.org/node/331941 ">Adding dynamic form elements using AHAH (GREAT)</a></li>
+<li><a href="http://thedrupalblog.com/using-ahah-dynamically-generate-form-elements-and-integration-multi-tiered-taxonomy">Using AHAH to dynamically generate form elements </a></li>
+<li><a href="http://wimleers.com/blog/ahah-helper-module">AHAH helper module</a></li>
+<li><a href="http://www.drupaler.co.uk/blog/ahah-node-forms-and-select-lists/434">AHAH, Node Forms And Select Lists</a></li>
+<li><a href="http://maxeydevbox.org/blogs/geoffmaxey/adventure-ahah-and-drupal-form-api">An Adventure with AHAH and the Drupal Form API</a></li>
+<li><a href="http://www.stellapower.net/content/ajax-ifying-drupal-node-forms">AJAX-ifying Drupal Node Forms</a></li>
+<li><a href="http://katbailey.net/blog/ahah-drupal-may-it-one-day-live-its-acronym">AHAH in Drupal: may it one day live up to its acronym</a></li>
+<li><a href="http://blog.menhir.be/2008/09/27/ahah-forms-in-drupal-6/">Ahah forms in drupal 6</a></li>
+<li><a href="http://drupalsn.com/learn-drupal/drupal-tutorials/getting-going-ahah-and-drupal-6">Getting going with AHAH and Drupal 6</a></li>
+<li><a href="http://www.nicklewis.org/node/967">Drupal 6 AHAH forms: Making New Fields Work</a></li>
+</ul>
+
+<p>A big thanks to the Drupal community as always for putting so much helpful support up online for free!</p>
+
+]]></content>
+  </entry>
+  
+</feed>

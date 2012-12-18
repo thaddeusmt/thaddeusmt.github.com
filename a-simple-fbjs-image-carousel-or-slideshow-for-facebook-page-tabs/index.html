@@ -1,0 +1,460 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>A simple FBJS image carousel (or slideshow) for Facebook page tabs - Chili Pepper Design</title>
+  <meta name="author" content="Evan Johnson">
+
+  
+  <meta name="description" content="(Plug: Looking for an easy, fast, affordable way to create custom Facebook landing tabs? Check out my new product: http://splashtab.com Thanks!)
+This &hellip;">
+  <meta name="keywords" content="fbmlfan page tabfacebook appfacebookfan pagefbjsjavascriptanimateslideshowcarousel">
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://thaddeusmt.github.coma-simple-fbjs-image-carousel-or-slideshow-for-facebook-page-tabs">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Chili Pepper Design" type="application/atom+xml">
+  
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-6058373-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Chili Pepper Design</a></h1>
+  
+    <h2>Free-range web development</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:thaddeusmt.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <br style="clear: both" />
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">A Simple FBJS Image Carousel (or Slideshow) for Facebook Page Tabs</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-11-01T23:19:00-07:00" pubdate data-updated="true">Nov 1<span>st</span>, 2009</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><span style="font-size: .9em; font-style: italic;">(<strong>Plug</strong>: Looking for an easy, fast, affordable way to create custom Facebook landing tabs? Check out my new product: <a href="http://www.splashtab.com">http://splashtab.com</a> Thanks!)</span></p>
+<p>This little code snippet is really basic, and not actually that good or clever. You can make a much nicer slideshow or carousel if you put a little time into it. But I just want to demonstrate how many of the nice JavaScript effects we are used to on the &#8220;Web 2.0&#8221; are also possible on a Facebook Page via Facebook&#8217;s <a href="http://wiki.developers.facebook.com/index.php/FBJS/Animation">Animate library</a>. It&#8217;s not as robust as <a href="http://jquery.com/">jQuery</a> or <a href="http://script.aculo.us/">Scriptaculous</a>, but since you can&#8217;t import those libraries to a Tab the Animate library will have to do. :)</p>
+<p>The final result looks like this:<br />
+&lt;img width=&quot; alt=&#8220;Screenshot of the Chili Pepper Design Facebook image carousel&#8221; src=&#8220;http://www.chilipepperdesign.com/images/46.jpg&#8221; /&gt;</p>
+<p><strong>And you can view a <a href="http://www.facebook.com/pages/Bozeman-MT/Chili-Pepper-Design/59282833907?v=app_154473727596">live demo on the <span class="caps">CPD</span> Facebook Page</a></strong></p>
+<p>For instructions on how to create your own custom Facebook tabs, <a href="http://www.chilipepperdesign.com/2009/10/11/how-to-make-custom-facebook-fan-page-tabs-with-fbml-part-2">read my tutorial here</a>.</p>
+<p>To begin, here is the simple <span class="caps">FBJS</span> &lt;script&gt; code:</p>
+<pre><code>==
+var numslides = 7;
+var slidesvisible = 3;
+var currentslide = 0;
+var slidewidth = 147;==
+function goright() {
+	if (currentslide &lt;= (numslides-slidesvisible-1)) {
+		Animation(document.getElementById('slideshow_inner')).by('right', slidewidth+'px').by('left', '-'+slidewidth+'px').go();
+		if (currentslide ====== (numslides-slidesvisible-1)) {
+			Animation(document.getElementById('right_button')).to('opacity', '0.3').go();
+			Animation(document.getElementById('left_button')).to('opacity', '1').go();
+		} 
+		if (currentslide &lt; (numslides-slidesvisible-1)) { Animation(document.getElementById('left_button')).to('opacity', '1').go(); }
+		currentslide++;
+	}
+}
+function goleft() {
+	if (currentslide &gt; 0) {
+		Animation(document.getElementById('slideshow_inner')).by('left', slidewidth+'px').by('right', '-'+slidewidth+'px').go();
+		if (currentslide ====== 1) {
+			Animation(document.getElementById('left_button')).to('opacity', '0.3').go();
+			Animation(document.getElementById('right_button')).to('opacity', '1').go();
+		}
+		if (currentslide &gt; 1) { Animation(document.getElementById('right_button')).to('opacity', '1').go(); }
+		currentslide--;
+	}
+}
+</code></pre>
+<p>Here is the <span class="caps">CSS</span>:</p>
+<pre><code>
+	#slideshow_wrapper { width:530px; clear: both; margin-bottom: 20px; }
+	#slideshow { overflow: hidden; width: 435px; float: left; position:relative; margin-right: 5px; }
+	#slideshow_inner { position: relative; width: 1250px; }
+	#slideshow_inner a { opacity:0.7; margin: 0 7px; }
+	#slideshow_inner a:hover { opacity: 1; }
+</code></pre>
+<p>And finally, here is the markup:</p>
+<pre><code>
+&lt;div id="slideshow_wrapper"&gt;
+			&lt;img id="left_button" src="http:/yoururl.com/images/left_button.gif" onclick="goleft(); return false;" style="float: left; display: block; width: 41px; cursor: pointer; opacity: 0.3;" /&gt;
+		    &lt;div id="slideshow"&gt;
+		        &lt;div id="slideshow_inner"&gt;
+		            &lt;a id="slide1" href="http://yoururl.com/link1" title="Oronaut Outdoor Blog"&gt;&lt;img src="&lt;?php echo $basepath ?&gt;images/slide1.jpg" /&gt;&lt;/a&gt; 
+		            &lt;a id="slide2" href="http://yoururl.com/link2" title="Colorado Ski Mountaineering Cup"&gt;&lt;img src="&lt;?php echo $basepath ?&gt;images/slide2.jpg" /&gt;&lt;/a&gt; 
+		            &lt;a id="slide3" href="http://yoururl.com/link3" title="PowderBlog"&gt;&lt;img src="&lt;?php echo $basepath ?&gt;images/slide3.jpg" /&gt;&lt;/a&gt; 
+		            &lt;a id="slide4" href="yoururl.com/link4" title="Highland Meadows HOA"&gt;&lt;img src="http:/yoururl.com/images/slide4.jpg" /&gt;&lt;/a&gt; 
+		            &lt;a id="slide5" href="http://yoururl.com/link5" title="United State Ski Mountaineering Association"&gt;&lt;img src="http:/yoururl.com/images/slide5.jpg" /&gt;&lt;/a&gt; 
+		            &lt;a id="slide6" href="http://yoururl.com/link6" title="Circle S Seeds"&gt;&lt;img src="http:/yoururl.com/images/slide6.jpg" /&gt;&lt;/a&gt; 
+		            &lt;a id="slide7" href="http://yoururl.com/link7" title="Rita Designs"&gt;&lt;img src="http:/yoururl.com/images/slide7.jpg" /&gt;&lt;/a&gt; 
+		        &lt;/div&gt;
+		    &lt;/div&gt;
+		    &lt;img id="right_button" src="http:/yoururl.com/images/right_button2.gif" onclick="goright(); return false;" style="float: left; display: block; width: 41px; cursor: pointer;" /&gt;
+			&lt;p&gt;Click on an image to leave Facebook and visit the Portfolio.&lt;/p&gt;
+		&lt;/div&gt;
+</code></pre>
+<p>(One thing to note when scripting <span class="caps">FBJS</span> for Tabs: onLoad does not work. All JS must be started with a trigger event of some sort, even if it is as simple as a mouseOver.)</p>
+<p>This is just a starting point. My code is not very generalized, the opacity effects have IE issues (as usual), and there are probably other issues besides. But have fun building on this, and create some sexy animated Facebook tabs!</p></div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Evan Johnson</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-11-01T23:19:00-07:00" pubdate data-updated="true">Nov 1<span>st</span>, 2009</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/social-media/'>Social-Media</a>, <a class='category' href='/blog/categories/web-development/'>Web-Development</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://thaddeusmt.github.coma-simple-fbjs-image-carousel-or-slideshow-for-facebook-page-tabs" data-via="thaddeusmt" data-counturl="http://thaddeusmt.github.coma-simple-fbjs-image-carousel-or-slideshow-for-facebook-page-tabs" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="how-to-make-custom-facebook-fan-page-tabs-with-fbml-part-2" title="Previous Post: How to make custom Facebook Fan Page tabs with FBML, Part 2">&laquo; How to make custom Facebook Fan Page tabs with FBML, Part 2</a>
+      
+      
+        <a class="basic-alignment right" href="book-review-magento-beginners-guide" title="Next Post: Book Review: Magento Beginner's Guide">Book Review: Magento Beginner's Guide &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p><img id="profile-image" src="http://www.gravatar.com/avatar/02bee2f91e0a8c3aefbfa6bfb5304c51" alt="Gravatar of thaddeusmt " title="Gravatar of thaddeusmt" />My name is Evan Johnson. I'm a software developer from Montana, who spent some time in Nebraska. I'm the chief software architect at <a href="http://splashlabsocial.com">SplashLab Social</a>, but I am blogging here on my old freelance web design URL for fun. I hope you find something useful here, thanks for visiting! Cheers</p>
+</section><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="magento-15-ee-110-windows-command-line-batch-update-script-magebat">Magento 1.5 / EE 1.10 Windows Command Line Batch Update Script mage.bat</a>
+      </li>
+    
+      <li class="post">
+        <a href="reveal-fan-gate-like-gate-facebook-iframe-tab-tutorial-with-php"> Reveal / Fan-Gate / Like-Gate Facebook iframe tab tutorial (with PHP)</a>
+      </li>
+    
+      <li class="post">
+        <a href="facebook-iframe-tabs-on-pages-no-more-fbml">Facebook iframe tabs on Pages - No more FBML!</a>
+      </li>
+    
+      <li class="post">
+        <a href="a-facebook-content-management-system-cms-for-facebook-page-templates">A Facebook Content Management System (CMS) for Facebook Page Templates</a>
+      </li>
+    
+      <li class="post">
+        <a href="insert-flash-media-embed-code-tinymce-plugin">Insert Flash Media Embed Code TinyMCE Plugin</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("thaddeusmt", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/thaddeusmt" class="twitter-follow-button" data-show-count="false">Follow @thaddeusmt</a>
+  
+</section>
+
+<section>
+  <h1>StackOverflow</h1>
+  <a id="stackoverflow-badge" href="http://stackoverflow.com/users/164439/thaddeusmt"><img src="http://stackoverflow.com/users/flair/164439.png" width="208" height="58" alt="profile for thaddeusmt at Stack Overflow, Q&amp;A for professional and enthusiast programmers" title="profile for thaddeusmt at Stack Overflow, Q&amp;A for professional and enthusiast programmers"></a>
+</section>
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/thaddeusmt">@thaddeusmt</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'thaddeusmt',
+            count: 4,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+<section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/blogs/'>Blogs (2)</a></li>
+<li class='category'><a href='/blog/categories/cms/'>CMS (6)</a></li>
+<li class='category'><a href='/blog/categories/css/'>CSS (2)</a></li>
+<li class='category'><a href='/blog/categories/javascript/'>JavaScript (3)</a></li>
+<li class='category'><a href='/blog/categories/seo/'>SEO (2)</a></li>
+<li class='category'><a href='/blog/categories/social-media/'>Social-Media (6)</a></li>
+<li class='category'><a href='/blog/categories/web-design/'>Web-Design (2)</a></li>
+<li class='category'><a href='/blog/categories/web-development/'>Web-Development (25)</a></li>
+<li class='category'><a href='/blog/categories/e-commerce/'>e-Commerce (11)</a></li>
+
+  </ul>
+</section>
+<section>
+  <h1>Coderwall</h1>
+  <ul id="cw_badges">
+    <li class="loading">Status updating...</li>
+  </ul>
+
+  <script type="text/javascript">
+    var coderwall = (function(){
+      function render(options, badges){
+        var fragment = '',
+            t = $(options.target)[0],
+            height = 65,
+            width = 65,
+            index;
+
+        for (index in badges) {
+          fragment += '<a class="cw_badge"title="' + badges[index].description + '" href="http://coderwall.com/' + options.user + '">';
+          fragment +=   '<img alt="' + badges[index].description + '" height="' + width + '" width="' + height + '" src="' + badges[index].badge + '"/>';
+          fragment += '</a>';
+        }
+
+        t.innerHTML = fragment;
+      }
+      return {
+        showBadges: function(options){
+          $.ajax({
+              url: 'http://coderwall.com/' + options.user + '.json?callback=?'
+            , type: 'jsonp'
+            , error: function (err) { $(options.target + ' li.loading').addClass('error').text("Error loading feed"); }
+            , success: function(res) {
+                render(options, res.data.badges);
+            }
+          });
+        }
+      };
+    })();
+
+    $.domReady(function(){
+      if (!window.jXHR){
+        var jxhr = document.createElement('script');
+        jxhr.type = 'text/javascript';
+        jxhr.src = '/javascripts/libs/jXHR.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(jxhr, s);
+      }
+      if (!window.$){
+        var b = document.createElement('script');
+        b.type = 'text/javascript';
+        b.src = '/javascripts/ender.js';
+        var sc = document.getElementsByTagName('script')[0];
+        sc.parentNode.insertBefore(jxhr, s);
+      }
+      coderwall.showBadges({
+        user: 'thaddeusmt',
+        target: '#cw_badges'
+      });
+    });
+  </script>
+  <style type="text/css">
+    .cw_badge img {
+      padding: 5px;
+      border: 0 none !important;
+      -moz-box-shadow: none !important;
+      -webkit-box-shadow: none !important;
+      -o-box-shadow: none !important;
+      box-shadow: none !important;
+    }
+  </style>
+</section>
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Evan Johnson -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'chilipepperdesign';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

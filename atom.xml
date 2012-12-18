@@ -1,16 +1,1275 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[My Octopress Blog]]></title>
+  <title><![CDATA[Chili Pepper Design]]></title>
   <link href="http://thaddeusmt.github.com/atom.xml" rel="self"/>
   <link href="http://thaddeusmt.github.com/"/>
-  <updated>2012-12-16T13:40:34-07:00</updated>
+  <updated>2012-12-18T12:28:17-07:00</updated>
   <id>http://thaddeusmt.github.com/</id>
   <author>
-    <name><![CDATA[Your Name]]></name>
+    <name><![CDATA[Evan Johnson]]></name>
     
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Magento 1.5 / EE 1.10 Windows Command Line Batch Update Script mage.bat]]></title>
+    <link href="http://thaddeusmt.github.commagento-15-ee-110-windows-command-line-batch-update-script-magebat"/>
+    <updated>2011-05-15T23:00:00-06:00</updated>
+    <id>http://thaddeusmt.github.com./magento-15-ee-110-windows-command-line-batch-update-script-magebat</id>
+    <content type="html"><![CDATA[<p>So, this might be for kind of a narrow audience, but I&#8217;m pretty stoked on it so I wanted to share.</p>
+<p>In the newest version of the Magento ecommerce platform, Magento 1.5, they have redone their update script. In <a href="http://www.yireo.com/blog/1294-magento-15-mage-command-line">Magento Connect 2.0</a>, what was called &#8220;pear&#8221; is now &#8220;mage&#8221;.</p>
+<p>Old and busted:<br />
+<pre><code>./pear mage-setup .</code></pre></p>
+<p>New Hotness:<br />
+<pre><code>./mage mage-setup .</code></pre></p>
+<p>They basically work the same, but the name has changed and &#8211; more importantly if you are reading this &#8211; there is no windows batch file to run. There is a Bash shell script, so you can download and update Magento and it&#8217;s many Extensions via the command line in <em>Linux</em>, but not Windows.</p>
+<p>So, looking at the mage.sh script and working from the pear.bat script, I made mage.bat. It lets you do command line downloads and updates of Magento in Windows, just like you can on Linux.</p>
+<p>Not that anyone is actually hosting Magento on a <span class="caps">WAMP</span> setup, but I find it useful to be able to download and install Extensions and modules on my Windows development box.</p>
+<p><a href="http://www.chilipepperdesign.com/file_download/1/mage.zip">Download mage.bat &#8211; Windows Magento Connect 2.0 Update Script</a></p>
+<p>One you have mage.bat installed in the root directory of your Magento install (right next to the mage bash script), you are ready to go! Just run &#8220;mage&#8221; from the Windows command line.</p>
+<pre><code>mage help</code></pre>
+<p>The Yiero blog has a nice article about <a href="http://www.yireo.com/blog/1294-magento-15-mage-command-line">using Magento Connect 2.0 over command line</a>.</p>
+<p>Here is a good article about <a href="http://blog.nexcess.net/2011/03/11/upgrading-to-magento-1-5-0-1">upgrading Magento from 1.4 to 1.5</a> as well.</p>
+<p><span class="caps">TROUBLESHOOTING</span> <span class="caps">TIPS</span>:</p>
+<ul>
+	<li>Make sure you have <a href="http://pear.php.net/manual/en/installation.getting.php"><span class="caps">PEAR</span> installed</a> on the machine you are running this on</li>
+	<li>Make sure <span class="caps">PEAR</span> is in your Windows Path</li>
+	<li>Be sure to install mage.bat in your Magento root directory</li>
+	<li>In the command line, make sure you are in your Magento root when you run mage.bat</li>
+</ul>]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ Reveal / Fan-Gate / Like-Gate Facebook iframe tab tutorial (with PHP)]]></title>
+    <link href="http://thaddeusmt.github.comreveal-fan-gate-like-gate-facebook-iframe-tab-tutorial-with-php"/>
+    <updated>2011-02-15T00:37:00-07:00</updated>
+    <id>http://thaddeusmt.github.com./reveal-fan-gate-like-gate-facebook-iframe-tab-tutorial-with-php</id>
+    <content type="html"><![CDATA[<p><em><strong>Update: <a href="http://www.splashlabsocial.com">SplashLab Social</a> has been released!</strong> <a href="http://www.splashlabsocial.com">If you are looking for an easier way to set up Fans-only/Reveal tabs, look no further!</a> My new service makes it easy to create custom fan-gate tabs, check it out!</em></p>
+<p><a href="http://developers.facebook.com/blog/post/462#fbml_roadmap"><span class="caps">FBML</span> is going away</a>. Is the popular (and effective) strategy of &#8220;fan-gating&#8221; content to encourage visitors to Like you page going away with the &#8220;&lt;fb:visible-to-connection&gt;&#8221;:http://developers.facebook.com/docs/reference/fbml/visible-to-connection/ <span class="caps">FBML</span> tag?</p>
+<p>No! Facebook has been kind enough to provide a new method for implementing &#8220;reveal tabs&#8221; on the new iframe tabs. Follow along in the tutorial below to learn how to do this.</p>
+<p>(This tutorial assumes you are creating a <span class="caps">PHP</span> Facebook application, but you can follow the spirit of it in any language.)</p>
+<h3>1. Set up an iframe tab application</h3>
+<p>I won&#8217;t cover all of the details here, but you need to set up an iframe tab application on Facebook first. Assuming you have access to put <span class="caps">PHP</span> files up on a public server, follow these steps:</p>
+<ol>
+	<li>Go to the <a href="http://www.facebook.com/apps/application.php?id=2345053339">Facebook Developer application</a></li>
+	<li>Create a new application</li>
+	<li>On the <strong>&#8220;Facebook Integration&#8221;</strong> tab of the application settings:
+	<ol>
+		<li>Set the <strong>Canvas Page</strong> <span class="caps">URL</span> slug</li>
+		<li>Point the <strong>Canvas <span class="caps">URL</span></strong> to your <span class="caps">PHP</span> script&#8217;s base <span class="caps">URL</span></li>
+		<li>Set the <strong>Tab Name</strong> to something (Welcome!)</li>
+		<li><strong>Make sure the *Page Tab Type</strong> is set to iframe*</li>
+		<li>Set the <strong>Tab <span class="caps">URL</span></strong> to the specific <span class="caps">PHP</span> file for this tab</li>
+	</ol></li>
+	<li>On the <strong>&#8220;Advanced&#8221;</strong> tab of the application settings:
+	<ol>
+		<li>Make sure the <strong>&#8220;OAuth 2.0 for Canvas&#8221;</strong> option is set</li>
+	</ol></li>
+	<li>Save the application</li>
+	<li>Add the application to a Page to test it out</li>
+</ol>
+<p><strong><span class="caps">NOTE</span>:</strong> There is some confusion about Canvas <span class="caps">URL</span> and the Tab <span class="caps">URL</span>. The Canvas <span class="caps">URL</span> is the <span class="caps">PHP</span> file that get&#8217;s hit when the users views the Canvas app. This is different than the <span class="caps">PHP</span> script which generates the Tab, which is defined by the Tab <span class="caps">URL</span>. The Tab <span class="caps">URL</span> has to be relative to the Canvas <span class="caps">URL</span>. What I usually do is have the Canvas <span class="caps">PHP</span> file be &#8220;index.php&#8221; and point the Canvas <span class="caps">URL</span> to the directory it&#8217;s in. Then I make a &#8220;tab.php&#8221; file for the Tab <span class="caps">URL</span> in the same directory.</p>
+<ul>
+	<li><strong>Canvas <span class="caps">URL</span></strong>: http://mysite.com/myfbappdirectory/
+	<ul>
+		<li>This points to the file http://mysite.com/myfbappdirectory/index.php</li>
+	</ul></li>
+	<li><strong>Tab <span class="caps">URL</span></strong>: tab.php
+	<ul>
+		<li>This points to the file http://mysite.com/myfbappdirectory/tab.php</li>
+	</ul></li>
+</ul>
+<h3>2. Get the signed_request</h3>
+<p>Facebook now passes an encoded <span class="caps">POST</span> variable to tab applications, called the <a href="http://developers.facebook.com/docs/authentication/signed_request">signed_request</a>. The content of a tab&#8217;s signed_request is covered <a href="http://developers.facebook.com/docs/guides/canvas#tabs">here in the canvas guide</a>. General details about Facebook&#8217;s signed requests can be found <a href="http://developers.facebook.com/docs/authentication/signed_request">here</a>.</p>
+<p>To get the signed_request, make sure the &#8220;OAuth 2.0 for Canvas&#8221; option is set in your application&#8217;s settings. Then just grab it out of PHP&#8217;s $_REQUEST array global.</p>
+<pre><code>$signed_request = $_REQUEST['signed_request'];</code></pre>
+<h3>3. Decode the signed_request</h3>
+<p>The signed request is encoded for security. <a href="http://developers.facebook.com/docs/authentication/signed_request">Read more about this here.</a>. We are not really interested in security on this app though. We just want to tell if a visitor is a fan or not. So we are going to do the &#8220;cheater&#8221; method of decoding the signed_request, which ignores some of the security features (like the signature). Here is the cheater code (you will need the <span class="caps">PHP</span> json_decode() method!):</p>
+<pre><code>function parsePageSignedRequest() {
+    if (isset($_REQUEST['signed_request'])) {
+      $encoded_sig = null;
+      $payload = null;
+      list($encoded_sig, $payload) = explode('.', $_REQUEST['signed_request'], 2);
+      $sig = base64_decode(strtr($encoded_sig, '-_', '+/'));
+      $data = json_decode(base64_decode(strtr($payload, '-_', '+/'), true));
+      return $data;
+    }
+    return false;
+  }
+  print_r(parsePageSignedRequest());</code></pre>
+<h3>4. Switch content based on the signed_request</h3>
+<p>The signed_request on iframe tabs has a &#8220;pages&#8221; object, which holds a &#8220;liked&#8221; variable. If the user viewing your tab has Liked your page, it is set to <span class="caps">TRUE</span>. If they have not, it is set to <span class="caps">FALSE</span>. So:</p>
+<pre><code>function parsePageSignedRequest() {
+    if (isset($_REQUEST['signed_request'])) {
+      $encoded_sig = null;
+      $payload = null;
+      list($encoded_sig, $payload) = explode('.', $_REQUEST['signed_request'], 2);
+      $sig = base64_decode(strtr($encoded_sig, '-_', '+/'));
+      $data = json_decode(base64_decode(strtr($payload, '-_', '+/'), true));
+      return $data;
+    }
+    return false;
+  }
+  if($signed_request = parsePageSignedRequest()) {
+    if($signed_request-&gt;page-&gt;liked) {
+      echo "This content is for Fans only!";
+    } else {
+      echo "Please click on the Like button to view this tab!";
+    }
+  }</code></pre>
+<h3>You now have a reveal tab with fans-only content!</h3>
+<p>This new method is actually better than the old method in a couple of ways:</p>
+<ol>
+	<li>You no longer need to do devious &#8220;position: absolute&#8221; <span class="caps">CSS</span> hacks to get your fan and non-fan content to look nice! With &lt;fb:visible-to-connection&gt;, the content for <span class="caps">BOTH</span> was printed out, the non-fan content was just &#8220;hidden&#8221;, which was a nightmare to style.</li>
+	<li>The page doesn&#8217;t blow up when viewed as an Admin</li>
+	<li>Your content for fans-only is <span class="caps">REALLY</span> for <em>fans-only</em> &#8211; clever folks can no longer &#8220;View Source&#8221; to see the hidden content.</li>
+</ol>
+<p>Good luck, and happy Facebook developing!</p>]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Facebook iframe tabs on Pages - No more FBML!]]></title>
+    <link href="http://thaddeusmt.github.comfacebook-iframe-tabs-on-pages-no-more-fbml"/>
+    <updated>2011-02-14T23:43:00-07:00</updated>
+    <id>http://thaddeusmt.github.com./facebook-iframe-tabs-on-pages-no-more-fbml</id>
+    <content type="html"><![CDATA[<p>The long awaited transition from <span class="caps">FBML</span> tabs to iframe tabs has finally happened. As of this writing on Feb 14th 2011 (Valentines Day!) you can choose the &#8220;iframe&#8221; option for Facebook application tabs. The official word from the <a href="http://developers.facebook.com/roadmap/">Facebook developer roadmap</a> is that <a href="http://developers.facebook.com/blog/post/462#fbml_roadmap">as of March 11th developers will no longer be able to create <span class="caps">FBML</span> tabs</a> (although existing <span class="caps">FBML</span> apps will be supported indefinitely &#8211; or at least until the end of 2011 I heard in the comments).</p>
+<p><img src="http://www.chilipepperdesign.com/images/52.jpg" style="width: 415px" /></p>
+<h3>The Good</h3>
+<p>The great thing about iframe tabs is that you are working with a real webpage now. No more fighting with <span class="caps">FBJS</span> and finicky <span class="caps">FBML</span> tags!</p>
+<ol>
+	<li><strong>External JS like JQuery and TinyMCE</strong> &#8211; You can finally do all of the things that Canvas iframe apps have been able to do for a while, like include handy JavaScript libraries!</li>
+	<li><strong>onLoad JS events</strong> &#8211; One of the frustrating things with <span class="caps">FBML</span> apps was always that you couldn&#8217;t start JS on the page load, so things like automatic slideshows were impossible. You should be able to have content auto-play now!</li>
+	<li><strong>Facebook JS <span class="caps">SDK</span> for <span class="caps">XFBML</span> Social Plugins</strong> &#8211; You can import the JavaScript <span class="caps">SDK</span> and still have Request popups, Like buttons, make Open Graph <span class="caps">API</span> requests&#8230; the whole 9 yards.</li>
+</ol>
+<h3>The Bad</h3>
+<p>One of the interesting things is that the ubiquitous <a href="http://www.facebook.com/apps/application.php?id=4949752878">Static <span class="caps">FBML</span></a> app is going away too, apparently. This application has a been a great shortcut for many developers and page owners, allowing them to just install the app and paste in <span class="caps">HTML</span> and <span class="caps">FBML</span> code without creating a special custom application. (Hopefully more people will use the <a href="http://www.splashlabsocial.com">custom facebook tab creation</a> service I built, <a href="http://www.splashlabsocial.com">SplashLab Social</a> ;)</p>
+<p>This will be a pain for many users. It&#8217;s a big leap to have to create a custom application and host the code on your own server! I will be curious to see if Facebook creates a new app that does some of the same things?</p>
+<h3>The Ugly</h3>
+<p>Naturally, like any new (and many old) Facebook features iframe tabs have bugs still. My preliminary tests turned up the following problems:</p>
+<ol>
+	<li><s><strong>Tabs not visible to logged-out users</strong> &#8211; If a user is not logged in to Facebook they cannot see your tab. Official bug is here: <a href="http://bugs.developers.facebook.net/show_bug.cgi?id=15166">http://bugs.developers.facebook.net/show_bug.cgi?id=15166</a></s> <br />This has been fixed now!</li>
+	<li><s><strong><span class="caps">SSL</span>/https problems</strong> &#8211; My iframe tabs do not load properly when using Facebook over https. Here is the bug on Facebook if you want to track progress: <a href="http://bugs.developers.facebook.net/show_bug.cgi?id=15200">http://bugs.developers.facebook.net/show_bug.cgi?id=15200</a></s><br /> This has been fixed now</li>
+	<li><s><strong>Renaming tab titles not working</strong></s> &#8211; Changing the &#8220;Tab name&#8221; does not appear to working at this time. The official bug is here: <a href="http://bugs.developers.facebook.net/show_bug.cgi?id=15155">http://bugs.developers.facebook.net/show_bug.cgi?id=15155</a> <span class="caps">UPDATE</span>: Apparently this is a feature, not a bug! Users can now set custom Tab Titles for each tab!</li>
+	<li><s><strong>Max height scrollbar issues</strong></s> (my mistake) &#8211; The iframe tabs appear to have a maximum height of 800px, which gives a scrollbar for taller content. The problem with this is that when the scroll bar appears the tab is width is now smaller than 520px, essentially. This means if you have images which are 520px wide, you get a horizontal scroll bar at the bottom. It&#8217;s kind of ugly right now, hopefully Facebook will enable and auto-resize like regular Canvas apps have.</li>
+</ol>
+<p><strong>Iframe tab height:</strong> This is not a bug, but I DO think it&#8217;s a little weird and not very obvious. You can fix this with the FB.Canvas.setAutoResize() method, as <a href="http://bugs.developers.facebook.net/show_bug.cgi?id=15210">detailed in the bug I filed</a>.</p>
+<h3>Beyond Static <span class="caps">FBML</span></h3>
+<p>In summary, the new iframe tabs are more powerful and flexible than the <span class="caps">FBML</span> ones, and open up a lot of great new possibilities. There are a <span class="caps">LOT</span> of <span class="caps">FBML</span> apps out there, however, so it will be interesting to watch the transition.</p>
+<p>Please, post any comments or corrections you have below! Are there any other new features of iframe tabs you are excited for? Anything you will miss from <span class="caps">FBML</span>?</p>
+<p><em><strong>Update: <a href="http://www.splashlabsocial.com">SplashLab Social</a> has been released!</strong> <a href="http://www.splashlabsocial.com">If you are looking for an easier way to set up iframe tabs, look no further!</a> My new service makes it easy &#8211; check it out!</em></p>]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[A Facebook Content Management System (CMS) for Facebook Page Templates]]></title>
+    <link href="http://thaddeusmt.github.coma-facebook-content-management-system-cms-for-facebook-page-templates"/>
+    <updated>2010-03-24T00:58:00-06:00</updated>
+    <id>http://thaddeusmt.github.com./a-facebook-content-management-system-cms-for-facebook-page-templates</id>
+    <content type="html"><![CDATA[<p><a href="http://www.splashlabsocial.com"><img src="http://www.chilipepperdesign.com/images/53t.jpg" style="float: left; margin-right: 10px;" /></a><br />
+<p style="font-size:1.2em;"><strong>Update: The project is now live and ready for signups! Head over to <a href="http://splashlabsocial.com">SplashLab Social</a> to learn more and get started. It&#8217;s the easiest way to create and manage content on your Facebook Page&#8217;s iframe tabs!</strong></p></p>
+<p><br />
+<br />
+<br />
+<p>There&#8217;s something big in the works here at Chili Pepper Design I wanted to share on my blog quickly:</p></p>
+<h3><strike>Coming Soon:</strike> A Facebook Fan Page <span class="caps">CMS</span>!</h3>
+<p>Right now the social networking site <a href="http://www.facebook.com">Facebook</a> is quickly becoming the king of the web. Some sources claim that Facebook has <a href="http://www.guardian.co.uk/technology/blog/2010/mar/15/facebook-passes-google-share-us">passed Google</a> as the most visited website on the web. For this reason <a href="http://www.facebook.com/advertising/?pages">Fan Pages</a> are becoming an important part of the marketing strategies of small businesses and large corporations alike. Setting up a Fan Page is faster and cheaper than setting up a website, and allows customers to interact with the business/brand (and share it with their friends) in ways that traditional web pages do not.</p>
+<p>These Facebook Fan Pages consist of a series of &#8220;tabs&#8221;. In addition to the Wall, and the usual Photos, Videos, Discussion and Reviews tabs, many businesses are adding custom <span class="caps">FBML</span> tabs. These provide additional information and a touch of that business&#8217; personality and brand. These nicely designed tabs offer special promotions, games, contests, product information, shopping options, blog and twitter feeds, and much more. For some great examples of what can be accomplished with custom <span class="caps">FBML</span> tabs check out the <a href="http://facebookshowcase.net">Facebook Showcase</a>.</p>
+<p>The one drawback to these otherwise-awesome custom page tabs is that they require a bit of technical savvy to set up. Some require the creation of a custom application, and even making a simple tab with the <a href="http://www.facebook.com/apps/application.php?id=4949752878">Static <span class="caps">FBML</span></a> application requires <span class="caps">FBML</span> coding. There are many tutorials that cover how to set up custom tabs (like my own <a href="http://www.chilipepperdesign.com/2009/10/11/how-to-make-custom-facebook-fan-page-tabs-with-fbml-part-2"><span class="caps">FBML</span> tab tutorial here</a>), but frankly it&#8217;s easier to set up an <em>entire new website</em> with services like <a href="http://wordpress.com">WordPress.com</a> and <a href="http://www.blogger.com/">Blogger</a> than to set up a custom <span class="caps">FBML</span> tab.</p>
+<p>And even once a tab is set up, it is difficult to update it. The <span class="caps">FBML</span> code must be edited again, just like when it was first set up. This is one area where websites running Content Management Systems (CMSs) like Drupal and Wordpress are far ahead of custom facebook tabs. Editing a page in Drupal is as easy as composing an email &#8211; no coding needed!<br />
+<br />
+<p><em>But what if creating a custom <span class="caps">FBML</span> tab was just as simple as setting up blog on Blogger? Just sign up, choose a design template, enter the content, and you&#8217;re done?</em></p>
+<p><em>What if updating a custom <span class="caps">FBML</span> tab was as simple as updating a page on a Drupal website? Just log in, change the content, and hit &#8220;Update&#8221;?</em></p>
+<h2>Enter the Facebook <span class="caps">CMS</span></h2>
+<p>This is exactly the problem that Chili Pepper Design is working on addressing. With the <strong>Facebook Content Management System</strong> currently in development it will be easy as pie to create and update custom <span class="caps">FBML</span> tabs with nice templates on a Fan Page.</p>
+<p>Here&#8217;s how it will work:</p>
+<ol>
+<li>Create a Facebook Fan Page</li>
+<li>Go to the Facebook <span class="caps">CMS</span> website and create an account</li>
+<li>Choose a template for your tab</li>
+<li>Enter the content for the tab (using an easy <span class="caps">WYSIWYG</span> editor like Word)</li>
+<li>Save the new Tab</li>
+<li>Add the Facebook Application to the Fan Page (one click &#8220;Add to Page&#8221;)</li>
+<li><span class="caps">DONE</span>!</li>
+</ol>
+<p>Here are some of the many components that the templates will have (in various combinations):</p>
+<ul>
+<li>company logo</li>
+<li>multiple tabs/sub navigation</li>
+<li>body content</li>
+<li>custom images</li>
+<li>flash videos</li>
+<li>sidebar blocks</li>
+<li>Twitter feeds</li>
+<li>blog feeds</li>
+<li>comment area</li>
+<li>share buttons</li>
+<li>invite fiends</li>
+</ul>
+<p>The templates will be professionally designed, optimized for <span class="caps">SEO</span>, and have the ability to customize some of the colors.</p>
+<h3>For Facebook Designers</h3>
+<p>Are you a Facebook designer? Would like to provide your clients with an easy way to update the pages you have created for them? In addition to the standard templates, the Facebook <span class="caps">CMS</span> will offer a special product for designers to plug the <span class="caps">CMS</span> into their designs. The details on this have not been worked out, but it is a service I very much want to offer, along the lines of <a href="http://cushycms.com/">Cushy <span class="caps">CMS</span></a> or <a href="http://surrealcms.com/">Surreal <span class="caps">CMS</span></a>.</p>
+<p><strong>Check out <a href="http://www.splashlabsocial.com">SplashLab Social</a> to learn more!</strong></p>]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Insert Flash Media Embed Code TinyMCE Plugin]]></title>
+    <link href="http://thaddeusmt.github.cominsert-flash-media-embed-code-tinymce-plugin"/>
+    <updated>2010-03-22T16:19:00-06:00</updated>
+    <id>http://thaddeusmt.github.com./insert-flash-media-embed-code-tinymce-plugin</id>
+    <content type="html"><![CDATA[<p>I&#8217;ve run into a problem providing my clients good, easy-to-use media embed functionality with the existing JavaScript <span class="caps">WYSIWYG</span> editors. The big players, <a href="http://ckeditor.com/">CKEditor</a> (formery FCKEditor) and <a href="http://tinymce.moxiecode.com/">TinyMCE</a> both provide a &#8220;Flash&#8221; button which works okay with YouTube and other large video providers, but what about embedding a Picasa slideshow? None of the <span class="caps">WYSIWYG</span> editors come with plugin to just insert some <span class="caps">HTML</span> code. If you want to embed something like a Picasa slideshow,  customized YouTube player, or Google Map you have open up the source code, find the location you want to insert it, and paste in the code. Fine for some, but difficult and scary for most as it breaks the <span class="caps">WYSIWYG</span> paradigm.</p>
+<p>On one of my latest Drupal websites there are multiple bloggers, none of whom are particularly tech savvy. I set up the <span class="caps">CMS</span> with TinyMCE because I like how they can drag and drop images around (I just wish Drupal had an image embed uploader like WordPress!). After a while they complained that the Insert Flash button in TinyMCE just wasn&#8217;t cutting it. So I set about fixing it. How hard could it be to make a plugin that just inserts some <span class="caps">HTML</span> code where your cursor is? Like it already does for images?</p>
+<p>It turns out it is very easy. I was able to just edit the TinyMCE &#8220;Example&#8221; plug-in, which already did basically exactly what I wanted. So here I provide it to you, Internet. I hope it is useful, and please let me know if it&#8217;s broken (or could work better). Thanks!</p>
+<p><strong><span class="caps">UPDATED</span></strong>: (9-17-2010) I fixed some bugs with IE. It should work better cross-browse now.</p>
+<p>Download the plugin:</p>
+<ul>
+	<li><strong><a href="http://sourceforge.net/tracker/?func=detail&amp;aid=2974843&amp;group_id=103281&amp;atid=738747">From SourceForge</a> </strong></li>
+	<li><strong><a href="http://www.chilipepperdesign.com/examples/tinymce-embed-plugin-v2.zip">From Chili Pepper Design</a> </strong></li>
+</ul>
+<p>I found some tips on installing TinyCME plugins here: <a href="http://tinymce.moxiecode.com/punbb/viewtopic.php?id=3349">Installing Plugin Newbie Question</a><br />
+Here is the official guide to creating a plugin for TinyMCE 3: <a href="http://wiki.moxiecode.com/index.php/TinyMCE:Create_plugin/3.x">TinyMCE:Create plugin/3.x</a></p>
+<p><strong>To use this plugin, install it in the TinyMCE plugin folder and just include it in the <em>TinyMCE.init()</em> call like you would the other plugins</strong>. Example (&#8220;<strong>embed</strong>&#8221; is the name of the plugin):</p>
+<pre><code>
+&lt;script type="text/javascript" src="&lt;your installation path&gt;/tiny_mce/tiny_mce.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript"&gt;
+  tinyMCE.init({
+    theme : "advanced",
+    mode : "textareas",
+    plugins : "embed, fullscreen, emotions, preview",
+    theme_advanced_buttons3_add : "embed, fullscreen, emotions, preview"
+  });
+&lt;/script&gt;</code></pre>
+<p><strong><em>Disclaimer</em>: I am not a TinyMCE guru, and not even that hot at JavaScript. I probably cannot help you with other TinyMCE plugins, or even this one. I only got this to work because the Example plugin was so close to what I already needed. But thanks for stopping by!</strong></p>]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Learning Drupal Module Dev: Dependent AHAH/AJAX Forms]]></title>
+    <link href="http://thaddeusmt.github.comlearning-drupal-module-dev-dependent-ahahajax-forms"/>
+    <updated>2010-03-22T01:32:00-06:00</updated>
+    <id>http://thaddeusmt.github.com./learning-drupal-module-dev-dependent-ahahajax-forms</id>
+    <content type="html"><![CDATA[<p>So, I&#8217;ve been working on a simple module for a Drupal project lately. I wanted to have two administrator settings for the module, the second of which depends on the first. A &#8220;dependent dropdown&#8221;. It would be cool if it was &#8220;AJAXy&#8221; too, I thought. Well, it just so turns out that in Drupal 6 there are built in <a href="http://ajax.phpmagazine.net/2005/11/ahah_asychronous_html_and_http.html"><span class="caps">AHAH</span></a> (Asychronous <span class="caps">HTML</span> and <span class="caps">HTTP</span>) functions in the Forms <span class="caps">API</span> to do just this. Easy! Or is it?</p>
+<p>It also turns out there is a steep learning curve to making &#8220;Ajax forms&#8221; with the Drupal Forms <span class="caps">API</span>. I got it working, but it took a fair amount of effort. So, to help out future Drupal <span class="caps">AHAH</span> developers I am providing my code below, along with a list of links to resources that were a great help in unraveling this problem.</p>
+<p>First, to help provide an &#8220;aerial view&#8221; of what&#8217;s going on here, this is a list of the components involved:</p>
+<ul>
+<li>A form that has the <span class="caps">AHAH</span> fields (<em>ahahtestmodule_admin_settings</em> in this example)</li>
+<li>The first field in the form (<em>ahahtestmodule_types</em>), which will change the contents of the second field</li>
+<li>The second, &#8220;dependent&#8221; field (<em>ahahtestmodule_ahah_field</em>)</li>
+<li>The function that provides the options of the <span class="caps">AHAH</span> field based on the first field (<em>ahahtestmodule_get_ahah_fields()</em>)</li>  
+<li>The <span class="caps">AHAH</span> function that updates the <span class="caps">AHAH</span> field (<em>ahahtestmodule_ahah_field_js()</em>)</li>
+<li>menu callback function for the <span class="caps">AHAH</span> function (<em>ahahtestmodule/ahahjs</em>)</li>
+</ul>
+<p>To start out, here is the example admin settings form <em>ahahtestmodule_admin_settings</em> with both fields (<em>ahahtestmodule_types</em> and <em>ahahtestmodule_ahah_field</em>):</p>
+
+<pre><code>&amp;lt;?php 
+function ahahtestmodule_admin_settings() {
+  $form = array();
+  $form['settings'] = array(
+    '#type' =&gt; 'fieldset',
+    '#title' =&gt; t('ahahtestmodule Settings'),
+  );
+  $form['settings']['ahahtestmodule_types'] = array(
+    '#type' =&gt; 'radios',
+    '#title' =&gt; t('First Field'),
+    '#description' =&gt; t('Change this field to change the options in the next field.'),
+    '#options' =&gt; array('one' =&gt; t('Option 1'), 'two' =&gt; t('Option 2'), 'three' =&gt; t('Option 3')),
+    '#default_value' =&gt; variable_get('ahahtestmodule_types', 'one'),
+    '#ahah' =&gt; array(
+      'path' =&gt; 'ahahtestmodule/ahahjs',
+      'wrapper' =&gt; 'ahah-wrapper',
+      'method' =&gt; 'replace',
+    ),
+  );
+  $form['settings']['ahahtestmodule_ahah_field'] = array(
+    '#type' =&gt; 'select',
+    '#title' =&gt; t('Dependent Second Field'),
+    '#options' =&gt; ahahtestmodule_get_ahah_fields(variable_get('ahahtestmodule_types', 'one')),
+    '#default_value' =&gt; variable_get('ahahtestmodule_ahah_field', 'none'),
+    '#description' =&gt; t('This fields content depends on what is selected in the first field.'),
+    '#prefix' =&gt; '&amp;lt;div id="ahah-wrapper"&gt;',
+    '#suffix' =&gt; '&amp;lt;/div&gt;',
+  );
+  return system_settings_form($form);
+}
+?&gt;</code></pre>
+<p>Next, here is the dummy function that gets the right content for <em>ahahtestmodule_ahah_field</em> based on <em>ahahtestmodule_types</em>:</p>
+
+<pre><code>&amp;lt;?php 
+function ahahtestmodule_get_ahah_fields($first_variable) {
+  $ahah_fields = array();
+  switch ($first_variable) {
+    case 'one':
+        $ahah_fields['one'] = 'Option 1 Was Selected';
+        break;
+    case 'two':
+        $ahah_fields['two'] = 'Option 2 Was Selected';
+        $ahah_fields['two_bonus'] = 'Bonus Option!';
+        break;
+    case 'three':
+        $ahah_fields['three'] = 'Option 3 Was Selected';
+        break;
+    default:
+        $ahah_fields['none'] = 'Please Select...';
+  }
+  return $ahah_fields;
+}
+?&gt;</code></pre>
+<p>Then, here is the magic <span class="caps">AHAH</span> callback function that I don&#8217;t fully understand and ripped right off this article at drupal.org: <a href="http://drupal.org/node/331941">Adding dynamic form elements using <span class="caps">AHAH</span></a>:</p>
+
+<pre><code>&amp;lt;?php 
+// The AHAH callback function
+function ahahtestmodule_ahah_field_js() {
+  // The AHAH callback function triggered by the user changing the first field, "ahahtestmodule_types"
+  $form_state = array('storage' =&gt; NULL, 'submitted' =&gt; FALSE);
+  $form_build_id = $_POST['form_build_id'];
+  // Get for the form from the cache
+  $form = form_get_cache($form_build_id, $form_state);
+  // Get the form set up to process
+  $args = $form['#parameters'];
+  $form_id = array_shift($args);
+  $form_state['post'] = $form['#post'] = $_POST;
+  $form['#programmed'] = $form['#redirect'] = FALSE;
+  // Process the form with drupal_process_form(), which calls the submit handlers that put whatever was worthy of keeping in the $form_state
+  drupal_process_form($form_id, $form, $form_state);
+  // Call drupal_rebuild_form(), which destroys $_POST, creates the form again with hook_form, gets the new form cached and processed again
+  $form = drupal_rebuild_form($form_id, $form_state, $args, $form_build_id);
+  // THIS IS WHAT YOU WILL CUSTOMIZE FOR YOUR OWN FORM
+  // Choose the field you want to update with AHAH and render it
+  $ahah_form = $form['settings']['ahahtestmodule_ahah_field'];
+  unset($ahah_form['#prefix'], $ahah_form['#suffix']);
+  $output = drupal_render($ahah_form);
+  // Final rendering callback.
+  drupal_json(array('status' =&gt; TRUE, 'data' =&gt; $output));
+}
+?&gt;</code></pre>
+<p>Lastly, be sure to add the menu callback for <em>ahahtestmodule_ahah_field_js()</em>:<br />
+<br />
+<pre><code>&amp;lt;?php 
+function ahahtestmodule_menu() {
+  $items = array();
+  $items['ahahtestmodule/ahahjs'] = array(
+    'page callback' =&gt; 'ahahtestmodule_ahah_field_js',
+    'access arguments' =&gt; array('administer ahahtestmodule'),
+    'type' =&gt; MENU_CALLBACK,
+  );
+  return $items;
+}
+?&gt;</code></pre><br />
+<br />
+<p>I rolled this whole thing up into a little demo module that does nothing except run all this code:</p>
+<p><strong><a href="http://www.chilipepperdesign.com/examples/ahahtestmodule.zip">Download the Drupal Ahah Test Module</a></strong></p>
+<p>Here are some links that I used to figure this out that will hopefully help you too:</p>
+<ul>
+<li><a href="http://api.drupal.org/api/drupal/developer--topics--forms_api_reference.html/6#ahah">The Drupal Form <span class="caps">API</span> Manual Page (the <span class="caps">AHAH</span> section)</a></li>
+<li><a href="http://drupal.org/node/331941 ">Adding dynamic form elements using <span class="caps">AHAH</span> (<span class="caps">GREAT</span>)</a></li>
+<li><a href="http://thedrupalblog.com/using-ahah-dynamically-generate-form-elements-and-integration-multi-tiered-taxonomy">Using <span class="caps">AHAH</span> to dynamically generate form elements </a></li>
+<li><a href="http://wimleers.com/blog/ahah-helper-module"><span class="caps">AHAH</span> helper module</a></li>
+<li><a href="http://www.drupaler.co.uk/blog/ahah-node-forms-and-select-lists/434"><span class="caps">AHAH</span>, Node Forms And Select Lists</a></li>
+<li><a href="http://maxeydevbox.org/blogs/geoffmaxey/adventure-ahah-and-drupal-form-api">An Adventure with <span class="caps">AHAH</span> and the Drupal Form <span class="caps">API</span></a></li>
+<li><a href="http://www.stellapower.net/content/ajax-ifying-drupal-node-forms"><span class="caps">AJAX</span>-ifying Drupal Node Forms</a></li>
+<li><a href="http://katbailey.net/blog/ahah-drupal-may-it-one-day-live-its-acronym"><span class="caps">AHAH</span> in Drupal: may it one day live up to its acronym</a></li>
+<li><a href="http://blog.menhir.be/2008/09/27/ahah-forms-in-drupal-6/">Ahah forms in drupal 6</a></li>
+<li><a href="http://drupalsn.com/learn-drupal/drupal-tutorials/getting-going-ahah-and-drupal-6">Getting going with <span class="caps">AHAH</span> and Drupal 6</a></li>
+<li><a href="http://www.nicklewis.org/node/967">Drupal 6 <span class="caps">AHAH</span> forms: Making New Fields Work</a></li>
+</ul>
+<p>A big thanks to the Drupal community as always for putting so much helpful support up online for free!</p>]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Easy SEO: +2,500% page views from a year of casual blogging?]]></title>
+    <link href="http://thaddeusmt.github.comeasy-seo-2500-page-views-from-a-year-of-casual-blogging"/>
+    <updated>2010-03-04T00:35:00-07:00</updated>
+    <id>http://thaddeusmt.github.com./easy-seo-2500-page-views-from-a-year-of-casual-blogging</id>
+    <content type="html"><![CDATA[<p>You know, you always read in <span class="caps">SEO</span> articles about how important blogging is for increasing traffic. It&#8217;s one of the top suggestions around for improving a website&#8217;s search engine juice. Well, I am here to testify that it truly is a great <span class="caps">SEO</span> tool.</p>
+<p>Granted, the title of this post is hyperbolic link-bait. ;) But it&#8217;s true nonetheless!</p>
+<p>I&#8217;ve had this site, <a href="http://www.chilipepperdesign.com">http://chilipepperdesign.com</a>, up for probably five years now but only as a static portfolio site for most of that time. Then, a year ago, I upgraded the site and added a blog to it. In that year <em><strong>my monthly page views have increased 2,500% and the number of monthly visits has gone up 4,400%</strong></em>.</p>
+<p>I don&#8217;t claim to be a great blogger. I&#8217;m not even a prolific blogger. And I had a <em>very</em> small amount of traffic before, so the percent gain is in some ways exaggerated. But it&#8217;s still an impressive change to me. The idea that casual blogging can increase traffic even <em>just</em> a 1000% would be impressive! But let&#8217;s get a little perspective:</p>
+<h3>Website Traffic Factors</h3>
+<ol>
+	<li>Even though I have few posts, some of them are on very hot topics like Facebook Fan Page design. One single post accounts for a <strong>full 1/3</strong> of my site&#8217;s total traffic!</li>
+	<li>I crafted my blog with very &#8220;Search Engine Friendly&#8221; markup. Without this, a blog is useless.</li>
+	<li>I have not used <em>any</em> paid advertising, or done <em>any link building to speak of</em>. This is purely organic search engine traffic from the blog.</li>
+	<li>My website&#8217;s traffic was pretty much negligible last year, and that skews the percentages. I&#8217;m sure now that I have real traffic my gain next year will be much smaller in terms of percentage.</li>
+</ol>
+<p>So, take from this what you will, but it is a fact: blogging gives search engines what they need &#8211; <strong>content</strong>. When you provide a search engine with content you will be rewarded.</p>
+<p><img src="http://www.chilipepperdesign.com/images/48.jpg" alt="" /></p>
+<p>Happy blogging!</p>]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How to programmatically create Views in Drupal 6]]></title>
+    <link href="http://thaddeusmt.github.comhow-to-programmatically-create-views-in-drupal-6"/>
+    <updated>2010-01-15T00:08:00-07:00</updated>
+    <id>http://thaddeusmt.github.com./how-to-programmatically-create-views-in-drupal-6</id>
+    <content type="html"><![CDATA[<p>So, this stumped me for a while. I needed my small custom Drupal module to select a bunch of nodes based on a <span class="caps">CCK</span> Date field and the Publish status. It is a pain to query the <span class="caps">CCK</span> tables directly, so every forum post I could find told me to do this via Views. That&#8217;s all well and good, but the instructions for doing this all involved creating a View with the Vuiews UI, <em>then</em> calling it to make my query.</p>
+<p>But I wanted to have some of the View&#8217;s query parameters change dynamically based on my module&#8217;s admin settings. Although you could probably do this with some custom Views Argument <span class="caps">PHP</span> code, I didn&#8217;t want to do it this way. It divorced the code from my module too much somehow. It would mean that after I installed my module I would have to create a View and paste in some custom <span class="caps">PHP</span> code! Yuck.</p>
+<p>Looking through the Views 2 documentation I learned how to create &#8220;default views&#8221; for a module, but still I didn&#8217;t like this approach. This would mean that the custom view would still appear in the Views list, and could be disabled, modified, and what have you. What I really wanted to do was just create a View programmatically in my module code. How hard could it be?</p>
+<p>With Views 1 it was apparently easy to do this with the <em>views_build_view()</em> method, and I found <a href="http://drupal.org/node/138828">many</a> <a href="http://drupal.org/node/99721">articles</a> explaining how. But I am using Views 2, so these were of no help.</p>
+<p>Some poking around in the Views code showed me the way, however, and it turns out it&#8217;s pretty easy after all.</p>
+<p>Basically, all you need to do is create a view using the Views UI then Export it to get most of the code. You can&#8217;t quite use the exported code as-is though. You need to replace the first line of the export code (<em>$view = new view;<em>) with (<em>$view = views</em>new</em>view();</em>). It basically does the same thing. Once you&#8217;ve replaced that line you can create a view anywhere you want in your module&#8217;s code. You can then execute, embed it, or whatever you want by calling the appropriate functions (like <em>$view&#8594;execute_display(&#8216;default&#8217;, array())</em>). Here is a piece of example code using a simple view that displays the Title field of all Published nodes:</p>
+<pre><code>//create a new view
+$view = views_new_view();
+//define the view (this code was generated by the Export)
+$view-&gt;name = 'test_date_view';
+$view-&gt;description = '';
+$view-&gt;tag = '';
+$view-&gt;view_php = '';
+$view-&gt;base_table = 'node';
+$view-&gt;is_cacheable = FALSE;
+$view-&gt;api_version = 2;
+$view-&gt;disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+$handler = $view-&gt;new_display('default', 'Defaults', 'default');
+$handler-&gt;override_option('fields', array(
+  'title' =&gt; array(
+	'label' =&gt; 'Title',
+	'alter' =&gt; array(
+	  'alter_text' =&gt; 0,
+	  'text' =&gt; '',
+	  'make_link' =&gt; 0,
+	  'path' =&gt; '',
+	  'alt' =&gt; '',
+	  'prefix' =&gt; '',
+	  'suffix' =&gt; '',
+	  'help' =&gt; '',
+	  'trim' =&gt; 0,
+	  'max_length' =&gt; '',
+	  'word_boundary' =&gt; 1,
+	  'ellipsis' =&gt; 1,
+	  'html' =&gt; 0,
+	),
+	'link_to_node' =&gt; 1,
+	'exclude' =&gt; 0,
+	'id' =&gt; 'title',
+	'table' =&gt; 'node',
+	'field' =&gt; 'title',
+	'relationship' =&gt; 'none',
+  ),
+));
+$handler-&gt;override_option('filters', array(
+  'status' =&gt; array(
+	'operator' =&gt; '=',
+	'value' =&gt; '1',
+	'group' =&gt; '0',
+	'exposed' =&gt; FALSE,
+	'expose' =&gt; array(
+	  'operator' =&gt; FALSE,
+	  'label' =&gt; '',
+	),
+	'id' =&gt; 'status',
+	'table' =&gt; 'node',
+	'field' =&gt; 'status',
+	'relationship' =&gt; 'none',
+  ),
+  ),
+));
+$handler-&gt;override_option('access', array(
+  'type' =&gt; 'none',
+));
+$handler-&gt;override_option('cache', array(
+  'type' =&gt; 'none',
+));
+$handler-&gt;override_option('row_options', array(
+  'inline' =&gt; array(),
+  'separator' =&gt; '',
+));
+// now output the view (or whatever you want to do with it)
+print $view-&gt;execute_display('default', array());
+</code></pre>
+<p>I posted this over in the <a href="http://drupal.org/node/685432">Drupal documentation</a> as well.</p>]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Unobtrusive jCarousel page/tab external controls with jQuery]]></title>
+    <link href="http://thaddeusmt.github.comunobtrusive-jcarousel-pagetab-external-controls-with-jquery"/>
+    <updated>2010-01-14T12:49:00-07:00</updated>
+    <id>http://thaddeusmt.github.com./unobtrusive-jcarousel-pagetab-external-controls-with-jquery</id>
+    <content type="html"><![CDATA[<p>I am using the very slick and enjoyable <a href="http://sorgalla.com/projects/jcarousel/">jCarousel</a> plugin for <a href="http://jquery.com/">jQuery</a> on a new project to display featured content on the front page. I wanted to use the <a href="http://sorgalla.com/projects/jcarousel/examples/static_controls.html">external controls</a> to allow users to easily jump between slides. However, all the examples I found required hard-coding the control links into the document <span class="caps">HTML</span>. This is not best practice because when JavaScript is disabled and the carousel degrades to a simple list you have a bunch of control links that do nothing sitting there on the page. Better to create the controls in JS and append them to the <span class="caps">DOM</span> with jQuery! This way the controls only appear when the jCarousel script is loaded and ready to use them.</p>
+<p>To do this I just had to add a little extra code to the <em>initCallback</em> method I was already using to bind the external controls. Here is the JS needed to unobtrusively create a jCarousel with 4 external control links:</p>
+<pre><code>&lt;script type="text/javascript"&gt;
+//this function creates the control links and binds them
+function mycarousel_initCallback(carousel) {
+    // add the controls here
+    carousel.container.before('&lt;div class="jcarousel-control"&gt;&lt;a href="#"&gt;1&lt;/a&gt;&lt;a href="#"&gt;2&lt;/a&gt;&lt;a href="#"&gt;3&lt;/a&gt;&lt;a href="#"&gt;4&lt;/a&gt;&lt;/div&gt;');
+    // now bind the controls
+    jQuery('.jcarousel-control a').bind('click', function() {
+        carousel.scroll(jQuery.jcarousel.intval(jQuery(this).text()));
+        return false;
+    });
+};
+//create the jCarousel on the #mycarousel element with the initCallback above
+jQuery(document).ready(function() {
+    jQuery("#mycarousel").jcarousel({
+        initCallback: mycarousel_initCallback,
+    });
+});
+&lt;/script&gt;
+</code></pre>
+<p>I simply append the <em>.jcarousel-control</em> div before the carousel container using <em>carousel.container.before()</em>. You could just as easily add it after the carousel by using <em>carousel.container.after()</em>.</p>
+<p>I love how easy jQuery make <a href="http://www.alistapart.com/articles/understandingprogressiveenhancement/">progressive enhancement</a>! Enjoy.</p>]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Adding the "rel" and "title" attributes to image links in CKEditor 3]]></title>
+    <link href="http://thaddeusmt.github.comadding-the-rel-and-title-attributes-to-image-links-in-ckeditor-3"/>
+    <updated>2010-01-08T14:37:00-07:00</updated>
+    <id>http://thaddeusmt.github.com./adding-the-rel-and-title-attributes-to-image-links-in-ckeditor-3</id>
+    <content type="html"><![CDATA[<p><a href="http://ckeditor.com/">CKEditor</a> is the new and improved successor to the venerable <a href="http://sourceforge.net/projects/fckeditor/files/FCKeditor/">FCKeditor</a> JavaScript <span class="caps">WYSIWYG</span> editor. I&#8217;ve used <a href="http://tinymce.moxiecode.com/">TinyMCE</a> and FCKeditor before, but this was my first time trying out the new CKEditor 3.1. I am using it on a new Drupal website via the <a href="http://drupal.org/project/ckeditor">Drupal CKEditor module</a>. The problem I ran into, however, is using <a href="http://www.huddletogether.com/projects/lightbox2/">Lightbox2</a> on images inserted via CKEditor. CK does not provide a way to add the &#8220;rel&#8221; attribute to image links (or any links for that matter). CK also doesn&#8217;t allow adding the &#8220;title&#8221; attribute to image links. Lightbox uses both of these to determine which images to display, group together in galleries, provide a caption, etc. I found <a href="http://dev.fckeditor.net/attachment/ticket/2627/fck-rel.patch">a patch for FCKeditor</a> which allows adding a &#8220;rel&#8221; attribute to image links, but I couldn&#8217;t find one for the new CKEditor. So here we are. :)</p>
+<p>This is a total hack, since I have not looked in to how to properly make a plugin for the new CKEditor, but it works pretty well. Maybe someone who knows how to make plugins to CKEditor can show me the way.</p>
+<p>To start hacking, we need to first copy over the minified <em>ckeditor\plugins\image\dialogs\image.js</em> with the indented <em>ckeditor\_source\plugins\image\dialogs\image.js</em>, since it&#8217;s really hard to work with the minified <em>image.js</em>.</p>
+<p>In <em>image.js</em> all of the tabs and fields in the Image popup dialog are defined in the &#8220;contents&#8221; array (below the onHide function). We will add our new &#8220;rel&#8221; and &#8220;title&#8221; fields to the content array, in the &#8220;Link&#8221; tab&#8217;s sub-array. I added the new code at the end of the Link tab&#8217;s definition array after the <em>txtUrl</em>, <em>browse</em>, and <em>cmbTarget</em> fields (around line 1146). The code I added is:</p>
+
+<pre><code>{
+id : 'txtTitle',
+type : 'text',
+label : editor.lang.link.advisoryTitle,
+'default' : '',
+setup : function( type, element )
+{
+	if ( type == LINK )
+	{
+		this.setValue( element.getAttribute( 'title' ) );
+	}
+},
+commit : function( type, element )
+{
+	if ( type == LINK )
+	{
+		if ( this.getValue() || this.isChanged() )
+		{
+			element.setAttribute( 'title', this.getValue() );
+		}
+	}
+}
+},
+{
+id : 'txtRel',
+type : 'text',
+label : editor.lang.link.rel,
+'default' : '',
+setup : function( type, element )
+{
+	if ( type == LINK )
+	{
+		this.setValue( element.getAttribute( 'rel' ) );
+	}
+},
+commit : function( type, element )
+{
+	if ( type == LINK )
+	{
+		if ( this.getValue() || this.isChanged() )
+		{
+			element.setAttribute( 'rel', this.getValue() );
+		}
+	}
+}
+},
+</code></pre>
+<p>This adds a <em>txtTitle</em> and <em>txtRel</em> field to the Link tab on the Insert Image CKEditor dialog. <strong>Look out for commas!</strong> The first time I did this I missed a comma between the cmbTarget and txtTitle declarations, which borked everything.</p>
+<p>The final thing we need to do is create the &#8220;editor.lang.link.rel&#8221; English translation definition so the new <em>txtRel</em> field is properly labeled in the dialog (I re-used the existing &#8220;editor.lang.link.advisoryTitle&#8221; translation for <em>txtTitle</em>). To do this, open up <em>ckeditor\lang\en.js</em>. I added the following snipped between <em>styles</em> and <em>selectAnchor</em> in the &#8220;Link&#8221; block, but just make sure it&#8217;s in the &#8220;Link&#8221; block of translations.</p>
+
+<pre><code>rel:'Rel',</code></pre>
+<p>You could probably hard-code this label, but I kept with the translation system. I didn&#8217;t do any labels except the English one, but you get the idea. If you are using another language insert the &#8220;rel&#8221; label into the appropriate file for that language.</p>
+<p>You can now set the &#8220;rel&#8221; and &#8220;title&#8221; attributes on the image link, and use them with the Lightbox of your choice!</p>]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Configuring and compiling Nginx and PHP-FPM on Ubuntu for Magento, Part 3]]></title>
+    <link href="http://thaddeusmt.github.comconfiguring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-3"/>
+    <updated>2010-01-03T20:47:00-07:00</updated>
+    <id>http://thaddeusmt.github.com./configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-3</id>
+    <content type="html"><![CDATA[<p>This is the 3rd and final article about installing Magento on Nginx with <span class="caps">PHP</span>-<span class="caps">FPM</span>. <a href="http://www.chilipepperdesign.com/2009/12/14/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-1">Part 1 is here</a>, and <a href="http://www.chilipepperdesign.com/2009/12/18/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-2">Part 2 is here</a>.</p>
+<p>This part explains how I set up my public web directories, and how I did the Nginx configuration files for a Magento site. One of the tricky things about switching to Nginx from Apache is that Nginx does not use .htaccess files or the usual Apache mod_rewrite rules for pretty/<span class="caps">SEO</span> URLs. You can replicate all of Magento&#8217;s mod_rewrite rules with Nginx&#8217;s own rewrite module, but it takes some getting used to and Magento doesn&#8217;t come with them pre-written (like the mod_rewrite rules in the .htaccess files).</p>
+<p>Here are some of the resources I used:</p>
+<ul>
+<li><a href="http://articles.slicehost.com/2009/3/6/ubuntu-intrepid-nginx-virtual-hosts-1">Slicehost: Nginx Virtual Hosts #1</a></li>
+<li><a href="http://articles.slicehost.com/2009/9/4/ubuntu-intrepid-nginx-virtual-hosts-2-2">Slicehost: Nginx Virtual Hosts #2</a></li>
+<li><a href="http://www.magentocommerce.com/boards/viewthread/7931/">Magento Forum: NginX Web Server with Magento</a></li>
+<li><a href="http://www.magentocommerce.com/boards/viewthread/38134/">Magento Forum: Thread about Fooman Speedster (which I never go to work)</a></li>
+<li><a href="http://markmail.org/message/fdurus5iczudtm62">Random MarkMail post (I needed Google Translate to help me out)</a></li>
+<li><a href="http://varien.com.ua/blog/Fustanovka-magento-dlya-raboty-s-nginx-php-fpm-apc">varien.com.ua (Also needed Google Translate to help me out)</a></li>
+</ul>
+<p>First we&#8217;ll set up the directory structure like we are used to with Apache:</p>
+
+<pre><code>
+# mkdir /usr/local/nginx/sites-available
+# mkdir /usr/local/nginx/sites-enabled
+# mkdir /var/www/example1.com/public
+# mkdir /var/www/example1.com/log
+# cp  /usr/local/nginx/conf/nginx.conf /usr/local/nginx/conf/nginx.conf-original
+</code></pre>
+<p>Then set up the base nginx conf file <em>/usr/local/nginx/conf/nginx.conf</em>:</p>
+
+<pre><code>
+user www-data;
+worker_processes 1;
+
+events {
+    worker_connections 1024;
+}
+
+http {
+    include mime.types;
+    default_type application/octet-stream;
+    sendfile on;
+    keepalive_timeout 65;
+    gzip on;
+    include /usr/local/nginx/sites-enabled/*;
+}
+</code></pre>
+<p>Then set up the Nginx conf file for your website. I am using the default site in this example <em>/usr/local/nginx/sites-available/default</em>, but if you have multiple sites instead of <em>default</em> you would create files called <em>site1.com</em>, <em>site2.com</em>, etc.</p>
+<p>This file is where all of the rewrite magic is. The url in this example is <em>example1.com</em>, which you should replace with your own. The document root is <em>/var/www/example1.com/public</em> which, again, you will need to change to match your own configuration.</p>
+
+<pre><code>
+# fastcgi nodes
+upstream  backend  {
+    server unix:/tmp/fcgi.sock;
+}
+
+# redirect all non-www requests to www requests (it would be easy to reverse this)
+server {
+    listen   80;
+    server_name  example1.com;
+    rewrite ^/(.*) http://www.example1.com/$1 permanent;
+}
+
+server {
+    listen       80;
+    server_name www.example1.com;
+
+    # protection (we have no .htaccess)
+    location ~ (/(app/|includes/|lib/|/pkginfo/|var/|report/config.xml)|/\.svn/|/.hta.+) {
+        deny all;
+    }
+   # pass php files over to PHP-FPM via the socket
+    location ~ (\.php)$ {
+        fastcgi_index index.php;
+        include /etc/nginx/fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        if (-e $request_filename) { # check if requested path exists
+            fastcgi_pass backend;
+        }
+    }
+    # the javascript compressor
+    location ^~ /js/index.php {
+        fastcgi_pass   backend;
+        fastcgi_index index.php;
+        fastcgi_param  SCRIPT_NAME $fastcgi_script_name;
+        fastcgi_param  SCRIPT_FILENAME  /var/www/example1.com/public$fastcgi_script_name;
+        include /etc/nginx/fastcgi_params;
+        access_log off;
+        expires 30d;
+    }
+   # special case for the error "report" pages
+    location /report/ {
+        fastcgi_index index.php;
+        include /etc/nginx/fastcgi_params;
+        fastcgi_param  SCRIPT_NAME /report/index.php;
+        fastcgi_param  SCRIPT_FILENAME  /var/www/example1.com/public/report/index.php;
+        if (!-f $request_filename) {
+            fastcgi_pass backend;
+            break;
+        }
+    }
+    # pass everything else over to PHP-FPM via the socket
+    location / {
+        root /var/www/example1.com/public/; # absolute path doc root
+        index index.php index.html index.htm;
+
+        # set expire headers
+        if ($request_uri ~* "\.(ico|css|js|gif|jpe?g|png)$") {
+            expires max;
+        }
+        # set fastcgi settings, not allowed in the "if" block
+        include /etc/nginx/fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root/index.php;
+        fastcgi_param SCRIPT_NAME /index.php;
+        # rewrite - if file not found, pass it to the backend
+        if (!-f $request_filename) {
+            fastcgi_pass backend;
+            break;
+        }
+        error_page 404 index.php;
+    }
+    access_log /var/www/example1.com/log/access.log;
+    error_log /var/www/example1.com/log/error.log;
+}
+</code></pre>
+<p>I am no expert with Nginx, but a lot of Google searching and trial and error gave me the file above, and it seems to work. I hope it is helpful, even if this exact code doesn&#8217;t work for you.</p>
+<p>Finally, activate the site by creating a symbolic link to it and restarting the server:</p>
+
+<pre><code>
+# ln -s /usr/local/nginx/sites-available/default /usr/local/nginx/sites-enabled/default
+# ln -s /usr/local/nginx/sites-enabled /etc/sites
+# /etc/init.d/nginx restart
+</code></pre>
+<p>And that&#8217;s it! You should now have Magento running on Nginx! (<em>After</em>, of course, also installing mysql and a sendmail program, and probably an <span class="caps">FTP</span> server, and who knows what else :)</p>
+<p>Now, how to make it actually go faster than Apache? There are many settings you can tweak. Look in <em>fastcgi_params</em> to change <span class="caps">PHP</span>-<span class="caps">FPM</span> settings, <em>php.ini</em> to change <span class="caps">APC</span> settings, <em>my.cnf</em> to change mysql settings, <em>nginx.conf</em> to adjust the number of worker processes and the keepalive timeouts&#8230; the list goes on. Good luck!</p>]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Configuring and compiling Nginx and PHP-FPM on Ubuntu for Magento, Part 2]]></title>
+    <link href="http://thaddeusmt.github.comconfiguring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-2"/>
+    <updated>2009-12-18T19:17:00-07:00</updated>
+    <id>http://thaddeusmt.github.com./configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-2</id>
+    <content type="html"><![CDATA[<p>This is the second part of my little guide to get Magento running on Nginx with <span class="caps">PHP</span>-<span class="caps">FPM</span> and <span class="caps">APC</span>. Check out <a href="http://www.chilipepperdesign.com/2009/12/14/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-1">Part 1 here</a> and <a href="http://www.chilipepperdesign.com/2010/01/03/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-3">Part 3 here</a>.</p>
+<p>In this part, we compile <a href="http://php-fpm.org/"><span class="caps">PHP</span>-<span class="caps">FPM</span></a> and get it working with the <a href="http://php.net/manual/en/book.apc.php"><span class="caps">APC</span></a> &#8220;Accelerator&#8221; cache for Nginx. The first step is to compile <span class="caps">PHP</span>-<span class="caps">FPM</span>. Some of this is taken almost verbatim from the <span class="caps">FPM</span> <a href="http://github.com/dreamcat4/php-fpm/blob/master/readme.markdown">readme</a>:</p>
+
+<pre><code># aptitude install -y libxml2-dev libevent-dev libjpeg-dev
+# export LE_VER=1.4.12-stable
+# wget "http://www.monkey.org/~provos/libevent-$LE_VER.tar.gz"
+# tar -zxvf "libevent-$LE_VER.tar.gz"
+# cd "libevent-$LE_VER"
+# ./configure &amp;&amp; make
+# DESTDIR=$PWD make install
+# export LIBEVENT_SEARCH_PATH="$PWD/usr/local"
+# export PHP_VER=5.2.11
+# cd ~/sources
+# wget "http://launchpad.net/php-fpm/master/0.6/+download/php-fpm-0.6~$PHP_VER.tar.gz"
+# tar -zxvf "php-fpm-0.6~$PHP_VER.tar.gz"
+# ./php-fpm-0.6-5.2.11/generate-fpm-patch
+# wget "http://us.php.net/get/php-$PHP_VER.tar.gz/from/us.php.net/mirror"
+# tar xvfz "php-$PHP_VER.tar.gz"
+# cd "php-$PHP_VER"
+# patch -p1 &lt; ../fpm.patch
+# ./buildconf --force
+# mkdir fpm-build &amp;&amp; cd fpm-build
+# aptitude install libxml2-dev libbz2-dev libpcre3-dev libmcrypt-dev libmhash-dev libmhash2 libcurl4-openssl-dev libsyck0-dev libgd-dev zlib1g-dev
+# ../configure --with-fpm --with-libevent="$LIBEVENT_SEARCH_PATH" --enable-mbstring --with-zlib --enable-zip --with-mcrypt --with-jpeg-dir=/usr/lib --with-gd --without-sqlite --without-pdo_sqlite --enable-fastcgi --with-curl --with-mhash --with-mysql=/etc/mysql/ --enable-pdo=shared --with-pdo-mysql=shared
+# make all install
+# make test
+# aptitude install m4 autoconf
+# mount -o remount,exec,suid /tmp
+# pecl install apc
+# cp /root/sources/php-5.2.11/php.ini-recommended /usr/local/lib/php.ini
+# ln -s /usr/local/lib/php.ini /etc/php/php.ini
+# ln -s /etc/php-fpm.conf /etc/php/php-fpm.conf
+</code></pre>
+<p>At the end of the commands above, you will notice we installed <span class="caps">APC</span>. Now, in <em>/etc/php/php-fpm.conf</em> there are four places you need to change the user and group to the correct ones for the web server. On my install, the user and group were both <em>www-data</em>:</p>
+<pre><code>&amp;lt;value name="owner"&amp;gt;www-data&amp;lt;/value&amp;gt;
+&amp;lt;value name="group"&amp;gt;www-data&amp;lt;/value&amp;gt;
+&amp;lt;value name="user"&amp;gt;www-data&amp;lt;/value&amp;gt;
+&amp;lt;value name="group"&amp;gt;www-data&amp;lt;/value&amp;gt;
+</code></pre>
+<p>To set up some basic parameters for the <span class="caps">PHP</span>-<span class="caps">FPM</span> FastCGI install, create the file <em>/etc/nginx/fastcgi_params</em>. We will be importing this into the Nginx config files later. This is what I am using, but you may need to tweak yours for better performance:</p>
+<pre><code>fastcgi_connect_timeout 60;
+fastcgi_send_timeout 180;
+fastcgi_read_timeout 180;
+fastcgi_buffer_size 128k;
+fastcgi_buffers 4 256k;
+fastcgi_busy_buffers_size 256k;
+fastcgi_temp_file_write_size 256k;
+fastcgi_intercept_errors on;
+</code></pre>
+<p>Lastly, edit your php.ini file <em>/etc/php/php.ini</em> to enable <span class="caps">PDO</span> on mySql (which Magento needs) and <span class="caps">APC</span>. To do so, add the following lines:</p>
+<pre><code>extension_dir = /usr/local/lib/php/extensions/no-debug-non-zts-20060613
+extension = pdo.so
+extension = mysql_pdo.so
+extension = apc.so
+apc.enabled = 1
+apc.shm_size = 96
+apc.include_once_override = 1
+</code></pre>
+<p>I remember there being some sort of confusion the first time I tried setting the extension_dir, so check and make sure that it&#8217;s correct for your environment. It might also be <em>/usr/lib/php5/20060613</em>.</p>
+<p>There, nothing to it! You should have <span class="caps">PHP</span>-<span class="caps">FPM</span> running now. The final step is to create the Nginx config files so requests for <span class="caps">PHP</span> are passed over to <span class="caps">PHP</span>-<span class="caps">FPM</span> for processing. This is covered in <a href="http://www.chilipepperdesign.com/2010/01/03/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-3">Part 3</a>, along with some Magento specific Nginx config options.</p>]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Configuring and compiling Nginx and PHP-FPM on Ubuntu for Magento, Part 1]]></title>
+    <link href="http://thaddeusmt.github.comconfiguring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-1"/>
+    <updated>2009-12-14T21:08:00-07:00</updated>
+    <id>http://thaddeusmt.github.com./configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-1</id>
+    <content type="html"><![CDATA[<p>So, Magento is a huge piece of modular and extensible <span class="caps">PHP</span> code. Each request takes a lot of <span class="caps">CPU</span> cycles and memory to kick out a Magento page. This means it is <em>slow</em>. The performance of Magento is a frequent complaint, and rightfully so: consumers won&#8217;t wait around all day for an ecommerce store to load. They will bail out and try another store if a page doesn&#8217;t load in just a few seconds. A default Magento 1.3 install on budget web hosting can have page load times of up to 10secs, which is unacceptable. </p>
+<p>So what can be done to speed up Magento?</p>
+<p>There are a <a href="http://www.magentocommerce.com/wiki/groups/168/optimising_your_web_stack_performance_for_magento">number</a> of <a href="http://www.magentocommerce.com/blog/comments/understanding-magento-scalability-and-performance-1/">things</a>. I have tried almost all of them at this point. And I did reduce the page load time greatly, at least on the front end. But all of the AJAXy scripts on the backend (which has no caching, as far as I know) meant store maintenance and order fulfillment remained a tedious process. So I decided to try one final thing: make the switch from trusty old <a href="http://www.apache.org/">Apache</a> to <a href="http://wiki.nginx.org">Nginx</a>.</p>
+<p>I did have Apache2 tweaked out and running quite fast, but Apache has a big memory footprint (especially when running mod_php), and this Magento install is on a 256MB &#8220;slice&#8221; in the <a href="http://www.rackspacecloud.com/">Rackspace Cloud</a> so I want to keep the amount of <span class="caps">RAM</span> needed to run the store as low possible without sacrificing performance. Nginx is a really lightweight web server, and when paired with <a href="http://php-fpm.org/"><span class="caps">PHP</span>-<span class="caps">FPM</span></a> (&#8220;FastCGI Process Manager&#8221;, a patch for FastCGI) supposedly it&#8217;s the fastest and most memory efficient way around to serve up <span class="caps">PHP</span> scripts. Sounds like just what I need!</p>
+<p>I got Magento running on Nginx with <span class="caps">PHP</span>-<span class="caps">FPM</span> and <span class="caps">APC</span> and it runs about as fast as my Apache install. I was hoping for a miracle and didn&#8217;t get it, but considering it&#8217;s on an anorexic little 256MB Cloud Server I would say it is performing admirably. Perhaps with more time to tune the performance (and bumping up to a bigger slice) it would really be fast, but I worked a long time on the previous Apache install so it was a tough act to follow. This article is the first of three that will explain what I did to get Magento running on this stack.</p>
+<p><strong><span class="caps">DISCALIMER</span>:</strong> I am a pretty serious linux n00b. I&#8217;m sure I installed unnecessary packages, added extra compile flags, and what have you. <em>You might bork your server trying this stuff, so don&#8217;t do it in a production environment!!</em> However, I did get Magento running on Nginx with <span class="caps">PHP</span>-<span class="caps">FPM</span> and <span class="caps">APC</span>. It was a struggle, but I did it. So I thought I would share my notes in hopes they will help others. I do not claim that these same commands will work for you in your unique environment, and I probably won&#8217;t be help troubleshooting when they fail. Also, please add a comment and correct me if anything is wrong here, or if there is a better way to do anything. Thanks!</p>
+<p>Here are some of the resources I used to figure this out the first time around:</p>
+<ul>
+<li><a href="http://articles.slicehost.com/2009/3/4/ubuntu-intrepid-installing-nginx-from-source">Slidehost: Installing Nginx from source</a></li>
+<li><a href="http://interfacelab.com/nginx-php-fpm-apc-awesome/"><span class="caps">NGINX</span> + <span class="caps">PHP</span>-<span class="caps">FPM</span> + <span class="caps">APC</span> = Awesome</a></li>
+<li><a href="http://codeshepherd.blogspot.com/2009/05/nginx-phpfpm-memcache-mysql-xcache.html">Nginx + <span class="caps">PHPFPM</span> + Memcache + Mysql + XCache + Monit + Logrotate</a></li>
+<li><a href="http://www.yawn.it/2008/04/30/nginx-php-php-fpm-on-debian-etch-40/">Nginx + <span class="caps">PHP</span> + <span class="caps">PHP</span>-<span class="caps">FPM</span> on Debian Etch 4.0</a></li>
+</ul>
+<p>And here is the start of the compile and install process (note: you might need to sudo these commands):</p>
+
+<pre><code>
+# aptitude install make bison flex gcc patch autoconf subversion locate libc6 libpcre3 libpcre3-dev libpcrecpp0 libssl0.9.8 zlib1g lsb-base
+# mkdir ~/sources
+# cd ~/sources/
+# wget http://sysoev.ru/nginx/nginx-0.7.63.tar.gz
+# tar -zxvf nginx-0.7.63.tar.gz
+# cd nginx-0.7.63/
+# ./configure --sbin-path=/usr/local/sbin --with-http_ssl_module
+# make
+# make install
+# ln -s /usr/local/nginx/conf /etc/nginx
+# /usr/local/sbin/nginx
+# kill `cat /usr/local/nginx/logs/nginx.pid`
+</code></pre>
+<p>Then, I created the following init script at <em>/etc/init.d/nginx</em>.</p>
+
+<pre><code>
+#! /bin/sh
+
+### BEGIN INIT INFO
+# Provides: nginx
+# Required-Start: $all
+# Required-Stop: $all
+# Default-Start: 2 3 4 5
+# Default-Stop: 0 1 6
+# Short-Description: starts the nginx web server
+# Description: starts nginx using start-stop-daemon
+### END INIT INFO
+
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+DAEMON=/usr/local/sbin/nginx
+NAME=nginx
+DESC=nginx
+
+test -x $DAEMON || exit 0
+
+# Include nginx defaults if available
+if [ -f /etc/default/nginx ] ; then
+. /etc/default/nginx
+fi
+
+set -e
+
+. /lib/lsb/init-functions
+
+case "$1" in
+start)
+echo -n "Starting $DESC: "
+start-stop-daemon --start --quiet --pidfile /usr/local/nginx/logs/$NAME.pid \
+--exec $DAEMON -- $DAEMON_OPTS || true
+echo "$NAME."
+;;
+stop)
+echo -n "Stopping $DESC: "
+start-stop-daemon --stop --quiet --pidfile /usr/local/nginx/logs/$NAME.pid \
+--exec $DAEMON || true
+echo "$NAME."
+;;
+restart|force-reload)
+echo -n "Restarting $DESC: "
+start-stop-daemon --stop --quiet --pidfile \
+/usr/local/nginx/logs/$NAME.pid --exec $DAEMON || true
+sleep 1
+start-stop-daemon --start --quiet --pidfile \
+/usr/local/nginx/logs/$NAME.pid --exec $DAEMON -- $DAEMON_OPTS || true
+echo "$NAME."
+;;
+reload)
+echo -n "Reloading $DESC configuration: "
+start-stop-daemon --stop --signal HUP --quiet --pidfile /usr/local/nginx/logs/$NAME.pid \
+--exec $DAEMON || true
+echo "$NAME."
+;;
+status)
+status_of_proc -p /usr/local/nginx/logs/$NAME.pid "$DAEMON" nginx &amp;&amp; exit 0 || exit $?
+;;
+*)
+N=/etc/init.d/$NAME
+echo "Usage: $N {start|stop|restart|reload|force-reload|status}" &gt;&amp;2
+exit 1
+;;
+esac
+
+exit 0
+</code></pre>
+<p>Now we can easily start and stop Nginx with familiar commands like <em>/etc/init.d/nginx start</em>. To install the init script, do the following:</p>
+
+<pre><code>
+# chmod +x /etc/init.d/nginx
+# /usr/sbin/update-rc.d -f nginx defaults
+</code></pre>
+<p>You should have Nginx compiled, installed, and running now. Yay! Next, <a href="http://www.chilipepperdesign.com/2009/12/18/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-2">Part 2</a> will be about installing and compiling <span class="caps">PHP</span>-<span class="caps">FPM</span>. Finally, <a href="http://www.chilipepperdesign.com/2010/01/03/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-3">Part 3</a> is about setting up Magneto with Nginx and <span class="caps">PHP</span>-<span class="caps">FPM</span> (including mod-rewrite issues). I will not be covering the other aspects of setting up a Magento server like MySql and sendmail, because these are the same for an Apache stack which has plenty of documentation out on the Internet already.</p>]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Book Review: Magento Beginner's Guide]]></title>
+    <link href="http://thaddeusmt.github.combook-review-magento-beginners-guide"/>
+    <updated>2009-11-26T21:05:00-07:00</updated>
+    <id>http://thaddeusmt.github.com./book-review-magento-beginners-guide</id>
+    <content type="html"><![CDATA[<p>I was recently approached by <a href="http://www.packtpub.com/">&#91;packt&#93; Publishing</a> to do a review of their book, the <strong>Magento Beginner&#8217;s Guide</strong> (by <a href="http://williamriceinc.blogspot.com/">William Rice</a>). I&#8217;ve been working with Magento a lot over the past year and blog about it here from time to time, so they figured I would be good to review it. After setting up, modifying and maintaining four Magento stores in the last 10 months I don&#8217;t feel I have much to learn from a &#8220;beginners guide&#8221;, but I figured I could use my experience of what a beginner actually needs to know and see if this book covers all the bases.</p>
+<p>I have read parts of the official <a href="http://www.magentocommerce.com/support/magento-user-guide-book">Magento User Guide</a> (and <a href="http://www.amazon.com/gp/product/0973862173?ie=UTF8&amp;tag=oronaut-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0973862173">php/architect&#8217;s Guide to E-Commerce Programming with Magento</a>) but this book fills a different gap than the others. The User Guide covers all of the features, but it is not a practical guide. (The programming book was great, but did not cover how to actually use Magento). My favorite thing about the Beginner&#8217;s Guide is that it showed how to use Magento in a practical, day-to-day way. Being just a &#8220;beginner&#8217;s guide&#8221; it does not cover all of the features, but it covers a wide swath of the important ones. What really impressed me was the way it provided tips on how to deal with and overcome some of Magento&#8217;s serious (and occasionally deal-breaking) problems that make the day-to-day administration of an online store difficult.</p>
+<p>An example of this are the confusing order &#8220;statuses&#8221;. Depending on how the order was paid for (PayPal, Check, CC, etc) orders may be marked &#8220;Pending&#8221; or &#8220;Processing&#8221; in a confusing way. The book puts in a real effort to make sense of this mess. It even offers a good work-around using the &#8220;Hold&#8221; feature to overcome this problem. Order fulfillment and management is one of the biggest pain points in Magento, so I&#8217;m glad the book took a moment to deal with this, unlike the official User Guide. The book had other good practical tips for setting up Taxes, Shipping, Meta Information, and more.</p>
+<p>The content of the book was organized well, covering the setup of a store and all it&#8217;s components in the best order for ease and speed. For instance, if you added all of your products before sorting out your Tax Classes you would have a lot of unnecessary work later, but the book smartly walks you through setting up the Taxes first.</p>
+<p>The topics covered in this book are (in order):</p>
+<ul>
+<li>installing and configuring Magento/li&gt;<br />
+<li>setting up categories and attributes</li>
+<li>setting up taxes</li>
+<li>adding products</li>
+<li>customizing the appearance of the storefront</li>
+<li>some advanced product topics, like:<br />
+<ul><br />
+<li>configurable products</li>
+<li>grouped products</li>
+<li>related products</li>
+<li>quantity based tiered pricing</li>
+</ul>
+</li>
+<li>customer accounts</li>
+<li>payment methods</li>
+<li>shipping methods</li>
+<li>order fulfillment process</li>
+</ul>
+<p>This is only a beginners guide, so many features of Magento are not covered. This is not necessarily a bad thing, but it&#8217;s good to know before purchasing. If you were hoping to learn how to create Coupon Codes, for instance, you would be disappointed. Some of the main topics <em>not</em> covered in this book are:</p>
+<ul>
+<li>price rules: (a big one)<br />
+<ul><br />
+<li>sales<br />
+<li>coupon codes<br />
+<li>cart discounts</ul>
+</li>
+<li>search</li>
+<li>newsletters</li>
+<li>importing and exporting products and customers</li>
+<li>setting up multiple stores (views, websites, etc)</li>
+<li>upsells and cross sells (although the Related Products are very similar and <em>are</em> covered)</li>
+<li>installing new extensions/modules</li>
+<li>customizing emails</li>
+<li>granular admin permissions (the shipping page, etc)</li>
+<li>bundled products</li>
+<li>downloadable products</li>
+</ul>
+<p>There are only two places where I think the book fell short of it&#8217;s goal as a &#8220;beginners guide&#8221;, and the first is the speed issue. In defense of the book fixing the speed problem is outside the abilities of a &#8220;beginner&#8221;, but it is a pretty serious issue that should have been addressed. The book had nothing to say about performance, except a brief mention about the Cache (in the context of turning it off to view changed code). I would like to have seen a few paragraphs about the potential for speed problems, notes on choosing a fast host&#8230; something along those lines.</p>
+<p>The second complaint I had surprised me: there is <em>no mention</em> of how to customize the emails sent to the customer. The default Magento install sends <em>terrible</em> emails to the customer with things like &#8220;555-<span class="caps">DEMO</span>&#8221; phone numbers, &#8220;Magento&#8221; alt text, and other sloppy things hard-coded into the email templates that look very unprofessional. You can override these in the &#8220;Email Templates&#8221; section of the Admin Configuration or hand-edit the files, but the book had no mention of either method. The book <em>did</em> explain how to configure the appropriate email addresses, explained when emails are sent to the customer, and even mentioned how to change the address on the <em>printable</em> invoices and packingslips. But the common problem of editing the email templates was missed. This is my biggest complaint about the book.</p>
+<p>Now, back to some praise: this is the first book I&#8217;ve read from &#91;packt&#93;, so I don&#8217;t know if this is the norm or not, but I like how they divided up chapters into sub-sections like the step-by-step &#8220;Time for Action&#8221; walkthroughs, and the  &#8220;What Just Happened&#8221; recap. They served well to guide the &#8220;beginner&#8221; through the processes explained in the book, and also to explain the &#8220;why&#8221; behind the actions. Throughout the entire book there were also nice screenshots which illustrated the &#8220;whats&#8221; and the &#8220;wheres&#8221; of the user interface, a very important feature of any software beginners guide. And at the end of the book the step-by-step instructions from all of the chapters were summarized (again with screenshots) as a handy quick-reference.</p>
+<p>All in all it&#8217;s a good guide to install, configure, and start selling online with Magento. One can, of course, get familiar with using Magento without it. Through trial and error I eventually came to some of the same conclusions the book did about the best way to fulfill orders, name categories, etc. What this book does is provide a shortcut which will hopefully save some of the inevitable frustration of learning new software. It would be especially useful for the true beginner who has never set up an open source software system (like WordPress, Drupal, etc) on a server before, or who has never run an ecommerce store of any kind before.</p>
+<p>Magento is a complex and constantly evolving piece of software, so no matter what you will find yourself on Google eventually learning about topics beyond the scope of <em>any</em> book, but as books go this Beginner&#8217;s Guide looks like a good place to start.</p>
+<p>You can buy it directly from the publisher <a href="http://www.packtpub.com/magento-beginners-guide/book">here</a>, or from Amazon <a href="http://www.amazon.com/gp/product/1847195946?ie=UTF8&amp;tag=oronaut-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=1847195946">here</a>.</p>]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[A simple FBJS image carousel (or slideshow) for Facebook page tabs]]></title>
+    <link href="http://thaddeusmt.github.coma-simple-fbjs-image-carousel-or-slideshow-for-facebook-page-tabs"/>
+    <updated>2009-11-01T23:19:00-07:00</updated>
+    <id>http://thaddeusmt.github.com./a-simple-fbjs-image-carousel-or-slideshow-for-facebook-page-tabs</id>
+    <content type="html"><![CDATA[<p><span style="font-size: .9em; font-style: italic;">(<strong>Plug</strong>: Looking for an easy, fast, affordable way to create custom Facebook landing tabs? Check out my new product: <a href="http://www.splashtab.com">http://splashtab.com</a> Thanks!)</span></p>
+<p>This little code snippet is really basic, and not actually that good or clever. You can make a much nicer slideshow or carousel if you put a little time into it. But I just want to demonstrate how many of the nice JavaScript effects we are used to on the &#8220;Web 2.0&#8221; are also possible on a Facebook Page via Facebook&#8217;s <a href="http://wiki.developers.facebook.com/index.php/FBJS/Animation">Animate library</a>. It&#8217;s not as robust as <a href="http://jquery.com/">jQuery</a> or <a href="http://script.aculo.us/">Scriptaculous</a>, but since you can&#8217;t import those libraries to a Tab the Animate library will have to do. :)</p>
+<p>The final result looks like this:<br />
+&lt;img width=&quot; alt=&#8220;Screenshot of the Chili Pepper Design Facebook image carousel&#8221; src=&#8220;http://www.chilipepperdesign.com/images/46.jpg&#8221; /&gt;</p>
+<p><strong>And you can view a <a href="http://www.facebook.com/pages/Bozeman-MT/Chili-Pepper-Design/59282833907?v=app_154473727596">live demo on the <span class="caps">CPD</span> Facebook Page</a></strong></p>
+<p>For instructions on how to create your own custom Facebook tabs, <a href="http://www.chilipepperdesign.com/2009/10/11/how-to-make-custom-facebook-fan-page-tabs-with-fbml-part-2">read my tutorial here</a>.</p>
+<p>To begin, here is the simple <span class="caps">FBJS</span> &lt;script&gt; code:</p>
+<pre><code>==
+var numslides = 7;
+var slidesvisible = 3;
+var currentslide = 0;
+var slidewidth = 147;==
+function goright() {
+	if (currentslide &lt;= (numslides-slidesvisible-1)) {
+		Animation(document.getElementById('slideshow_inner')).by('right', slidewidth+'px').by('left', '-'+slidewidth+'px').go();
+		if (currentslide ====== (numslides-slidesvisible-1)) {
+			Animation(document.getElementById('right_button')).to('opacity', '0.3').go();
+			Animation(document.getElementById('left_button')).to('opacity', '1').go();
+		} 
+		if (currentslide &lt; (numslides-slidesvisible-1)) { Animation(document.getElementById('left_button')).to('opacity', '1').go(); }
+		currentslide++;
+	}
+}
+function goleft() {
+	if (currentslide &gt; 0) {
+		Animation(document.getElementById('slideshow_inner')).by('left', slidewidth+'px').by('right', '-'+slidewidth+'px').go();
+		if (currentslide ====== 1) {
+			Animation(document.getElementById('left_button')).to('opacity', '0.3').go();
+			Animation(document.getElementById('right_button')).to('opacity', '1').go();
+		}
+		if (currentslide &gt; 1) { Animation(document.getElementById('right_button')).to('opacity', '1').go(); }
+		currentslide--;
+	}
+}
+</code></pre>
+<p>Here is the <span class="caps">CSS</span>:</p>
+<pre><code>
+	#slideshow_wrapper { width:530px; clear: both; margin-bottom: 20px; }
+	#slideshow { overflow: hidden; width: 435px; float: left; position:relative; margin-right: 5px; }
+	#slideshow_inner { position: relative; width: 1250px; }
+	#slideshow_inner a { opacity:0.7; margin: 0 7px; }
+	#slideshow_inner a:hover { opacity: 1; }
+</code></pre>
+<p>And finally, here is the markup:</p>
+<pre><code>
+&lt;div id="slideshow_wrapper"&gt;
+			&lt;img id="left_button" src="http:/yoururl.com/images/left_button.gif" onclick="goleft(); return false;" style="float: left; display: block; width: 41px; cursor: pointer; opacity: 0.3;" /&gt;
+		    &lt;div id="slideshow"&gt;
+		        &lt;div id="slideshow_inner"&gt;
+		            &lt;a id="slide1" href="http://yoururl.com/link1" title="Oronaut Outdoor Blog"&gt;&lt;img src="&lt;?php echo $basepath ?&gt;images/slide1.jpg" /&gt;&lt;/a&gt; 
+		            &lt;a id="slide2" href="http://yoururl.com/link2" title="Colorado Ski Mountaineering Cup"&gt;&lt;img src="&lt;?php echo $basepath ?&gt;images/slide2.jpg" /&gt;&lt;/a&gt; 
+		            &lt;a id="slide3" href="http://yoururl.com/link3" title="PowderBlog"&gt;&lt;img src="&lt;?php echo $basepath ?&gt;images/slide3.jpg" /&gt;&lt;/a&gt; 
+		            &lt;a id="slide4" href="yoururl.com/link4" title="Highland Meadows HOA"&gt;&lt;img src="http:/yoururl.com/images/slide4.jpg" /&gt;&lt;/a&gt; 
+		            &lt;a id="slide5" href="http://yoururl.com/link5" title="United State Ski Mountaineering Association"&gt;&lt;img src="http:/yoururl.com/images/slide5.jpg" /&gt;&lt;/a&gt; 
+		            &lt;a id="slide6" href="http://yoururl.com/link6" title="Circle S Seeds"&gt;&lt;img src="http:/yoururl.com/images/slide6.jpg" /&gt;&lt;/a&gt; 
+		            &lt;a id="slide7" href="http://yoururl.com/link7" title="Rita Designs"&gt;&lt;img src="http:/yoururl.com/images/slide7.jpg" /&gt;&lt;/a&gt; 
+		        &lt;/div&gt;
+		    &lt;/div&gt;
+		    &lt;img id="right_button" src="http:/yoururl.com/images/right_button2.gif" onclick="goright(); return false;" style="float: left; display: block; width: 41px; cursor: pointer;" /&gt;
+			&lt;p&gt;Click on an image to leave Facebook and visit the Portfolio.&lt;/p&gt;
+		&lt;/div&gt;
+</code></pre>
+<p>(One thing to note when scripting <span class="caps">FBJS</span> for Tabs: onLoad does not work. All JS must be started with a trigger event of some sort, even if it is as simple as a mouseOver.)</p>
+<p>This is just a starting point. My code is not very generalized, the opacity effects have IE issues (as usual), and there are probably other issues besides. But have fun building on this, and create some sexy animated Facebook tabs!</p>]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How to make custom Facebook Fan Page tabs with FBML, Part 2]]></title>
+    <link href="http://thaddeusmt.github.comhow-to-make-custom-facebook-fan-page-tabs-with-fbml-part-2"/>
+    <updated>2009-10-11T22:26:00-06:00</updated>
+    <id>http://thaddeusmt.github.com./how-to-make-custom-facebook-fan-page-tabs-with-fbml-part-2</id>
+    <content type="html"><![CDATA[<p><strong style="font-size: 1.1em;"><span class="caps">UPDATE</span> 2-14-2011: <a href="http://www.chilipepperdesign.com/2011/02/14/facebook-iframe-tabs-on-pages-no-more-fbml"><span class="caps">FBML</span> is going away &#8211; learn about Facebook iframe tabs on Facebook Pages here</a> </strong></p>
+<p><strong style="font-size: 1.1em;"><span class="caps">UPDATE</span> 3-10-2011: <a href="http://www.splashlabsocial.com">Easily create and manage custom Facebook Page Tabs with SplashLab Social &#8211; Now available!</a> </strong></p>
+<ul>
+	<li><a href="http://www.chilipepperdesign.com/2009/10/06/how-to-make-custom-facebook-fan-page-tabs-with-fbml-part-1">Read Part 1 Here</a>.</li>
+	<li>Check out some <a href="http://facebookshowcase.net"><strong>great custom Facebook Pages</strong></a></li>
+</ul>
+<h2>Quick and Dirty Custom Facebook Page Tabs and Boxes</h2>
+<p>The fastest and easiest way to add custom Tabs to a Page is with the <a href="http://www.facebook.com/apps/application.php?id=4949752878">Static <span class="caps">FBML</span> application</a>. A nice visual tutorial of this method is posted on <a href="http://lorrainesiew.wordpress.com/2009/07/04/facebook-pages-introduction-to-fbml/">lorrainesiew.wordpress.com</a>. I will also quickly outline the process here:</p>
+<ol>
+	<li>Assuming you have a Facebook Fan Page already, you can get started by visiting the <a href="http://www.facebook.com/apps/application.php?id=4949752878">Static <span class="caps">FBML</span> App&#8217;s Page</a>, and click on &#8220;Add to my Page&#8221; underneath the logo in the top left.</li>
+	<li>Once you have added the application to your Page, go edit the Settings for that Page and you should see &#8220;<span class="caps">FBML</span>&#8221; listed under your <em>Applications</em>. Click on the &#8220;Admin Options&#8221; pencil icon to the right, and then click on &#8220;Edit&#8221;.</li>
+	<li>On the next page enter the name you want for your Tab, then enter some simple <span class="caps">HTML</span> to test it out. Click on &#8220;Save Changes&#8221;.</li>
+	<li>View your Fan Page. Click on the &#8220;+&#8221; sign to the right of your Tabs to add the new Tab you just created to the list of visible Tabs. You can drag it around to reorder your Tabs.</li>
+</ol>
+<p>It&#8217;s hard to beat the Static <span class="caps">FBML</span> app in terms of speed and simplicity. The only problem with it is that it really is <em>static</em>. When I tried to add a Comments form with the &lt;fb:comments&gt; tag it threw errors. Other dynamic <span class="caps">FBML</span> tags have the same problem. This is fine most of the time since you can do a <em>lot</em> with static images, links and videos. (Web 1.0!) But if you want to have a Comment area or import Twitter or <span class="caps">RSS</span> feeds you&#8217;ll need a dynamic page. A &#8220;dynamic tab&#8221; requires  it&#8217;s own special Facebook Application to be created. Next I cover how to make a Facebook app that adds a Tab to your Page.</p>
+<h2>Advanced Custom Facebook Page Tabs</h2>
+<p>To make a &#8220;fancy&#8221;, dynamic Tab like I did for the <a href="http://www.facebook.com/pages/Bozeman-MT/Chili-Pepper-Design/59282833907?v=app_154473727596">Chili Pepper page on Facebook</a>, you need to create a new Facebook Application. A Facebook App is, at it&#8217;s core, just a web page hosted on a server which is loaded into Facebook via <span class="caps">AJAX</span>. You can make very advanced apps that hook into the Facebook Feed and other things, but all I want to talk about here is making a very simple one that just displays <span class="caps">HTML</span> on a Tab. The basic process of creating an App are:</p>
+<ol>
+	<li>Download a <a href="http://wiki.developers.facebook.com/index.php/Client_Libraries">Facebook <span class="caps">API</span> Client Library</a> in the language of your choice</li>
+	<li>Upload the library to your web host</li>
+	<li>Create a basic &#8220;index&#8221; page to test that your app is working</li>
+	<li>Create a new App using the <a href="http://www.facebook.com/developers/">Facebook Developer Application</a></li>
+	<li>Change your App&#8217;s settings on Facebook to point to the <span class="caps">URL</span> where you uploaded your App&#8217;s &#8220;index&#8221; page</li>
+	<li>Add your new App to your Page as a Tab to test it out</li>
+</ol>
+<p>There are many great tutorials that provide detailed instructions on how to do all this, so rather than reinvent the wheel I&#8217;ll provide some links to these resources:</p>
+<ul>
+	<li><a href="http://developers.facebook.com/get_started.php">Official Facebook &#8216;Get Started&#8217; Page</a></li>
+	<li><a href="http://wiki.developers.facebook.com/index.php/Anatomy_of_a_Facebook_App">Anatomy of a Facebook App</a></li>
+	<li><a href="http://www.labnol.org/internet/tutorial-write-a-facebook-application/10116/">Write Your Own Facebook App in 5 Minutes</a></li>
+	<li>Good <a href="http://www.merchantos.com/makebeta/facebook/facebook-php-tutorial/">Facebook <span class="caps">PHP</span> Tutorial</a></li>
+	<li>NetTuts <a href="http://net.tutsplus.com/tutorials/tools-and-tips/build-your-first-facebook-app/">Build Your First Facebook App</a></li>
+	<li><a href="http://gathadams.com/2007/06/18/how-to-write-a-facebook-application-in-10-minutes/">Write a FaceBook App in 10 mintures</a></li>
+	<li><a href="http://padrenel.blogs.experienceproject.com/3459.html">10 Things To Know About Facebook Apps Before Starting</a></li>
+</ul>
+<p>All you really need is the official <a href="http://developers.facebook.com/get_started.php">Get Started</a> page, in my opinion. But even with all the tutorials in the world you&#8217;ll find yourself searching through the <a href="http://forum.developers.facebook.com/">Forums</a> to figure out errors and problems, since the Documentation is just so-so.</p>
+<p>Using the resources above you can create a Facebook App. Here are the steps necessary to create a Tab with yourApp and add it to your Page:</p>
+<ol>
+	<li>To create a Tab, create another file (such as <em>tab.php</em>) in your App&#8217;s &#8220;Canvas Callback <span class="caps">URL</span>&#8221; directory on your host.</li>
+	<li>In your App&#8217;s settings, under the <strong>Canvas</strong> section, <em>make sure that your Canvas Callback <span class="caps">URL</span> has a trailing slash on it</em>.</li>
+	<li>Make sure that, under the <strong>Authentication</strong> section, <em>Facebook Pages</em> is checked as &#8220;Installable To&#8221;.</li>
+	<li>Then, still in your Settings page, under the <strong>Profile</strong> section, fill out the <em>Tab <span class="caps">URL</span></em> field. In this example we would just add <em>tab.php</em>.</li>
+	<li>If you have not done this already, add your App to your Page. This is done by going to your App&#8217;s &#8220;Application Profile&#8221; (which is linked off of your App dashboard page at the bottom, after the links to Edit Settings, Feed Template, etc). On the right side the screen on your Application Profile page, under the &#8220;Go To Application&#8221; button, there is a link to &#8220;Add to Page&#8221;. (If it&#8217;s not visible, click the &#8220;More&#8221; arrow).</li>
+	<li>Now visit your <em>Page&#8217;s</em> Settings page. Under the Applications heading you should see your App listed. Click on the &#8220;Edit&#8221; Pencil to the right of it, and select &#8220;Application Settings&#8221;. In the little lightbox/popup-window you should see &#8220;Tab (<ins>Add</ins>)&#8221;. Click on &#8220;Add&#8221; to add the Tab to your page!</li>
+</ol>
+<p>You now have a custom App Tab on your Page! Creating a nice Tab with dynamic content is beyond the scope of this post, but I hope to give some short tutorials in later posts about that. To help you start out making your Tab though, here are two things to remember:</p>
+<ul>
+	<li>Tabs don&#8217;t need to including <em>facebook.php</em> and instantiate the $facebook object. Also, they don&#8217;t need (or want) <em>require_login()</em> to be called. If you call <em>require_login()</em> you may get an error, or users may be forced to &#8220;install&#8221; your app to view the tab, neither of which make a good first impression. For <em>most</em> applications you need the $facebook object, but not for a simple Tab-centric one like this.</li>
+	<li>Remember that a Tab is not a regular Canvas. You cannot us &lt;fb:iframe&gt; and some other <span class="caps">FBML</span> tags. Tab pages have to be <span class="caps">FBML</span> applications, and a limited subset of <span class="caps">FBML</span> at that. On the <a href="http://developers.facebook.com/tools.php?fbml">Test console</a> you can select &#8220;Tab&#8221; from the <em>Position</em> dropdown to test which tags will work.</li>
+	<li>To check if your tab is really being viewed as a Tab, use this code:</li>
+</ul>
+<pre><code>if( !isset($_POST['fb_sig_in_profile_tab']) ) { echo "tab only code here"; }</code></pre>
+<ul>
+	<li>To check if the user viewing your Tab is logged in to Facebook or not, use this code:</li>
+</ul>
+<pre><code>if ($_REQUEST['fb_sig_logged_out_facebook']) { echo "code for logged out users"; }</code></pre>
+<ul>
+	<li>To display something only to Fans of your page:</li>
+</ul>
+<pre><code>&lt;fb:visible-to-connection&gt;Welcome, fans!&lt;/fb:visible-to-connection&gt;</code></pre>
+<h3>Bonus Points: Make your custom tab the default &#8220;landing&#8221; tab</h3>
+<ol>
+	<li>On your Page&#8217;s Settings, click the Pencil icon to the right of <strong>Wall Settings</strong> and select &#8220;Edit&#8221;.</li>
+	<li>Look for the <em>Default Landing Tab for Everyone Else</em> dropdown. Select the landing Tab of your choice from the list! Assuming you have successfully created and added your Tab to your Page, you can choose your custom Tab as the default &#8220;landing page&#8221;.</li>
+</ol>
+<h3>Inspiration</h3>
+<p>And finally, for some inspiration for your own custom page check out the great things designers are doing with Facebook Pages over on the<strong> <a href="http://facebookshowcase.net">Facebook Showcase</a> </strong></p>
+<div style="color: #808080; font-size: .9em;">Facebook is a registered trademark of Facebook, Inc.</div>]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How to make custom Facebook Fan Page tabs with FBML, Part 1]]></title>
+    <link href="http://thaddeusmt.github.comhow-to-make-custom-facebook-fan-page-tabs-with-fbml-part-1"/>
+    <updated>2009-10-06T00:10:00-06:00</updated>
+    <id>http://thaddeusmt.github.com./how-to-make-custom-facebook-fan-page-tabs-with-fbml-part-1</id>
+    <content type="html"><![CDATA[<p><strong style="font-size: 1.1em;"><span class="caps">UPDATE</span> 2-14-2011: <a href="http://www.chilipepperdesign.com/2011/02/14/facebook-iframe-tabs-on-pages-no-more-fbml"><span class="caps">FBML</span> is going away &#8211; learn about Facebook iframe tabs on Facebook Pages here</a> </strong></p>
+<p><strong style="font-size: 1.1em;"><span class="caps">UPDATE</span> 3-10-2011: <a href="http://www.splashlabsocial.com">Easily create and manage custom Facebook Page Tabs with SplashLab Social &#8211; Now available!</a> </strong></p>
+<p>If you have started to dabble in the new wave of &#8220;social media marketing&#8221; you probably made your business/brand/company/band/etc a <a href="http://www.facebook.com/advertising/?pages">Facebook Fan Page</a>. These are basically just like regular Facebook user profiles except instead of a business having &#8220;friends&#8221;, they have what are (more accurately) called &#8220;fans&#8221;. This seems like a good idea since Pages provide a great way for companies to interact with their customers. That part of Fan Pages <strong>is</strong> a good idea, and everyone seems to have a link to &#8220;find us on facebook!&#8221; now because of it! But there are challenges.</p>
+<p>It&#8217;s hard to brand a Facebook Page. You can change the Profile Picture and upload photos and videos, etc, but it all feels very much like Facebook still. This consistent visual look is one of the great things about Facebook, but if someone finds your company on Facebook before ever visiting your regular website, your ability to educate the visitor about your products or services is extremely limited. And if you send someone to your Facebook Page from your regular website, there is no clear way to route them back to where the sale will actually be made. It can be a problem. Once they hit Facebook you are at the mercy of whatever users post on the Wall or write in the Reviews tab.</p>
+<p>Again, this is the <strong>good thing</strong> about social media and &#8220;the web 2.0&#8221;. Getting direct feedback from customers and being able to engage in dialog with them in invaluable. But doing so at the expense of your brand seems unnecessary. Fortunately with some planning and effort you can get the best of both worlds from a Facebook Fan Page: branding/sales <em>and</em> customer feedback. The key is using <a href="http://wiki.developers.facebook.com/index.php/FBML"><span class="caps">FBML</span></a> to make custom <a href="http://wiki.developers.facebook.com/index.php/New_Design_Tabbed_Profile">Facebook Tabs</a> and Boxes. Using these you can leave all of the great default Facebook social functionality intact and also:</p>
+<ul>
+	<li>add boxes next to the Wall with your own images, logos, colors, links and text</li>
+	<li>add entire custom Tabs complete with video, audio, comments, blog content, Twitter feeds, and much more</li>
+	<li>make one of these custom Tabs the default &#8220;landing&#8221; tab for your Facebook page</li>
+</ul>
+<p>With a little bit of work your Faceook Page can become truly <em>yours</em>; featuring products, services, specials, newsletter signup forms, and more. All with your brand&#8217;s colors and styles! It&#8217;s just takes a little <span class="caps">FBML</span> know-how.</p>
+<h3>So what is this <span class="caps">FBML</span> stuff, then?</h3>
+<p>&#8220;<span class="caps">FBML</span>&#8221; stands for Facebook Markup Langauage. It is much like <span class="caps">HTML</span>. A Facebook &#8220;<span class="caps">FBML</span> Page&#8221; is a combination of both <span class="caps">FBML</span> tags and <span class="caps">HTML</span> tags. One reason for the addition of <span class="caps">FBML</span> tags to regular <span class="caps">HTML</span> is to make it easy to include special Facebook features in a Page, like the visitor&#8217;s Facebook <a href="http://wiki.developers.facebook.com/index.php/Fb:name">name</a> or a <a href="http://wiki.developers.facebook.com/index.php/Fb:friend-selector">list of their Friends</a>.</p>
+<p>Another reason for <span class="caps">FBML</span> is that Facebook wants to maintain a clean and secure website, so some regular <span class="caps">HTML</span> tags (especially ones related to Flash and JavaScript) have been &#8220;disabled&#8221; and replacement <span class="caps">FBML</span> tags are offered in their place (sometimes). For instance you cannot just use the <span class="caps">HTML</span> &lt;embed&gt; or &lt;object&gt; tags. If you want to include Flash video, you have to use the &#8220;&lt;fb:swf&gt;&#8221;:http://wiki.developers.facebook.com/index.php/Fb:swf <span class="caps">FBML</span> tag.</p>
+<p>Here are some helpful pages to educate yourself on <span class="caps">FBML</span>. In these wiki pages are useful bits like which <span class="caps">FBML</span> tags are available, and which <span class="caps">HTML</span> tags <em>aren&#8217;t</em>.</p>
+<ul>
+	<li><a href="http://wiki.developers.facebook.com/index.php/FBML_documentation"><span class="caps">FBML</span> tag overview</a></li>
+	<li><a href="http://wiki.developers.facebook.com/index.php/Allowed_FBML_and_HTML_Tags">List of which <span class="caps">HTML</span> and <span class="caps">FBML</span> tags are allowed where</a></li>
+	<li><a href="http://developers.facebook.com/tools.php?fbml">Online <span class="caps">FBML</span> texting sandbox area</a></li>
+	<li><a href="http://wiki.developers.facebook.com/index.php/CSS_Tips_and_Tricks">Facebook <span class="caps">CSS</span> overview</a></li>
+	<li><a href="http://wiki.developers.facebook.com/index.php/Facebook_Styles">More Facebook <span class="caps">CSS</span> tips</a></li>
+</ul>
+<p>If you already know how to make web pages with <span class="caps">HTML</span> then <span class="caps">FBML</span> is easy. There are bugs, quirks and &#8220;gotcha&#8217;s&#8221; of course, but the general principal is the same as <span class="caps">HTML</span>. The <a href="http://wiki.developers.facebook.com/index.php/FBML_documentation">tag list</a> and <a href="http://wiki.developers.facebook.com/index.php/Facebook_Styles">css tips</a>, combined with the <a href="http://developers.facebook.com/tools.php?fbml">testing area</a>, will have you making sharp <span class="caps">FBML</span> pages in no time.</p>
+<p>But how and where does one go about typing and entering all these <span class="caps">FBML</span> tags? In the context of simply wanting to add custom tabs to a Page, there are two ways:</p>
+<ol>
+	<li>a quick and dirty way using the <a href="http://www.facebook.com/apps/application.php?id=4949752878">Static <span class="caps">FBML</span></a> app</li>
+	<li>a more involved but also more powerful way by creating your own Application</li>
+</ol>
+<p>I cover both in <a href="http://www.chilipepperdesign.com/2009/10/11/how-to-make-custom-facebook-fan-page-tabs-with-fbml-part-2">How to make custom Facebook Fan Page tabs with <span class="caps">FBML</span>, Part 2</a>.</p>
+<div style="color: #808080; font-size: .9em;">Facebook is a registered trademark of Facebook, Inc.</div>]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Custom Loops for Custom Taxonomies in WordPress 2.8]]></title>
+    <link href="http://thaddeusmt.github.comcustom-loops-for-custom-taxonomies-in-wordpress-28"/>
+    <updated>2009-09-23T18:24:00-06:00</updated>
+    <id>http://thaddeusmt.github.com./custom-loops-for-custom-taxonomies-in-wordpress-28</id>
+    <content type="html"><![CDATA[<p><a href="http://codex.wordpress.org/Version_2.8">WordPress 2.8</a> saw a big expansion and enhancement of it&#8217;s <a href="http://codex.wordpress.org/WordPress_Taxonomy">Taxonomy <span class="caps">API</span></a>, allowing for easy creation of custom taxonomies. The default WordPress &#8220;category&#8221; and &#8220;tag&#8221; taxonomies are sufficient for most blogs, but the ability to define additional sets of terms (&#8220;vocabularies&#8221;) makes the platform a much more flexible and powerful Content Management System than it was before. Ever since <a href="http://justintadlock.com/archives/2009/05/06/custom-taxonomies-in-wordpress-28">Justin Tadlock</a> opened my eyes to how to create and use additional taxonomies, it seems like every WordPress project I work on needs one or two extra vocabularies. :)</p>
+<p>Working with Drupal as much as I have, I became very accustomed to having multiple taxonomies. It&#8217;s incredibly useful. A classic example is Movies: each movie has a director, some actors, a year it was made, etc. You <em>could</em> just lump all these together with a bunch of &#8220;tags&#8221; in WordPress, but grouping &#8220;Actor&#8221; and &#8220;Year&#8221; tags together into taxonomies makes site organization and navigation much simpler (and more sensible).</p>
+<p>But there are some challenges still to using WordPress taxonomies. While there is some support in the new <span class="caps">API</span> word making queries based on specific taxonomies, there is not a lot. You <em>can</em> filter your Loop by a term in a single taxonomy via the <em>query_posts()</em>, as <a href="http://justintadlock.com/archives/2009/05/06/custom-taxonomies-in-wordpress-28">Justin</a> shows in this example:</p>
+<pre><code>&lt;?php 
+query_posts( array( 'people' =&gt; 'will-smith', 'showposts' =&gt; 10 ) ); 
+?&gt;</code></pre>
+<p>Only posts tagged with actor &#8220;Will Smith&#8221; in the &#8220;people&#8221; taxonomy will be returned. But what if you want to return posts that tagged with multiple tags in your taxonomy? Or if you want to return posts that are tagged in <em>two</em> custom taxonomies? What about posts with a specific custom field <em>and</em> custom taxonomy?</p>
+<p>For advanced WordPress post (&#8220;Loop&#8221;) queries it&#8217;s necessary to roll up your sleeves and write some <span class="caps">SQL</span>. There are two ways to do this. The first is to add a filter function to the regular <em>query_posts()</em> method:</p>
+<pre><code>&lt;?php
+function filter_where($where = '') {
+    $where .= " AND post_date &lt;= '".date('Y-m-d')."'";
+    return $where;
+}
+add_filter('posts_where', 'filter_where');
+query_posts($query_string);
+if (have_posts()) : 
+    while (have_posts()) : 
+        the_post();
+        //display your post data with the usual functions like the_title(), etc
+    endwhile;
+endif;
+?&gt;</code></pre>
+<p>The other way &#8211; which is less verbose and easier to comprehend &#8211; is to straight-up write your own <span class="caps">SQL</span> statement, a la this WordPress Codex <a href="http://codex.wordpress.org/Custom_Queries">article on Custom Queries</a>. Rather than try to teach any <span class="caps">SQL</span>, I&#8217;ll just provide a couple examples.</p>
+<p>Here is a query that selects posts which have the MyCustomField custom field value set to &#8220;my custom value&#8221; <em>and</em> are tagged &#8220;mytag&#8221; in the custom &#8220;mytaxonomy&#8221;:</p>
+<pre><code>&lt;?php
+$querystr = "
+    SELECT *
+    FROM $wpdb-&gt;posts as wpost
+    INNER JOIN $wpdb-&gt;postmeta  ON (wpost.ID = $wpdb-&gt;postmeta.post_id)
+    AND $wpdb-&gt;postmeta.meta_key = 'MyCustomField' 
+    AND $wpdb-&gt;postmeta.meta_value = 'my custom value' 
+    INNER JOIN $wpdb-&gt;term_relationships  ON (wpost.ID = $wpdb-&gt;term_relationships.object_id)
+    INNER JOIN $wpdb-&gt;term_taxonomy ON ($wpdb-&gt;term_relationships.term_taxonomy_id = $wpdb-&gt;term_taxonomy.term_taxonomy_id)
+    AND $wpdb-&gt;term_taxonomy.taxonomy = 'mytaxonomy'
+    AND $wpdb-&gt;term_taxonomy.term_id IN (mytag)
+    WHERE wpost.post_status IN ('publish')
+    ORDER BY wpost.post_date ASC
+    ";
+$pageposts = $wpdb-&gt;get_results($querystr, OBJECT);
+if ($pageposts): 
+    foreach ($pageposts as $post): 
+        setup_postdata($post);
+        //display your post data with the usual functions like the_title(), etc
+    endforeach;
+endif;
+?&gt;</code></pre>
+<p>_Notice that the Loop is set up differently! It is a <em>foreach</em> instead of a <em>while</em>, and you must call <em>setup_postdata($post)</em> instead of <em>just the_post()</em> to set up the global post variables._</p>
+<p>Here is one more example that queries posts with terms in <em>two</em> different custom taxonomies, and with which the MyCustomField custom field value is set to anything <em>but</em> &#8220;my custom value&#8221; (just to make it interesting):</p>
+<pre><code>&lt;?php
+$querystr = "
+SELECT *
+    FROM $wpdb-&gt;posts as wpost		
+    INNER JOIN $wpdb-&gt;term_relationships r1
+    ON (wpost.ID = r1.object_id)
+    INNER JOIN $wpdb-&gt;term_taxonomy t1
+    ON (r1.term_taxonomy_id = t1.term_taxonomy_id)
+    AND t1.taxonomy IN ('firstcustomtaxonomy')
+    AND t1.term_id IN ('aTaxonomyTerm')
+    INNER JOIN $wpdb-&gt;term_relationships r2
+    ON (wpost.ID = r2.object_id)
+    INNER JOIN $wpdb-&gt;term_taxonomy t2
+    ON (r2.term_taxonomy_id = t2.term_taxonomy_id)
+    AND t2.taxonomy IN ('secondcustomtaxonomy')
+    AND t2.term_id IN ('anotherTaxonomyTerm')
+    WHERE wpost.ID NOT IN 
+        (SELECT m.post_id FROM wp_postmeta m 
+         WHERE m.meta_key = 'MyCustomField' 
+         AND m.meta_value = 'my custom value')
+    AND post_status IN ('publish')
+    ORDER BY wpost.post_date ASC
+    ";
+$pageposts = $wpdb-&gt;get_results($querystr, OBJECT);
+if ($pageposts): 
+    foreach ($pageposts as $post): 
+        setup_postdata($post);
+        //display your post data with the usual functions like the_title(), etc
+    endforeach;
+endif;
+?&gt;</code></pre>
+<p>Have fun making powerful, custom websites with the new WordPress 2.8 and it&#8217;s custom taxonomies!</p>]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[WordPress: A Loop inside of a Loop with working Comments]]></title>
+    <link href="http://thaddeusmt.github.comwordpress-a-loop-inside-of-a-loop-with-working-comments"/>
+    <updated>2009-08-25T15:32:00-06:00</updated>
+    <id>http://thaddeusmt.github.com./wordpress-a-loop-inside-of-a-loop-with-working-comments</id>
+    <content type="html"><![CDATA[<p>I was faced with a problem while creating a WordPress theme the other day. I was grouping posts together using a 2.8 <a href="http://justintadlock.com/archives/2009/05/06/custom-taxonomies-in-wordpress-28">custom taxonomy</a> (which is my new favorite thing in WordPress), and wanted to display a list of all related posts above the Comments template. Basically wanted a small <a href="http://codex.wordpress.org/The_Loop">Loop</a> inside of the main Loop &#8211; a loop within a loop.</p>
+<p>I found a few pages online which address this, such as <a href="http://lohmantrading.com/Fourced/2009/08/wordpress-loop-inside-of-a-loop/">WordPress Loop Inside of a Loop</a> and <a href="http://www.tyssendesign.com.au/articles/calling-a-wordpress-loop-from-inside-a-wordpress-loop/">Calling a WordPress Loop from inside a WordPress Loop</a>. The idea is pretty simple, and these techniques work fine most of the time.</p>
+<p>Everything looked fine to me, as well, until I hit &#8220;Submit Comment&#8221; to test it&#8230; <em>and the comment appeared on the wrong post</em>.</p>
+<p>The problem is that inner loop sets the global <em>$post</em> object to the last item in that loop. The methods <em>the_post()</em> and <em>setup_postdata($post)</em> set up the global variables which are needed by <em>the_permalink()</em>, <em>the_title()</em>, <em>comments_template()</em>, etc. So if you call any of these usual &#8220;Loop&#8221; methods again <span class="caps">AFTER</span> the inner loop, they are operating on the <em>last post in the inner loop</em> instead of the <em>current post in the main loop</em>.</p>
+<p>The trick is to save the <em>$post</em> objects before the inner loop and to reset them again after the inner loop. To do this, change the Loop structure to follow this template:<br />
+<br /></p>
+<div><pre><code>$posts = get_posts($wp_query->query);  //get the posts
+foreach($posts as $post) :   // cycle through them in the main loop
+	$currentPost = $post;  // save the current "main loop" post 
+	setup_postdata($post);  // instantiate the global post variables to the main loop post
+	the_title();    // use your usual Loop methods 
+	the_content();
+
+$innerposts = get_posts('order=asc&mytaxonomy=mycustomerterm);  //get the posts from my custom taxonomy
+	foreach($innerposts as $post) :   // cycle through them in the main loop
+		setup_postdata($post);  // instantiate the global post variables to the inner loop post
+		the_title();    // the inner loop post's title
+	endforeach;  // end of inner loop
+
+$post = $currentPost;  // reset the post from the main loop
+	$id = $post->ID;  // reset the post from the main loop
+	comments_template();  // now, the comments for the post in the main loop
+endforeach;  // end of main loop</code></pre></div><p>Another way to do this might be to <span class="caps">NOT</span> set the global variables in the inner loop, thus avoiding this issue with the comments entirely. You would just have to directly access the post variables in the inner loop, i.e. <em>$rel_post&#8594;post_title</em> instead of <em>the_title()<em>. It would work for simple things, like the title and slug. Check out <a href="http://codex.wordpress.org/Displaying_Posts_Using_a_Custom">custom select query</a></em>Select</em>Query in the WordPress Codex to figure out how to get all of the fields you need from the DB to use this method.</p>]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Magento - Six Months In]]></title>
+    <link href="http://thaddeusmt.github.commagento-six-months-in"/>
+    <updated>2009-08-13T01:48:00-06:00</updated>
+    <id>http://thaddeusmt.github.com./magento-six-months-in</id>
+    <content type="html"><![CDATA[<p>Yes, this basically amounts to a good old fashioned rant post. But there is a purpose behind it: to educate those thinking of using Magento to power their ecommerce store about potential concerns and pitfalls. Read on, and enjoy.</p>
+<h2>Magento is an ambitious, promising ecommerce platform.</h2>
+<p><a href="http://www.magentocommerce.com/">Magento</a> really is a neat piece of software. <a href="http://www.varien.com/">Varien</a> has really outdone itself. It is one of the most feature rich ecommerce platforms out right now and =drumroll= it&#8217;s <a href="http://en.wikipedia.org/wiki/Open_source_software">Open Source</a>!</p>
+<p>After comparing prices and features a year ago, Magento was chosen from amongst all of the other ecommerce solutions available for some upcoming projects. I have now helped setup, develop, maintain and run four Magento stores. I&#8217;ve been working with Magento almost exclusively for the past 6 months.</p>
+<p>It&#8217;s pretty great!</p>
+<p>But it is not perfect.</p>
+<h3>Magento, while open source, is not community developed.</h3>
+<p>If I find a bug in Magento, I can submit it to Varien. Hopefully they will fix it in the next release? I can also fix it myself. This is the beauty of Open Source, right? Except that all development of the core branch is still controlled by Varien. There is no means by which I can patch the core myself, test other patches, etc. The best I  can do is include my fix with the bug report. Perhaps this isn&#8217;t unusual&#8230; but compared to other <span class="caps">OSS</span> I&#8217;m familiar with like <a href="http://drupal.org/">Drupal</a>, it means that the speed with which bugs are patched is much slower. This lack of collaborative development will hold Magento back, making it more a &#8220;good free product&#8221; than a &#8220;great open source&#8221; one.</p>
+<h3>Magento is terrible for backend order management and fulfillment.</h3>
+<p>The biggest issue I&#8217;ve had with Magento is order management and fulfillment in the backend. The slow, restrictive, clunky process of creating an Invoice and then a Shipment to complete an Order is just bad. It is not scalable. Magento runs slow enough as it is &#8211; having to click (and wait) 4+ times <em>per order</em> just to print a packing slip is unsustainable. It could take 5 minutes to print 10 packing slips! One of the first things I&#8217;ve had to do to make Magento really usable for a store with any volume of orders is create bulk actions for the order page which allow faster order processing.</p>
+<p>But that&#8217;s not all! If you want to &#8220;Edit&#8221; and order in Magento because, say, the shipping address was incorrect what Magento actually does is create a whole new order. The comment history is lost, a new email is fired off to the admin account, the order number is even different! And if the order had Configurable or Bundled items in it &#8211; Magento doesn&#8217;t support editing them so it actually removes them from the order. You better remember to re-add them if they were important!</p>
+<p>Then there is order management. If you have printed the Invoice and the Packing Slip, the order is automatically marked complete. This is fine &#8211; except that if you end up <em>not</em> shipping it out, you cannot change the status back to &#8220;Processing&#8221;. You cannot &#8220;Cancel&#8221; the order. It is just &#8220;Complete&#8221;. The order status management is terrible. This is just one example of the many problems with it. You cannot do bulk status changes, and you are too restricted about which statuses you can move from and to.</p>
+<h3>Magento is still &#8220;Beta&#8221; buggy.</h3>
+<p>Magento is at it&#8217;s 1.3 release now, and Varien even offers their <a href="http://www.magentocommerce.com/product/enterprise-edition">Enterprise</a> version as well, but it&#8217;s still a Beta release at heart. The problem is that there are just too many features. Any single feature works okay most of the time: configurable products, catalog price rules, pricing tiers, tax calculations, etc. But when you start to utilize multiple features at the same time, you will run into trouble.</p>
+<p>An example: &#8220;percent off&#8221; catalog price rules don&#8217;t apply properly to Configurable products. &#8220;Percent off&#8221; catalog price rules and Configurable products work fine <em>on their own</em>, but fail when combined. If one Configurable option is more expensive, the &#8220;percent off&#8221; of the cheaper base item is still used. Not a bug most people run into most of the time, but if your Magento store has configurable products and you are running a &#8220;20% off&#8221; sale, the sale price is probably wrong on those items right now. Which is what you expect! From <em>Beta</em> software. Frankly, I&#8217;m not sure a monster chunk of code the size of Magento can ever come out of Beta. :)</p>
+<h3>Magento is getting faster, but it&#8217;s still slow.</h3>
+<p>Varien has been working very hard on this, and its getting faster, but be prepared to deal with speed issues. I&#8217;ve learned how to make Magento fly &#8211; but it was long process and I know more now about Apache, KeepAlives, Query Caching and other performance tuning than I ever wanted to. Don&#8217;t expect speed if you run a default Magento install on cheap shared hosting. The reason Magento is so great is also the reason it&#8217;s so slow: features, features, features. <span class="caps">PHP</span> chews through <span class="caps">CPU</span> cycles like crazy to make Magento do all the great stuff it does, and the price paid is long load times.</p>
+<h3>Magento is still (too) young.</h3>
+<p>More than anything, the problem is that Magento is still so young. It&#8217;s only been a little over a year since the 1.0 release. The whole project is less than three years old. Considering that Varien carries all of the development weight on their shoulders it&#8217;s impressive how far Magento <em>has</em> come &#8211; but it&#8217;s not &#8220;there&#8221; yet. I don&#8217;t mean to sound accusing or disappointed &#8211; I just want to give a word of warning to prospective users.</p>
+<h2>What does Magento do right?</h2>
+<p>Everything <span class="caps">NOT</span> listed here. <strong>Which is a lot.</strong> I admit I have very little experience with other ecommerce platforms, but I know most of them have a much longer list of problems than Magento does. Magento will continue to be refined over time, and in the mean time many of the issues here are already addressed (or will be soon) by <a href="http://www.magentocommerce.com/magento-connect">community extensions</a>.</p>
+<p>So Magento does a lot right, and is doing more right every day. Just be aware of the pitfalls of running such complicated, young software.</p>]]></content>
+  </entry>
   
 </feed>

@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: JavaScript | Chili Pepper Design]]></title>
+  <link href="http://thaddeusmt.github.com/blog/categories/javascript/atom.xml" rel="self"/>
+  <link href="http://thaddeusmt.github.com/"/>
+  <updated>2012-12-18T12:28:17-07:00</updated>
+  <id>http://thaddeusmt.github.com/</id>
+  <author>
+    <name><![CDATA[Evan Johnson]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Insert Flash Media Embed Code TinyMCE Plugin]]></title>
+    <link href="http://thaddeusmt.github.cominsert-flash-media-embed-code-tinymce-plugin"/>
+    <updated>2010-03-22T16:19:00-06:00</updated>
+    <id>http://thaddeusmt.github.com./insert-flash-media-embed-code-tinymce-plugin</id>
+    <content type="html"><![CDATA[<p>I've run into a problem providing my clients good, easy-to-use media embed functionality with the existing JavaScript WYSIWYG editors. The big players, "CKEditor":http://ckeditor.com/ (formery FCKEditor) and "TinyMCE":http://tinymce.moxiecode.com/ both provide a "Flash" button which works okay with YouTube and other large video providers, but what about embedding a Picasa slideshow? None of the WYSIWYG editors come with plugin to just insert some HTML code. If you want to embed something like a Picasa slideshow,  customized YouTube player, or Google Map you have open up the source code, find the location you want to insert it, and paste in the code. Fine for some, but difficult and scary for most as it breaks the WYSIWYG paradigm.</p>
+
+<p>On one of my latest Drupal websites there are multiple bloggers, none of whom are particularly tech savvy. I set up the CMS with TinyMCE because I like how they can drag and drop images around (I just wish Drupal had an image embed uploader like WordPress!). After a while they complained that the Insert Flash button in TinyMCE just wasn't cutting it. So I set about fixing it. How hard could it be to make a plugin that just inserts some HTML code where your cursor is? Like it already does for images?</p>
+
+<p>It turns out it is very easy. I was able to just edit the TinyMCE "Example" plug-in, which already did basically exactly what I wanted. So here I provide it to you, Internet. I hope it is useful, and please let me know if it's broken (or could work better). Thanks!</p>
+
+<p><em>UPDATED</em>: (9-17-2010) I fixed some bugs with IE. It should work better cross-browse now.</p>
+
+<p>Download the plugin:</p>
+
+<ul>
+<li><strong>"From SourceForge":http://sourceforge.net/tracker/?func=detail&amp;aid=2974843&amp;group_id=103281&amp;atid=738747 </strong></li>
+<li><strong>"From Chili Pepper Design":http://www.chilipepperdesign.com/examples/tinymce-embed-plugin-v2.zip </strong></li>
+</ul>
+
+
+<p>I found some tips on installing TinyCME plugins here: "Installing Plugin Newbie Question":http://tinymce.moxiecode.com/punbb/viewtopic.php?id=3349
+Here is the official guide to creating a plugin for TinyMCE 3: "TinyMCE:Create plugin/3.x":http://wiki.moxiecode.com/index.php/TinyMCE:Create_plugin/3.x</p>
+
+<p><em>To use this plugin, install it in the TinyMCE plugin folder and just include it in the <em>TinyMCE.init()</em> call like you would the other plugins</em>. Example ("<em>embed</em>" is the name of the plugin):</p>
+
+<pre><code>
+<script type="text/javascript" src="<your installation path>/tiny_mce/tiny_mce.js"></script>
+<script type="text/javascript">
+  tinyMCE.init({
+    theme : "advanced",
+    mode : "textareas",
+    plugins : "embed, fullscreen, emotions, preview",
+    theme_advanced_buttons3_add : "embed, fullscreen, emotions, preview"
+  });
+</script></code></pre>
+
+
+<p><em><em>Disclaimer</em>: I am not a TinyMCE guru, and not even that hot at JavaScript. I probably cannot help you with other TinyMCE plugins, or even this one. I only got this to work because the Example plugin was so close to what I already needed. But thanks for stopping by!</em></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Unobtrusive jCarousel page/tab external controls with jQuery]]></title>
+    <link href="http://thaddeusmt.github.comunobtrusive-jcarousel-pagetab-external-controls-with-jquery"/>
+    <updated>2010-01-14T12:49:00-07:00</updated>
+    <id>http://thaddeusmt.github.com./unobtrusive-jcarousel-pagetab-external-controls-with-jquery</id>
+    <content type="html"><![CDATA[<p>I am using the very slick and enjoyable "jCarousel":http://sorgalla.com/projects/jcarousel/ plugin for "jQuery":http://jquery.com/ on a new project to display featured content on the front page. I wanted to use the "external controls":http://sorgalla.com/projects/jcarousel/examples/static_controls.html to allow users to easily jump between slides. However, all the examples I found required hard-coding the control links into the document HTML. This is not best practice because when JavaScript is disabled and the carousel degrades to a simple list you have a bunch of control links that do nothing sitting there on the page. Better to create the controls in JS and append them to the DOM with jQuery! This way the controls only appear when the jCarousel script is loaded and ready to use them.</p>
+
+<p>To do this I just had to add a little extra code to the <em>initCallback</em> method I was already using to bind the external controls. Here is the JS needed to unobtrusively create a jCarousel with 4 external control links:</p>
+
+<pre><code><script type="text/javascript">
+//this function creates the control links and binds them
+function mycarousel_initCallback(carousel) {
+    // add the controls here
+    carousel.container.before('<div class="jcarousel-control"><a href="#">1</a><a href="#">2</a><a href="#">3</a><a href="#">4</a></div>');
+    // now bind the controls
+    jQuery('.jcarousel-control a').bind('click', function() {
+        carousel.scroll(jQuery.jcarousel.intval(jQuery(this).text()));
+        return false;
+    });
+};
+//create the jCarousel on the #mycarousel element with the initCallback above
+jQuery(document).ready(function() {
+    jQuery("#mycarousel").jcarousel({
+        initCallback: mycarousel_initCallback,
+    });
+});
+</script>
+</code></pre>
+
+
+<p>I simply append the <em>.jcarousel-control</em> div before the carousel container using <em>carousel.container.before()</em>. You could just as easily add it after the carousel by using <em>carousel.container.after()</em>.</p>
+
+<p>I love how easy jQuery make "progressive enhancement":http://www.alistapart.com/articles/understandingprogressiveenhancement/! Enjoy.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Adding the "rel" and "title" attributes to image links in CKEditor 3]]></title>
+    <link href="http://thaddeusmt.github.comadding-the-rel-and-title-attributes-to-image-links-in-ckeditor-3"/>
+    <updated>2010-01-08T14:37:00-07:00</updated>
+    <id>http://thaddeusmt.github.com./adding-the-rel-and-title-attributes-to-image-links-in-ckeditor-3</id>
+    <content type="html"><![CDATA[<p><a href="http://ckeditor.com/">CKEditor</a> is the new and improved successor to the venerable <a href="http://sourceforge.net/projects/fckeditor/files/FCKeditor/">FCKeditor</a> JavaScript WYSIWYG editor. I've used <a href="http://tinymce.moxiecode.com/">TinyMCE</a> and FCKeditor before, but this was my first time trying out the new CKEditor 3.1. I am using it on a new Drupal website via the <a href="http://drupal.org/project/ckeditor">Drupal CKEditor module</a>. The problem I ran into, however, is using <a href="http://www.huddletogether.com/projects/lightbox2/">Lightbox2</a> on images inserted via CKEditor. CK does not provide a way to add the "rel" attribute to image links (or any links for that matter). CK also doesn't allow adding the "title" attribute to image links. Lightbox uses both of these to determine which images to display, group together in galleries, provide a caption, etc. I found <a href="http://dev.fckeditor.net/attachment/ticket/2627/fck-rel.patch">a patch for FCKeditor</a> which allows adding a "rel" attribute to image links, but I couldn't find one for the new CKEditor. So here we are. :)</p>
+
+
+
+
+<p>This is a total hack, since I have not looked in to how to properly make a plugin for the new CKEditor, but it works pretty well. Maybe someone who knows how to make plugins to CKEditor can show me the way.</p>
+
+
+
+
+<p>To start hacking, we need to first copy over the minified <em>ckeditor\plugins\image\dialogs\image.js</em> with the indented <em>ckeditor\_source\plugins\image\dialogs\image.js</em>, since it's really hard to work with the minified <em>image.js</em>.</p>
+
+
+
+
+<p>In <em>image.js</em> all of the tabs and fields in the Image popup dialog are defined in the "contents" array (below the onHide function). We will add our new "rel" and "title" fields to the content array, in the "Link" tab's sub-array. I added the new code at the end of the Link tab's definition array after the <em>txtUrl</em>, <em>browse</em>, and <em>cmbTarget</em> fields (around line 1146). The code I added is:</p>
+
+
+
+
+<pre><code>{
+id : 'txtTitle',
+type : 'text',
+label : editor.lang.link.advisoryTitle,
+'default' : '',
+setup : function( type, element )
+{
+    if ( type == LINK )
+    {
+        this.setValue( element.getAttribute( 'title' ) );
+    }
+},
+commit : function( type, element )
+{
+    if ( type == LINK )
+    {
+        if ( this.getValue() || this.isChanged() )
+        {
+            element.setAttribute( 'title', this.getValue() );
+        }
+    }
+}
+},
+{
+id : 'txtRel',
+type : 'text',
+label : editor.lang.link.rel,
+'default' : '',
+setup : function( type, element )
+{
+    if ( type == LINK )
+    {
+        this.setValue( element.getAttribute( 'rel' ) );
+    }
+},
+commit : function( type, element )
+{
+    if ( type == LINK )
+    {
+        if ( this.getValue() || this.isChanged() )
+        {
+            element.setAttribute( 'rel', this.getValue() );
+        }
+    }
+}
+},
+</code></pre>
+
+
+
+
+<p>This adds a _txtTitle_ and _txtRel_ field to the Link tab on the Insert Image CKEditor dialog. <strong>Look out for commas!</strong> The first time I did this I missed a comma between the cmbTarget and txtTitle declarations, which borked everything.</p>
+
+
+
+
+<p>The final thing we need to do is create the "editor.lang.link.rel" English translation definition so the new _txtRel_ field is properly labeled in the dialog (I re-used the existing "editor.lang.link.advisoryTitle" translation for _txtTitle_). To do this, open up _ckeditor\lang\en.js_. I added the following snipped between _styles_ and _selectAnchor_ in the "Link" block, but just make sure it's in the "Link" block of translations.</p>
+
+
+
+
+<pre><code>rel:'Rel',</code></pre>
+
+
+
+
+<p>You could probably hard-code this label, but I kept with the translation system. I didn't do any labels except the English one, but you get the idea. If you are using another language insert the "rel" label into the appropriate file for that language.</p>
+
+
+
+
+<p>You can now set the "rel" and "title" attributes on the image link, and use them with the Lightbox of your choice!</p>
+
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,523 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Configuring and compiling Nginx and PHP-FPM on Ubuntu for Magento, Part 3 - Chili Pepper Design</title>
+  <meta name="author" content="Evan Johnson">
+
+  
+  <meta name="description" content="This is the 3rd and final article about installing Magento on Nginx with PHP-FPM. Part 1 is here, and Part 2 is here.
+This part explains how I set up &hellip;">
+  <meta name="keywords" content="apcmagnetonginxmod_rewritehtaccess">
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://thaddeusmt.github.comconfiguring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-3">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Chili Pepper Design" type="application/atom+xml">
+  
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-6058373-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Chili Pepper Design</a></h1>
+  
+    <h2>Free-range web development</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:thaddeusmt.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <br style="clear: both" />
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Configuring and Compiling Nginx and PHP-FPM on Ubuntu for Magento, Part 3</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-01-03T20:47:00-07:00" pubdate data-updated="true">Jan 3<span>rd</span>, 2010</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>This is the 3rd and final article about installing Magento on Nginx with <span class="caps">PHP</span>-<span class="caps">FPM</span>. <a href="http://www.chilipepperdesign.com/2009/12/14/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-1">Part 1 is here</a>, and <a href="http://www.chilipepperdesign.com/2009/12/18/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-2">Part 2 is here</a>.</p>
+<p>This part explains how I set up my public web directories, and how I did the Nginx configuration files for a Magento site. One of the tricky things about switching to Nginx from Apache is that Nginx does not use .htaccess files or the usual Apache mod_rewrite rules for pretty/<span class="caps">SEO</span> URLs. You can replicate all of Magento&#8217;s mod_rewrite rules with Nginx&#8217;s own rewrite module, but it takes some getting used to and Magento doesn&#8217;t come with them pre-written (like the mod_rewrite rules in the .htaccess files).</p>
+<p>Here are some of the resources I used:</p>
+<ul>
+<li><a href="http://articles.slicehost.com/2009/3/6/ubuntu-intrepid-nginx-virtual-hosts-1">Slicehost: Nginx Virtual Hosts #1</a></li>
+<li><a href="http://articles.slicehost.com/2009/9/4/ubuntu-intrepid-nginx-virtual-hosts-2-2">Slicehost: Nginx Virtual Hosts #2</a></li>
+<li><a href="http://www.magentocommerce.com/boards/viewthread/7931/">Magento Forum: NginX Web Server with Magento</a></li>
+<li><a href="http://www.magentocommerce.com/boards/viewthread/38134/">Magento Forum: Thread about Fooman Speedster (which I never go to work)</a></li>
+<li><a href="http://markmail.org/message/fdurus5iczudtm62">Random MarkMail post (I needed Google Translate to help me out)</a></li>
+<li><a href="http://varien.com.ua/blog/Fustanovka-magento-dlya-raboty-s-nginx-php-fpm-apc">varien.com.ua (Also needed Google Translate to help me out)</a></li>
+</ul>
+<p>First we&#8217;ll set up the directory structure like we are used to with Apache:</p>
+
+<pre><code>
+# mkdir /usr/local/nginx/sites-available
+# mkdir /usr/local/nginx/sites-enabled
+# mkdir /var/www/example1.com/public
+# mkdir /var/www/example1.com/log
+# cp  /usr/local/nginx/conf/nginx.conf /usr/local/nginx/conf/nginx.conf-original
+</code></pre>
+<p>Then set up the base nginx conf file <em>/usr/local/nginx/conf/nginx.conf</em>:</p>
+
+<pre><code>
+user www-data;
+worker_processes 1;
+
+events {
+    worker_connections 1024;
+}
+
+http {
+    include mime.types;
+    default_type application/octet-stream;
+    sendfile on;
+    keepalive_timeout 65;
+    gzip on;
+    include /usr/local/nginx/sites-enabled/*;
+}
+</code></pre>
+<p>Then set up the Nginx conf file for your website. I am using the default site in this example <em>/usr/local/nginx/sites-available/default</em>, but if you have multiple sites instead of <em>default</em> you would create files called <em>site1.com</em>, <em>site2.com</em>, etc.</p>
+<p>This file is where all of the rewrite magic is. The url in this example is <em>example1.com</em>, which you should replace with your own. The document root is <em>/var/www/example1.com/public</em> which, again, you will need to change to match your own configuration.</p>
+
+<pre><code>
+# fastcgi nodes
+upstream  backend  {
+    server unix:/tmp/fcgi.sock;
+}
+
+# redirect all non-www requests to www requests (it would be easy to reverse this)
+server {
+    listen   80;
+    server_name  example1.com;
+    rewrite ^/(.*) http://www.example1.com/$1 permanent;
+}
+
+server {
+    listen       80;
+    server_name www.example1.com;
+
+    # protection (we have no .htaccess)
+    location ~ (/(app/|includes/|lib/|/pkginfo/|var/|report/config.xml)|/\.svn/|/.hta.+) {
+        deny all;
+    }
+   # pass php files over to PHP-FPM via the socket
+    location ~ (\.php)$ {
+        fastcgi_index index.php;
+        include /etc/nginx/fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        if (-e $request_filename) { # check if requested path exists
+            fastcgi_pass backend;
+        }
+    }
+    # the javascript compressor
+    location ^~ /js/index.php {
+        fastcgi_pass   backend;
+        fastcgi_index index.php;
+        fastcgi_param  SCRIPT_NAME $fastcgi_script_name;
+        fastcgi_param  SCRIPT_FILENAME  /var/www/example1.com/public$fastcgi_script_name;
+        include /etc/nginx/fastcgi_params;
+        access_log off;
+        expires 30d;
+    }
+   # special case for the error "report" pages
+    location /report/ {
+        fastcgi_index index.php;
+        include /etc/nginx/fastcgi_params;
+        fastcgi_param  SCRIPT_NAME /report/index.php;
+        fastcgi_param  SCRIPT_FILENAME  /var/www/example1.com/public/report/index.php;
+        if (!-f $request_filename) {
+            fastcgi_pass backend;
+            break;
+        }
+    }
+    # pass everything else over to PHP-FPM via the socket
+    location / {
+        root /var/www/example1.com/public/; # absolute path doc root
+        index index.php index.html index.htm;
+
+        # set expire headers
+        if ($request_uri ~* "\.(ico|css|js|gif|jpe?g|png)$") {
+            expires max;
+        }
+        # set fastcgi settings, not allowed in the "if" block
+        include /etc/nginx/fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root/index.php;
+        fastcgi_param SCRIPT_NAME /index.php;
+        # rewrite - if file not found, pass it to the backend
+        if (!-f $request_filename) {
+            fastcgi_pass backend;
+            break;
+        }
+        error_page 404 index.php;
+    }
+    access_log /var/www/example1.com/log/access.log;
+    error_log /var/www/example1.com/log/error.log;
+}
+</code></pre>
+<p>I am no expert with Nginx, but a lot of Google searching and trial and error gave me the file above, and it seems to work. I hope it is helpful, even if this exact code doesn&#8217;t work for you.</p>
+<p>Finally, activate the site by creating a symbolic link to it and restarting the server:</p>
+
+<pre><code>
+# ln -s /usr/local/nginx/sites-available/default /usr/local/nginx/sites-enabled/default
+# ln -s /usr/local/nginx/sites-enabled /etc/sites
+# /etc/init.d/nginx restart
+</code></pre>
+<p>And that&#8217;s it! You should now have Magento running on Nginx! (<em>After</em>, of course, also installing mysql and a sendmail program, and probably an <span class="caps">FTP</span> server, and who knows what else :)</p>
+<p>Now, how to make it actually go faster than Apache? There are many settings you can tweak. Look in <em>fastcgi_params</em> to change <span class="caps">PHP</span>-<span class="caps">FPM</span> settings, <em>php.ini</em> to change <span class="caps">APC</span> settings, <em>my.cnf</em> to change mysql settings, <em>nginx.conf</em> to adjust the number of worker processes and the keepalive timeouts&#8230; the list goes on. Good luck!</p></div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Evan Johnson</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-01-03T20:47:00-07:00" pubdate data-updated="true">Jan 3<span>rd</span>, 2010</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/web-development/'>Web-Development</a>, <a class='category' href='/blog/categories/e-commerce/'>e-Commerce</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://thaddeusmt.github.comconfiguring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-3" data-via="thaddeusmt" data-counturl="http://thaddeusmt.github.comconfiguring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-3" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-2" title="Previous Post: Configuring and compiling Nginx and PHP-FPM on Ubuntu for Magento, Part 2">&laquo; Configuring and compiling Nginx and PHP-FPM on Ubuntu for Magento, Part 2</a>
+      
+      
+        <a class="basic-alignment right" href="adding-the-rel-and-title-attributes-to-image-links-in-ckeditor-3" title="Next Post: Adding the "rel" and "title" attributes to image links in CKEditor 3">Adding the "rel" and "title" attributes to image links in CKEditor 3 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p><img id="profile-image" src="http://www.gravatar.com/avatar/02bee2f91e0a8c3aefbfa6bfb5304c51" alt="Gravatar of thaddeusmt " title="Gravatar of thaddeusmt" />My name is Evan Johnson. I'm a software developer from Montana, who spent some time in Nebraska. I'm the chief software architect at <a href="http://splashlabsocial.com">SplashLab Social</a>, but I am blogging here on my old freelance web design URL for fun. I hope you find something useful here, thanks for visiting! Cheers</p>
+</section><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="magento-15-ee-110-windows-command-line-batch-update-script-magebat">Magento 1.5 / EE 1.10 Windows Command Line Batch Update Script mage.bat</a>
+      </li>
+    
+      <li class="post">
+        <a href="reveal-fan-gate-like-gate-facebook-iframe-tab-tutorial-with-php"> Reveal / Fan-Gate / Like-Gate Facebook iframe tab tutorial (with PHP)</a>
+      </li>
+    
+      <li class="post">
+        <a href="facebook-iframe-tabs-on-pages-no-more-fbml">Facebook iframe tabs on Pages - No more FBML!</a>
+      </li>
+    
+      <li class="post">
+        <a href="a-facebook-content-management-system-cms-for-facebook-page-templates">A Facebook Content Management System (CMS) for Facebook Page Templates</a>
+      </li>
+    
+      <li class="post">
+        <a href="insert-flash-media-embed-code-tinymce-plugin">Insert Flash Media Embed Code TinyMCE Plugin</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("thaddeusmt", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/thaddeusmt" class="twitter-follow-button" data-show-count="false">Follow @thaddeusmt</a>
+  
+</section>
+
+<section>
+  <h1>StackOverflow</h1>
+  <a id="stackoverflow-badge" href="http://stackoverflow.com/users/164439/thaddeusmt"><img src="http://stackoverflow.com/users/flair/164439.png" width="208" height="58" alt="profile for thaddeusmt at Stack Overflow, Q&amp;A for professional and enthusiast programmers" title="profile for thaddeusmt at Stack Overflow, Q&amp;A for professional and enthusiast programmers"></a>
+</section>
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/thaddeusmt">@thaddeusmt</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'thaddeusmt',
+            count: 4,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+<section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/blogs/'>Blogs (2)</a></li>
+<li class='category'><a href='/blog/categories/cms/'>CMS (6)</a></li>
+<li class='category'><a href='/blog/categories/css/'>CSS (2)</a></li>
+<li class='category'><a href='/blog/categories/javascript/'>JavaScript (3)</a></li>
+<li class='category'><a href='/blog/categories/seo/'>SEO (2)</a></li>
+<li class='category'><a href='/blog/categories/social-media/'>Social-Media (6)</a></li>
+<li class='category'><a href='/blog/categories/web-design/'>Web-Design (2)</a></li>
+<li class='category'><a href='/blog/categories/web-development/'>Web-Development (25)</a></li>
+<li class='category'><a href='/blog/categories/e-commerce/'>e-Commerce (11)</a></li>
+
+  </ul>
+</section>
+<section>
+  <h1>Coderwall</h1>
+  <ul id="cw_badges">
+    <li class="loading">Status updating...</li>
+  </ul>
+
+  <script type="text/javascript">
+    var coderwall = (function(){
+      function render(options, badges){
+        var fragment = '',
+            t = $(options.target)[0],
+            height = 65,
+            width = 65,
+            index;
+
+        for (index in badges) {
+          fragment += '<a class="cw_badge"title="' + badges[index].description + '" href="http://coderwall.com/' + options.user + '">';
+          fragment +=   '<img alt="' + badges[index].description + '" height="' + width + '" width="' + height + '" src="' + badges[index].badge + '"/>';
+          fragment += '</a>';
+        }
+
+        t.innerHTML = fragment;
+      }
+      return {
+        showBadges: function(options){
+          $.ajax({
+              url: 'http://coderwall.com/' + options.user + '.json?callback=?'
+            , type: 'jsonp'
+            , error: function (err) { $(options.target + ' li.loading').addClass('error').text("Error loading feed"); }
+            , success: function(res) {
+                render(options, res.data.badges);
+            }
+          });
+        }
+      };
+    })();
+
+    $.domReady(function(){
+      if (!window.jXHR){
+        var jxhr = document.createElement('script');
+        jxhr.type = 'text/javascript';
+        jxhr.src = '/javascripts/libs/jXHR.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(jxhr, s);
+      }
+      if (!window.$){
+        var b = document.createElement('script');
+        b.type = 'text/javascript';
+        b.src = '/javascripts/ender.js';
+        var sc = document.getElementsByTagName('script')[0];
+        sc.parentNode.insertBefore(jxhr, s);
+      }
+      coderwall.showBadges({
+        user: 'thaddeusmt',
+        target: '#cw_badges'
+      });
+    });
+  </script>
+  <style type="text/css">
+    .cw_badge img {
+      padding: 5px;
+      border: 0 none !important;
+      -moz-box-shadow: none !important;
+      -webkit-box-shadow: none !important;
+      -o-box-shadow: none !important;
+      box-shadow: none !important;
+    }
+  </style>
+</section>
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Evan Johnson -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'chilipepperdesign';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
