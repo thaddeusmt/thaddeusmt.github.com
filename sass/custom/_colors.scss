@@ -3,10 +3,12 @@
 // If you need a handy color picker try http://hslpicker.com
 
 $page-bg: #fff;
-$header-bg: #fff;
+// $header-bg: #fff;
 $title-color: #3A3A3A;
-$nav-bg: #fff !default;
+$nav-bg: #0C0C0C;
 $nav-bg-back: #fff;
+$nav-color: lighten($nav-bg, 38) !default;
+$nav-color-hover: lighten($nav-color, 25) !default;
 //$link-color: #A41B0B;
 //$visited: #660000;
 

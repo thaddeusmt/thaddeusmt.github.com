@@ -2,7 +2,7 @@
 // Add styles here to make changes without digging in too much
 
 html {
-  background: $page-bg;
+  background: $page-bg url(images/background.jpg);
 }
 body {
 	> header {
@@ -24,10 +24,54 @@ body {
       border: 0;
 		}
 	}
+  #main {
+    @media only screen and (min-width: 992px) {
+		  clear: both;
+		}
+  }
 }
 @media only screen and (min-width: 992px) {
   body { font-size: 1em; }
   h1 { font-size: 2.6em; line-height: .8em; }
+}
+body > header {
+  background: transparent;
+  padding-top: .25em;
+  overflow: hidden;
+  @media only screen and (max-width: 992px) {
+    padding-bottom: .4em;
+  }
+}
+body > header h1 {
+  color: #700202;
+  text-shadow: -1px -1px 0px #A55D6F;
+  font-size: 3em;
+}
+body > header h1 a, body > header h1 a:visited {
+  color: #990000;
+  -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,.6)))
+}
+body > header h1 a:hover {
+  color: #700202;
+}
+body > header h2 {
+  margin-top: -5px;
+}
+body > nav {
+  background: transparent;
+  @media only screen and (max-width: 992px) {
+    border: 0 none; 
+  }
+}
+#main, #content, #content .blog-index {
+  @media only screen and (min-width: 992px) {
+    border-top-left-radius: .4em;
+    border-top-right-radius: .4em;
+  }
+}
+aside.sidebar {
+  background: #f2f2f2 url(images/sidebar.jpg) 30% 0 no-repeat;
+  border-top-right-radius: .4em;
 }
 #profile-image {
   float: left;

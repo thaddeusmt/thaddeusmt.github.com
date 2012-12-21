@@ -4,7 +4,7 @@
 
 url: http://thaddeusmt.github.com
 title: Chili Pepper Design
-subtitle: "Free-range web development"
+subtitle: "Web development relleno"
 author: Evan Johnson
 simple_search: http://google.com/search
 description: "Thoughts, tutorials and code snippets about web development using PHP, jQuery, mySql, MongoDB, and friends."
@@ -45,7 +45,9 @@ titlecase: true       # Converts page and post titles to titlecase
 
 # list each of the sidebar modules you want to include, in the order you want them to appear.
 # To add custom asides, create files in /source/_includes/custom/asides/ and add them to the list like 'custom/asides/custom_aside_name.html'
-default_asides: [custom/asides/about.html, asides/recent_posts.html, custom/asides/category_list.html, asides/twitter.html, custom/asides/stackoverflow_flair.html, custom/asides/coderwall.html, asides/github.html]
+default_asides: [custom/asides/about.html, asides/recent_posts.html, custom/asides/category_list.html, asides/twitter.html,  custom/asides/stackoverflow_flair.html, custom/asides/coderwall.html]
+# asides/github.html
+# custom/asides/stackoverflow_flair.html
 
 # Each layout uses the default asides, but they can have their own asides instead. Simply uncomment the lines below
 # and add an array with the asides you want to use.
@@ -61,7 +63,7 @@ default_asides: [custom/asides/about.html, asides/recent_posts.html, custom/asid
 gravatar_email: thaddeusmt@gmail.com
 
 # Github repositories
-github_user: thaddeusmt
+# github_user: thaddeusmt
 github_repo_count: 4
 github_show_profile_link: true
 github_skip_forks: true
