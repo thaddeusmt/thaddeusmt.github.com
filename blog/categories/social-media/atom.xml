@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Social-Media | Chili Pepper Design]]></title>
   <link href="http://thaddeusmt.github.com/blog/categories/social-media/atom.xml" rel="self"/>
   <link href="http://thaddeusmt.github.com/"/>
-  <updated>2012-12-20T23:24:19-07:00</updated>
+  <updated>2012-12-20T23:45:39-07:00</updated>
   <id>http://thaddeusmt.github.com/</id>
   <author>
     <name><![CDATA[Evan Johnson]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[ Reveal / Fan-Gate / Like-Gate Facebook iframe tab tutorial (with PHP)]]></title>
-    <link href="http://thaddeusmt.github.comreveal-fan-gate-like-gate-facebook-iframe-tab-tutorial-with-php"/>
+    <link href="http://thaddeusmt.github.com/2011/02/15/reveal-fan-gate-like-gate-facebook-iframe-tab-tutorial-with-php/"/>
     <updated>2011-02-15T00:37:00-07:00</updated>
-    <id>http://thaddeusmt.github.com./reveal-fan-gate-like-gate-facebook-iframe-tab-tutorial-with-php</id>
+    <id>http://thaddeusmt.github.com/2011/02/15/reveal-fan-gate-like-gate-facebook-iframe-tab-tutorial-with-php</id>
     <content type="html"><![CDATA[<p><em><strong>Update: <a href="http://www.splashlabsocial.com">SplashLab Social</a> has been released!</strong> <a href="http://www.splashlabsocial.com">If you are looking for an easier way to set up Fans-only/Reveal tabs, look no further!</a> My new service makes it easy to create custom fan-gate tabs, check it out!</em></p>
 
 <p>"FBML is going away":http://developers.facebook.com/blog/post/462#fbml_roadmap. Is the popular (and effective) strategy of "fan-gating" content to encourage visitors to Like you page going away with the "&lt;fb:visible-to-connection>":http://developers.facebook.com/docs/reference/fbml/visible-to-connection/ FBML tag?</p>
@@ -142,9 +142,9 @@
   
   <entry>
     <title type="html"><![CDATA[Facebook iframe tabs on Pages - No more FBML!]]></title>
-    <link href="http://thaddeusmt.github.comfacebook-iframe-tabs-on-pages-no-more-fbml"/>
+    <link href="http://thaddeusmt.github.com/2011/02/14/facebook-iframe-tabs-on-pages-no-more-fbml/"/>
     <updated>2011-02-14T23:43:00-07:00</updated>
-    <id>http://thaddeusmt.github.com./facebook-iframe-tabs-on-pages-no-more-fbml</id>
+    <id>http://thaddeusmt.github.com/2011/02/14/facebook-iframe-tabs-on-pages-no-more-fbml</id>
     <content type="html"><![CDATA[<p>The long awaited transition from FBML tabs to iframe tabs has finally happened. As of this writing on Feb 14th 2011 (Valentines Day!) you can choose the "iframe" option for Facebook application tabs. The official word from the "Facebook developer roadmap":http://developers.facebook.com/roadmap/ is that "as of March 11th developers will no longer be able to create FBML tabs":http://developers.facebook.com/blog/post/462#fbml_roadmap (although existing FBML apps will be supported indefinitely - or at least until the end of 2011 I heard in the comments).</p>
 
 <p><img src="http://www.chilipepperdesign.com/images/52.jpg" style="width: 415px" /></p>
@@ -195,9 +195,9 @@
   
   <entry>
     <title type="html"><![CDATA[A Facebook Content Management System (CMS) for Facebook Page Templates]]></title>
-    <link href="http://thaddeusmt.github.coma-facebook-content-management-system-cms-for-facebook-page-templates"/>
+    <link href="http://thaddeusmt.github.com/2010/03/24/a-facebook-content-management-system-cms-for-facebook-page-templates/"/>
     <updated>2010-03-24T00:58:00-06:00</updated>
-    <id>http://thaddeusmt.github.com./a-facebook-content-management-system-cms-for-facebook-page-templates</id>
+    <id>http://thaddeusmt.github.com/2010/03/24/a-facebook-content-management-system-cms-for-facebook-page-templates</id>
     <content type="html"><![CDATA[<p><a href="http://www.splashlabsocial.com"><img src="http://www.chilipepperdesign.com/images/53t.jpg" style="float: left; margin-right: 10px;" /></a></p>
 
 <p style="font-size:1.2em;"><strong>Update: The project is now live and ready for signups! Head over to <a href="http://splashlabsocial.com">SplashLab Social</a> to learn more and get started. It's the easiest way to create and manage content on your Facebook Page's iframe tabs!</strong></p>
@@ -290,9 +290,9 @@
   
   <entry>
     <title type="html"><![CDATA[A simple FBJS image carousel (or slideshow) for Facebook page tabs]]></title>
-    <link href="http://thaddeusmt.github.coma-simple-fbjs-image-carousel-or-slideshow-for-facebook-page-tabs"/>
+    <link href="http://thaddeusmt.github.com/2009/11/01/a-simple-fbjs-image-carousel-or-slideshow-for-facebook-page-tabs/"/>
     <updated>2009-11-01T23:19:00-07:00</updated>
-    <id>http://thaddeusmt.github.com./a-simple-fbjs-image-carousel-or-slideshow-for-facebook-page-tabs</id>
+    <id>http://thaddeusmt.github.com/2009/11/01/a-simple-fbjs-image-carousel-or-slideshow-for-facebook-page-tabs</id>
     <content type="html"><![CDATA[<p><span style="font-size: .9em; font-style: italic;">(<em>Plug</em>: Looking for an easy, fast, affordable way to create custom Facebook landing tabs? Check out my new product: "http://splashtab.com":http://www.splashtab.com Thanks!)</span></p>
 
 <p>This little code snippet is really basic, and not actually that good or clever. You can make a much nicer slideshow or carousel if you put a little time into it. But I just want to demonstrate how many of the nice JavaScript effects we are used to on the "Web 2.0" are also possible on a Facebook Page via Facebook's "Animate library":http://wiki.developers.facebook.com/index.php/FBJS/Animation. It's not as robust as "jQuery":http://jquery.com/ or "Scriptaculous":http://script.aculo.us/, but since you can't import those libraries to a Tab the Animate library will have to do. :)</p>
@@ -377,9 +377,9 @@ function goleft() {
   
   <entry>
     <title type="html"><![CDATA[How to make custom Facebook Fan Page tabs with FBML, Part 2]]></title>
-    <link href="http://thaddeusmt.github.comhow-to-make-custom-facebook-fan-page-tabs-with-fbml-part-2"/>
+    <link href="http://thaddeusmt.github.com/2009/10/11/how-to-make-custom-facebook-fan-page-tabs-with-fbml-part-2/"/>
     <updated>2009-10-11T22:26:00-06:00</updated>
-    <id>http://thaddeusmt.github.com./how-to-make-custom-facebook-fan-page-tabs-with-fbml-part-2</id>
+    <id>http://thaddeusmt.github.com/2009/10/11/how-to-make-custom-facebook-fan-page-tabs-with-fbml-part-2</id>
     <content type="html"><![CDATA[<p><strong style="font-size: 1.1em;">UPDATE 2-14-2011: "FBML is going away - learn about Facebook iframe tabs on Facebook Pages here":http://www.chilipepperdesign.com/2011/02/14/facebook-iframe-tabs-on-pages-no-more-fbml </strong></p>
 
 <p><strong style="font-size: 1.1em;">UPDATE 3-10-2011: "Easily create and manage custom Facebook Page Tabs with SplashLab Social - Now available!":http://www.splashlabsocial.com </strong></p>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Blogs | Chili Pepper Design]]></title>
   <link href="http://thaddeusmt.github.com/blog/categories/blogs/atom.xml" rel="self"/>
   <link href="http://thaddeusmt.github.com/"/>
-  <updated>2012-12-20T23:24:19-07:00</updated>
+  <updated>2012-12-20T23:45:39-07:00</updated>
   <id>http://thaddeusmt.github.com/</id>
   <author>
     <name><![CDATA[Evan Johnson]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Easy SEO: +2,500% page views from a year of casual blogging?]]></title>
-    <link href="http://thaddeusmt.github.comeasy-seo-2500-page-views-from-a-year-of-casual-blogging"/>
+    <link href="http://thaddeusmt.github.com/2010/03/04/easy-seo-2500-page-views-from-a-year-of-casual-blogging/"/>
     <updated>2010-03-04T00:35:00-07:00</updated>
-    <id>http://thaddeusmt.github.com./easy-seo-2500-page-views-from-a-year-of-casual-blogging</id>
+    <id>http://thaddeusmt.github.com/2010/03/04/easy-seo-2500-page-views-from-a-year-of-casual-blogging</id>
     <content type="html"><![CDATA[<p>You know, you always read in SEO articles about how important blogging is for increasing traffic. It's one of the top suggestions around for improving a website's search engine juice. Well, I am here to testify that it truly is a great SEO tool.</p>
 
 <p>Granted, the title of this post is hyperbolic link-bait. ;) But it's true nonetheless!</p>
@@ -47,9 +47,9 @@
   
   <entry>
     <title type="html"><![CDATA[WordPress: A Loop inside of a Loop with working Comments]]></title>
-    <link href="http://thaddeusmt.github.comwordpress-a-loop-inside-of-a-loop-with-working-comments"/>
+    <link href="http://thaddeusmt.github.com/2009/08/25/wordpress-a-loop-inside-of-a-loop-with-working-comments/"/>
     <updated>2009-08-25T15:32:00-06:00</updated>
-    <id>http://thaddeusmt.github.com./wordpress-a-loop-inside-of-a-loop-with-working-comments</id>
+    <id>http://thaddeusmt.github.com/2009/08/25/wordpress-a-loop-inside-of-a-loop-with-working-comments</id>
     <content type="html"><![CDATA[<p>I was faced with a problem while creating a WordPress theme the other day. I was grouping posts together using a 2.8 "custom taxonomy":http://justintadlock.com/archives/2009/05/06/custom-taxonomies-in-wordpress-28 (which is my new favorite thing in WordPress), and wanted to display a list of all related posts above the Comments template. Basically wanted a small "Loop":http://codex.wordpress.org/The_Loop inside of the main Loop - a loop within a loop.</p>
 
 <p>I found a few pages online which address this, such as "WordPress Loop Inside of a Loop":http://lohmantrading.com/Fourced/2009/08/wordpress-loop-inside-of-a-loop/ and "Calling a WordPress Loop from inside a WordPress Loop":http://www.tyssendesign.com.au/articles/calling-a-wordpress-loop-from-inside-a-wordpress-loop/. The idea is pretty simple, and these techniques work fine most of the time.</p>

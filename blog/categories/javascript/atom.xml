@@ -4,7 +4,7 @@
   <title><![CDATA[Category: JavaScript | Chili Pepper Design]]></title>
   <link href="http://thaddeusmt.github.com/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://thaddeusmt.github.com/"/>
-  <updated>2012-12-20T23:24:19-07:00</updated>
+  <updated>2012-12-20T23:45:39-07:00</updated>
   <id>http://thaddeusmt.github.com/</id>
   <author>
     <name><![CDATA[Evan Johnson]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Insert Flash Media Embed Code TinyMCE Plugin]]></title>
-    <link href="http://thaddeusmt.github.cominsert-flash-media-embed-code-tinymce-plugin"/>
+    <link href="http://thaddeusmt.github.com/2010/03/22/insert-flash-media-embed-code-tinymce-plugin/"/>
     <updated>2010-03-22T16:19:00-06:00</updated>
-    <id>http://thaddeusmt.github.com./insert-flash-media-embed-code-tinymce-plugin</id>
+    <id>http://thaddeusmt.github.com/2010/03/22/insert-flash-media-embed-code-tinymce-plugin</id>
     <content type="html"><![CDATA[<p>I've run into a problem providing my clients good, easy-to-use media embed functionality with the existing JavaScript WYSIWYG editors. The big players, "CKEditor":http://ckeditor.com/ (formery FCKEditor) and "TinyMCE":http://tinymce.moxiecode.com/ both provide a "Flash" button which works okay with YouTube and other large video providers, but what about embedding a Picasa slideshow? None of the WYSIWYG editors come with plugin to just insert some HTML code. If you want to embed something like a Picasa slideshow,  customized YouTube player, or Google Map you have open up the source code, find the location you want to insert it, and paste in the code. Fine for some, but difficult and scary for most as it breaks the WYSIWYG paradigm.</p>
 
 <p>On one of my latest Drupal websites there are multiple bloggers, none of whom are particularly tech savvy. I set up the CMS with TinyMCE because I like how they can drag and drop images around (I just wish Drupal had an image embed uploader like WordPress!). After a while they complained that the Insert Flash button in TinyMCE just wasn't cutting it. So I set about fixing it. How hard could it be to make a plugin that just inserts some HTML code where your cursor is? Like it already does for images?</p>
@@ -57,9 +57,9 @@ Here is the official guide to creating a plugin for TinyMCE 3: "TinyMCE:Create p
   
   <entry>
     <title type="html"><![CDATA[Unobtrusive jCarousel page/tab external controls with jQuery]]></title>
-    <link href="http://thaddeusmt.github.comunobtrusive-jcarousel-pagetab-external-controls-with-jquery"/>
+    <link href="http://thaddeusmt.github.com/2010/01/14/unobtrusive-jcarousel-pagetab-external-controls-with-jquery/"/>
     <updated>2010-01-14T12:49:00-07:00</updated>
-    <id>http://thaddeusmt.github.com./unobtrusive-jcarousel-pagetab-external-controls-with-jquery</id>
+    <id>http://thaddeusmt.github.com/2010/01/14/unobtrusive-jcarousel-pagetab-external-controls-with-jquery</id>
     <content type="html"><![CDATA[<p>I am using the very slick and enjoyable "jCarousel":http://sorgalla.com/projects/jcarousel/ plugin for "jQuery":http://jquery.com/ on a new project to display featured content on the front page. I wanted to use the "external controls":http://sorgalla.com/projects/jcarousel/examples/static_controls.html to allow users to easily jump between slides. However, all the examples I found required hard-coding the control links into the document HTML. This is not best practice because when JavaScript is disabled and the carousel degrades to a simple list you have a bunch of control links that do nothing sitting there on the page. Better to create the controls in JS and append them to the DOM with jQuery! This way the controls only appear when the jCarousel script is loaded and ready to use them.</p>
 
 <p>To do this I just had to add a little extra code to the <em>initCallback</em> method I was already using to bind the external controls. Here is the JS needed to unobtrusively create a jCarousel with 4 external control links:</p>
@@ -93,9 +93,9 @@ jQuery(document).ready(function() {
   
   <entry>
     <title type="html"><![CDATA[Adding the "rel" and "title" attributes to image links in CKEditor 3]]></title>
-    <link href="http://thaddeusmt.github.comadding-the-rel-and-title-attributes-to-image-links-in-ckeditor-3"/>
+    <link href="http://thaddeusmt.github.com/2010/01/08/adding-the-rel-and-title-attributes-to-image-links-in-ckeditor-3/"/>
     <updated>2010-01-08T14:37:00-07:00</updated>
-    <id>http://thaddeusmt.github.com./adding-the-rel-and-title-attributes-to-image-links-in-ckeditor-3</id>
+    <id>http://thaddeusmt.github.com/2010/01/08/adding-the-rel-and-title-attributes-to-image-links-in-ckeditor-3</id>
     <content type="html"><![CDATA[<p><a href="http://ckeditor.com/">CKEditor</a> is the new and improved successor to the venerable <a href="http://sourceforge.net/projects/fckeditor/files/FCKeditor/">FCKeditor</a> JavaScript WYSIWYG editor. I've used <a href="http://tinymce.moxiecode.com/">TinyMCE</a> and FCKeditor before, but this was my first time trying out the new CKEditor 3.1. I am using it on a new Drupal website via the <a href="http://drupal.org/project/ckeditor">Drupal CKEditor module</a>. The problem I ran into, however, is using <a href="http://www.huddletogether.com/projects/lightbox2/">Lightbox2</a> on images inserted via CKEditor. CK does not provide a way to add the "rel" attribute to image links (or any links for that matter). CK also doesn't allow adding the "title" attribute to image links. Lightbox uses both of these to determine which images to display, group together in galleries, provide a caption, etc. I found <a href="http://dev.fckeditor.net/attachment/ticket/2627/fck-rel.patch">a patch for FCKeditor</a> which allows adding a "rel" attribute to image links, but I couldn't find one for the new CKEditor. So here we are. :)</p>
 
 

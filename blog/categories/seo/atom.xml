@@ -4,7 +4,7 @@
   <title><![CDATA[Category: SEO | Chili Pepper Design]]></title>
   <link href="http://thaddeusmt.github.com/blog/categories/seo/atom.xml" rel="self"/>
   <link href="http://thaddeusmt.github.com/"/>
-  <updated>2012-12-20T23:24:19-07:00</updated>
+  <updated>2012-12-20T23:45:39-07:00</updated>
   <id>http://thaddeusmt.github.com/</id>
   <author>
     <name><![CDATA[Evan Johnson]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Easy SEO: +2,500% page views from a year of casual blogging?]]></title>
-    <link href="http://thaddeusmt.github.comeasy-seo-2500-page-views-from-a-year-of-casual-blogging"/>
+    <link href="http://thaddeusmt.github.com/2010/03/04/easy-seo-2500-page-views-from-a-year-of-casual-blogging/"/>
     <updated>2010-03-04T00:35:00-07:00</updated>
-    <id>http://thaddeusmt.github.com./easy-seo-2500-page-views-from-a-year-of-casual-blogging</id>
+    <id>http://thaddeusmt.github.com/2010/03/04/easy-seo-2500-page-views-from-a-year-of-casual-blogging</id>
     <content type="html"><![CDATA[<p>You know, you always read in SEO articles about how important blogging is for increasing traffic. It's one of the top suggestions around for improving a website's search engine juice. Well, I am here to testify that it truly is a great SEO tool.</p>
 
 <p>Granted, the title of this post is hyperbolic link-bait. ;) But it's true nonetheless!</p>
@@ -47,9 +47,9 @@
   
   <entry>
     <title type="html"><![CDATA[htaccess 301 Redirects from one URL query string to another]]></title>
-    <link href="http://thaddeusmt.github.comhtaccess-query-string-301s"/>
+    <link href="http://thaddeusmt.github.com/2009/02/01/htaccess-query-string-301s/"/>
     <updated>2009-02-01T13:14:00-07:00</updated>
-    <id>http://thaddeusmt.github.com./htaccess-query-string-301s</id>
+    <id>http://thaddeusmt.github.com/2009/02/01/htaccess-query-string-301s</id>
     <content type="html"><![CDATA[<p>The other day I was trying to set up a "301 Moved Permanently":http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.3 redirect that took one dynamic url and redirected to <em>another</em> dynamic url.</p>
 
 <p>Searching around I found "plenty":http://www.seobook.com/archives/001714.shtml of "tips":http://www.webproworld.com/discussion-forum/73178-how-do-you-301-redirect-dynamic-url-url-question-mark.html on how to redirect from older "ugly" style dynamic urls like "test.php?id=999" to new "clean" dynamic urls like "test/999", but that wasn't exactly what I needed. I needed to go from something like "page.php?id=999" to something like"page.php?id=111". Basically just a parameter substitution.</p>

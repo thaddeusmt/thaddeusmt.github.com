@@ -1,0 +1,387 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Insert Flash Media Embed Code TinyMCE Plugin - Chili Pepper Design</title>
+  <meta name="author" content="Evan Johnson">
+
+  
+  <meta name="description" content="I&#8217;ve run into a problem providing my clients good, easy-to-use media embed functionality with the existing JavaScript WYSIWYG editors. The big &hellip;">
+  <meta name="keywords" content="tinymcemedia embedembed codeyoutube embedvideo embedinsert videoembed objecttincymce pluginflash embed plugingoogle maps">
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://thaddeusmt.github.com/2010/03/22/insert-flash-media-embed-code-tinymce-plugin/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Chili Pepper Design" type="application/atom+xml">
+  
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-6058373-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Chili Pepper Design</a></h1>
+  
+    <h2>Web development relleno</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:thaddeusmt.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Insert Flash Media Embed Code TinyMCE Plugin</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-03-22T16:19:00-06:00" pubdate data-updated="true">Mar 22<span>nd</span>, 2010</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>I&#8217;ve run into a problem providing my clients good, easy-to-use media embed functionality with the existing JavaScript <span class="caps">WYSIWYG</span> editors. The big players, <a href="http://ckeditor.com/">CKEditor</a> (formery FCKEditor) and <a href="http://tinymce.moxiecode.com/">TinyMCE</a> both provide a &#8220;Flash&#8221; button which works okay with YouTube and other large video providers, but what about embedding a Picasa slideshow? None of the <span class="caps">WYSIWYG</span> editors come with plugin to just insert some <span class="caps">HTML</span> code. If you want to embed something like a Picasa slideshow,  customized YouTube player, or Google Map you have open up the source code, find the location you want to insert it, and paste in the code. Fine for some, but difficult and scary for most as it breaks the <span class="caps">WYSIWYG</span> paradigm.</p>
+<p>On one of my latest Drupal websites there are multiple bloggers, none of whom are particularly tech savvy. I set up the <span class="caps">CMS</span> with TinyMCE because I like how they can drag and drop images around (I just wish Drupal had an image embed uploader like WordPress!). After a while they complained that the Insert Flash button in TinyMCE just wasn&#8217;t cutting it. So I set about fixing it. How hard could it be to make a plugin that just inserts some <span class="caps">HTML</span> code where your cursor is? Like it already does for images?</p>
+<p>It turns out it is very easy. I was able to just edit the TinyMCE &#8220;Example&#8221; plug-in, which already did basically exactly what I wanted. So here I provide it to you, Internet. I hope it is useful, and please let me know if it&#8217;s broken (or could work better). Thanks!</p>
+<p><strong><span class="caps">UPDATED</span></strong>: (9-17-2010) I fixed some bugs with IE. It should work better cross-browse now.</p>
+<p>Download the plugin:</p>
+<ul>
+	<li><strong><a href="http://sourceforge.net/tracker/?func=detail&amp;aid=2974843&amp;group_id=103281&amp;atid=738747">From SourceForge</a> </strong></li>
+	<li><strong><a href="http://www.chilipepperdesign.com/examples/tinymce-embed-plugin-v2.zip">From Chili Pepper Design</a> </strong></li>
+</ul>
+<p>I found some tips on installing TinyCME plugins here: <a href="http://tinymce.moxiecode.com/punbb/viewtopic.php?id=3349">Installing Plugin Newbie Question</a><br />
+Here is the official guide to creating a plugin for TinyMCE 3: <a href="http://wiki.moxiecode.com/index.php/TinyMCE:Create_plugin/3.x">TinyMCE:Create plugin/3.x</a></p>
+<p><strong>To use this plugin, install it in the TinyMCE plugin folder and just include it in the <em>TinyMCE.init()</em> call like you would the other plugins</strong>. Example (&#8220;<strong>embed</strong>&#8221; is the name of the plugin):</p>
+<pre><code>
+&lt;script type="text/javascript" src="&lt;your installation path&gt;/tiny_mce/tiny_mce.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript"&gt;
+  tinyMCE.init({
+    theme : "advanced",
+    mode : "textareas",
+    plugins : "embed, fullscreen, emotions, preview",
+    theme_advanced_buttons3_add : "embed, fullscreen, emotions, preview"
+  });
+&lt;/script&gt;</code></pre>
+<p><strong><em>Disclaimer</em>: I am not a TinyMCE guru, and not even that hot at JavaScript. I probably cannot help you with other TinyMCE plugins, or even this one. I only got this to work because the Example plugin was so close to what I already needed. But thanks for stopping by!</strong></p></div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Evan Johnson</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-03-22T16:19:00-06:00" pubdate data-updated="true">Mar 22<span>nd</span>, 2010</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/javascript/'>JavaScript</a>, <a class='category' href='/blog/categories/web-development/'>Web-Development</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://thaddeusmt.github.com/2010/03/22/insert-flash-media-embed-code-tinymce-plugin/" data-via="thaddeusmt" data-counturl="http://thaddeusmt.github.com/2010/03/22/insert-flash-media-embed-code-tinymce-plugin/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2010/03/22/learning-drupal-module-dev-dependent-ahahajax-forms/" title="Previous Post: Learning Drupal Module Dev: Dependent AHAH/AJAX Forms">&laquo; Learning Drupal Module Dev: Dependent AHAH/AJAX Forms</a>
+      
+      
+        <a class="basic-alignment right" href="/2010/03/24/a-facebook-content-management-system-cms-for-facebook-page-templates/" title="Next Post: A Facebook Content Management System (CMS) for Facebook Page Templates">A Facebook Content Management System (CMS) for Facebook Page Templates &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p><img id="profile-image" src="http://www.gravatar.com/avatar/02bee2f91e0a8c3aefbfa6bfb5304c51" alt="Gravatar of thaddeusmt " title="Gravatar of thaddeusmt" />My name is Evan Johnson. I'm a software developer from Montana, who spent some time in Nebraska. I'm the chief software architect at <a href="http://splashlabsocial.com">SplashLab Social</a>, but I am blogging here on my old freelance web design URL for fun. I hope you find something useful here, thanks for visiting! Cheers</p>
+</section><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2011/05/15/magento-15-ee-110-windows-command-line-batch-update-script-magebat/">Magento 1.5 / EE 1.10 Windows Command Line Batch Update Script mage.bat</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/02/15/reveal-fan-gate-like-gate-facebook-iframe-tab-tutorial-with-php/"> Reveal / Fan-Gate / Like-Gate Facebook iframe tab tutorial (with PHP)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/02/14/facebook-iframe-tabs-on-pages-no-more-fbml/">Facebook iframe tabs on Pages - No more FBML!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/03/24/a-facebook-content-management-system-cms-for-facebook-page-templates/">A Facebook Content Management System (CMS) for Facebook Page Templates</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/03/22/insert-flash-media-embed-code-tinymce-plugin/">Insert Flash Media Embed Code TinyMCE Plugin</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/blogs/'>Blogs (2)</a></li>
+<li class='category'><a href='/blog/categories/cms/'>CMS (6)</a></li>
+<li class='category'><a href='/blog/categories/css/'>CSS (2)</a></li>
+<li class='category'><a href='/blog/categories/javascript/'>JavaScript (3)</a></li>
+<li class='category'><a href='/blog/categories/seo/'>SEO (2)</a></li>
+<li class='category'><a href='/blog/categories/social-media/'>Social-Media (6)</a></li>
+<li class='category'><a href='/blog/categories/web-design/'>Web-Design (2)</a></li>
+<li class='category'><a href='/blog/categories/web-development/'>Web-Development (25)</a></li>
+<li class='category'><a href='/blog/categories/e-commerce/'>e-Commerce (11)</a></li>
+
+  </ul>
+</section>
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("thaddeusmt", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/thaddeusmt" class="twitter-follow-button" data-show-count="false">Follow @thaddeusmt</a>
+  
+</section>
+
+<section>
+  <h1>StackOverflow</h1>
+  <a id="stackoverflow-badge" href="http://stackoverflow.com/users/164439/thaddeusmt"><img src="http://stackoverflow.com/users/flair/164439.png" width="208" height="58" alt="profile for thaddeusmt at Stack Overflow, Q&amp;A for professional and enthusiast programmers" title="profile for thaddeusmt at Stack Overflow, Q&amp;A for professional and enthusiast programmers"></a>
+</section>
+<section>
+  <h1>Coderwall</h1>
+  <ul id="cw_badges">
+    <li class="loading">Status updating...</li>
+  </ul>
+
+  <script type="text/javascript">
+    var coderwall = (function(){
+      function render(options, badges){
+        var fragment = '',
+            t = $(options.target)[0],
+            height = 65,
+            width = 65,
+            index;
+
+        for (index in badges) {
+          fragment += '<a class="cw_badge"title="' + badges[index].description + '" href="http://coderwall.com/' + options.user + '">';
+          fragment +=   '<img alt="' + badges[index].description + '" height="' + width + '" width="' + height + '" src="' + badges[index].badge + '"/>';
+          fragment += '</a>';
+        }
+
+        t.innerHTML = fragment;
+      }
+      return {
+        showBadges: function(options){
+          $.ajax({
+              url: 'http://coderwall.com/' + options.user + '.json?callback=?'
+            , type: 'jsonp'
+            , error: function (err) { $(options.target + ' li.loading').addClass('error').text("Error loading feed"); }
+            , success: function(res) {
+                render(options, res.data.badges);
+            }
+          });
+        }
+      };
+    })();
+
+    $.domReady(function(){
+      if (!window.jXHR){
+        var jxhr = document.createElement('script');
+        jxhr.type = 'text/javascript';
+        jxhr.src = '/javascripts/libs/jXHR.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(jxhr, s);
+      }
+      if (!window.$){
+        var b = document.createElement('script');
+        b.type = 'text/javascript';
+        b.src = '/javascripts/ender.js';
+        var sc = document.getElementsByTagName('script')[0];
+        sc.parentNode.insertBefore(jxhr, s);
+      }
+      coderwall.showBadges({
+        user: 'thaddeusmt',
+        target: '#cw_badges'
+      });
+    });
+  </script>
+  <style type="text/css">
+    .cw_badge img {
+      padding: 5px;
+      border: 0 none !important;
+      -moz-box-shadow: none !important;
+      -webkit-box-shadow: none !important;
+      -o-box-shadow: none !important;
+      box-shadow: none !important;
+    }
+  </style>
+</section>
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Evan Johnson -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'chilipepperdesign';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

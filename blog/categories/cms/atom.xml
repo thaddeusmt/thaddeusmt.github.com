@@ -4,7 +4,7 @@
   <title><![CDATA[Category: CMS | Chili Pepper Design]]></title>
   <link href="http://thaddeusmt.github.com/blog/categories/cms/atom.xml" rel="self"/>
   <link href="http://thaddeusmt.github.com/"/>
-  <updated>2012-12-20T23:24:19-07:00</updated>
+  <updated>2012-12-20T23:45:39-07:00</updated>
   <id>http://thaddeusmt.github.com/</id>
   <author>
     <name><![CDATA[Evan Johnson]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[A Facebook Content Management System (CMS) for Facebook Page Templates]]></title>
-    <link href="http://thaddeusmt.github.coma-facebook-content-management-system-cms-for-facebook-page-templates"/>
+    <link href="http://thaddeusmt.github.com/2010/03/24/a-facebook-content-management-system-cms-for-facebook-page-templates/"/>
     <updated>2010-03-24T00:58:00-06:00</updated>
-    <id>http://thaddeusmt.github.com./a-facebook-content-management-system-cms-for-facebook-page-templates</id>
+    <id>http://thaddeusmt.github.com/2010/03/24/a-facebook-content-management-system-cms-for-facebook-page-templates</id>
     <content type="html"><![CDATA[<p><a href="http://www.splashlabsocial.com"><img src="http://www.chilipepperdesign.com/images/53t.jpg" style="float: left; margin-right: 10px;" /></a></p>
 
 <p style="font-size:1.2em;"><strong>Update: The project is now live and ready for signups! Head over to <a href="http://splashlabsocial.com">SplashLab Social</a> to learn more and get started. It's the easiest way to create and manage content on your Facebook Page's iframe tabs!</strong></p>
@@ -110,9 +110,9 @@
   
   <entry>
     <title type="html"><![CDATA[Learning Drupal Module Dev: Dependent AHAH/AJAX Forms]]></title>
-    <link href="http://thaddeusmt.github.comlearning-drupal-module-dev-dependent-ahahajax-forms"/>
+    <link href="http://thaddeusmt.github.com/2010/03/22/learning-drupal-module-dev-dependent-ahahajax-forms/"/>
     <updated>2010-03-22T01:32:00-06:00</updated>
-    <id>http://thaddeusmt.github.com./learning-drupal-module-dev-dependent-ahahajax-forms</id>
+    <id>http://thaddeusmt.github.com/2010/03/22/learning-drupal-module-dev-dependent-ahahajax-forms</id>
     <content type="html"><![CDATA[<p>So, I've been working on a simple module for a Drupal project lately. I wanted to have two administrator settings for the module, the second of which depends on the first. A "dependent dropdown". It would be cool if it was "AJAXy" too, I thought. Well, it just so turns out that in Drupal 6 there are built in <a href="http://ajax.phpmagazine.net/2005/11/ahah_asychronous_html_and_http.html">AHAH</a> (Asychronous HTML and HTTP) functions in the Forms API to do just this. Easy! Or is it?</p>
 
 
@@ -285,9 +285,9 @@ function ahahtestmodule_menu() {
   
   <entry>
     <title type="html"><![CDATA[How to programmatically create Views in Drupal 6]]></title>
-    <link href="http://thaddeusmt.github.comhow-to-programmatically-create-views-in-drupal-6"/>
+    <link href="http://thaddeusmt.github.com/2010/01/15/how-to-programmatically-create-views-in-drupal-6/"/>
     <updated>2010-01-15T00:08:00-07:00</updated>
-    <id>http://thaddeusmt.github.com./how-to-programmatically-create-views-in-drupal-6</id>
+    <id>http://thaddeusmt.github.com/2010/01/15/how-to-programmatically-create-views-in-drupal-6</id>
     <content type="html"><![CDATA[<p>So, this stumped me for a while. I needed my small custom Drupal module to select a bunch of nodes based on a CCK Date field and the Publish status. It is a pain to query the CCK tables directly, so every forum post I could find told me to do this via Views. That's all well and good, but the instructions for doing this all involved creating a View with the Vuiews UI, <em>then</em> calling it to make my query.</p>
 
 <p>But I wanted to have some of the View's query parameters change dynamically based on my module's admin settings. Although you could probably do this with some custom Views Argument PHP code, I didn't want to do it this way. It divorced the code from my module too much somehow. It would mean that after I installed my module I would have to create a View and paste in some custom PHP code! Yuck.</p>
@@ -376,9 +376,9 @@ print $view->execute_display('default', array());
   
   <entry>
     <title type="html"><![CDATA[Custom Loops for Custom Taxonomies in WordPress 2.8]]></title>
-    <link href="http://thaddeusmt.github.comcustom-loops-for-custom-taxonomies-in-wordpress-28"/>
+    <link href="http://thaddeusmt.github.com/2009/09/23/custom-loops-for-custom-taxonomies-in-wordpress-28/"/>
     <updated>2009-09-23T18:24:00-06:00</updated>
-    <id>http://thaddeusmt.github.com./custom-loops-for-custom-taxonomies-in-wordpress-28</id>
+    <id>http://thaddeusmt.github.com/2009/09/23/custom-loops-for-custom-taxonomies-in-wordpress-28</id>
     <content type="html"><![CDATA[<p>"WordPress 2.8":http://codex.wordpress.org/Version_2.8 saw a big expansion and enhancement of it's "Taxonomy API":http://codex.wordpress.org/WordPress_Taxonomy, allowing for easy creation of custom taxonomies. The default WordPress "category" and "tag" taxonomies are sufficient for most blogs, but the ability to define additional sets of terms ("vocabularies") makes the platform a much more flexible and powerful Content Management System than it was before. Ever since "Justin Tadlock":http://justintadlock.com/archives/2009/05/06/custom-taxonomies-in-wordpress-28 opened my eyes to how to create and use additional taxonomies, it seems like every WordPress project I work on needs one or two extra vocabularies. :)</p>
 
 <p>Working with Drupal as much as I have, I became very accustomed to having multiple taxonomies. It's incredibly useful. A classic example is Movies: each movie has a director, some actors, a year it was made, etc. You <em>could</em> just lump all these together with a bunch of "tags" in WordPress, but grouping "Actor" and "Year" tags together into taxonomies makes site organization and navigation much simpler (and more sensible).</p>
@@ -481,9 +481,9 @@ endif;
   
   <entry>
     <title type="html"><![CDATA[How to Integrate (Import) WordPress Content into Magento Blocks]]></title>
-    <link href="http://thaddeusmt.github.comhow-to-integrate-import-wordpress-content-into-magento-blocks"/>
+    <link href="http://thaddeusmt.github.com/2009/04/26/how-to-integrate-import-wordpress-content-into-magento-blocks/"/>
     <updated>2009-04-26T23:10:00-06:00</updated>
-    <id>http://thaddeusmt.github.com./how-to-integrate-import-wordpress-content-into-magento-blocks</id>
+    <id>http://thaddeusmt.github.com/2009/04/26/how-to-integrate-import-wordpress-content-into-magento-blocks</id>
     <content type="html"><![CDATA[<p>This is the technique I use to integrate "WordPress":http://wordpress.org/ content into "Magento":http://www.magentocommerce.com/. This can be useful for bringing in posts related to a product, or having recent blog posts on the Magento home page... whatever you can dream up. No modules, plugins or extensions are needed for this technique - just a good grasp of PHP and the Magento and WordPress theming/templating systems. There are probably many other ways to do this, but this is an easy way that I figured out which works well for my purposes so far.</p>
 
 <p><em>First, the WordPress side of the process.</em></p>

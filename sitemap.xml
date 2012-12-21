@@ -1,171 +1,183 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
-        <loc>http://thaddeusmt.github.comthe-new-blog</loc>
-        <lastmod>2012-12-20T23:20:41-07:00</lastmod>
+        <loc>http://thaddeusmt.github.com/2009/01/29/the-new-blog/</loc>
+        <lastmod>2012-12-20T23:45:26-07:00</lastmod>
     </url>
     <url>
-        <loc>http://thaddeusmt.github.comhtaccess-query-string-301s</loc>
-        <lastmod>2012-12-20T23:20:41-07:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://thaddeusmt.github.comretrofitting-content-management-systems-cms-on-existing-websites
-        </loc>
-        <lastmod>2012-12-20T23:20:41-07:00</lastmod>
+        <loc>http://thaddeusmt.github.com/2009/02/01/htaccess-query-string-301s/</loc>
+        <lastmod>2012-12-20T23:45:19-07:00</lastmod>
     </url>
     <url>
         <loc>
-            http://thaddeusmt.github.comhow-to-add-dynamic-content-to-magento-static-blocks-and-pages
+            http://thaddeusmt.github.com/2009/02/12/retrofitting-content-management-systems-cms-on-existing-websites/
         </loc>
-        <lastmod>2012-12-20T23:20:41-07:00</lastmod>
+        <lastmod>2012-12-20T23:45:13-07:00</lastmod>
     </url>
     <url>
         <loc>
-            http://thaddeusmt.github.commagento-how-to-list-all-the-products-in-a-single-category-in-a-sidebar-block
+            http://thaddeusmt.github.com/2009/03/03/how-to-add-dynamic-content-to-magento-static-blocks-and-pages/
         </loc>
-        <lastmod>2012-12-20T23:20:41-07:00</lastmod>
+        <lastmod>2012-12-20T23:45:09-07:00</lastmod>
     </url>
     <url>
         <loc>
-            http://thaddeusmt.github.comhow-to-integrate-import-wordpress-content-into-magento-blocks
+            http://thaddeusmt.github.com/2009/03/23/magento-how-to-list-all-the-products-in-a-single-category-in-a-sidebar-block/
         </loc>
-        <lastmod>2012-12-20T23:20:41-07:00</lastmod>
+        <lastmod>2012-12-20T23:45:03-07:00</lastmod>
     </url>
     <url>
         <loc>
-            http://thaddeusmt.github.comcss-equal-height-columns-with-bottom-border-and-margin
+            http://thaddeusmt.github.com/2009/04/26/how-to-integrate-import-wordpress-content-into-magento-blocks/
         </loc>
-        <lastmod>2012-12-20T23:20:41-07:00</lastmod>
+        <lastmod>2012-12-20T23:44:50-07:00</lastmod>
     </url>
     <url>
         <loc>
-            http://thaddeusmt.github.commagento-how-to-protect-pages-so-only-logged-in-users-can-view-them
+            http://thaddeusmt.github.com/2009/05/03/css-equal-height-columns-with-bottom-border-and-margin/
         </loc>
-        <lastmod>2012-12-20T23:20:41-07:00</lastmod>
-    </url>
-    <url>
-        <loc>http://thaddeusmt.github.comchanging-magento-order-invoice-and-shipping-numbers</loc>
-        <lastmod>2012-12-20T23:20:41-07:00</lastmod>
+        <lastmod>2012-12-20T23:44:45-07:00</lastmod>
     </url>
     <url>
         <loc>
-            http://thaddeusmt.github.comhow-to-edit-orders-with-configurable-products-in-magento
+            http://thaddeusmt.github.com/2009/07/08/magento-how-to-protect-pages-so-only-logged-in-users-can-view-them/
         </loc>
-        <lastmod>2012-12-20T23:20:41-07:00</lastmod>
-    </url>
-    <url>
-        <loc>http://thaddeusmt.github.commagento-six-months-in</loc>
-        <lastmod>2012-12-20T23:20:41-07:00</lastmod>
+        <lastmod>2012-12-20T23:44:39-07:00</lastmod>
     </url>
     <url>
         <loc>
-            http://thaddeusmt.github.comwordpress-a-loop-inside-of-a-loop-with-working-comments
+            http://thaddeusmt.github.com/2009/07/09/changing-magento-order-invoice-and-shipping-numbers/
         </loc>
-        <lastmod>2012-12-20T23:20:41-07:00</lastmod>
-    </url>
-    <url>
-        <loc>http://thaddeusmt.github.comcustom-loops-for-custom-taxonomies-in-wordpress-28</loc>
-        <lastmod>2012-12-20T23:20:41-07:00</lastmod>
+        <lastmod>2012-12-20T23:44:34-07:00</lastmod>
     </url>
     <url>
         <loc>
-            http://thaddeusmt.github.comhow-to-make-custom-facebook-fan-page-tabs-with-fbml-part-1
+            http://thaddeusmt.github.com/2009/08/10/how-to-edit-orders-with-configurable-products-in-magento/
         </loc>
-        <lastmod>2012-12-20T23:20:41-07:00</lastmod>
+        <lastmod>2012-12-20T23:44:28-07:00</lastmod>
+    </url>
+    <url>
+        <loc>http://thaddeusmt.github.com/2009/08/13/magento-six-months-in/</loc>
+        <lastmod>2012-12-20T23:44:21-07:00</lastmod>
     </url>
     <url>
         <loc>
-            http://thaddeusmt.github.comhow-to-make-custom-facebook-fan-page-tabs-with-fbml-part-2
+            http://thaddeusmt.github.com/2009/08/25/wordpress-a-loop-inside-of-a-loop-with-working-comments/
         </loc>
-        <lastmod>2012-12-20T23:20:41-07:00</lastmod>
+        <lastmod>2012-12-20T23:44:13-07:00</lastmod>
     </url>
     <url>
         <loc>
-            http://thaddeusmt.github.coma-simple-fbjs-image-carousel-or-slideshow-for-facebook-page-tabs
+            http://thaddeusmt.github.com/2009/09/23/custom-loops-for-custom-taxonomies-in-wordpress-28/
         </loc>
-        <lastmod>2012-12-20T23:20:41-07:00</lastmod>
-    </url>
-    <url>
-        <loc>http://thaddeusmt.github.combook-review-magento-beginners-guide</loc>
-        <lastmod>2012-12-20T23:20:41-07:00</lastmod>
+        <lastmod>2012-12-20T23:44:07-07:00</lastmod>
     </url>
     <url>
         <loc>
-            http://thaddeusmt.github.comconfiguring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-1
+            http://thaddeusmt.github.com/2009/10/06/how-to-make-custom-facebook-fan-page-tabs-with-fbml-part-1/
         </loc>
-        <lastmod>2012-12-20T23:20:41-07:00</lastmod>
+        <lastmod>2012-12-20T23:44:01-07:00</lastmod>
     </url>
     <url>
         <loc>
-            http://thaddeusmt.github.comconfiguring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-2
+            http://thaddeusmt.github.com/2009/10/11/how-to-make-custom-facebook-fan-page-tabs-with-fbml-part-2/
         </loc>
-        <lastmod>2012-12-20T23:20:41-07:00</lastmod>
+        <lastmod>2012-12-20T23:43:55-07:00</lastmod>
     </url>
     <url>
         <loc>
-            http://thaddeusmt.github.comconfiguring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-3
+            http://thaddeusmt.github.com/2009/11/01/a-simple-fbjs-image-carousel-or-slideshow-for-facebook-page-tabs/
         </loc>
-        <lastmod>2012-12-20T23:20:41-07:00</lastmod>
+        <lastmod>2012-12-20T23:43:49-07:00</lastmod>
+    </url>
+    <url>
+        <loc>http://thaddeusmt.github.com/2009/11/26/book-review-magento-beginners-guide/</loc>
+        <lastmod>2012-12-20T23:43:43-07:00</lastmod>
     </url>
     <url>
         <loc>
-            http://thaddeusmt.github.comadding-the-rel-and-title-attributes-to-image-links-in-ckeditor-3
+            http://thaddeusmt.github.com/2009/12/14/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-1/
         </loc>
-        <lastmod>2012-12-20T23:20:41-07:00</lastmod>
+        <lastmod>2012-12-20T23:43:36-07:00</lastmod>
     </url>
     <url>
         <loc>
-            http://thaddeusmt.github.comunobtrusive-jcarousel-pagetab-external-controls-with-jquery
+            http://thaddeusmt.github.com/2009/12/18/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-2/
         </loc>
-        <lastmod>2012-12-20T23:20:41-07:00</lastmod>
-    </url>
-    <url>
-        <loc>http://thaddeusmt.github.comhow-to-programmatically-create-views-in-drupal-6</loc>
-        <lastmod>2012-12-20T23:20:41-07:00</lastmod>
+        <lastmod>2012-12-20T23:43:30-07:00</lastmod>
     </url>
     <url>
         <loc>
-            http://thaddeusmt.github.comeasy-seo-2500-page-views-from-a-year-of-casual-blogging
+            http://thaddeusmt.github.com/2010/01/03/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-3/
         </loc>
-        <lastmod>2012-12-20T23:20:41-07:00</lastmod>
-    </url>
-    <url>
-        <loc>http://thaddeusmt.github.comlearning-drupal-module-dev-dependent-ahahajax-forms</loc>
-        <lastmod>2012-12-20T23:20:41-07:00</lastmod>
-    </url>
-    <url>
-        <loc>http://thaddeusmt.github.cominsert-flash-media-embed-code-tinymce-plugin</loc>
-        <lastmod>2012-12-20T23:20:41-07:00</lastmod>
+        <lastmod>2012-12-20T23:43:23-07:00</lastmod>
     </url>
     <url>
         <loc>
-            http://thaddeusmt.github.coma-facebook-content-management-system-cms-for-facebook-page-templates
+            http://thaddeusmt.github.com/2010/01/08/adding-the-rel-and-title-attributes-to-image-links-in-ckeditor-3/
         </loc>
-        <lastmod>2012-12-20T23:20:41-07:00</lastmod>
-    </url>
-    <url>
-        <loc>http://thaddeusmt.github.comfacebook-iframe-tabs-on-pages-no-more-fbml</loc>
-        <lastmod>2012-12-20T23:20:41-07:00</lastmod>
+        <lastmod>2012-12-20T23:43:17-07:00</lastmod>
     </url>
     <url>
         <loc>
-            http://thaddeusmt.github.comreveal-fan-gate-like-gate-facebook-iframe-tab-tutorial-with-php
+            http://thaddeusmt.github.com/2010/01/14/unobtrusive-jcarousel-pagetab-external-controls-with-jquery/
         </loc>
-        <lastmod>2012-12-20T23:20:41-07:00</lastmod>
+        <lastmod>2012-12-20T23:43:11-07:00</lastmod>
     </url>
     <url>
         <loc>
-            http://thaddeusmt.github.commagento-15-ee-110-windows-command-line-batch-update-script-magebat
+            http://thaddeusmt.github.com/2010/01/15/how-to-programmatically-create-views-in-drupal-6/
         </loc>
-        <lastmod>2012-12-20T23:20:41-07:00</lastmod>
+        <lastmod>2012-12-20T23:43:04-07:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://thaddeusmt.github.com/2010/03/04/easy-seo-2500-page-views-from-a-year-of-casual-blogging/
+        </loc>
+        <lastmod>2012-12-20T23:42:55-07:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://thaddeusmt.github.com/2010/03/22/learning-drupal-module-dev-dependent-ahahajax-forms/
+        </loc>
+        <lastmod>2012-12-20T23:42:41-07:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://thaddeusmt.github.com/2010/03/22/insert-flash-media-embed-code-tinymce-plugin/
+        </loc>
+        <lastmod>2012-12-20T23:42:49-07:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://thaddeusmt.github.com/2010/03/24/a-facebook-content-management-system-cms-for-facebook-page-templates/
+        </loc>
+        <lastmod>2012-12-20T23:42:34-07:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://thaddeusmt.github.com/2011/02/14/facebook-iframe-tabs-on-pages-no-more-fbml/
+        </loc>
+        <lastmod>2012-12-20T23:42:28-07:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://thaddeusmt.github.com/2011/02/15/reveal-fan-gate-like-gate-facebook-iframe-tab-tutorial-with-php/
+        </loc>
+        <lastmod>2012-12-20T23:42:21-07:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://thaddeusmt.github.com/2011/05/15/magento-15-ee-110-windows-command-line-batch-update-script-magebat/
+        </loc>
+        <lastmod>2012-12-20T23:39:44-07:00</lastmod>
     </url>
     <url>
         <loc>http://thaddeusmt.github.com/archives/</loc>
-        <lastmod>2012-12-20T23:20:41-07:00</lastmod>
+        <lastmod>2012-12-20T23:45:26-07:00</lastmod>
     </url>
     <url>
         <loc>http://thaddeusmt.github.com/</loc>
-        <lastmod>2012-12-20T23:20:41-07:00</lastmod>
+        <lastmod>2012-12-20T23:45:26-07:00</lastmod>
     </url>
 </urlset>

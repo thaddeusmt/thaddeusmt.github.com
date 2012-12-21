@@ -4,7 +4,7 @@
   <title><![CDATA[Chili Pepper Design]]></title>
   <link href="http://thaddeusmt.github.com/atom.xml" rel="self"/>
   <link href="http://thaddeusmt.github.com/"/>
-  <updated>2012-12-20T23:24:19-07:00</updated>
+  <updated>2012-12-20T23:45:39-07:00</updated>
   <id>http://thaddeusmt.github.com/</id>
   <author>
     <name><![CDATA[Evan Johnson]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Magento 1.5 / EE 1.10 Windows Command Line Batch Update Script mage.bat]]></title>
-    <link href="http://thaddeusmt.github.commagento-15-ee-110-windows-command-line-batch-update-script-magebat"/>
+    <link href="http://thaddeusmt.github.com/2011/05/15/magento-15-ee-110-windows-command-line-batch-update-script-magebat/"/>
     <updated>2011-05-15T23:00:00-06:00</updated>
-    <id>http://thaddeusmt.github.com./magento-15-ee-110-windows-command-line-batch-update-script-magebat</id>
+    <id>http://thaddeusmt.github.com/2011/05/15/magento-15-ee-110-windows-command-line-batch-update-script-magebat</id>
     <content type="html"><![CDATA[<p>So, this might be for kind of a narrow audience, but I&#8217;m pretty stoked on it so I wanted to share.</p>
 <p>In the newest version of the Magento ecommerce platform, Magento 1.5, they have redone their update script. In <a href="http://www.yireo.com/blog/1294-magento-15-mage-command-line">Magento Connect 2.0</a>, what was called &#8220;pear&#8221; is now &#8220;mage&#8221;.</p>
 <p>Old and busted:<br />
@@ -43,9 +43,9 @@
   
   <entry>
     <title type="html"><![CDATA[ Reveal / Fan-Gate / Like-Gate Facebook iframe tab tutorial (with PHP)]]></title>
-    <link href="http://thaddeusmt.github.comreveal-fan-gate-like-gate-facebook-iframe-tab-tutorial-with-php"/>
+    <link href="http://thaddeusmt.github.com/2011/02/15/reveal-fan-gate-like-gate-facebook-iframe-tab-tutorial-with-php/"/>
     <updated>2011-02-15T00:37:00-07:00</updated>
-    <id>http://thaddeusmt.github.com./reveal-fan-gate-like-gate-facebook-iframe-tab-tutorial-with-php</id>
+    <id>http://thaddeusmt.github.com/2011/02/15/reveal-fan-gate-like-gate-facebook-iframe-tab-tutorial-with-php</id>
     <content type="html"><![CDATA[<p><em><strong>Update: <a href="http://www.splashlabsocial.com">SplashLab Social</a> has been released!</strong> <a href="http://www.splashlabsocial.com">If you are looking for an easier way to set up Fans-only/Reveal tabs, look no further!</a> My new service makes it easy to create custom fan-gate tabs, check it out!</em></p>
 <p><a href="http://developers.facebook.com/blog/post/462#fbml_roadmap"><span class="caps">FBML</span> is going away</a>. Is the popular (and effective) strategy of &#8220;fan-gating&#8221; content to encourage visitors to Like you page going away with the &#8220;&lt;fb:visible-to-connection&gt;&#8221;:http://developers.facebook.com/docs/reference/fbml/visible-to-connection/ <span class="caps">FBML</span> tag?</p>
 <p>No! Facebook has been kind enough to provide a new method for implementing &#8220;reveal tabs&#8221; on the new iframe tabs. Follow along in the tutorial below to learn how to do this.</p>
@@ -131,9 +131,9 @@
   
   <entry>
     <title type="html"><![CDATA[Facebook iframe tabs on Pages - No more FBML!]]></title>
-    <link href="http://thaddeusmt.github.comfacebook-iframe-tabs-on-pages-no-more-fbml"/>
+    <link href="http://thaddeusmt.github.com/2011/02/14/facebook-iframe-tabs-on-pages-no-more-fbml/"/>
     <updated>2011-02-14T23:43:00-07:00</updated>
-    <id>http://thaddeusmt.github.com./facebook-iframe-tabs-on-pages-no-more-fbml</id>
+    <id>http://thaddeusmt.github.com/2011/02/14/facebook-iframe-tabs-on-pages-no-more-fbml</id>
     <content type="html"><![CDATA[<p>The long awaited transition from <span class="caps">FBML</span> tabs to iframe tabs has finally happened. As of this writing on Feb 14th 2011 (Valentines Day!) you can choose the &#8220;iframe&#8221; option for Facebook application tabs. The official word from the <a href="http://developers.facebook.com/roadmap/">Facebook developer roadmap</a> is that <a href="http://developers.facebook.com/blog/post/462#fbml_roadmap">as of March 11th developers will no longer be able to create <span class="caps">FBML</span> tabs</a> (although existing <span class="caps">FBML</span> apps will be supported indefinitely &#8211; or at least until the end of 2011 I heard in the comments).</p>
 <p><img src="http://www.chilipepperdesign.com/images/52.jpg" style="width: 415px" /></p>
 <h3>The Good</h3>
@@ -163,9 +163,9 @@
   
   <entry>
     <title type="html"><![CDATA[A Facebook Content Management System (CMS) for Facebook Page Templates]]></title>
-    <link href="http://thaddeusmt.github.coma-facebook-content-management-system-cms-for-facebook-page-templates"/>
+    <link href="http://thaddeusmt.github.com/2010/03/24/a-facebook-content-management-system-cms-for-facebook-page-templates/"/>
     <updated>2010-03-24T00:58:00-06:00</updated>
-    <id>http://thaddeusmt.github.com./a-facebook-content-management-system-cms-for-facebook-page-templates</id>
+    <id>http://thaddeusmt.github.com/2010/03/24/a-facebook-content-management-system-cms-for-facebook-page-templates</id>
     <content type="html"><![CDATA[<p><a href="http://www.splashlabsocial.com"><img src="http://www.chilipepperdesign.com/images/53t.jpg" style="float: left; margin-right: 10px;" /></a><br />
 <p style="font-size:1.2em;"><strong>Update: The project is now live and ready for signups! Head over to <a href="http://splashlabsocial.com">SplashLab Social</a> to learn more and get started. It&#8217;s the easiest way to create and manage content on your Facebook Page&#8217;s iframe tabs!</strong></p></p>
 <p><br />
@@ -214,9 +214,9 @@
   
   <entry>
     <title type="html"><![CDATA[Insert Flash Media Embed Code TinyMCE Plugin]]></title>
-    <link href="http://thaddeusmt.github.cominsert-flash-media-embed-code-tinymce-plugin"/>
+    <link href="http://thaddeusmt.github.com/2010/03/22/insert-flash-media-embed-code-tinymce-plugin/"/>
     <updated>2010-03-22T16:19:00-06:00</updated>
-    <id>http://thaddeusmt.github.com./insert-flash-media-embed-code-tinymce-plugin</id>
+    <id>http://thaddeusmt.github.com/2010/03/22/insert-flash-media-embed-code-tinymce-plugin</id>
     <content type="html"><![CDATA[<p>I&#8217;ve run into a problem providing my clients good, easy-to-use media embed functionality with the existing JavaScript <span class="caps">WYSIWYG</span> editors. The big players, <a href="http://ckeditor.com/">CKEditor</a> (formery FCKEditor) and <a href="http://tinymce.moxiecode.com/">TinyMCE</a> both provide a &#8220;Flash&#8221; button which works okay with YouTube and other large video providers, but what about embedding a Picasa slideshow? None of the <span class="caps">WYSIWYG</span> editors come with plugin to just insert some <span class="caps">HTML</span> code. If you want to embed something like a Picasa slideshow,  customized YouTube player, or Google Map you have open up the source code, find the location you want to insert it, and paste in the code. Fine for some, but difficult and scary for most as it breaks the <span class="caps">WYSIWYG</span> paradigm.</p>
 <p>On one of my latest Drupal websites there are multiple bloggers, none of whom are particularly tech savvy. I set up the <span class="caps">CMS</span> with TinyMCE because I like how they can drag and drop images around (I just wish Drupal had an image embed uploader like WordPress!). After a while they complained that the Insert Flash button in TinyMCE just wasn&#8217;t cutting it. So I set about fixing it. How hard could it be to make a plugin that just inserts some <span class="caps">HTML</span> code where your cursor is? Like it already does for images?</p>
 <p>It turns out it is very easy. I was able to just edit the TinyMCE &#8220;Example&#8221; plug-in, which already did basically exactly what I wanted. So here I provide it to you, Internet. I hope it is useful, and please let me know if it&#8217;s broken (or could work better). Thanks!</p>
@@ -244,9 +244,9 @@ Here is the official guide to creating a plugin for TinyMCE 3: <a href="http://w
   
   <entry>
     <title type="html"><![CDATA[Learning Drupal Module Dev: Dependent AHAH/AJAX Forms]]></title>
-    <link href="http://thaddeusmt.github.comlearning-drupal-module-dev-dependent-ahahajax-forms"/>
+    <link href="http://thaddeusmt.github.com/2010/03/22/learning-drupal-module-dev-dependent-ahahajax-forms/"/>
     <updated>2010-03-22T01:32:00-06:00</updated>
-    <id>http://thaddeusmt.github.com./learning-drupal-module-dev-dependent-ahahajax-forms</id>
+    <id>http://thaddeusmt.github.com/2010/03/22/learning-drupal-module-dev-dependent-ahahajax-forms</id>
     <content type="html"><![CDATA[<p>So, I&#8217;ve been working on a simple module for a Drupal project lately. I wanted to have two administrator settings for the module, the second of which depends on the first. A &#8220;dependent dropdown&#8221;. It would be cool if it was &#8220;AJAXy&#8221; too, I thought. Well, it just so turns out that in Drupal 6 there are built in <a href="http://ajax.phpmagazine.net/2005/11/ahah_asychronous_html_and_http.html"><span class="caps">AHAH</span></a> (Asychronous <span class="caps">HTML</span> and <span class="caps">HTTP</span>) functions in the Forms <span class="caps">API</span> to do just this. Easy! Or is it?</p>
 <p>It also turns out there is a steep learning curve to making &#8220;Ajax forms&#8221; with the Drupal Forms <span class="caps">API</span>. I got it working, but it took a fair amount of effort. So, to help out future Drupal <span class="caps">AHAH</span> developers I am providing my code below, along with a list of links to resources that were a great help in unraveling this problem.</p>
 <p>First, to help provide an &#8220;aerial view&#8221; of what&#8217;s going on here, this is a list of the components involved:</p>
@@ -376,9 +376,9 @@ function ahahtestmodule_menu() {
   
   <entry>
     <title type="html"><![CDATA[Easy SEO: +2,500% page views from a year of casual blogging?]]></title>
-    <link href="http://thaddeusmt.github.comeasy-seo-2500-page-views-from-a-year-of-casual-blogging"/>
+    <link href="http://thaddeusmt.github.com/2010/03/04/easy-seo-2500-page-views-from-a-year-of-casual-blogging/"/>
     <updated>2010-03-04T00:35:00-07:00</updated>
-    <id>http://thaddeusmt.github.com./easy-seo-2500-page-views-from-a-year-of-casual-blogging</id>
+    <id>http://thaddeusmt.github.com/2010/03/04/easy-seo-2500-page-views-from-a-year-of-casual-blogging</id>
     <content type="html"><![CDATA[<p>You know, you always read in <span class="caps">SEO</span> articles about how important blogging is for increasing traffic. It&#8217;s one of the top suggestions around for improving a website&#8217;s search engine juice. Well, I am here to testify that it truly is a great <span class="caps">SEO</span> tool.</p>
 <p>Granted, the title of this post is hyperbolic link-bait. ;) But it&#8217;s true nonetheless!</p>
 <p>I&#8217;ve had this site, <a href="http://www.chilipepperdesign.com">http://chilipepperdesign.com</a>, up for probably five years now but only as a static portfolio site for most of that time. Then, a year ago, I upgraded the site and added a blog to it. In that year <em><strong>my monthly page views have increased 2,500% and the number of monthly visits has gone up 4,400%</strong></em>.</p>
@@ -397,9 +397,9 @@ function ahahtestmodule_menu() {
   
   <entry>
     <title type="html"><![CDATA[How to programmatically create Views in Drupal 6]]></title>
-    <link href="http://thaddeusmt.github.comhow-to-programmatically-create-views-in-drupal-6"/>
+    <link href="http://thaddeusmt.github.com/2010/01/15/how-to-programmatically-create-views-in-drupal-6/"/>
     <updated>2010-01-15T00:08:00-07:00</updated>
-    <id>http://thaddeusmt.github.com./how-to-programmatically-create-views-in-drupal-6</id>
+    <id>http://thaddeusmt.github.com/2010/01/15/how-to-programmatically-create-views-in-drupal-6</id>
     <content type="html"><![CDATA[<p>So, this stumped me for a while. I needed my small custom Drupal module to select a bunch of nodes based on a <span class="caps">CCK</span> Date field and the Publish status. It is a pain to query the <span class="caps">CCK</span> tables directly, so every forum post I could find told me to do this via Views. That&#8217;s all well and good, but the instructions for doing this all involved creating a View with the Vuiews UI, <em>then</em> calling it to make my query.</p>
 <p>But I wanted to have some of the View&#8217;s query parameters change dynamically based on my module&#8217;s admin settings. Although you could probably do this with some custom Views Argument <span class="caps">PHP</span> code, I didn&#8217;t want to do it this way. It divorced the code from my module too much somehow. It would mean that after I installed my module I would have to create a View and paste in some custom <span class="caps">PHP</span> code! Yuck.</p>
 <p>Looking through the Views 2 documentation I learned how to create &#8220;default views&#8221; for a module, but still I didn&#8217;t like this approach. This would mean that the custom view would still appear in the Views list, and could be disabled, modified, and what have you. What I really wanted to do was just create a View programmatically in my module code. How hard could it be?</p>
@@ -479,9 +479,9 @@ print $view-&gt;execute_display('default', array());
   
   <entry>
     <title type="html"><![CDATA[Unobtrusive jCarousel page/tab external controls with jQuery]]></title>
-    <link href="http://thaddeusmt.github.comunobtrusive-jcarousel-pagetab-external-controls-with-jquery"/>
+    <link href="http://thaddeusmt.github.com/2010/01/14/unobtrusive-jcarousel-pagetab-external-controls-with-jquery/"/>
     <updated>2010-01-14T12:49:00-07:00</updated>
-    <id>http://thaddeusmt.github.com./unobtrusive-jcarousel-pagetab-external-controls-with-jquery</id>
+    <id>http://thaddeusmt.github.com/2010/01/14/unobtrusive-jcarousel-pagetab-external-controls-with-jquery</id>
     <content type="html"><![CDATA[<p>I am using the very slick and enjoyable <a href="http://sorgalla.com/projects/jcarousel/">jCarousel</a> plugin for <a href="http://jquery.com/">jQuery</a> on a new project to display featured content on the front page. I wanted to use the <a href="http://sorgalla.com/projects/jcarousel/examples/static_controls.html">external controls</a> to allow users to easily jump between slides. However, all the examples I found required hard-coding the control links into the document <span class="caps">HTML</span>. This is not best practice because when JavaScript is disabled and the carousel degrades to a simple list you have a bunch of control links that do nothing sitting there on the page. Better to create the controls in JS and append them to the <span class="caps">DOM</span> with jQuery! This way the controls only appear when the jCarousel script is loaded and ready to use them.</p>
 <p>To do this I just had to add a little extra code to the <em>initCallback</em> method I was already using to bind the external controls. Here is the JS needed to unobtrusively create a jCarousel with 4 external control links:</p>
 <pre><code>&lt;script type="text/javascript"&gt;
@@ -509,9 +509,9 @@ jQuery(document).ready(function() {
   
   <entry>
     <title type="html"><![CDATA[Adding the "rel" and "title" attributes to image links in CKEditor 3]]></title>
-    <link href="http://thaddeusmt.github.comadding-the-rel-and-title-attributes-to-image-links-in-ckeditor-3"/>
+    <link href="http://thaddeusmt.github.com/2010/01/08/adding-the-rel-and-title-attributes-to-image-links-in-ckeditor-3/"/>
     <updated>2010-01-08T14:37:00-07:00</updated>
-    <id>http://thaddeusmt.github.com./adding-the-rel-and-title-attributes-to-image-links-in-ckeditor-3</id>
+    <id>http://thaddeusmt.github.com/2010/01/08/adding-the-rel-and-title-attributes-to-image-links-in-ckeditor-3</id>
     <content type="html"><![CDATA[<p><a href="http://ckeditor.com/">CKEditor</a> is the new and improved successor to the venerable <a href="http://sourceforge.net/projects/fckeditor/files/FCKeditor/">FCKeditor</a> JavaScript <span class="caps">WYSIWYG</span> editor. I&#8217;ve used <a href="http://tinymce.moxiecode.com/">TinyMCE</a> and FCKeditor before, but this was my first time trying out the new CKEditor 3.1. I am using it on a new Drupal website via the <a href="http://drupal.org/project/ckeditor">Drupal CKEditor module</a>. The problem I ran into, however, is using <a href="http://www.huddletogether.com/projects/lightbox2/">Lightbox2</a> on images inserted via CKEditor. CK does not provide a way to add the &#8220;rel&#8221; attribute to image links (or any links for that matter). CK also doesn&#8217;t allow adding the &#8220;title&#8221; attribute to image links. Lightbox uses both of these to determine which images to display, group together in galleries, provide a caption, etc. I found <a href="http://dev.fckeditor.net/attachment/ticket/2627/fck-rel.patch">a patch for FCKeditor</a> which allows adding a &#8220;rel&#8221; attribute to image links, but I couldn&#8217;t find one for the new CKEditor. So here we are. :)</p>
 <p>This is a total hack, since I have not looked in to how to properly make a plugin for the new CKEditor, but it works pretty well. Maybe someone who knows how to make plugins to CKEditor can show me the way.</p>
 <p>To start hacking, we need to first copy over the minified <em>ckeditor\plugins\image\dialogs\image.js</em> with the indented <em>ckeditor\_source\plugins\image\dialogs\image.js</em>, since it&#8217;s really hard to work with the minified <em>image.js</em>.</p>
@@ -574,9 +574,9 @@ commit : function( type, element )
   
   <entry>
     <title type="html"><![CDATA[Configuring and compiling Nginx and PHP-FPM on Ubuntu for Magento, Part 3]]></title>
-    <link href="http://thaddeusmt.github.comconfiguring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-3"/>
+    <link href="http://thaddeusmt.github.com/2010/01/03/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-3/"/>
     <updated>2010-01-03T20:47:00-07:00</updated>
-    <id>http://thaddeusmt.github.com./configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-3</id>
+    <id>http://thaddeusmt.github.com/2010/01/03/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-3</id>
     <content type="html"><![CDATA[<p>This is the 3rd and final article about installing Magento on Nginx with <span class="caps">PHP</span>-<span class="caps">FPM</span>. <a href="http://www.chilipepperdesign.com/2009/12/14/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-1">Part 1 is here</a>, and <a href="http://www.chilipepperdesign.com/2009/12/18/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-2">Part 2 is here</a>.</p>
 <p>This part explains how I set up my public web directories, and how I did the Nginx configuration files for a Magento site. One of the tricky things about switching to Nginx from Apache is that Nginx does not use .htaccess files or the usual Apache mod_rewrite rules for pretty/<span class="caps">SEO</span> URLs. You can replicate all of Magento&#8217;s mod_rewrite rules with Nginx&#8217;s own rewrite module, but it takes some getting used to and Magento doesn&#8217;t come with them pre-written (like the mod_rewrite rules in the .htaccess files).</p>
 <p>Here are some of the resources I used:</p>
@@ -708,9 +708,9 @@ server {
   
   <entry>
     <title type="html"><![CDATA[Configuring and compiling Nginx and PHP-FPM on Ubuntu for Magento, Part 2]]></title>
-    <link href="http://thaddeusmt.github.comconfiguring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-2"/>
+    <link href="http://thaddeusmt.github.com/2009/12/18/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-2/"/>
     <updated>2009-12-18T19:17:00-07:00</updated>
-    <id>http://thaddeusmt.github.com./configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-2</id>
+    <id>http://thaddeusmt.github.com/2009/12/18/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-2</id>
     <content type="html"><![CDATA[<p>This is the second part of my little guide to get Magento running on Nginx with <span class="caps">PHP</span>-<span class="caps">FPM</span> and <span class="caps">APC</span>. Check out <a href="http://www.chilipepperdesign.com/2009/12/14/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-1">Part 1 here</a> and <a href="http://www.chilipepperdesign.com/2010/01/03/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-3">Part 3 here</a>.</p>
 <p>In this part, we compile <a href="http://php-fpm.org/"><span class="caps">PHP</span>-<span class="caps">FPM</span></a> and get it working with the <a href="http://php.net/manual/en/book.apc.php"><span class="caps">APC</span></a> &#8220;Accelerator&#8221; cache for Nginx. The first step is to compile <span class="caps">PHP</span>-<span class="caps">FPM</span>. Some of this is taken almost verbatim from the <span class="caps">FPM</span> <a href="http://github.com/dreamcat4/php-fpm/blob/master/readme.markdown">readme</a>:</p>
 
@@ -775,9 +775,9 @@ apc.include_once_override = 1
   
   <entry>
     <title type="html"><![CDATA[Configuring and compiling Nginx and PHP-FPM on Ubuntu for Magento, Part 1]]></title>
-    <link href="http://thaddeusmt.github.comconfiguring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-1"/>
+    <link href="http://thaddeusmt.github.com/2009/12/14/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-1/"/>
     <updated>2009-12-14T21:08:00-07:00</updated>
-    <id>http://thaddeusmt.github.com./configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-1</id>
+    <id>http://thaddeusmt.github.com/2009/12/14/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-1</id>
     <content type="html"><![CDATA[<p>So, Magento is a huge piece of modular and extensible <span class="caps">PHP</span> code. Each request takes a lot of <span class="caps">CPU</span> cycles and memory to kick out a Magento page. This means it is <em>slow</em>. The performance of Magento is a frequent complaint, and rightfully so: consumers won&#8217;t wait around all day for an ecommerce store to load. They will bail out and try another store if a page doesn&#8217;t load in just a few seconds. A default Magento 1.3 install on budget web hosting can have page load times of up to 10secs, which is unacceptable. </p>
 <p>So what can be done to speed up Magento?</p>
 <p>There are a <a href="http://www.magentocommerce.com/wiki/groups/168/optimising_your_web_stack_performance_for_magento">number</a> of <a href="http://www.magentocommerce.com/blog/comments/understanding-magento-scalability-and-performance-1/">things</a>. I have tried almost all of them at this point. And I did reduce the page load time greatly, at least on the front end. But all of the AJAXy scripts on the backend (which has no caching, as far as I know) meant store maintenance and order fulfillment remained a tedious process. So I decided to try one final thing: make the switch from trusty old <a href="http://www.apache.org/">Apache</a> to <a href="http://wiki.nginx.org">Nginx</a>.</p>
@@ -889,9 +889,9 @@ exit 0
   
   <entry>
     <title type="html"><![CDATA[Book Review: Magento Beginner's Guide]]></title>
-    <link href="http://thaddeusmt.github.combook-review-magento-beginners-guide"/>
+    <link href="http://thaddeusmt.github.com/2009/11/26/book-review-magento-beginners-guide/"/>
     <updated>2009-11-26T21:05:00-07:00</updated>
-    <id>http://thaddeusmt.github.com./book-review-magento-beginners-guide</id>
+    <id>http://thaddeusmt.github.com/2009/11/26/book-review-magento-beginners-guide</id>
     <content type="html"><![CDATA[<p>I was recently approached by <a href="http://www.packtpub.com/">&#91;packt&#93; Publishing</a> to do a review of their book, the <strong>Magento Beginner&#8217;s Guide</strong> (by <a href="http://williamriceinc.blogspot.com/">William Rice</a>). I&#8217;ve been working with Magento a lot over the past year and blog about it here from time to time, so they figured I would be good to review it. After setting up, modifying and maintaining four Magento stores in the last 10 months I don&#8217;t feel I have much to learn from a &#8220;beginners guide&#8221;, but I figured I could use my experience of what a beginner actually needs to know and see if this book covers all the bases.</p>
 <p>I have read parts of the official <a href="http://www.magentocommerce.com/support/magento-user-guide-book">Magento User Guide</a> (and <a href="http://www.amazon.com/gp/product/0973862173?ie=UTF8&amp;tag=oronaut-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0973862173">php/architect&#8217;s Guide to E-Commerce Programming with Magento</a>) but this book fills a different gap than the others. The User Guide covers all of the features, but it is not a practical guide. (The programming book was great, but did not cover how to actually use Magento). My favorite thing about the Beginner&#8217;s Guide is that it showed how to use Magento in a practical, day-to-day way. Being just a &#8220;beginner&#8217;s guide&#8221; it does not cover all of the features, but it covers a wide swath of the important ones. What really impressed me was the way it provided tips on how to deal with and overcome some of Magento&#8217;s serious (and occasionally deal-breaking) problems that make the day-to-day administration of an online store difficult.</p>
 <p>An example of this are the confusing order &#8220;statuses&#8221;. Depending on how the order was paid for (PayPal, Check, CC, etc) orders may be marked &#8220;Pending&#8221; or &#8220;Processing&#8221; in a confusing way. The book puts in a real effort to make sense of this mess. It even offers a good work-around using the &#8220;Hold&#8221; feature to overcome this problem. Order fulfillment and management is one of the biggest pain points in Magento, so I&#8217;m glad the book took a moment to deal with this, unlike the official User Guide. The book had other good practical tips for setting up Taxes, Shipping, Meta Information, and more.</p>
@@ -945,9 +945,9 @@ exit 0
   
   <entry>
     <title type="html"><![CDATA[A simple FBJS image carousel (or slideshow) for Facebook page tabs]]></title>
-    <link href="http://thaddeusmt.github.coma-simple-fbjs-image-carousel-or-slideshow-for-facebook-page-tabs"/>
+    <link href="http://thaddeusmt.github.com/2009/11/01/a-simple-fbjs-image-carousel-or-slideshow-for-facebook-page-tabs/"/>
     <updated>2009-11-01T23:19:00-07:00</updated>
-    <id>http://thaddeusmt.github.com./a-simple-fbjs-image-carousel-or-slideshow-for-facebook-page-tabs</id>
+    <id>http://thaddeusmt.github.com/2009/11/01/a-simple-fbjs-image-carousel-or-slideshow-for-facebook-page-tabs</id>
     <content type="html"><![CDATA[<p><span style="font-size: .9em; font-style: italic;">(<strong>Plug</strong>: Looking for an easy, fast, affordable way to create custom Facebook landing tabs? Check out my new product: <a href="http://www.splashtab.com">http://splashtab.com</a> Thanks!)</span></p>
 <p>This little code snippet is really basic, and not actually that good or clever. You can make a much nicer slideshow or carousel if you put a little time into it. But I just want to demonstrate how many of the nice JavaScript effects we are used to on the &#8220;Web 2.0&#8221; are also possible on a Facebook Page via Facebook&#8217;s <a href="http://wiki.developers.facebook.com/index.php/FBJS/Animation">Animate library</a>. It&#8217;s not as robust as <a href="http://jquery.com/">jQuery</a> or <a href="http://script.aculo.us/">Scriptaculous</a>, but since you can&#8217;t import those libraries to a Tab the Animate library will have to do. :)</p>
 <p>The final result looks like this:<br />
@@ -1016,9 +1016,9 @@ function goleft() {
   
   <entry>
     <title type="html"><![CDATA[How to make custom Facebook Fan Page tabs with FBML, Part 2]]></title>
-    <link href="http://thaddeusmt.github.comhow-to-make-custom-facebook-fan-page-tabs-with-fbml-part-2"/>
+    <link href="http://thaddeusmt.github.com/2009/10/11/how-to-make-custom-facebook-fan-page-tabs-with-fbml-part-2/"/>
     <updated>2009-10-11T22:26:00-06:00</updated>
-    <id>http://thaddeusmt.github.com./how-to-make-custom-facebook-fan-page-tabs-with-fbml-part-2</id>
+    <id>http://thaddeusmt.github.com/2009/10/11/how-to-make-custom-facebook-fan-page-tabs-with-fbml-part-2</id>
     <content type="html"><![CDATA[<p><strong style="font-size: 1.1em;"><span class="caps">UPDATE</span> 2-14-2011: <a href="http://www.chilipepperdesign.com/2011/02/14/facebook-iframe-tabs-on-pages-no-more-fbml"><span class="caps">FBML</span> is going away &#8211; learn about Facebook iframe tabs on Facebook Pages here</a> </strong></p>
 <p><strong style="font-size: 1.1em;"><span class="caps">UPDATE</span> 3-10-2011: <a href="http://www.splashlabsocial.com">Easily create and manage custom Facebook Page Tabs with SplashLab Social &#8211; Now available!</a> </strong></p>
 <ul>
@@ -1091,9 +1091,9 @@ function goleft() {
   
   <entry>
     <title type="html"><![CDATA[How to make custom Facebook Fan Page tabs with FBML, Part 1]]></title>
-    <link href="http://thaddeusmt.github.comhow-to-make-custom-facebook-fan-page-tabs-with-fbml-part-1"/>
+    <link href="http://thaddeusmt.github.com/2009/10/06/how-to-make-custom-facebook-fan-page-tabs-with-fbml-part-1/"/>
     <updated>2009-10-06T00:10:00-06:00</updated>
-    <id>http://thaddeusmt.github.com./how-to-make-custom-facebook-fan-page-tabs-with-fbml-part-1</id>
+    <id>http://thaddeusmt.github.com/2009/10/06/how-to-make-custom-facebook-fan-page-tabs-with-fbml-part-1</id>
     <content type="html"><![CDATA[<p><strong style="font-size: 1.1em;"><span class="caps">UPDATE</span> 2-14-2011: <a href="http://www.chilipepperdesign.com/2011/02/14/facebook-iframe-tabs-on-pages-no-more-fbml"><span class="caps">FBML</span> is going away &#8211; learn about Facebook iframe tabs on Facebook Pages here</a> </strong></p>
 <p><strong style="font-size: 1.1em;"><span class="caps">UPDATE</span> 3-10-2011: <a href="http://www.splashlabsocial.com">Easily create and manage custom Facebook Page Tabs with SplashLab Social &#8211; Now available!</a> </strong></p>
 <p>If you have started to dabble in the new wave of &#8220;social media marketing&#8221; you probably made your business/brand/company/band/etc a <a href="http://www.facebook.com/advertising/?pages">Facebook Fan Page</a>. These are basically just like regular Facebook user profiles except instead of a business having &#8220;friends&#8221;, they have what are (more accurately) called &#8220;fans&#8221;. This seems like a good idea since Pages provide a great way for companies to interact with their customers. That part of Fan Pages <strong>is</strong> a good idea, and everyone seems to have a link to &#8220;find us on facebook!&#8221; now because of it! But there are challenges.</p>
@@ -1128,9 +1128,9 @@ function goleft() {
   
   <entry>
     <title type="html"><![CDATA[Custom Loops for Custom Taxonomies in WordPress 2.8]]></title>
-    <link href="http://thaddeusmt.github.comcustom-loops-for-custom-taxonomies-in-wordpress-28"/>
+    <link href="http://thaddeusmt.github.com/2009/09/23/custom-loops-for-custom-taxonomies-in-wordpress-28/"/>
     <updated>2009-09-23T18:24:00-06:00</updated>
-    <id>http://thaddeusmt.github.com./custom-loops-for-custom-taxonomies-in-wordpress-28</id>
+    <id>http://thaddeusmt.github.com/2009/09/23/custom-loops-for-custom-taxonomies-in-wordpress-28</id>
     <content type="html"><![CDATA[<p><a href="http://codex.wordpress.org/Version_2.8">WordPress 2.8</a> saw a big expansion and enhancement of it&#8217;s <a href="http://codex.wordpress.org/WordPress_Taxonomy">Taxonomy <span class="caps">API</span></a>, allowing for easy creation of custom taxonomies. The default WordPress &#8220;category&#8221; and &#8220;tag&#8221; taxonomies are sufficient for most blogs, but the ability to define additional sets of terms (&#8220;vocabularies&#8221;) makes the platform a much more flexible and powerful Content Management System than it was before. Ever since <a href="http://justintadlock.com/archives/2009/05/06/custom-taxonomies-in-wordpress-28">Justin Tadlock</a> opened my eyes to how to create and use additional taxonomies, it seems like every WordPress project I work on needs one or two extra vocabularies. :)</p>
 <p>Working with Drupal as much as I have, I became very accustomed to having multiple taxonomies. It&#8217;s incredibly useful. A classic example is Movies: each movie has a director, some actors, a year it was made, etc. You <em>could</em> just lump all these together with a bunch of &#8220;tags&#8221; in WordPress, but grouping &#8220;Actor&#8221; and &#8220;Year&#8221; tags together into taxonomies makes site organization and navigation much simpler (and more sensible).</p>
 <p>But there are some challenges still to using WordPress taxonomies. While there is some support in the new <span class="caps">API</span> word making queries based on specific taxonomies, there is not a lot. You <em>can</em> filter your Loop by a term in a single taxonomy via the <em>query_posts()</em>, as <a href="http://justintadlock.com/archives/2009/05/06/custom-taxonomies-in-wordpress-28">Justin</a> shows in this example:</p>
@@ -1215,9 +1215,9 @@ endif;
   
   <entry>
     <title type="html"><![CDATA[WordPress: A Loop inside of a Loop with working Comments]]></title>
-    <link href="http://thaddeusmt.github.comwordpress-a-loop-inside-of-a-loop-with-working-comments"/>
+    <link href="http://thaddeusmt.github.com/2009/08/25/wordpress-a-loop-inside-of-a-loop-with-working-comments/"/>
     <updated>2009-08-25T15:32:00-06:00</updated>
-    <id>http://thaddeusmt.github.com./wordpress-a-loop-inside-of-a-loop-with-working-comments</id>
+    <id>http://thaddeusmt.github.com/2009/08/25/wordpress-a-loop-inside-of-a-loop-with-working-comments</id>
     <content type="html"><![CDATA[<p>I was faced with a problem while creating a WordPress theme the other day. I was grouping posts together using a 2.8 <a href="http://justintadlock.com/archives/2009/05/06/custom-taxonomies-in-wordpress-28">custom taxonomy</a> (which is my new favorite thing in WordPress), and wanted to display a list of all related posts above the Comments template. Basically wanted a small <a href="http://codex.wordpress.org/The_Loop">Loop</a> inside of the main Loop &#8211; a loop within a loop.</p>
 <p>I found a few pages online which address this, such as <a href="http://lohmantrading.com/Fourced/2009/08/wordpress-loop-inside-of-a-loop/">WordPress Loop Inside of a Loop</a> and <a href="http://www.tyssendesign.com.au/articles/calling-a-wordpress-loop-from-inside-a-wordpress-loop/">Calling a WordPress Loop from inside a WordPress Loop</a>. The idea is pretty simple, and these techniques work fine most of the time.</p>
 <p>Everything looked fine to me, as well, until I hit &#8220;Submit Comment&#8221; to test it&#8230; <em>and the comment appeared on the wrong post</em>.</p>
@@ -1245,9 +1245,9 @@ endforeach;  // end of main loop</code></pre></div><p>Another way to do this mig
   
   <entry>
     <title type="html"><![CDATA[Magento - Six Months In]]></title>
-    <link href="http://thaddeusmt.github.commagento-six-months-in"/>
+    <link href="http://thaddeusmt.github.com/2009/08/13/magento-six-months-in/"/>
     <updated>2009-08-13T01:48:00-06:00</updated>
-    <id>http://thaddeusmt.github.com./magento-six-months-in</id>
+    <id>http://thaddeusmt.github.com/2009/08/13/magento-six-months-in</id>
     <content type="html"><![CDATA[<p>Yes, this basically amounts to a good old fashioned rant post. But there is a purpose behind it: to educate those thinking of using Magento to power their ecommerce store about potential concerns and pitfalls. Read on, and enjoy.</p>
 <h2>Magento is an ambitious, promising ecommerce platform.</h2>
 <p><a href="http://www.magentocommerce.com/">Magento</a> really is a neat piece of software. <a href="http://www.varien.com/">Varien</a> has really outdone itself. It is one of the most feature rich ecommerce platforms out right now and =drumroll= it&#8217;s <a href="http://en.wikipedia.org/wiki/Open_source_software">Open Source</a>!</p>
