@@ -4,7 +4,7 @@ date: 2009-03-23 19:57
 title: "Magento: How to list all the products in a single category in a sidebar block"
 categories: [e-Commerce, Web-Development]
 keywords: [magento,zend framework,e-commerce,store,custom module,product list,static block,sidebar]
-permalink: magento-how-to-list-all-the-products-in-a-single-category-in-a-sidebar-block
+# permalink: magento-how-to-list-all-the-products-in-a-single-category-in-a-sidebar-block
 ---
 
 The website I'm currently developing wants to have all of the products in "CategoryX" displaying in the left sidebar on all pages. It's a small category with their 5 core products, and they want to make sure no matter where the visitor is on the site, they are just a click away from viewing these products. The sidebar block only consists of a header with the Category name, and a simple list of the products with links to their product information page. It's just links in this case - no images or prices or "Add to Cart" buttons - but you could add these easily.

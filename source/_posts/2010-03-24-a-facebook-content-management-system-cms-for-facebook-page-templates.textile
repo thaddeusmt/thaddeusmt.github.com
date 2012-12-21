@@ -4,7 +4,7 @@ date: 2010-03-24 00:58
 title: "A Facebook Content Management System (CMS) for Facebook Page Templates"
 categories: [CMS, Social-Media]
 keywords: [facebook,facebook cms,facebook templates,facebook page templates,facebook tab templates,facebook content management system,custom tab cms]
-permalink: a-facebook-content-management-system-cms-for-facebook-page-templates
+# permalink: a-facebook-content-management-system-cms-for-facebook-page-templates
 ---
 
 <a href="http://www.splashlabsocial.com"><img src="http://www.chilipepperdesign.com/images/53t.jpg" style="float: left; margin-right: 10px;" /></a>

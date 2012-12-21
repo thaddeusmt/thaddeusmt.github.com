@@ -4,7 +4,7 @@ date: 2010-01-15 00:08
 title: "How to programmatically create Views in Drupal 6"
 categories: [CMS, Web-Development]
 keywords: [drupal,views,views 2,drupal 6,create view,tutorial,how to,guide]
-permalink: how-to-programmatically-create-views-in-drupal-6
+# permalink: how-to-programmatically-create-views-in-drupal-6
 ---
 
 So, this stumped me for a while. I needed my small custom Drupal module to select a bunch of nodes based on a CCK Date field and the Publish status. It is a pain to query the CCK tables directly, so every forum post I could find told me to do this via Views. That's all well and good, but the instructions for doing this all involved creating a View with the Vuiews UI, _then_ calling it to make my query. 

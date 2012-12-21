@@ -4,7 +4,7 @@ date: 2010-03-22 01:32
 title: "Learning Drupal Module Dev: Dependent AHAH/AJAX Forms"
 categories: [Web-Development, CMS]
 keywords: [AHAH,AJAX,Drupal,Forms API,AHAH forms,ajax fields,dependent fields,AJAX forms]
-permalink: learning-drupal-module-dev-dependent-ahahajax-forms
+# permalink: learning-drupal-module-dev-dependent-ahahajax-forms
 ---
 
 <p>So, I've been working on a simple module for a Drupal project lately. I wanted to have two administrator settings for the module, the second of which depends on the first. A "dependent dropdown". It would be cool if it was "AJAXy" too, I thought. Well, it just so turns out that in Drupal 6 there are built in <a href="http://ajax.phpmagazine.net/2005/11/ahah_asychronous_html_and_http.html">AHAH</a> (Asychronous HTML and HTTP) functions in the Forms API to do just this. Easy! Or is it?</p>

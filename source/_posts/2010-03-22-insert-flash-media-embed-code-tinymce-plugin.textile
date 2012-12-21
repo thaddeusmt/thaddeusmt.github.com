@@ -4,7 +4,7 @@ date: 2010-03-22 16:19
 title: "Insert Flash Media Embed Code TinyMCE Plugin"
 categories: [Web-Development, JavaScript]
 keywords: [tinymce,media embed,embed code,youtube embed,video embed,insert video,embed object,tincymce plugin,flash embed plugin,google maps]
-permalink: insert-flash-media-embed-code-tinymce-plugin
+# permalink: insert-flash-media-embed-code-tinymce-plugin
 ---
 
 I've run into a problem providing my clients good, easy-to-use media embed functionality with the existing JavaScript WYSIWYG editors. The big players, "CKEditor":http://ckeditor.com/ (formery FCKEditor) and "TinyMCE":http://tinymce.moxiecode.com/ both provide a "Flash" button which works okay with YouTube and other large video providers, but what about embedding a Picasa slideshow? None of the WYSIWYG editors come with plugin to just insert some HTML code. If you want to embed something like a Picasa slideshow,  customized YouTube player, or Google Map you have open up the source code, find the location you want to insert it, and paste in the code. Fine for some, but difficult and scary for most as it breaks the WYSIWYG paradigm.

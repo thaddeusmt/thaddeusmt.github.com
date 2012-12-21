@@ -4,7 +4,7 @@ date: 2009-02-12 23:42
 title: "Retrofitting Content Management Systems (CMS) on Existing Websites"
 categories: [CMS, Web-Development]
 keywords: [cms made simple,content management system,maintainable websites,open source cms,easy to update websites]
-permalink: retrofitting-content-management-systems-cms-on-existing-websites
+# permalink: retrofitting-content-management-systems-cms-on-existing-websites
 ---
 
 This past week I retrofit the "Montana Seed Trade Association":http://www.mtseedtrade.com website with "CMS Made Simple":http://www.cmsmadesimple.org/. Previously, it was a "flat" website that consisted of some basic HTML and a couple of simple dynamic PHP pages populated from a mySQL database. Every time they wanted to update the site with new events or meeting dates, they had to call up the original web developer and pay them the standard (not cheap) hourly rate to make the changes.

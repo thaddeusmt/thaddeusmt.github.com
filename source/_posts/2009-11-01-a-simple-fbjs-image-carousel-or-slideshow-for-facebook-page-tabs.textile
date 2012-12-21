@@ -4,7 +4,7 @@ date: 2009-11-01 23:19
 title: "A simple FBJS image carousel (or slideshow) for Facebook page tabs"
 categories: [Social-Media, Web-Development]
 keywords: [fbml,fan page tab,facebook app,facebook,fan page,fbjs,javascript,animate,slideshow,carousel]
-permalink: a-simple-fbjs-image-carousel-or-slideshow-for-facebook-page-tabs
+# permalink: a-simple-fbjs-image-carousel-or-slideshow-for-facebook-page-tabs
 ---
 
 <span style="font-size: .9em; font-style: italic;">(*Plug*: Looking for an easy, fast, affordable way to create custom Facebook landing tabs? Check out my new product: "http://splashtab.com":http://www.splashtab.com Thanks!)</span>

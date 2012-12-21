@@ -4,7 +4,7 @@ date: 2010-01-08 14:37
 title: "Adding the \"rel\" and \"title\" attributes to image links in CKEditor 3"
 categories: [Web-Development, JavaScript]
 keywords: [ckeditor,javascript,lightbox,rel,title,attribute,wysiwyg]
-permalink: adding-the-rel-and-title-attributes-to-image-links-in-ckeditor-3
+# permalink: adding-the-rel-and-title-attributes-to-image-links-in-ckeditor-3
 ---
 
 <p><a href="http://ckeditor.com/">CKEditor</a> is the new and improved successor to the venerable <a href="http://sourceforge.net/projects/fckeditor/files/FCKeditor/">FCKeditor</a> JavaScript WYSIWYG editor. I've used <a href="http://tinymce.moxiecode.com/">TinyMCE</a> and FCKeditor before, but this was my first time trying out the new CKEditor 3.1. I am using it on a new Drupal website via the <a href="http://drupal.org/project/ckeditor">Drupal CKEditor module</a>. The problem I ran into, however, is using <a href="http://www.huddletogether.com/projects/lightbox2/">Lightbox2</a> on images inserted via CKEditor. CK does not provide a way to add the "rel" attribute to image links (or any links for that matter). CK also doesn't allow adding the "title" attribute to image links. Lightbox uses both of these to determine which images to display, group together in galleries, provide a caption, etc. I found <a href="http://dev.fckeditor.net/attachment/ticket/2627/fck-rel.patch">a patch for FCKeditor</a> which allows adding a "rel" attribute to image links, but I couldn't find one for the new CKEditor. So here we are. :)</p>

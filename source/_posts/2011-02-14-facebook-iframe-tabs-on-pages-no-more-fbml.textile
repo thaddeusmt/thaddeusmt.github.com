@@ -4,7 +4,7 @@ date: 2011-02-14 23:43
 title: "Facebook iframe tabs on Pages - No more FBML!"
 categories: [Social-Media, Web-Development]
 keywords: []
-permalink: facebook-iframe-tabs-on-pages-no-more-fbml
+# permalink: facebook-iframe-tabs-on-pages-no-more-fbml
 ---
 
 The long awaited transition from FBML tabs to iframe tabs has finally happened. As of this writing on Feb 14th 2011 (Valentines Day!) you can choose the "iframe" option for Facebook application tabs. The official word from the "Facebook developer roadmap":http://developers.facebook.com/roadmap/ is that "as of March 11th developers will no longer be able to create FBML tabs":http://developers.facebook.com/blog/post/462#fbml_roadmap (although existing FBML apps will be supported indefinitely - or at least until the end of 2011 I heard in the comments).

@@ -4,7 +4,7 @@ date: 2009-07-09 17:23
 title: "Changing Magento Order, Invoice and Shipping Number"
 categories: [e-Commerce, Web-Development]
 keywords: [magento,ecommerce,order number,invoice number,credit memo number,shipping number,change order number,shorten order number,how to,tutorial]
-permalink: changing-magento-order-invoice-and-shipping-numbers
+# permalink: changing-magento-order-invoice-and-shipping-numbers
 ---
 
 A client needed to change the default order numbering scheme in Magento 1.3. There is no simple administrative backend setting to do this, however. The order, invoice, shipping and credit memo numbers are fixed - 9 digits long prefixed with a 1. The client wanted all of their order numbers in the form "AZ-xxxxx" - two fixed letters, a dash, and then 5 digits. So... how go about changing this?

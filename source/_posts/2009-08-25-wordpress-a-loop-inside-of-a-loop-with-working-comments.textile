@@ -4,7 +4,7 @@ date: 2009-08-25 15:32
 title: "WordPress: A Loop inside of a Loop with working Comments"
 categories: [Web-Development, Blogs]
 keywords: [wordpress,the loop,loop in a loop,loop inside of a loop,loop hack,list posts in post,wordpress php,blogs,blog customization,wordpress themes]
-permalink: wordpress-a-loop-inside-of-a-loop-with-working-comments
+# permalink: wordpress-a-loop-inside-of-a-loop-with-working-comments
 ---
 
 I was faced with a problem while creating a WordPress theme the other day. I was grouping posts together using a 2.8 "custom taxonomy":http://justintadlock.com/archives/2009/05/06/custom-taxonomies-in-wordpress-28 (which is my new favorite thing in WordPress), and wanted to display a list of all related posts above the Comments template. Basically wanted a small "Loop":http://codex.wordpress.org/The_Loop inside of the main Loop - a loop within a loop. 

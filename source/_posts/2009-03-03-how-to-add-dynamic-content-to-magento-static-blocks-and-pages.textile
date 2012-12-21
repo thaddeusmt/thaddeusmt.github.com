@@ -4,7 +4,7 @@ date: 2009-03-03 23:06
 title: "How to Add Dynamic Content to Magento Static Blocks and Pages"
 categories: [e-Commerce, Web-Development]
 keywords: [magento,e-commerce,content management system,Zend Framework,store]
-permalink: how-to-add-dynamic-content-to-magento-static-blocks-and-pages
+# permalink: how-to-add-dynamic-content-to-magento-static-blocks-and-pages
 ---
 
 Magento provides an easy way to create blocks of static content which, with a little Layout-XML-Fu, can be added to any page in Magento. Even better, these blocks can be added to any category page with no programming at all. This is great if you want to have a banner image with monthly specials and deals, or if you want to add a header image or descriptive text to a category.

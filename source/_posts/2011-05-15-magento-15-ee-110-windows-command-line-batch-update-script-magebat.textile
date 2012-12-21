@@ -4,7 +4,7 @@ date: 2011-05-15 23:00
 title: "Magento 1.5 / EE 1.10 Windows Command Line Batch Update Script mage.bat"
 categories: [CSS, Web-Development]
 keywords: []
-permalink: magento-15-ee-110-windows-command-line-batch-update-script-magebat
+# permalink: magento-15-ee-110-windows-command-line-batch-update-script-magebat
 ---
 
 So, this might be for kind of a narrow audience, but I'm pretty stoked on it so I wanted to share.
