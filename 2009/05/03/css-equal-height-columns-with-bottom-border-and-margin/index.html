@@ -25,7 +25,7 @@
   <script src="/javascripts/ender.js"></script>
   <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <link href="/atom.xml" rel="alternate" title="Chili Pepper Design" type="application/atom+xml">
-  
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
   
   <script type="text/javascript">
     var _gaq = _gaq || [];
@@ -91,7 +91,7 @@
   
 
 
-<time datetime="2009-05-03T02:53:00-06:00" pubdate data-updated="true">May 3<span>rd</span>, 2009</time>
+<time datetime="2009-05-03T02:53:00-05:00" pubdate data-updated="true">May 3<span>rd</span>, 2009</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -102,6 +102,7 @@
 
 <div class="entry-content"><p>The saga of <span class="caps">CSS</span> &#8220;equal height columns&#8221; is long and frustrating. It&#8217;s a common and attractive design element, but ever since we stopped using <span class="caps">HTML</span> Tables for our 2 and 3 column web page layouts in favor of Divs containers, it&#8217;s been a real challenge to implement them using standards based <span class="caps">CSS</span> and markup.</p>
 <p>My favorite of the many clever techniques so far devised to solve this problem is the <a href="http://www.positioniseverything.net/articles/onetruelayout/equalheight">Position Is Everything One True Layout</a> method (although don&#8217;t try to use internal anchor links with this!). Another favorite is the <a href="http://matthewjamestaylor.com/blog/equal-height-columns-cross-browser-css-no-hacks">Equal Height Columns with Cross-Browser <span class="caps">CSS</span> &amp; No Hacks</a>, but it actually seems a little more complicated and hack-ish to me (despite the name). And if you really want it to <em>just work</em> to no extra markup and don&#8217;t mind a little inelegance, the good old <a href="http://www.alistapart.com/articles/fauxcolumns/">Faux Columns</a> approach with a background image works well too.</p>
+<p><!-- more --></p>
 <p>But the P.I.E. One True Layout method is my favorite and that&#8217;s the one I&#8217;m using in this example. To review, the basic gist of the P.I.E. method is that each column has a huge bottom padding to extend it&#8217;s background color, a huge negative margin to pull the effective bottom of the column back to where it should be, and the container hides the overflow:</p>
 <pre><code>&lt;style type="text/css"&gt;
 .column-1, .column-2 {
@@ -187,12 +188,12 @@
   
 
 
-<time datetime="2009-05-03T02:53:00-06:00" pubdate data-updated="true">May 3<span>rd</span>, 2009</time>
+<time datetime="2009-05-03T02:53:00-05:00" pubdate data-updated="true">May 3<span>rd</span>, 2009</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/css/'>CSS</a>, <a class='category' href='/blog/categories/web-design/'>Web-Design</a>
+    <a class='category' href='/blog/categories/css/'>CSS</a>
   
 </span>
 
@@ -235,6 +236,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/12/27/new-hipster-hacker-octopress-blog/">New Hipster Hacker Blog</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/05/15/magento-15-ee-110-windows-command-line-batch-update-script-magebat/">Magento 1.5 / EE 1.10 Windows Command Line Batch Update Script mage.bat</a>
       </li>
     
@@ -250,24 +255,25 @@
         <a href="/2010/03/24/a-facebook-content-management-system-cms-for-facebook-page-templates/">A Facebook Content Management System (CMS) for Facebook Page Templates</a>
       </li>
     
-      <li class="post">
-        <a href="/2010/03/22/insert-flash-media-embed-code-tinymce-plugin/">Insert Flash Media Embed Code TinyMCE Plugin</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
   <ul id="categories">
-    <li class='category'><a href='/blog/categories/blogs/'>Blogs (2)</a></li>
-<li class='category'><a href='/blog/categories/cms/'>CMS (6)</a></li>
+    <li class='category'><a href='/blog/categories/apache/'>Apache (1)</a></li>
 <li class='category'><a href='/blog/categories/css/'>CSS (2)</a></li>
+<li class='category'><a href='/blog/categories/drupal/'>Drupal (2)</a></li>
+<li class='category'><a href='/blog/categories/facebook/'>Facebook (6)</a></li>
 <li class='category'><a href='/blog/categories/javascript/'>JavaScript (3)</a></li>
+<li class='category'><a href='/blog/categories/linux/'>Linux (3)</a></li>
+<li class='category'><a href='/blog/categories/magento/'>Magento (11)</a></li>
+<li class='category'><a href='/blog/categories/meta/'>Meta (3)</a></li>
+<li class='category'><a href='/blog/categories/nginx/'>Nginx (3)</a></li>
+<li class='category'><a href='/blog/categories/reviews/'>Reviews (1)</a></li>
+<li class='category'><a href='/blog/categories/ruby-/'>Ruby, (1)</a></li>
 <li class='category'><a href='/blog/categories/seo/'>SEO (2)</a></li>
-<li class='category'><a href='/blog/categories/social-media/'>Social-Media (6)</a></li>
-<li class='category'><a href='/blog/categories/web-design/'>Web-Design (2)</a></li>
-<li class='category'><a href='/blog/categories/web-development/'>Web-Development (25)</a></li>
-<li class='category'><a href='/blog/categories/e-commerce/'>e-Commerce (11)</a></li>
+<li class='category'><a href='/blog/categories/web-development/'>Web-Development (19)</a></li>
+<li class='category'><a href='/blog/categories/wordpress/'>WordPress (3)</a></li>
 
   </ul>
 </section>
@@ -369,7 +375,7 @@
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2012 - Evan Johnson -
+  Copyright &copy; 2013 - Evan Johnson -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

@@ -9,8 +9,7 @@
   <meta name="author" content="Evan Johnson">
 
   
-  <meta name="description" content="So, this might be for kind of a narrow audience, but I&#8217;m pretty stoked on it so I wanted to share.
-In the newest version of the Magento &hellip;">
+  <meta name="description" content="I have not blogged very much the last couple of years, but I am feeling the itch again. I love how blogging makes you more closely research and &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -26,7 +25,7 @@ In the newest version of the Magento &hellip;">
   <script src="/javascripts/ender.js"></script>
   <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <link href="/atom.xml" rel="alternate" title="Chili Pepper Design" type="application/atom+xml">
-  
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
   
   <script type="text/javascript">
     var _gaq = _gaq || [];
@@ -79,6 +78,64 @@ In the newest version of the Magento &hellip;">
       
   <header>
     
+      <h1 class="entry-title"><a href="/2012/12/27/new-hipster-hacker-octopress-blog/">New Hipster Hacker Blog</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-27T17:16:00-06:00" pubdate data-updated="true">Dec 27<span>th</span>, 2012</time>
+        
+         | <a href="/2012/12/27/new-hipster-hacker-octopress-blog/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I have not blogged very much the last couple of years, but I am feeling the itch again. I love how blogging makes you more closely research and examine your thoughts and your code. I have missed it. I also miss the positive feedback and ego-reinforcement of blog comments and Google Analytics stats. So for 2013 I am trying to get back on the horse.</p>
+
+<p>It was 4 years ago that I first decided to blog about web design and development on my freelance web design site, Chili Pepper Design. I read some high praise for the <a href="http://textpattern.com/">Textpattern</a> PHP content management system, and installed it. It worked well, but had started to feel dated of late. And besides, none of the cool kids on Hacker News ever talk about Textpattern any more. ;)</p>
+
+<p>So what are the cool kids talking about now? What is the new hotness? Ruby-powered static Jekyll blogs of course! Hosted on GitHub Pages! Thus you see before you the new Chili Pepper Design blog, powered by <a href="http://octopress.org">Octopress</a> (a fork of <a href="http://jekyllrb.com/">Jekyll</a>).</p>
+
+<p>Actually it&#8217;s not that new or hot anymore, but here are a few reasons why I chose to go the Jekyll/Octopress route regardless:</p>
+
+<ul>
+<li><strong><a href="http://octopress.org/docs/setup/">Short learning curve</a></strong> - I was also comtemplating setting up a custom Rails blog, but have not found the time</li>
+<li><strong><a href="http://jekyllbootstrap.com/lessons/jekyll-introduction.html#how_jekyll_generates_the_final_static_files">Static</a></strong> - fast loading! and no database to set up, migrate or maintain</li>
+<li><strong><a href="http://www.ruby-lang.org/en/">Ruby</a></strong> - I am learning Ruby, so this is a good excuse to squint at some code.</li>
+<li><strong><a href="http://pages.github.com/">GitHub Pages</a> hosting</strong> - free and (fairly) easy to set up</li>
+<li><strong>Easy to theme</strong> - not only is the default Octopress rad, but you have total freedom when styling Jekyll blogs</li>
+<li><strong><a href="https://github.com/imathis/octopress/wiki/3rd-party-plugins">Hipster plugins</a></strong> - easily show off your Coderwall and StackOverflow bling, etc</li>
+</ul>
+
+
+<p>Next up I&#8217;m going to stretch out my old blogging muscles with a post about how I migrated my blog from Textpattern to Octopress - on <em>windows</em> (dun dun dun).</p>
+
+<p> Cheers!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/2011/05/15/magento-15-ee-110-windows-command-line-batch-update-script-magebat/">Magento 1.5 / EE 1.10 Windows Command Line Batch Update Script mage.bat</a></h1>
     
     
@@ -95,7 +152,7 @@ In the newest version of the Magento &hellip;">
   
 
 
-<time datetime="2011-05-15T23:00:00-06:00" pubdate data-updated="true">May 15<span>th</span>, 2011</time>
+<time datetime="2011-05-15T23:00:00-05:00" pubdate data-updated="true">May 15<span>th</span>, 2011</time>
         
          | <a href="/2011/05/15/magento-15-ee-110-windows-command-line-batch-update-script-magebat/#disqus_thread">Comments</a>
         
@@ -113,19 +170,12 @@ In the newest version of the Magento &hellip;">
 <p>They basically work the same, but the name has changed and &#8211; more importantly if you are reading this &#8211; there is no windows batch file to run. There is a Bash shell script, so you can download and update Magento and it&#8217;s many Extensions via the command line in <em>Linux</em>, but not Windows.</p>
 <p>So, looking at the mage.sh script and working from the pear.bat script, I made mage.bat. It lets you do command line downloads and updates of Magento in Windows, just like you can on Linux.</p>
 <p>Not that anyone is actually hosting Magento on a <span class="caps">WAMP</span> setup, but I find it useful to be able to download and install Extensions and modules on my Windows development box.</p>
-<p><a href="http://www.chilipepperdesign.com/file_download/1/mage.zip">Download mage.bat &#8211; Windows Magento Connect 2.0 Update Script</a></p>
-<p>One you have mage.bat installed in the root directory of your Magento install (right next to the mage bash script), you are ready to go! Just run &#8220;mage&#8221; from the Windows command line.</p>
-<pre><code>mage help</code></pre>
-<p>The Yiero blog has a nice article about <a href="http://www.yireo.com/blog/1294-magento-15-mage-command-line">using Magento Connect 2.0 over command line</a>.</p>
-<p>Here is a good article about <a href="http://blog.nexcess.net/2011/03/11/upgrading-to-magento-1-5-0-1">upgrading Magento from 1.4 to 1.5</a> as well.</p>
-<p><span class="caps">TROUBLESHOOTING</span> <span class="caps">TIPS</span>:</p>
-<ul>
-	<li>Make sure you have <a href="http://pear.php.net/manual/en/installation.getting.php"><span class="caps">PEAR</span> installed</a> on the machine you are running this on</li>
-	<li>Make sure <span class="caps">PEAR</span> is in your Windows Path</li>
-	<li>Be sure to install mage.bat in your Magento root directory</li>
-	<li>In the command line, make sure you are in your Magento root when you run mage.bat</li>
-</ul></div>
+<p></div>
   
+  
+    <footer>
+      <a rel="full-article" href="/2011/05/15/magento-15-ee-110-windows-command-line-batch-update-script-magebat/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -152,7 +202,7 @@ In the newest version of the Magento &hellip;">
   
 
 
-<time datetime="2011-02-15T00:37:00-07:00" pubdate data-updated="true">Feb 15<span>th</span>, 2011</time>
+<time datetime="2011-02-15T00:37:00-06:00" pubdate data-updated="true">Feb 15<span>th</span>, 2011</time>
         
          | <a href="/2011/02/15/reveal-fan-gate-like-gate-facebook-iframe-tab-tutorial-with-php/#disqus_thread">Comments</a>
         
@@ -162,87 +212,15 @@ In the newest version of the Magento &hellip;">
 
 
   <div class="entry-content"><p><em><strong>Update: <a href="http://www.splashlabsocial.com">SplashLab Social</a> has been released!</strong> <a href="http://www.splashlabsocial.com">If you are looking for an easier way to set up Fans-only/Reveal tabs, look no further!</a> My new service makes it easy to create custom fan-gate tabs, check it out!</em></p>
-<p><a href="http://developers.facebook.com/blog/post/462#fbml_roadmap"><span class="caps">FBML</span> is going away</a>. Is the popular (and effective) strategy of &#8220;fan-gating&#8221; content to encourage visitors to Like you page going away with the &#8220;&lt;fb:visible-to-connection&gt;&#8221;:http://developers.facebook.com/docs/reference/fbml/visible-to-connection/ <span class="caps">FBML</span> tag?</p>
+<p><a href="http://developers.facebook.com/blog/post/462#fbml_roadmap"><span class="caps">FBML</span> is going away</a>. Is the popular (and effective) strategy of &#8220;fan-gating&#8221; content to encourage visitors to Like you page going away with the <a href="http://developers.facebook.com/docs/reference/fbml/visible-to-connection/">fb:visible-to-connection</a> <span class="caps">FBML</span> tag?</p>
 <p>No! Facebook has been kind enough to provide a new method for implementing &#8220;reveal tabs&#8221; on the new iframe tabs. Follow along in the tutorial below to learn how to do this.</p>
 <p>(This tutorial assumes you are creating a <span class="caps">PHP</span> Facebook application, but you can follow the spirit of it in any language.)</p>
-<h3>1. Set up an iframe tab application</h3>
-<p>I won&#8217;t cover all of the details here, but you need to set up an iframe tab application on Facebook first. Assuming you have access to put <span class="caps">PHP</span> files up on a public server, follow these steps:</p>
-<ol>
-	<li>Go to the <a href="http://www.facebook.com/apps/application.php?id=2345053339">Facebook Developer application</a></li>
-	<li>Create a new application</li>
-	<li>On the <strong>&#8220;Facebook Integration&#8221;</strong> tab of the application settings:
-	<ol>
-		<li>Set the <strong>Canvas Page</strong> <span class="caps">URL</span> slug</li>
-		<li>Point the <strong>Canvas <span class="caps">URL</span></strong> to your <span class="caps">PHP</span> script&#8217;s base <span class="caps">URL</span></li>
-		<li>Set the <strong>Tab Name</strong> to something (Welcome!)</li>
-		<li><strong>Make sure the *Page Tab Type</strong> is set to iframe*</li>
-		<li>Set the <strong>Tab <span class="caps">URL</span></strong> to the specific <span class="caps">PHP</span> file for this tab</li>
-	</ol></li>
-	<li>On the <strong>&#8220;Advanced&#8221;</strong> tab of the application settings:
-	<ol>
-		<li>Make sure the <strong>&#8220;OAuth 2.0 for Canvas&#8221;</strong> option is set</li>
-	</ol></li>
-	<li>Save the application</li>
-	<li>Add the application to a Page to test it out</li>
-</ol>
-<p><strong><span class="caps">NOTE</span>:</strong> There is some confusion about Canvas <span class="caps">URL</span> and the Tab <span class="caps">URL</span>. The Canvas <span class="caps">URL</span> is the <span class="caps">PHP</span> file that get&#8217;s hit when the users views the Canvas app. This is different than the <span class="caps">PHP</span> script which generates the Tab, which is defined by the Tab <span class="caps">URL</span>. The Tab <span class="caps">URL</span> has to be relative to the Canvas <span class="caps">URL</span>. What I usually do is have the Canvas <span class="caps">PHP</span> file be &#8220;index.php&#8221; and point the Canvas <span class="caps">URL</span> to the directory it&#8217;s in. Then I make a &#8220;tab.php&#8221; file for the Tab <span class="caps">URL</span> in the same directory.</p>
-<ul>
-	<li><strong>Canvas <span class="caps">URL</span></strong>: http://mysite.com/myfbappdirectory/
-	<ul>
-		<li>This points to the file http://mysite.com/myfbappdirectory/index.php</li>
-	</ul></li>
-	<li><strong>Tab <span class="caps">URL</span></strong>: tab.php
-	<ul>
-		<li>This points to the file http://mysite.com/myfbappdirectory/tab.php</li>
-	</ul></li>
-</ul>
-<h3>2. Get the signed_request</h3>
-<p>Facebook now passes an encoded <span class="caps">POST</span> variable to tab applications, called the <a href="http://developers.facebook.com/docs/authentication/signed_request">signed_request</a>. The content of a tab&#8217;s signed_request is covered <a href="http://developers.facebook.com/docs/guides/canvas#tabs">here in the canvas guide</a>. General details about Facebook&#8217;s signed requests can be found <a href="http://developers.facebook.com/docs/authentication/signed_request">here</a>.</p>
-<p>To get the signed_request, make sure the &#8220;OAuth 2.0 for Canvas&#8221; option is set in your application&#8217;s settings. Then just grab it out of PHP&#8217;s $_REQUEST array global.</p>
-<pre><code>$signed_request = $_REQUEST['signed_request'];</code></pre>
-<h3>3. Decode the signed_request</h3>
-<p>The signed request is encoded for security. <a href="http://developers.facebook.com/docs/authentication/signed_request">Read more about this here.</a>. We are not really interested in security on this app though. We just want to tell if a visitor is a fan or not. So we are going to do the &#8220;cheater&#8221; method of decoding the signed_request, which ignores some of the security features (like the signature). Here is the cheater code (you will need the <span class="caps">PHP</span> json_decode() method!):</p>
-<pre><code>function parsePageSignedRequest() {
-    if (isset($_REQUEST['signed_request'])) {
-      $encoded_sig = null;
-      $payload = null;
-      list($encoded_sig, $payload) = explode('.', $_REQUEST['signed_request'], 2);
-      $sig = base64_decode(strtr($encoded_sig, '-_', '+/'));
-      $data = json_decode(base64_decode(strtr($payload, '-_', '+/'), true));
-      return $data;
-    }
-    return false;
-  }
-  print_r(parsePageSignedRequest());</code></pre>
-<h3>4. Switch content based on the signed_request</h3>
-<p>The signed_request on iframe tabs has a &#8220;pages&#8221; object, which holds a &#8220;liked&#8221; variable. If the user viewing your tab has Liked your page, it is set to <span class="caps">TRUE</span>. If they have not, it is set to <span class="caps">FALSE</span>. So:</p>
-<pre><code>function parsePageSignedRequest() {
-    if (isset($_REQUEST['signed_request'])) {
-      $encoded_sig = null;
-      $payload = null;
-      list($encoded_sig, $payload) = explode('.', $_REQUEST['signed_request'], 2);
-      $sig = base64_decode(strtr($encoded_sig, '-_', '+/'));
-      $data = json_decode(base64_decode(strtr($payload, '-_', '+/'), true));
-      return $data;
-    }
-    return false;
-  }
-  if($signed_request = parsePageSignedRequest()) {
-    if($signed_request-&gt;page-&gt;liked) {
-      echo "This content is for Fans only!";
-    } else {
-      echo "Please click on the Like button to view this tab!";
-    }
-  }</code></pre>
-<h3>You now have a reveal tab with fans-only content!</h3>
-<p>This new method is actually better than the old method in a couple of ways:</p>
-<ol>
-	<li>You no longer need to do devious &#8220;position: absolute&#8221; <span class="caps">CSS</span> hacks to get your fan and non-fan content to look nice! With &lt;fb:visible-to-connection&gt;, the content for <span class="caps">BOTH</span> was printed out, the non-fan content was just &#8220;hidden&#8221;, which was a nightmare to style.</li>
-	<li>The page doesn&#8217;t blow up when viewed as an Admin</li>
-	<li>Your content for fans-only is <span class="caps">REALLY</span> for <em>fans-only</em> &#8211; clever folks can no longer &#8220;View Source&#8221; to see the hidden content.</li>
-</ol>
-<p>Good luck, and happy Facebook developing!</p></div>
+<p></div>
   
+  
+    <footer>
+      <a rel="full-article" href="/2011/02/15/reveal-fan-gate-like-gate-facebook-iframe-tab-tutorial-with-php/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -269,7 +247,7 @@ In the newest version of the Magento &hellip;">
   
 
 
-<time datetime="2011-02-14T23:43:00-07:00" pubdate data-updated="true">Feb 14<span>th</span>, 2011</time>
+<time datetime="2011-02-14T23:43:00-06:00" pubdate data-updated="true">Feb 14<span>th</span>, 2011</time>
         
          | <a href="/2011/02/14/facebook-iframe-tabs-on-pages-no-more-fbml/#disqus_thread">Comments</a>
         
@@ -280,30 +258,12 @@ In the newest version of the Magento &hellip;">
 
   <div class="entry-content"><p>The long awaited transition from <span class="caps">FBML</span> tabs to iframe tabs has finally happened. As of this writing on Feb 14th 2011 (Valentines Day!) you can choose the &#8220;iframe&#8221; option for Facebook application tabs. The official word from the <a href="http://developers.facebook.com/roadmap/">Facebook developer roadmap</a> is that <a href="http://developers.facebook.com/blog/post/462#fbml_roadmap">as of March 11th developers will no longer be able to create <span class="caps">FBML</span> tabs</a> (although existing <span class="caps">FBML</span> apps will be supported indefinitely &#8211; or at least until the end of 2011 I heard in the comments).</p>
 <p><img src="http://www.chilipepperdesign.com/images/52.jpg" style="width: 415px" /></p>
-<h3>The Good</h3>
-<p>The great thing about iframe tabs is that you are working with a real webpage now. No more fighting with <span class="caps">FBJS</span> and finicky <span class="caps">FBML</span> tags!</p>
-<ol>
-	<li><strong>External JS like JQuery and TinyMCE</strong> &#8211; You can finally do all of the things that Canvas iframe apps have been able to do for a while, like include handy JavaScript libraries!</li>
-	<li><strong>onLoad JS events</strong> &#8211; One of the frustrating things with <span class="caps">FBML</span> apps was always that you couldn&#8217;t start JS on the page load, so things like automatic slideshows were impossible. You should be able to have content auto-play now!</li>
-	<li><strong>Facebook JS <span class="caps">SDK</span> for <span class="caps">XFBML</span> Social Plugins</strong> &#8211; You can import the JavaScript <span class="caps">SDK</span> and still have Request popups, Like buttons, make Open Graph <span class="caps">API</span> requests&#8230; the whole 9 yards.</li>
-</ol>
-<h3>The Bad</h3>
-<p>One of the interesting things is that the ubiquitous <a href="http://www.facebook.com/apps/application.php?id=4949752878">Static <span class="caps">FBML</span></a> app is going away too, apparently. This application has a been a great shortcut for many developers and page owners, allowing them to just install the app and paste in <span class="caps">HTML</span> and <span class="caps">FBML</span> code without creating a special custom application. (Hopefully more people will use the <a href="http://www.splashlabsocial.com">custom facebook tab creation</a> service I built, <a href="http://www.splashlabsocial.com">SplashLab Social</a> ;)</p>
-<p>This will be a pain for many users. It&#8217;s a big leap to have to create a custom application and host the code on your own server! I will be curious to see if Facebook creates a new app that does some of the same things?</p>
-<h3>The Ugly</h3>
-<p>Naturally, like any new (and many old) Facebook features iframe tabs have bugs still. My preliminary tests turned up the following problems:</p>
-<ol>
-	<li><s><strong>Tabs not visible to logged-out users</strong> &#8211; If a user is not logged in to Facebook they cannot see your tab. Official bug is here: <a href="http://bugs.developers.facebook.net/show_bug.cgi?id=15166">http://bugs.developers.facebook.net/show_bug.cgi?id=15166</a></s> <br />This has been fixed now!</li>
-	<li><s><strong><span class="caps">SSL</span>/https problems</strong> &#8211; My iframe tabs do not load properly when using Facebook over https. Here is the bug on Facebook if you want to track progress: <a href="http://bugs.developers.facebook.net/show_bug.cgi?id=15200">http://bugs.developers.facebook.net/show_bug.cgi?id=15200</a></s><br /> This has been fixed now</li>
-	<li><s><strong>Renaming tab titles not working</strong></s> &#8211; Changing the &#8220;Tab name&#8221; does not appear to working at this time. The official bug is here: <a href="http://bugs.developers.facebook.net/show_bug.cgi?id=15155">http://bugs.developers.facebook.net/show_bug.cgi?id=15155</a> <span class="caps">UPDATE</span>: Apparently this is a feature, not a bug! Users can now set custom Tab Titles for each tab!</li>
-	<li><s><strong>Max height scrollbar issues</strong></s> (my mistake) &#8211; The iframe tabs appear to have a maximum height of 800px, which gives a scrollbar for taller content. The problem with this is that when the scroll bar appears the tab is width is now smaller than 520px, essentially. This means if you have images which are 520px wide, you get a horizontal scroll bar at the bottom. It&#8217;s kind of ugly right now, hopefully Facebook will enable and auto-resize like regular Canvas apps have.</li>
-</ol>
-<p><strong>Iframe tab height:</strong> This is not a bug, but I DO think it&#8217;s a little weird and not very obvious. You can fix this with the FB.Canvas.setAutoResize() method, as <a href="http://bugs.developers.facebook.net/show_bug.cgi?id=15210">detailed in the bug I filed</a>.</p>
-<h3>Beyond Static <span class="caps">FBML</span></h3>
-<p>In summary, the new iframe tabs are more powerful and flexible than the <span class="caps">FBML</span> ones, and open up a lot of great new possibilities. There are a <span class="caps">LOT</span> of <span class="caps">FBML</span> apps out there, however, so it will be interesting to watch the transition.</p>
-<p>Please, post any comments or corrections you have below! Are there any other new features of iframe tabs you are excited for? Anything you will miss from <span class="caps">FBML</span>?</p>
-<p><em><strong>Update: <a href="http://www.splashlabsocial.com">SplashLab Social</a> has been released!</strong> <a href="http://www.splashlabsocial.com">If you are looking for an easier way to set up iframe tabs, look no further!</a> My new service makes it easy &#8211; check it out!</em></p></div>
+<p></div>
   
+  
+    <footer>
+      <a rel="full-article" href="/2011/02/14/facebook-iframe-tabs-on-pages-no-more-fbml/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -330,7 +290,7 @@ In the newest version of the Magento &hellip;">
   
 
 
-<time datetime="2010-03-24T00:58:00-06:00" pubdate data-updated="true">Mar 24<span>th</span>, 2010</time>
+<time datetime="2010-03-24T00:58:00-05:00" pubdate data-updated="true">Mar 24<span>th</span>, 2010</time>
         
          | <a href="/2010/03/24/a-facebook-content-management-system-cms-for-facebook-page-templates/#disqus_thread">Comments</a>
         
@@ -339,51 +299,16 @@ In the newest version of the Magento &hellip;">
   </header>
 
 
-  <div class="entry-content"><p><a href="http://www.splashlabsocial.com"><img src="http://www.chilipepperdesign.com/images/53t.jpg" style="float: left; margin-right: 10px;" /></a><br />
-<p style="font-size:1.2em;"><strong>Update: The project is now live and ready for signups! Head over to <a href="http://splashlabsocial.com">SplashLab Social</a> to learn more and get started. It&#8217;s the easiest way to create and manage content on your Facebook Page&#8217;s iframe tabs!</strong></p></p>
-<p><br />
-<br />
-<br />
-<p>There&#8217;s something big in the works here at Chili Pepper Design I wanted to share on my blog quickly:</p></p>
-<h3><strike>Coming Soon:</strike> A Facebook Fan Page <span class="caps">CMS</span>!</h3>
-<p>Right now the social networking site <a href="http://www.facebook.com">Facebook</a> is quickly becoming the king of the web. Some sources claim that Facebook has <a href="http://www.guardian.co.uk/technology/blog/2010/mar/15/facebook-passes-google-share-us">passed Google</a> as the most visited website on the web. For this reason <a href="http://www.facebook.com/advertising/?pages">Fan Pages</a> are becoming an important part of the marketing strategies of small businesses and large corporations alike. Setting up a Fan Page is faster and cheaper than setting up a website, and allows customers to interact with the business/brand (and share it with their friends) in ways that traditional web pages do not.</p>
-<p>These Facebook Fan Pages consist of a series of &#8220;tabs&#8221;. In addition to the Wall, and the usual Photos, Videos, Discussion and Reviews tabs, many businesses are adding custom <span class="caps">FBML</span> tabs. These provide additional information and a touch of that business&#8217; personality and brand. These nicely designed tabs offer special promotions, games, contests, product information, shopping options, blog and twitter feeds, and much more. For some great examples of what can be accomplished with custom <span class="caps">FBML</span> tabs check out the <a href="http://facebookshowcase.net">Facebook Showcase</a>.</p>
-<p>The one drawback to these otherwise-awesome custom page tabs is that they require a bit of technical savvy to set up. Some require the creation of a custom application, and even making a simple tab with the <a href="http://www.facebook.com/apps/application.php?id=4949752878">Static <span class="caps">FBML</span></a> application requires <span class="caps">FBML</span> coding. There are many tutorials that cover how to set up custom tabs (like my own <a href="http://www.chilipepperdesign.com/2009/10/11/how-to-make-custom-facebook-fan-page-tabs-with-fbml-part-2"><span class="caps">FBML</span> tab tutorial here</a>), but frankly it&#8217;s easier to set up an <em>entire new website</em> with services like <a href="http://wordpress.com">WordPress.com</a> and <a href="http://www.blogger.com/">Blogger</a> than to set up a custom <span class="caps">FBML</span> tab.</p>
-<p>And even once a tab is set up, it is difficult to update it. The <span class="caps">FBML</span> code must be edited again, just like when it was first set up. This is one area where websites running Content Management Systems (CMSs) like Drupal and Wordpress are far ahead of custom facebook tabs. Editing a page in Drupal is as easy as composing an email &#8211; no coding needed!<br />
-<br />
-<p><em>But what if creating a custom <span class="caps">FBML</span> tab was just as simple as setting up blog on Blogger? Just sign up, choose a design template, enter the content, and you&#8217;re done?</em></p>
-<p><em>What if updating a custom <span class="caps">FBML</span> tab was as simple as updating a page on a Drupal website? Just log in, change the content, and hit &#8220;Update&#8221;?</em></p>
-<h2>Enter the Facebook <span class="caps">CMS</span></h2>
-<p>This is exactly the problem that Chili Pepper Design is working on addressing. With the <strong>Facebook Content Management System</strong> currently in development it will be easy as pie to create and update custom <span class="caps">FBML</span> tabs with nice templates on a Fan Page.</p>
-<p>Here&#8217;s how it will work:</p>
-<ol>
-<li>Create a Facebook Fan Page</li>
-<li>Go to the Facebook <span class="caps">CMS</span> website and create an account</li>
-<li>Choose a template for your tab</li>
-<li>Enter the content for the tab (using an easy <span class="caps">WYSIWYG</span> editor like Word)</li>
-<li>Save the new Tab</li>
-<li>Add the Facebook Application to the Fan Page (one click &#8220;Add to Page&#8221;)</li>
-<li><span class="caps">DONE</span>!</li>
-</ol>
-<p>Here are some of the many components that the templates will have (in various combinations):</p>
-<ul>
-<li>company logo</li>
-<li>multiple tabs/sub navigation</li>
-<li>body content</li>
-<li>custom images</li>
-<li>flash videos</li>
-<li>sidebar blocks</li>
-<li>Twitter feeds</li>
-<li>blog feeds</li>
-<li>comment area</li>
-<li>share buttons</li>
-<li>invite fiends</li>
-</ul>
-<p>The templates will be professionally designed, optimized for <span class="caps">SEO</span>, and have the ability to customize some of the colors.</p>
-<h3>For Facebook Designers</h3>
-<p>Are you a Facebook designer? Would like to provide your clients with an easy way to update the pages you have created for them? In addition to the standard templates, the Facebook <span class="caps">CMS</span> will offer a special product for designers to plug the <span class="caps">CMS</span> into their designs. The details on this have not been worked out, but it is a service I very much want to offer, along the lines of <a href="http://cushycms.com/">Cushy <span class="caps">CMS</span></a> or <a href="http://surrealcms.com/">Surreal <span class="caps">CMS</span></a>.</p>
-<p><strong>Check out <a href="http://www.splashlabsocial.com">SplashLab Social</a> to learn more!</strong></p></div>
+  <div class="entry-content"><p style="font-size:1.2em;">
+<p><a href="http://www.splashlabsocial.com"><img src="http://www.chilipepperdesign.com/images/53t.jpg" style="float: left; margin-right: 10px;" /></a><br />
+<strong>Update: The project is now live and ready for signups! Head over to <a href="http://splashlabsocial.com">SplashLab Social</a> to learn more and get started. It&#8217;s the easiest way to create and manage content on your Facebook Page&#8217;s iframe tabs!</strong></p></p>
+<p>There&#8217;s something big in the works here at Chili Pepper Design I wanted to share on my blog quickly:</p>
+<p></div>
   
+  
+    <footer>
+      <a rel="full-article" href="/2010/03/24/a-facebook-content-management-system-cms-for-facebook-page-templates/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -410,7 +335,7 @@ In the newest version of the Magento &hellip;">
   
 
 
-<time datetime="2010-03-22T16:19:00-06:00" pubdate data-updated="true">Mar 22<span>nd</span>, 2010</time>
+<time datetime="2010-03-22T16:19:00-05:00" pubdate data-updated="true">Mar 22<span>nd</span>, 2010</time>
         
          | <a href="/2010/03/22/insert-flash-media-embed-code-tinymce-plugin/#disqus_thread">Comments</a>
         
@@ -422,27 +347,12 @@ In the newest version of the Magento &hellip;">
   <div class="entry-content"><p>I&#8217;ve run into a problem providing my clients good, easy-to-use media embed functionality with the existing JavaScript <span class="caps">WYSIWYG</span> editors. The big players, <a href="http://ckeditor.com/">CKEditor</a> (formery FCKEditor) and <a href="http://tinymce.moxiecode.com/">TinyMCE</a> both provide a &#8220;Flash&#8221; button which works okay with YouTube and other large video providers, but what about embedding a Picasa slideshow? None of the <span class="caps">WYSIWYG</span> editors come with plugin to just insert some <span class="caps">HTML</span> code. If you want to embed something like a Picasa slideshow,  customized YouTube player, or Google Map you have open up the source code, find the location you want to insert it, and paste in the code. Fine for some, but difficult and scary for most as it breaks the <span class="caps">WYSIWYG</span> paradigm.</p>
 <p>On one of my latest Drupal websites there are multiple bloggers, none of whom are particularly tech savvy. I set up the <span class="caps">CMS</span> with TinyMCE because I like how they can drag and drop images around (I just wish Drupal had an image embed uploader like WordPress!). After a while they complained that the Insert Flash button in TinyMCE just wasn&#8217;t cutting it. So I set about fixing it. How hard could it be to make a plugin that just inserts some <span class="caps">HTML</span> code where your cursor is? Like it already does for images?</p>
 <p>It turns out it is very easy. I was able to just edit the TinyMCE &#8220;Example&#8221; plug-in, which already did basically exactly what I wanted. So here I provide it to you, Internet. I hope it is useful, and please let me know if it&#8217;s broken (or could work better). Thanks!</p>
-<p><strong><span class="caps">UPDATED</span></strong>: (9-17-2010) I fixed some bugs with IE. It should work better cross-browse now.</p>
-<p>Download the plugin:</p>
-<ul>
-	<li><strong><a href="http://sourceforge.net/tracker/?func=detail&amp;aid=2974843&amp;group_id=103281&amp;atid=738747">From SourceForge</a> </strong></li>
-	<li><strong><a href="http://www.chilipepperdesign.com/examples/tinymce-embed-plugin-v2.zip">From Chili Pepper Design</a> </strong></li>
-</ul>
-<p>I found some tips on installing TinyCME plugins here: <a href="http://tinymce.moxiecode.com/punbb/viewtopic.php?id=3349">Installing Plugin Newbie Question</a><br />
-Here is the official guide to creating a plugin for TinyMCE 3: <a href="http://wiki.moxiecode.com/index.php/TinyMCE:Create_plugin/3.x">TinyMCE:Create plugin/3.x</a></p>
-<p><strong>To use this plugin, install it in the TinyMCE plugin folder and just include it in the <em>TinyMCE.init()</em> call like you would the other plugins</strong>. Example (&#8220;<strong>embed</strong>&#8221; is the name of the plugin):</p>
-<pre><code>
-&lt;script type="text/javascript" src="&lt;your installation path&gt;/tiny_mce/tiny_mce.js"&gt;&lt;/script&gt;
-&lt;script type="text/javascript"&gt;
-  tinyMCE.init({
-    theme : "advanced",
-    mode : "textareas",
-    plugins : "embed, fullscreen, emotions, preview",
-    theme_advanced_buttons3_add : "embed, fullscreen, emotions, preview"
-  });
-&lt;/script&gt;</code></pre>
-<p><strong><em>Disclaimer</em>: I am not a TinyMCE guru, and not even that hot at JavaScript. I probably cannot help you with other TinyMCE plugins, or even this one. I only got this to work because the Example plugin was so close to what I already needed. But thanks for stopping by!</strong></p></div>
+<p></div>
   
+  
+    <footer>
+      <a rel="full-article" href="/2010/03/22/insert-flash-media-embed-code-tinymce-plugin/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -469,7 +379,7 @@ Here is the official guide to creating a plugin for TinyMCE 3: <a href="http://w
   
 
 
-<time datetime="2010-03-22T01:32:00-06:00" pubdate data-updated="true">Mar 22<span>nd</span>, 2010</time>
+<time datetime="2010-03-22T01:32:00-05:00" pubdate data-updated="true">Mar 22<span>nd</span>, 2010</time>
         
          | <a href="/2010/03/22/learning-drupal-module-dev-dependent-ahahajax-forms/#disqus_thread">Comments</a>
         
@@ -481,129 +391,12 @@ Here is the official guide to creating a plugin for TinyMCE 3: <a href="http://w
   <div class="entry-content"><p>So, I&#8217;ve been working on a simple module for a Drupal project lately. I wanted to have two administrator settings for the module, the second of which depends on the first. A &#8220;dependent dropdown&#8221;. It would be cool if it was &#8220;AJAXy&#8221; too, I thought. Well, it just so turns out that in Drupal 6 there are built in <a href="http://ajax.phpmagazine.net/2005/11/ahah_asychronous_html_and_http.html"><span class="caps">AHAH</span></a> (Asychronous <span class="caps">HTML</span> and <span class="caps">HTTP</span>) functions in the Forms <span class="caps">API</span> to do just this. Easy! Or is it?</p>
 <p>It also turns out there is a steep learning curve to making &#8220;Ajax forms&#8221; with the Drupal Forms <span class="caps">API</span>. I got it working, but it took a fair amount of effort. So, to help out future Drupal <span class="caps">AHAH</span> developers I am providing my code below, along with a list of links to resources that were a great help in unraveling this problem.</p>
 <p>First, to help provide an &#8220;aerial view&#8221; of what&#8217;s going on here, this is a list of the components involved:</p>
-<ul>
-<li>A form that has the <span class="caps">AHAH</span> fields (<em>ahahtestmodule_admin_settings</em> in this example)</li>
-<li>The first field in the form (<em>ahahtestmodule_types</em>), which will change the contents of the second field</li>
-<li>The second, &#8220;dependent&#8221; field (<em>ahahtestmodule_ahah_field</em>)</li>
-<li>The function that provides the options of the <span class="caps">AHAH</span> field based on the first field (<em>ahahtestmodule_get_ahah_fields()</em>)</li>  
-<li>The <span class="caps">AHAH</span> function that updates the <span class="caps">AHAH</span> field (<em>ahahtestmodule_ahah_field_js()</em>)</li>
-<li>menu callback function for the <span class="caps">AHAH</span> function (<em>ahahtestmodule/ahahjs</em>)</li>
-</ul>
-<p>To start out, here is the example admin settings form <em>ahahtestmodule_admin_settings</em> with both fields (<em>ahahtestmodule_types</em> and <em>ahahtestmodule_ahah_field</em>):</p>
-
-<pre><code>&amp;lt;?php 
-function ahahtestmodule_admin_settings() {
-  $form = array();
-  $form['settings'] = array(
-    '#type' =&gt; 'fieldset',
-    '#title' =&gt; t('ahahtestmodule Settings'),
-  );
-  $form['settings']['ahahtestmodule_types'] = array(
-    '#type' =&gt; 'radios',
-    '#title' =&gt; t('First Field'),
-    '#description' =&gt; t('Change this field to change the options in the next field.'),
-    '#options' =&gt; array('one' =&gt; t('Option 1'), 'two' =&gt; t('Option 2'), 'three' =&gt; t('Option 3')),
-    '#default_value' =&gt; variable_get('ahahtestmodule_types', 'one'),
-    '#ahah' =&gt; array(
-      'path' =&gt; 'ahahtestmodule/ahahjs',
-      'wrapper' =&gt; 'ahah-wrapper',
-      'method' =&gt; 'replace',
-    ),
-  );
-  $form['settings']['ahahtestmodule_ahah_field'] = array(
-    '#type' =&gt; 'select',
-    '#title' =&gt; t('Dependent Second Field'),
-    '#options' =&gt; ahahtestmodule_get_ahah_fields(variable_get('ahahtestmodule_types', 'one')),
-    '#default_value' =&gt; variable_get('ahahtestmodule_ahah_field', 'none'),
-    '#description' =&gt; t('This fields content depends on what is selected in the first field.'),
-    '#prefix' =&gt; '&amp;lt;div id="ahah-wrapper"&gt;',
-    '#suffix' =&gt; '&amp;lt;/div&gt;',
-  );
-  return system_settings_form($form);
-}
-?&gt;</code></pre>
-<p>Next, here is the dummy function that gets the right content for <em>ahahtestmodule_ahah_field</em> based on <em>ahahtestmodule_types</em>:</p>
-
-<pre><code>&amp;lt;?php 
-function ahahtestmodule_get_ahah_fields($first_variable) {
-  $ahah_fields = array();
-  switch ($first_variable) {
-    case 'one':
-        $ahah_fields['one'] = 'Option 1 Was Selected';
-        break;
-    case 'two':
-        $ahah_fields['two'] = 'Option 2 Was Selected';
-        $ahah_fields['two_bonus'] = 'Bonus Option!';
-        break;
-    case 'three':
-        $ahah_fields['three'] = 'Option 3 Was Selected';
-        break;
-    default:
-        $ahah_fields['none'] = 'Please Select...';
-  }
-  return $ahah_fields;
-}
-?&gt;</code></pre>
-<p>Then, here is the magic <span class="caps">AHAH</span> callback function that I don&#8217;t fully understand and ripped right off this article at drupal.org: <a href="http://drupal.org/node/331941">Adding dynamic form elements using <span class="caps">AHAH</span></a>:</p>
-
-<pre><code>&amp;lt;?php 
-// The AHAH callback function
-function ahahtestmodule_ahah_field_js() {
-  // The AHAH callback function triggered by the user changing the first field, "ahahtestmodule_types"
-  $form_state = array('storage' =&gt; NULL, 'submitted' =&gt; FALSE);
-  $form_build_id = $_POST['form_build_id'];
-  // Get for the form from the cache
-  $form = form_get_cache($form_build_id, $form_state);
-  // Get the form set up to process
-  $args = $form['#parameters'];
-  $form_id = array_shift($args);
-  $form_state['post'] = $form['#post'] = $_POST;
-  $form['#programmed'] = $form['#redirect'] = FALSE;
-  // Process the form with drupal_process_form(), which calls the submit handlers that put whatever was worthy of keeping in the $form_state
-  drupal_process_form($form_id, $form, $form_state);
-  // Call drupal_rebuild_form(), which destroys $_POST, creates the form again with hook_form, gets the new form cached and processed again
-  $form = drupal_rebuild_form($form_id, $form_state, $args, $form_build_id);
-  // THIS IS WHAT YOU WILL CUSTOMIZE FOR YOUR OWN FORM
-  // Choose the field you want to update with AHAH and render it
-  $ahah_form = $form['settings']['ahahtestmodule_ahah_field'];
-  unset($ahah_form['#prefix'], $ahah_form['#suffix']);
-  $output = drupal_render($ahah_form);
-  // Final rendering callback.
-  drupal_json(array('status' =&gt; TRUE, 'data' =&gt; $output));
-}
-?&gt;</code></pre>
-<p>Lastly, be sure to add the menu callback for <em>ahahtestmodule_ahah_field_js()</em>:<br />
-<br />
-<pre><code>&amp;lt;?php 
-function ahahtestmodule_menu() {
-  $items = array();
-  $items['ahahtestmodule/ahahjs'] = array(
-    'page callback' =&gt; 'ahahtestmodule_ahah_field_js',
-    'access arguments' =&gt; array('administer ahahtestmodule'),
-    'type' =&gt; MENU_CALLBACK,
-  );
-  return $items;
-}
-?&gt;</code></pre><br />
-<br />
-<p>I rolled this whole thing up into a little demo module that does nothing except run all this code:</p>
-<p><strong><a href="http://www.chilipepperdesign.com/examples/ahahtestmodule.zip">Download the Drupal Ahah Test Module</a></strong></p>
-<p>Here are some links that I used to figure this out that will hopefully help you too:</p>
-<ul>
-<li><a href="http://api.drupal.org/api/drupal/developer--topics--forms_api_reference.html/6#ahah">The Drupal Form <span class="caps">API</span> Manual Page (the <span class="caps">AHAH</span> section)</a></li>
-<li><a href="http://drupal.org/node/331941 ">Adding dynamic form elements using <span class="caps">AHAH</span> (<span class="caps">GREAT</span>)</a></li>
-<li><a href="http://thedrupalblog.com/using-ahah-dynamically-generate-form-elements-and-integration-multi-tiered-taxonomy">Using <span class="caps">AHAH</span> to dynamically generate form elements </a></li>
-<li><a href="http://wimleers.com/blog/ahah-helper-module"><span class="caps">AHAH</span> helper module</a></li>
-<li><a href="http://www.drupaler.co.uk/blog/ahah-node-forms-and-select-lists/434"><span class="caps">AHAH</span>, Node Forms And Select Lists</a></li>
-<li><a href="http://maxeydevbox.org/blogs/geoffmaxey/adventure-ahah-and-drupal-form-api">An Adventure with <span class="caps">AHAH</span> and the Drupal Form <span class="caps">API</span></a></li>
-<li><a href="http://www.stellapower.net/content/ajax-ifying-drupal-node-forms"><span class="caps">AJAX</span>-ifying Drupal Node Forms</a></li>
-<li><a href="http://katbailey.net/blog/ahah-drupal-may-it-one-day-live-its-acronym"><span class="caps">AHAH</span> in Drupal: may it one day live up to its acronym</a></li>
-<li><a href="http://blog.menhir.be/2008/09/27/ahah-forms-in-drupal-6/">Ahah forms in drupal 6</a></li>
-<li><a href="http://drupalsn.com/learn-drupal/drupal-tutorials/getting-going-ahah-and-drupal-6">Getting going with <span class="caps">AHAH</span> and Drupal 6</a></li>
-<li><a href="http://www.nicklewis.org/node/967">Drupal 6 <span class="caps">AHAH</span> forms: Making New Fields Work</a></li>
-</ul>
-<p>A big thanks to the Drupal community as always for putting so much helpful support up online for free!</p></div>
+<p></div>
   
+  
+    <footer>
+      <a rel="full-article" href="/2010/03/22/learning-drupal-module-dev-dependent-ahahajax-forms/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -630,7 +423,7 @@ function ahahtestmodule_menu() {
   
 
 
-<time datetime="2010-03-04T00:35:00-07:00" pubdate data-updated="true">Mar 4<span>th</span>, 2010</time>
+<time datetime="2010-03-04T00:35:00-06:00" pubdate data-updated="true">Mar 4<span>th</span>, 2010</time>
         
          | <a href="/2010/03/04/easy-seo-2500-page-views-from-a-year-of-casual-blogging/#disqus_thread">Comments</a>
         
@@ -642,18 +435,12 @@ function ahahtestmodule_menu() {
   <div class="entry-content"><p>You know, you always read in <span class="caps">SEO</span> articles about how important blogging is for increasing traffic. It&#8217;s one of the top suggestions around for improving a website&#8217;s search engine juice. Well, I am here to testify that it truly is a great <span class="caps">SEO</span> tool.</p>
 <p>Granted, the title of this post is hyperbolic link-bait. ;) But it&#8217;s true nonetheless!</p>
 <p>I&#8217;ve had this site, <a href="http://www.chilipepperdesign.com">http://chilipepperdesign.com</a>, up for probably five years now but only as a static portfolio site for most of that time. Then, a year ago, I upgraded the site and added a blog to it. In that year <em><strong>my monthly page views have increased 2,500% and the number of monthly visits has gone up 4,400%</strong></em>.</p>
-<p>I don&#8217;t claim to be a great blogger. I&#8217;m not even a prolific blogger. And I had a <em>very</em> small amount of traffic before, so the percent gain is in some ways exaggerated. But it&#8217;s still an impressive change to me. The idea that casual blogging can increase traffic even <em>just</em> a 1000% would be impressive! But let&#8217;s get a little perspective:</p>
-<h3>Website Traffic Factors</h3>
-<ol>
-	<li>Even though I have few posts, some of them are on very hot topics like Facebook Fan Page design. One single post accounts for a <strong>full 1/3</strong> of my site&#8217;s total traffic!</li>
-	<li>I crafted my blog with very &#8220;Search Engine Friendly&#8221; markup. Without this, a blog is useless.</li>
-	<li>I have not used <em>any</em> paid advertising, or done <em>any link building to speak of</em>. This is purely organic search engine traffic from the blog.</li>
-	<li>My website&#8217;s traffic was pretty much negligible last year, and that skews the percentages. I&#8217;m sure now that I have real traffic my gain next year will be much smaller in terms of percentage.</li>
-</ol>
-<p>So, take from this what you will, but it is a fact: blogging gives search engines what they need &#8211; <strong>content</strong>. When you provide a search engine with content you will be rewarded.</p>
-<p><img src="http://www.chilipepperdesign.com/images/48.jpg" alt="" /></p>
-<p>Happy blogging!</p></div>
+<p></div>
   
+  
+    <footer>
+      <a rel="full-article" href="/2010/03/04/easy-seo-2500-page-views-from-a-year-of-casual-blogging/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -680,7 +467,7 @@ function ahahtestmodule_menu() {
   
 
 
-<time datetime="2010-01-15T00:08:00-07:00" pubdate data-updated="true">Jan 15<span>th</span>, 2010</time>
+<time datetime="2010-01-15T00:08:00-06:00" pubdate data-updated="true">Jan 15<span>th</span>, 2010</time>
         
          | <a href="/2010/01/15/how-to-programmatically-create-views-in-drupal-6/#disqus_thread">Comments</a>
         
@@ -691,80 +478,12 @@ function ahahtestmodule_menu() {
 
   <div class="entry-content"><p>So, this stumped me for a while. I needed my small custom Drupal module to select a bunch of nodes based on a <span class="caps">CCK</span> Date field and the Publish status. It is a pain to query the <span class="caps">CCK</span> tables directly, so every forum post I could find told me to do this via Views. That&#8217;s all well and good, but the instructions for doing this all involved creating a View with the Vuiews UI, <em>then</em> calling it to make my query.</p>
 <p>But I wanted to have some of the View&#8217;s query parameters change dynamically based on my module&#8217;s admin settings. Although you could probably do this with some custom Views Argument <span class="caps">PHP</span> code, I didn&#8217;t want to do it this way. It divorced the code from my module too much somehow. It would mean that after I installed my module I would have to create a View and paste in some custom <span class="caps">PHP</span> code! Yuck.</p>
-<p>Looking through the Views 2 documentation I learned how to create &#8220;default views&#8221; for a module, but still I didn&#8217;t like this approach. This would mean that the custom view would still appear in the Views list, and could be disabled, modified, and what have you. What I really wanted to do was just create a View programmatically in my module code. How hard could it be?</p>
-<p>With Views 1 it was apparently easy to do this with the <em>views_build_view()</em> method, and I found <a href="http://drupal.org/node/138828">many</a> <a href="http://drupal.org/node/99721">articles</a> explaining how. But I am using Views 2, so these were of no help.</p>
-<p>Some poking around in the Views code showed me the way, however, and it turns out it&#8217;s pretty easy after all.</p>
-<p>Basically, all you need to do is create a view using the Views UI then Export it to get most of the code. You can&#8217;t quite use the exported code as-is though. You need to replace the first line of the export code (<em>$view = new view;<em>) with (<em>$view = views</em>new</em>view();</em>). It basically does the same thing. Once you&#8217;ve replaced that line you can create a view anywhere you want in your module&#8217;s code. You can then execute, embed it, or whatever you want by calling the appropriate functions (like <em>$view&#8594;execute_display(&#8216;default&#8217;, array())</em>). Here is a piece of example code using a simple view that displays the Title field of all Published nodes:</p>
-<pre><code>//create a new view
-$view = views_new_view();
-//define the view (this code was generated by the Export)
-$view-&gt;name = 'test_date_view';
-$view-&gt;description = '';
-$view-&gt;tag = '';
-$view-&gt;view_php = '';
-$view-&gt;base_table = 'node';
-$view-&gt;is_cacheable = FALSE;
-$view-&gt;api_version = 2;
-$view-&gt;disabled = FALSE; /* Edit this to true to make a default view disabled initially */
-$handler = $view-&gt;new_display('default', 'Defaults', 'default');
-$handler-&gt;override_option('fields', array(
-  'title' =&gt; array(
-	'label' =&gt; 'Title',
-	'alter' =&gt; array(
-	  'alter_text' =&gt; 0,
-	  'text' =&gt; '',
-	  'make_link' =&gt; 0,
-	  'path' =&gt; '',
-	  'alt' =&gt; '',
-	  'prefix' =&gt; '',
-	  'suffix' =&gt; '',
-	  'help' =&gt; '',
-	  'trim' =&gt; 0,
-	  'max_length' =&gt; '',
-	  'word_boundary' =&gt; 1,
-	  'ellipsis' =&gt; 1,
-	  'html' =&gt; 0,
-	),
-	'link_to_node' =&gt; 1,
-	'exclude' =&gt; 0,
-	'id' =&gt; 'title',
-	'table' =&gt; 'node',
-	'field' =&gt; 'title',
-	'relationship' =&gt; 'none',
-  ),
-));
-$handler-&gt;override_option('filters', array(
-  'status' =&gt; array(
-	'operator' =&gt; '=',
-	'value' =&gt; '1',
-	'group' =&gt; '0',
-	'exposed' =&gt; FALSE,
-	'expose' =&gt; array(
-	  'operator' =&gt; FALSE,
-	  'label' =&gt; '',
-	),
-	'id' =&gt; 'status',
-	'table' =&gt; 'node',
-	'field' =&gt; 'status',
-	'relationship' =&gt; 'none',
-  ),
-  ),
-));
-$handler-&gt;override_option('access', array(
-  'type' =&gt; 'none',
-));
-$handler-&gt;override_option('cache', array(
-  'type' =&gt; 'none',
-));
-$handler-&gt;override_option('row_options', array(
-  'inline' =&gt; array(),
-  'separator' =&gt; '',
-));
-// now output the view (or whatever you want to do with it)
-print $view-&gt;execute_display('default', array());
-</code></pre>
-<p>I posted this over in the <a href="http://drupal.org/node/685432">Drupal documentation</a> as well.</p></div>
+<p></div>
   
+  
+    <footer>
+      <a rel="full-article" href="/2010/01/15/how-to-programmatically-create-views-in-drupal-6/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -791,7 +510,7 @@ print $view-&gt;execute_display('default', array());
   
 
 
-<time datetime="2010-01-14T12:49:00-07:00" pubdate data-updated="true">Jan 14<span>th</span>, 2010</time>
+<time datetime="2010-01-14T12:49:00-06:00" pubdate data-updated="true">Jan 14<span>th</span>, 2010</time>
         
          | <a href="/2010/01/14/unobtrusive-jcarousel-pagetab-external-controls-with-jquery/#disqus_thread">Comments</a>
         
@@ -802,122 +521,12 @@ print $view-&gt;execute_display('default', array());
 
   <div class="entry-content"><p>I am using the very slick and enjoyable <a href="http://sorgalla.com/projects/jcarousel/">jCarousel</a> plugin for <a href="http://jquery.com/">jQuery</a> on a new project to display featured content on the front page. I wanted to use the <a href="http://sorgalla.com/projects/jcarousel/examples/static_controls.html">external controls</a> to allow users to easily jump between slides. However, all the examples I found required hard-coding the control links into the document <span class="caps">HTML</span>. This is not best practice because when JavaScript is disabled and the carousel degrades to a simple list you have a bunch of control links that do nothing sitting there on the page. Better to create the controls in JS and append them to the <span class="caps">DOM</span> with jQuery! This way the controls only appear when the jCarousel script is loaded and ready to use them.</p>
 <p>To do this I just had to add a little extra code to the <em>initCallback</em> method I was already using to bind the external controls. Here is the JS needed to unobtrusively create a jCarousel with 4 external control links:</p>
-<pre><code>&lt;script type="text/javascript"&gt;
-//this function creates the control links and binds them
-function mycarousel_initCallback(carousel) {
-    // add the controls here
-    carousel.container.before('&lt;div class="jcarousel-control"&gt;&lt;a href="#"&gt;1&lt;/a&gt;&lt;a href="#"&gt;2&lt;/a&gt;&lt;a href="#"&gt;3&lt;/a&gt;&lt;a href="#"&gt;4&lt;/a&gt;&lt;/div&gt;');
-    // now bind the controls
-    jQuery('.jcarousel-control a').bind('click', function() {
-        carousel.scroll(jQuery.jcarousel.intval(jQuery(this).text()));
-        return false;
-    });
-};
-//create the jCarousel on the #mycarousel element with the initCallback above
-jQuery(document).ready(function() {
-    jQuery("#mycarousel").jcarousel({
-        initCallback: mycarousel_initCallback,
-    });
-});
-&lt;/script&gt;
-</code></pre>
-<p>I simply append the <em>.jcarousel-control</em> div before the carousel container using <em>carousel.container.before()</em>. You could just as easily add it after the carousel by using <em>carousel.container.after()</em>.</p>
-<p>I love how easy jQuery make <a href="http://www.alistapart.com/articles/understandingprogressiveenhancement/">progressive enhancement</a>! Enjoy.</p></div>
+<p></div>
   
   
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/01/08/adding-the-rel-and-title-attributes-to-image-links-in-ckeditor-3/">Adding the &#8220;Rel&#8221; and &#8220;Title&#8221; Attributes to Image Links in CKEditor 3</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-01-08T14:37:00-07:00" pubdate data-updated="true">Jan 8<span>th</span>, 2010</time>
-        
-         | <a href="/2010/01/08/adding-the-rel-and-title-attributes-to-image-links-in-ckeditor-3/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://ckeditor.com/">CKEditor</a> is the new and improved successor to the venerable <a href="http://sourceforge.net/projects/fckeditor/files/FCKeditor/">FCKeditor</a> JavaScript <span class="caps">WYSIWYG</span> editor. I&#8217;ve used <a href="http://tinymce.moxiecode.com/">TinyMCE</a> and FCKeditor before, but this was my first time trying out the new CKEditor 3.1. I am using it on a new Drupal website via the <a href="http://drupal.org/project/ckeditor">Drupal CKEditor module</a>. The problem I ran into, however, is using <a href="http://www.huddletogether.com/projects/lightbox2/">Lightbox2</a> on images inserted via CKEditor. CK does not provide a way to add the &#8220;rel&#8221; attribute to image links (or any links for that matter). CK also doesn&#8217;t allow adding the &#8220;title&#8221; attribute to image links. Lightbox uses both of these to determine which images to display, group together in galleries, provide a caption, etc. I found <a href="http://dev.fckeditor.net/attachment/ticket/2627/fck-rel.patch">a patch for FCKeditor</a> which allows adding a &#8220;rel&#8221; attribute to image links, but I couldn&#8217;t find one for the new CKEditor. So here we are. :)</p>
-<p>This is a total hack, since I have not looked in to how to properly make a plugin for the new CKEditor, but it works pretty well. Maybe someone who knows how to make plugins to CKEditor can show me the way.</p>
-<p>To start hacking, we need to first copy over the minified <em>ckeditor\plugins\image\dialogs\image.js</em> with the indented <em>ckeditor\_source\plugins\image\dialogs\image.js</em>, since it&#8217;s really hard to work with the minified <em>image.js</em>.</p>
-<p>In <em>image.js</em> all of the tabs and fields in the Image popup dialog are defined in the &#8220;contents&#8221; array (below the onHide function). We will add our new &#8220;rel&#8221; and &#8220;title&#8221; fields to the content array, in the &#8220;Link&#8221; tab&#8217;s sub-array. I added the new code at the end of the Link tab&#8217;s definition array after the <em>txtUrl</em>, <em>browse</em>, and <em>cmbTarget</em> fields (around line 1146). The code I added is:</p>
-
-<pre><code>{
-id : 'txtTitle',
-type : 'text',
-label : editor.lang.link.advisoryTitle,
-'default' : '',
-setup : function( type, element )
-{
-	if ( type == LINK )
-	{
-		this.setValue( element.getAttribute( 'title' ) );
-	}
-},
-commit : function( type, element )
-{
-	if ( type == LINK )
-	{
-		if ( this.getValue() || this.isChanged() )
-		{
-			element.setAttribute( 'title', this.getValue() );
-		}
-	}
-}
-},
-{
-id : 'txtRel',
-type : 'text',
-label : editor.lang.link.rel,
-'default' : '',
-setup : function( type, element )
-{
-	if ( type == LINK )
-	{
-		this.setValue( element.getAttribute( 'rel' ) );
-	}
-},
-commit : function( type, element )
-{
-	if ( type == LINK )
-	{
-		if ( this.getValue() || this.isChanged() )
-		{
-			element.setAttribute( 'rel', this.getValue() );
-		}
-	}
-}
-},
-</code></pre>
-<p>This adds a <em>txtTitle</em> and <em>txtRel</em> field to the Link tab on the Insert Image CKEditor dialog. <strong>Look out for commas!</strong> The first time I did this I missed a comma between the cmbTarget and txtTitle declarations, which borked everything.</p>
-<p>The final thing we need to do is create the &#8220;editor.lang.link.rel&#8221; English translation definition so the new <em>txtRel</em> field is properly labeled in the dialog (I re-used the existing &#8220;editor.lang.link.advisoryTitle&#8221; translation for <em>txtTitle</em>). To do this, open up <em>ckeditor\lang\en.js</em>. I added the following snipped between <em>styles</em> and <em>selectAnchor</em> in the &#8220;Link&#8221; block, but just make sure it&#8217;s in the &#8220;Link&#8221; block of translations.</p>
-
-<pre><code>rel:'Rel',</code></pre>
-<p>You could probably hard-code this label, but I kept with the translation system. I didn&#8217;t do any labels except the English one, but you get the idea. If you are using another language insert the &#8220;rel&#8221; label into the appropriate file for that language.</p>
-<p>You can now set the &#8220;rel&#8221; and &#8220;title&#8221; attributes on the image link, and use them with the Lightbox of your choice!</p></div>
-  
+    <footer>
+      <a rel="full-article" href="/2010/01/14/unobtrusive-jcarousel-pagetab-external-controls-with-jquery/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -941,6 +550,10 @@ commit : function( type, element )
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/12/27/new-hipster-hacker-octopress-blog/">New Hipster Hacker Blog</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/05/15/magento-15-ee-110-windows-command-line-batch-update-script-magebat/">Magento 1.5 / EE 1.10 Windows Command Line Batch Update Script mage.bat</a>
       </li>
     
@@ -956,24 +569,25 @@ commit : function( type, element )
         <a href="/2010/03/24/a-facebook-content-management-system-cms-for-facebook-page-templates/">A Facebook Content Management System (CMS) for Facebook Page Templates</a>
       </li>
     
-      <li class="post">
-        <a href="/2010/03/22/insert-flash-media-embed-code-tinymce-plugin/">Insert Flash Media Embed Code TinyMCE Plugin</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
   <ul id="categories">
-    <li class='category'><a href='/blog/categories/blogs/'>Blogs (2)</a></li>
-<li class='category'><a href='/blog/categories/cms/'>CMS (6)</a></li>
+    <li class='category'><a href='/blog/categories/apache/'>Apache (1)</a></li>
 <li class='category'><a href='/blog/categories/css/'>CSS (2)</a></li>
+<li class='category'><a href='/blog/categories/drupal/'>Drupal (2)</a></li>
+<li class='category'><a href='/blog/categories/facebook/'>Facebook (6)</a></li>
 <li class='category'><a href='/blog/categories/javascript/'>JavaScript (3)</a></li>
+<li class='category'><a href='/blog/categories/linux/'>Linux (3)</a></li>
+<li class='category'><a href='/blog/categories/magento/'>Magento (11)</a></li>
+<li class='category'><a href='/blog/categories/meta/'>Meta (3)</a></li>
+<li class='category'><a href='/blog/categories/nginx/'>Nginx (3)</a></li>
+<li class='category'><a href='/blog/categories/reviews/'>Reviews (1)</a></li>
+<li class='category'><a href='/blog/categories/ruby-/'>Ruby, (1)</a></li>
 <li class='category'><a href='/blog/categories/seo/'>SEO (2)</a></li>
-<li class='category'><a href='/blog/categories/social-media/'>Social-Media (6)</a></li>
-<li class='category'><a href='/blog/categories/web-design/'>Web-Design (2)</a></li>
-<li class='category'><a href='/blog/categories/web-development/'>Web-Development (25)</a></li>
-<li class='category'><a href='/blog/categories/e-commerce/'>e-Commerce (11)</a></li>
+<li class='category'><a href='/blog/categories/web-development/'>Web-Development (19)</a></li>
+<li class='category'><a href='/blog/categories/wordpress/'>WordPress (3)</a></li>
 
   </ul>
 </section>
@@ -1074,7 +688,7 @@ commit : function( type, element )
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2012 - Evan Johnson -
+  Copyright &copy; 2013 - Evan Johnson -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

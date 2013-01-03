@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Web-Development | Chili Pepper Design]]></title>
   <link href="http://thaddeusmt.github.com/blog/categories/web-development/atom.xml" rel="self"/>
   <link href="http://thaddeusmt.github.com/"/>
-  <updated>2012-12-20T23:45:39-07:00</updated>
+  <updated>2013-01-03T14:07:08-06:00</updated>
   <id>http://thaddeusmt.github.com/</id>
   <author>
     <name><![CDATA[Evan Johnson]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Magento 1.5 / EE 1.10 Windows Command Line Batch Update Script mage.bat]]></title>
     <link href="http://thaddeusmt.github.com/2011/05/15/magento-15-ee-110-windows-command-line-batch-update-script-magebat/"/>
-    <updated>2011-05-15T23:00:00-06:00</updated>
+    <updated>2011-05-15T23:00:00-05:00</updated>
     <id>http://thaddeusmt.github.com/2011/05/15/magento-15-ee-110-windows-command-line-batch-update-script-magebat</id>
     <content type="html"><![CDATA[<p>So, this might be for kind of a narrow audience, but I'm pretty stoked on it so I wanted to share.</p>
 
@@ -37,6 +37,9 @@
 <p>So, looking at the mage.sh script and working from the pear.bat script, I made mage.bat. It lets you do command line downloads and updates of Magento in Windows, just like you can on Linux.</p>
 
 <p>Not that anyone is actually hosting Magento on a WAMP setup, but I find it useful to be able to download and install Extensions and modules on my Windows development box.</p>
+
+<!-- more -->
+
 
 <p>"Download mage.bat - Windows Magento Connect 2.0 Update Script":http://www.chilipepperdesign.com/file_download/1/mage.zip</p>
 
@@ -64,15 +67,20 @@
   <entry>
     <title type="html"><![CDATA[ Reveal / Fan-Gate / Like-Gate Facebook iframe tab tutorial (with PHP)]]></title>
     <link href="http://thaddeusmt.github.com/2011/02/15/reveal-fan-gate-like-gate-facebook-iframe-tab-tutorial-with-php/"/>
-    <updated>2011-02-15T00:37:00-07:00</updated>
+    <updated>2011-02-15T00:37:00-06:00</updated>
     <id>http://thaddeusmt.github.com/2011/02/15/reveal-fan-gate-like-gate-facebook-iframe-tab-tutorial-with-php</id>
     <content type="html"><![CDATA[<p><em><strong>Update: <a href="http://www.splashlabsocial.com">SplashLab Social</a> has been released!</strong> <a href="http://www.splashlabsocial.com">If you are looking for an easier way to set up Fans-only/Reveal tabs, look no further!</a> My new service makes it easy to create custom fan-gate tabs, check it out!</em></p>
 
-<p>"FBML is going away":http://developers.facebook.com/blog/post/462#fbml_roadmap. Is the popular (and effective) strategy of "fan-gating" content to encourage visitors to Like you page going away with the "&lt;fb:visible-to-connection>":http://developers.facebook.com/docs/reference/fbml/visible-to-connection/ FBML tag?</p>
+<p>"FBML is going away":http://developers.facebook.com/blog/post/462#fbml_roadmap. Is the popular (and effective) strategy of "fan-gating" content to encourage visitors to Like you page going away with the <a href="http://developers.facebook.com/docs/reference/fbml/visible-to-connection/">fb:visible-to-connection</a> FBML tag?</p>
 
 <p>No! Facebook has been kind enough to provide a new method for implementing "reveal tabs" on the new iframe tabs. Follow along in the tutorial below to learn how to do this.</p>
 
 <p>(This tutorial assumes you are creating a PHP Facebook application, but you can follow the spirit of it in any language.)</p>
+
+<!-- more -->
+
+
+
 
 <h3>1. Set up an iframe tab application</h3>
 
@@ -191,11 +199,16 @@
   <entry>
     <title type="html"><![CDATA[Facebook iframe tabs on Pages - No more FBML!]]></title>
     <link href="http://thaddeusmt.github.com/2011/02/14/facebook-iframe-tabs-on-pages-no-more-fbml/"/>
-    <updated>2011-02-14T23:43:00-07:00</updated>
+    <updated>2011-02-14T23:43:00-06:00</updated>
     <id>http://thaddeusmt.github.com/2011/02/14/facebook-iframe-tabs-on-pages-no-more-fbml</id>
     <content type="html"><![CDATA[<p>The long awaited transition from FBML tabs to iframe tabs has finally happened. As of this writing on Feb 14th 2011 (Valentines Day!) you can choose the "iframe" option for Facebook application tabs. The official word from the "Facebook developer roadmap":http://developers.facebook.com/roadmap/ is that "as of March 11th developers will no longer be able to create FBML tabs":http://developers.facebook.com/blog/post/462#fbml_roadmap (although existing FBML apps will be supported indefinitely - or at least until the end of 2011 I heard in the comments).</p>
 
 <p><img src="http://www.chilipepperdesign.com/images/52.jpg" style="width: 415px" /></p>
+
+<!-- more -->
+
+
+
 
 <h3>The Good</h3>
 
@@ -244,13 +257,16 @@
   <entry>
     <title type="html"><![CDATA[Insert Flash Media Embed Code TinyMCE Plugin]]></title>
     <link href="http://thaddeusmt.github.com/2010/03/22/insert-flash-media-embed-code-tinymce-plugin/"/>
-    <updated>2010-03-22T16:19:00-06:00</updated>
+    <updated>2010-03-22T16:19:00-05:00</updated>
     <id>http://thaddeusmt.github.com/2010/03/22/insert-flash-media-embed-code-tinymce-plugin</id>
     <content type="html"><![CDATA[<p>I've run into a problem providing my clients good, easy-to-use media embed functionality with the existing JavaScript WYSIWYG editors. The big players, "CKEditor":http://ckeditor.com/ (formery FCKEditor) and "TinyMCE":http://tinymce.moxiecode.com/ both provide a "Flash" button which works okay with YouTube and other large video providers, but what about embedding a Picasa slideshow? None of the WYSIWYG editors come with plugin to just insert some HTML code. If you want to embed something like a Picasa slideshow,  customized YouTube player, or Google Map you have open up the source code, find the location you want to insert it, and paste in the code. Fine for some, but difficult and scary for most as it breaks the WYSIWYG paradigm.</p>
 
 <p>On one of my latest Drupal websites there are multiple bloggers, none of whom are particularly tech savvy. I set up the CMS with TinyMCE because I like how they can drag and drop images around (I just wish Drupal had an image embed uploader like WordPress!). After a while they complained that the Insert Flash button in TinyMCE just wasn't cutting it. So I set about fixing it. How hard could it be to make a plugin that just inserts some HTML code where your cursor is? Like it already does for images?</p>
 
 <p>It turns out it is very easy. I was able to just edit the TinyMCE "Example" plug-in, which already did basically exactly what I wanted. So here I provide it to you, Internet. I hope it is useful, and please let me know if it's broken (or could work better). Thanks!</p>
+
+<!-- more -->
+
 
 <p><em>UPDATED</em>: (9-17-2010) I fixed some bugs with IE. It should work better cross-browse now.</p>
 
@@ -286,7 +302,7 @@ Here is the official guide to creating a plugin for TinyMCE 3: "TinyMCE:Create p
   <entry>
     <title type="html"><![CDATA[Learning Drupal Module Dev: Dependent AHAH/AJAX Forms]]></title>
     <link href="http://thaddeusmt.github.com/2010/03/22/learning-drupal-module-dev-dependent-ahahajax-forms/"/>
-    <updated>2010-03-22T01:32:00-06:00</updated>
+    <updated>2010-03-22T01:32:00-05:00</updated>
     <id>http://thaddeusmt.github.com/2010/03/22/learning-drupal-module-dev-dependent-ahahajax-forms</id>
     <content type="html"><![CDATA[<p>So, I've been working on a simple module for a Drupal project lately. I wanted to have two administrator settings for the module, the second of which depends on the first. A "dependent dropdown". It would be cool if it was "AJAXy" too, I thought. Well, it just so turns out that in Drupal 6 there are built in <a href="http://ajax.phpmagazine.net/2005/11/ahah_asychronous_html_and_http.html">AHAH</a> (Asychronous HTML and HTTP) functions in the Forms API to do just this. Easy! Or is it?</p>
 
@@ -299,6 +315,11 @@ Here is the official guide to creating a plugin for TinyMCE 3: "TinyMCE:Create p
 
 
 <p>First, to help provide an "aerial view" of what's going on here, this is a list of the components involved:</p>
+
+
+
+
+<!-- more -->
 
 
 

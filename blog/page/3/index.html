@@ -9,7 +9,7 @@
   <meta name="author" content="Evan Johnson">
 
   
-  <meta name="description" content="Up to and including the current release of Magento (1.3.2.3), an admin cannot properly edit an order containing configurable products. Magento warns &hellip;">
+  <meta name="description" content="Yes, this basically amounts to a good old fashioned rant post. But there is a purpose behind it: to educate those thinking of using Magento to power &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -25,7 +25,7 @@
   <script src="/javascripts/ender.js"></script>
   <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <link href="/atom.xml" rel="alternate" title="Chili Pepper Design" type="application/atom+xml">
-  
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
   
   <script type="text/javascript">
     var _gaq = _gaq || [];
@@ -78,6 +78,53 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/2009/08/13/magento-six-months-in/">Magento - Six Months In</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-08-13T01:48:00-05:00" pubdate data-updated="true">Aug 13<span>th</span>, 2009</time>
+        
+         | <a href="/2009/08/13/magento-six-months-in/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Yes, this basically amounts to a good old fashioned rant post. But there is a purpose behind it: to educate those thinking of using Magento to power their ecommerce store about potential concerns and pitfalls. Read on, and enjoy.</p>
+<h2>Magento is an ambitious, promising ecommerce platform.</h2>
+<p><a href="http://www.magentocommerce.com/">Magento</a> really is a neat piece of software. <a href="http://www.varien.com/">Varien</a> has really outdone itself. It is one of the most feature rich ecommerce platforms out right now and =drumroll= it&#8217;s <a href="http://en.wikipedia.org/wiki/Open_source_software">Open Source</a>!</p>
+<p>After comparing prices and features a year ago, Magento was chosen from amongst all of the other ecommerce solutions available for some upcoming projects. I have now helped setup, develop, maintain and run four Magento stores. I&#8217;ve been working with Magento almost exclusively for the past 6 months.</p>
+<p>It&#8217;s pretty great!</p>
+<p>But it is not perfect.</p>
+<p></div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2009/08/13/magento-six-months-in/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/2009/08/10/how-to-edit-orders-with-configurable-products-in-magento/">How to Edit Orders With Configurable Products in Magento</a></h1>
     
     
@@ -94,7 +141,7 @@
   
 
 
-<time datetime="2009-08-10T19:35:00-06:00" pubdate data-updated="true">Aug 10<span>th</span>, 2009</time>
+<time datetime="2009-08-10T19:35:00-05:00" pubdate data-updated="true">Aug 10<span>th</span>, 2009</time>
         
          | <a href="/2009/08/10/how-to-edit-orders-with-configurable-products-in-magento/#disqus_thread">Comments</a>
         
@@ -106,48 +153,12 @@
   <div class="entry-content"><p>Up to and including the current release of Magento (1.3.2.3), an admin cannot properly edit an order containing configurable products. Magento warns you of this when you click the &#8220;Edit&#8221; button, and if you proceed the order appears on the edit screen containing only the Simple and Virtual products. <em>Configurable, Bundled, and other products are removed from the order.</em></p>
 <p>I am finding this more and more with Magento: it is the most feature-rich and impressive of all Open Source commerce solutions, but it is still a young piece of software and the result is that all of these great features are only about 80% operational. But enough ranting about Magento (for now).</p>
 <p>You need to be able to edit an orders containing configurable products! The code below allows you to do this by converting the Configurable products into their respective Simple products. This is not the same as actually being able to edit the Configurable products. This approach <em>is</em> the same one that Varien takes when allowing an admin to create new orders: you <em>cannot</em> add Configurable products, but you <em>can</em> add any of the Simple products that constitute the Configurable ones.</p>
-<p><strong><span class="caps">NOTE</span>:</strong> As always, it&#8217;s better to roll these into extensions for future upgradability, and <em>do not attempt this on a production server without backing everything up!</em> I don&#8217;t have to time to provide support if my little hack causes problems for you, so be careful!</p>
-<p>Now on to the code!</p>
-<p>First, we want to create a new list of product types that can be edited. We don&#8217;t want to mess with the list of product types that can be <em>created</em> however, so we need to make a new list. In <em>Adminhtml/etc/config.xml</em>, add the following code around line 399 (below the <em>adminhtml&#8594;sales&#8594;order&#8594;create</em> list of product types):</p>
-<pre><code>&lt;edit&gt;
-   &lt;available_product_types&gt;
-      &lt;simple/&gt;
-      &lt;virtual/&gt;
-      &lt;configurable/&gt;
-   &lt;/available_product_types&gt;
-&lt;/edit&gt;</code></pre>
-<p>This puts Configurable products on the &#8220;guest list&#8221;, as it were, allowing them to be edited.</p>
-<p>Then in <em>Adminhtml/Block/Sales/Order/View.php_, in the<em></em><em>construct</em> method, change the code in the &quot;if ($this&#8594;</em>isAllowedAction(&#8216;edit&#8217;) &amp;&amp; $this&#8594;getOrder()&#8594;canEdit()) {&quot; block from:</p>
-<pre><code>Mage::getConfig()-&gt;getNode('adminhtml/sales/order/create/available_product_types')-&gt;asArray())</code></pre>
-<p>to:</p>
-<pre><code>Mage::getConfig()-&gt;getNode('adminhtml/sales/order/edit/available_product_types')-&gt;asArray())</code></pre>
-<p>This code bypasses the JS warning you get when trying to edit an order containing configurable products, since it will not be needed. The warning about Bundled and other non-editable product types will still appear.</p>
-<p>And finally (this is the real guts of the hack), in <em>Mage/Adminhtml/Model/Sales/Order/Create.php</em>, in the  <em>initFromOrder()</em> method, change the code in the &#8220;foreach ($order&#8594;getItemsCollection&#8221; block as follows:</p>
-<pre><code>foreach ($order-&gt;getItemsCollection(
-            array_keys(Mage::getConfig()-&gt;getNode('adminhtml/sales/order/edit/available_product_types')-&gt;asArray()),
-            false
-            ) as $orderItem) {
-                if ($order-&gt;getReordered()) {
-                    $qty = $orderItem-&gt;getQtyOrdered();
-                }
-                else {
-                    $qty = $orderItem-&gt;getQtyOrdered() - $orderItem-&gt;getQtyShipped() - $orderItem-&gt;getQtyInvoiced();
-                }
-                if ($qty &gt; 0) {
-                     //if it's a child configurable product
-                    if ($orderItem-&gt;_getData("product_type") != "configurable") {
-                        $item = $this-&gt;initFromOrderItem($orderItem, $qty);
-                        if (is_string($item)) {
-                            Mage::throwException($item);
-                        }
-                    }
-                }
-        }</code></pre>
-<p>This code grabs the Configurable product&#8217;s child Simple products and adds <em>them</em> to the cart instead. This may look a little strange if a front end customer created the order, then re-orders it after the admin has edited it&#8230; but otherwise it works fine. <strong>The correct number of the correct Simple products are in the order &#8211; not lost to the void as they were previously.</strong></p>
-<p>It seems to me like it would have been easier for Varien to include this functionality rather than all of the code checking to ignore Configurable products? Who knows. But I hope my code snippet can help someone out!</p>
-<p><strong><span class="caps">UPDATE</span> 9.1.09</strong> There is a known issue with Catalog Price Rule sale prices using this hack. To get around it, just remember to hit the &#8220;Update Item&#8217;s and Qtys&#8221; button as soon as you have opened up the order for editing. This re-applies the sale price rules to the Simple items (which replaced the Configurable item).</p>
-<p>P.S. I doubt this is compatible with <a href="http://www.magentocommerce.com/extension/596/simple-configurable-products">OrganicInternet&#8217;s Simple Configurable Products</a> module, but I never tested against it so I don&#8217;t know.</p></div>
+<p></div>
   
+  
+    <footer>
+      <a rel="full-article" href="/2009/08/10/how-to-edit-orders-with-configurable-products-in-magento/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -174,7 +185,7 @@
   
 
 
-<time datetime="2009-07-09T17:23:00-06:00" pubdate data-updated="true">Jul 9<span>th</span>, 2009</time>
+<time datetime="2009-07-09T17:23:00-05:00" pubdate data-updated="true">Jul 9<span>th</span>, 2009</time>
         
          | <a href="/2009/07/09/changing-magento-order-invoice-and-shipping-numbers/#disqus_thread">Comments</a>
         
@@ -185,39 +196,12 @@
 
   <div class="entry-content"><p>A client needed to change the default order numbering scheme in Magento 1.3. There is no simple administrative backend setting to do this, however. The order, invoice, shipping and credit memo numbers are fixed &#8211; 9 digits long prefixed with a 1. The client wanted all of their order numbers in the form &#8220;AZ-xxxxx&#8221; &#8211; two fixed letters, a dash, and then 5 digits. So&#8230; how go about changing this?</p>
 <p>Looking around the Magento forums and a few other websites (listed at the bottom), combined with poking around the in Magento code and database (<a href="http://www.phpmyadmin.net">phpmyadmin</a> was very helpful), I eventually figured out a way to do it fairly simply, and without modifying any code! All that is required is running a few <span class="caps">SQL</span> statements against the database.</p>
-<p><em><span class="caps">DISCLAIMER</span>: Don&#8217;t run these on a live/production server, and backup your database before you run them! This works for me, but I have not rigorously tested this and it may break certain functionality and/or extensions. <strong><span class="caps">NOT</span> <span class="caps">TESTED</span> <span class="caps">WITH</span> 1.4 OR <span class="caps">ABOVE</span>!</strong> You have been warned!</em></p>
-<pre><code>update eav_entity_type set increment_pad_length=5 where entity_type_code='order';
-update eav_entity_store inner join eav_entity_type on eav_entity_type.entity_type_id = eav_entity_store.entity_type_id set eav_entity_store.increment_last_id='00001',eav_entity_store.increment_prefix='AZ-' where eav_entity_type.entity_type_code='order';
-update eav_entity_type set increment_pad_length=5 where entity_type_code='invoice';
-update eav_entity_store inner join eav_entity_type on eav_entity_type.entity_type_id = eav_entity_store.entity_type_id set eav_entity_store.increment_last_id='00001',eav_entity_store.increment_prefix='AZ-' where eav_entity_type.entity_type_code='invoice';
-update eav_entity_type set increment_pad_length=5 where entity_type_code='shipment';
-update eav_entity_store inner join eav_entity_type on eav_entity_type.entity_type_id = eav_entity_store.entity_type_id set eav_entity_store.increment_last_id='00001',eav_entity_store.increment_prefix='AZ-' where eav_entity_type.entity_type_code='shipment';
-update eav_entity_type set increment_pad_length=5 where entity_type_code='creditmemo';
-update eav_entity_store inner join eav_entity_type on eav_entity_type.entity_type_id = eav_entity_store.entity_type_id set eav_entity_store.increment_last_id='00001',eav_entity_store.increment_prefix='AZ-' where eav_entity_type.entity_type_code='creditmemo';</code></pre>
-<p>Just make sure that, in the <span class="caps">SQL</span> statements above:</p>
-<ul>
-	<li><em>increment_pad_length</em> is set to the length you want the number to be (not counting the prefix)</li>
-	<li><em>increment_last_id</em> is the number you want to start from from (padded correctly with zeros)</li>
-	<li><em>increment_prefix</em> is set to whatever prefix you want (it&#8217;s AZ- in this example)</li>
-</ul>
-<p>For extra credit, combine this with <a href="http://www.magentocommerce.com/extension/957/fooman-invoice-order-number">Fooman&#8217;s Invoice=Order Number</a> module to make the order/invoice/shipping numbers all the same.</p>
-<p>Resources for changing order numbers:</p>
-<ul>
-	<li><a href="http://www.magentocommerce.com/boards/viewthread/5893/">http://www.magentocommerce.com/boards/viewthread/5893/</a></li>
-	<li><a href="http://www.magentocommerce.com/boards/viewthread/10985/">http://www.magentocommerce.com/boards/viewthread/10985/</a></li>
-	<li><a href="http://eliasinteractive.com/blog/magento-ecommerce-how-to-reset-all-test-order-information-and-set-unique-prefix-for-orders-invoices-shipments-and-credit-memos/">http://eliasinteractive.com/blog/magento-ecommerce-how-to-reset-all-test-order-information-and-set-unique-prefix-for-orders-invoices-shipments-and-credit-memos/</a></li>
-</ul>
-<p><strong><span class="caps">UPDATE</span> 8.18.2009:</strong> <br />
-One bug I noticed is that if you have alphabet characters in your prefix (instead of just numbers), the order numbers do not display properly on the &#8220;Invoices&#8221;, &#8220;Shipments&#8221; and &#8220;Credit Memos&#8221;  admin Grid views. They work fine on the &#8220;Orders&#8221; grid view however. To fix this bug on the other admin Grid views you need make a small edit to each of their Grid.php files:</p>
-<ul>
-	<li>app/code/core/Mage/Adminhtml/Block/Sales/Invoice/Grid.php</li>
-	<li>app/code/core/Mage/Adminhtml/Block/Sales/Shipment/Grid.php</li>
-	<li>app/code/core/Mage/Adminhtml/Block/Sales/Creditmemo/Grid.php</li>
-</ul>
-<p>In each of those, simply change the &#8220;increment_id&#8221; and &#8220;order_increment_id&#8221; columns <em>type</em> from &#8220;number&#8221; to &#8220;text&#8221;. Problem solved.</p>
-<p><strong><span class="caps">UPDATE</span> 5.12.2010:</strong> <br />
-There has been one report that this DB hack does not work with Magento 1.4, and may cause problems with your installation. Proceed with caution!!!</p></div>
+<p></div>
   
+  
+    <footer>
+      <a rel="full-article" href="/2009/07/09/changing-magento-order-invoice-and-shipping-numbers/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -244,7 +228,7 @@ There has been one report that this DB hack does not work with Magento 1.4, and 
   
 
 
-<time datetime="2009-07-08T23:03:00-06:00" pubdate data-updated="true">Jul 8<span>th</span>, 2009</time>
+<time datetime="2009-07-08T23:03:00-05:00" pubdate data-updated="true">Jul 8<span>th</span>, 2009</time>
         
          | <a href="/2009/07/08/magento-how-to-protect-pages-so-only-logged-in-users-can-view-them/#disqus_thread">Comments</a>
         
@@ -255,49 +239,12 @@ There has been one report that this DB hack does not work with Magento 1.4, and 
 
   <div class="entry-content"><p>There are times when you want all or part of your Magento online store to only be visible to customers who are logged in to the website. Once such example is a &#8220;wholesale&#8221; website where only approved wholesale users should be able to view products and checkout. This functionality is not built in to Magento, but it&#8217;s a just a few simple little code hacks away.</p>
 <p><strong><em><span class="caps">NOTE</span>: On 8.25.09 I updated this post since I have improved the technique.</em></strong></p>
-<h2>Create a redirect .phtml template</h2>
-<p>First, create a small file in the <em>/template/page/html</em> directory of your active theme. Call it something like <em>auth-redirect.phtml</em>. The contents are just:</p>
-<pre><code>==&amp;lt?php== Mage::getSingleton('customer/session')-&gt;setBeforeAuthUrl($this-&gt;getRequest()-&gt;getRequestUri());  //save requested URL for later redirection
-if(!Mage::getSingleton('customer/session')-&gt;isLoggedIn()) {  // if not logged in
-    header("Status: 301");
-    header('Location: '.Mage::helper('core/url')-&gt;getHomeUrl(customer/account/login)) ;  // send to the login page
-    exit; 
-} ?&gt;</code></pre>
-<p><strong>Note:</strong> Apparently, for Magento 1.4, you should use this code (but I have not tested it):</p>
-<pre><code>==&amp;lt?php== Mage::getSingleton('customer/session')-&gt;setBeforeAuthUrl($this-&gt;getRequest()-&gt;getRequestUri());  //save requested URL for later redirection
-if(!Mage::getSingleton('customer/session')-&gt;isLoggedIn()) {  // if not logged in
-    header("Status: 301");
-    header('Location: '.$this-&gt;getUrl('customer/account/login')) ;  // send to the login page
-    exit; 
-} ?&gt;</code></pre>
-<p>Right now the 301 redirects to the login page, but it could be the homepage or somewhere else as well. The first line ensures that after logging in, the user is redirected to the page they first tried to access. Removing that line means the user gets redirected to their Account page after logging in, I believe.</p>
-<h2>Edit page.xml</h2>
-<p>Now we want to make the redirect code in <em>auth-redirect.phtml</em> available to all of the page templates on our website. In <em>layout/page.xml</em> in your active theme, add the following line of code:</p>
-<pre><code>&lt;block type="page/html" name="auth-redirect" as="auth-redirect" template="page/html/auth-redirect.phtml"/&gt;</code></pre>
-<p>Insert this as the first item under the &#8220;root&#8221; Block (i.e. &lt;block type=&#8220;page/html&#8221; name=&#8220;root&#8221; output=&quot;toHtml&quot;&gt;)</p>
-<h2>Edit page layout templates</h2>
-<p>Now that the redirect code in <em>auth-redirect.phtml</em> is available, we need to include it in all of the page templates. The &#8220;page templates&#8221; I&#8217;m referring to, in the <em>page</em> directory of your theme, are:</p>
-<ul>
-	<li>1column.phtml</li>
-	<li>2columns-left.phtml</li>
-	<li>2columns-right.phtml</li>
-	<li>3columns.phtml</li>
-	<li>etc etc</li>
-</ul>
-<p>Insert the following line into all of them, at the top of the file just after the &#8220;&lt;?php&#8221; tag.</p>
-<pre><code>echo $this-&gt;getChildHtml('auth-redirect')</code></pre>
-<p>This ensures that the redirect is included before any of the page <span class="caps">HTML</span> renders.</p>
-<h2>Add exceptions (or: public pages)</h2>
-<p>Finally, we need to add &#8220;exceptions&#8221; &#8211; public pages like the &#8220;login&#8221; page which don&#8217;t need to be protected. On a site that is only accessible to logged in users, the login page needs to be public!! To enable the login page, go to <em>layout/customer.xml</em> and add the following to the <code>&lt;customer_account_login&gt;</code> block:</p>
-<pre><code>&lt;remove name="auth-redirect" /&gt;</code></pre>
-<p>If you want users to be able to create an account, another good one to make public might be <code>&lt;customer_account_create&gt;</code> in <em>layout/customer.xml</em>.</p>
-<p>If you want to make the home (front) page public, add the &#8220;remove&#8221; code to the <code>&lt;cms_index_index&gt;</code> block in <em>layout/page.xml</em>.</p>
-<p>You can also add this code to the custom &#8220;Layout Update <span class="caps">XML</span>&#8221; on any category, product or <span class="caps">CMS</span> page to make them public.</p>
-<h2>And your done!</h2>
-<p>That&#8217;s it. Now, if you want to protect just certain parts of a Magento store, or control access based on user Roles, you will have to get a little fancier. I&#8217;m not covering that here, but&#8230;</p>
-<p>One way to do that might be to <span class="caps">NOT</span> add the auth-redirect block to the master <em>page.xml</em> (and then do exceptions), but instead to only place it on certain pages like the Cart and Checkout (so the catalog is visible, but you can&#8217;t <em>purchase</em> without logging in).</p>
-<p>Alternatively, you can control access by placing the conditional with  <code>==&amp;lt?php== Mage::getSingleton('customer/session')-&gt;isLoggedIn()  ?&gt;</code> right in specific <span class="caps">PHP</span> of pages you want to protect. Some folks check for specific pages by <span class="caps">URL</span> using <code>$_SERVER['REQUEST_URI']</code> with this technique. There&#8217;s more on this in the Magento forums <a href="http://www.magentocommerce.com/boards/viewthread/2574/">here</a>.</p></div>
+<p></div>
   
+  
+    <footer>
+      <a rel="full-article" href="/2009/07/08/magento-how-to-protect-pages-so-only-logged-in-users-can-view-them/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -324,7 +271,7 @@ if(!Mage::getSingleton('customer/session')-&gt;isLoggedIn()) {  // if not logged
   
 
 
-<time datetime="2009-05-03T02:53:00-06:00" pubdate data-updated="true">May 3<span>rd</span>, 2009</time>
+<time datetime="2009-05-03T02:53:00-05:00" pubdate data-updated="true">May 3<span>rd</span>, 2009</time>
         
          | <a href="/2009/05/03/css-equal-height-columns-with-bottom-border-and-margin/#disqus_thread">Comments</a>
         
@@ -335,71 +282,12 @@ if(!Mage::getSingleton('customer/session')-&gt;isLoggedIn()) {  // if not logged
 
   <div class="entry-content"><p>The saga of <span class="caps">CSS</span> &#8220;equal height columns&#8221; is long and frustrating. It&#8217;s a common and attractive design element, but ever since we stopped using <span class="caps">HTML</span> Tables for our 2 and 3 column web page layouts in favor of Divs containers, it&#8217;s been a real challenge to implement them using standards based <span class="caps">CSS</span> and markup.</p>
 <p>My favorite of the many clever techniques so far devised to solve this problem is the <a href="http://www.positioniseverything.net/articles/onetruelayout/equalheight">Position Is Everything One True Layout</a> method (although don&#8217;t try to use internal anchor links with this!). Another favorite is the <a href="http://matthewjamestaylor.com/blog/equal-height-columns-cross-browser-css-no-hacks">Equal Height Columns with Cross-Browser <span class="caps">CSS</span> &amp; No Hacks</a>, but it actually seems a little more complicated and hack-ish to me (despite the name). And if you really want it to <em>just work</em> to no extra markup and don&#8217;t mind a little inelegance, the good old <a href="http://www.alistapart.com/articles/fauxcolumns/">Faux Columns</a> approach with a background image works well too.</p>
-<p>But the P.I.E. One True Layout method is my favorite and that&#8217;s the one I&#8217;m using in this example. To review, the basic gist of the P.I.E. method is that each column has a huge bottom padding to extend it&#8217;s background color, a huge negative margin to pull the effective bottom of the column back to where it should be, and the container hides the overflow:</p>
-<pre><code>&lt;style type="text/css"&gt;
-.column-1, .column-2 {
-	padding-bottom: 32767px;
-	margin-bottom: -32767px;
-	}
-.column-container {
-	overflow: hidden;
-	}
-&lt;/style&gt;
-&lt;div class="column-container"&gt;
-	&lt;div class="column-1"&gt;
-		...
-	&lt;/div&gt;
-	&lt;div class="column-2"&gt;
-		...
-	&lt;/div&gt;
-&lt;/div&gt;</code></pre>
-<p>Pretty simple, and easy to implement. But because of the way the overflow is hidden, you can&#8217;t add a border or margin (without the background color) to the bottom of your columns! You can add padding (with the background color), but no border or margin because it&#8217;s hidden. So to add a bottom border or margin you have to cheat a little and add an extra div for each column with some special css sauce. But it <em>is</em> possible, and without any actual &#8220;hacks&#8221;, JavaScript or images! Take a look:</p>
-<p><a href="http://www.chilipepperdesign.com/examples/eq-height-col-borders/5px-example.html"><span class="caps">EXAMPLE</span>: <span class="caps">CSS</span> Equal Height Columns 5px Bottom Border</a></p>
-<p>Taking care of the bottom margin problem is easy: just add some extra margin to the top of the footer. If you care about IE6, be sure to add &#8220;zoom: 1;&#8221; to the column-container element (the one with <em>overflow</em> set to <em>hidden</em>). It would be nice if this extra margin property was on the column-container like it <em>should</em> be, but it&#8217;s not awful to have to add it to the footer instead.</p>
-<p>But what about the bottom border? The top, left, and right column borders are fine, it&#8217;s just the bottom one that get&#8217;s hidden. One extra div and a little absolute positioning is all it takes to give us a bottom border. Here is an outline of the additions we need to make to the original P.I.E. method:</p>
-<pre><code>&lt;style type="text/css"&gt;
-.column-1, .column-2 {
-	padding-bottom: 32767px;
-	margin-bottom: -32767px;
-	width: 200px;
-	border: #fff 1px solid;
-	}
-.column-container {
-	position: relative; /* put this here on the container, NOT the column! */
-	overflow: hidden;
-	zoom: 1;
-	}
-.column-1-bottom {
-	position: absolute; /* relative to the container, NOT the column! */
-	bottom: 0;
-	left: 0; /* if column-1 is floated left */
-	height: 1px;  /* same size as border on column-1 */
-	width: 202px;  /* (width of column-1) + (2 * (border size of column-1))  */
-	background: #fff; /* same color as border on column-1 */
-} 
-.column-2-bottom { 
-	position: absolute; /* relative to the container, NOT the column! */
-	bottom: 0;
-	right: 0; /* if column-2 is floated right */
-	height: 1px;  /* same size as border on column-2 */
-	width: 202px;  /* (width of column-2) + (2 * (border size of column-2))  */
-	background: #fff; /* same color as border on column-2 */
-} 
-&lt;/style&gt;
-&lt;div class="column-container"&gt;
-	&lt;div class="column-1"&gt;
-		...
-		&lt;div class="column-1-bottom"&gt;&lt;!-- ie needs this comment for small div heights --&gt;&lt;/div&gt;
-	&lt;/div&gt;
-	&lt;div class="column-2"&gt;
-		...
-		&lt;div class="column-2-bottom"&gt;&lt;!-- ie needs this comment for small div heights --&gt;&lt;/div&gt;
-	&lt;/div&gt;
-&lt;/div&gt;</code></pre>
-<p>And there you have it. Equal height columns surrounded by borders without using any images. Here is another example of the technique in action:</p>
-<p><a href="http://www.chilipepperdesign.com/examples/eq-height-col-borders/1px-example.html"><span class="caps">EXAMPLE</span>: <span class="caps">CSS</span> Equal Height Columns 1px Bottom Border</a></p>
-<p>I&#8217;ve tested this in Firefox 3, IE6, IE7, Chrome 1 and Safari 3. Just make sure the page is being displayed in &#8220;standards mode&#8221; and not &#8220;quirks mode&#8221;! With that in mind the only glitch I can&#8217;t seem to get around is that the bottom div is 1px too high in IE6, making the bottom border look a tiny bit off (the left and right borders go 1px past the &#8220;bottom border&#8221;).</p></div>
+<p></div>
   
+  
+    <footer>
+      <a rel="full-article" href="/2009/05/03/css-equal-height-columns-with-bottom-border-and-margin/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -426,7 +314,7 @@ if(!Mage::getSingleton('customer/session')-&gt;isLoggedIn()) {  // if not logged
   
 
 
-<time datetime="2009-04-26T23:10:00-06:00" pubdate data-updated="true">Apr 26<span>th</span>, 2009</time>
+<time datetime="2009-04-26T23:10:00-05:00" pubdate data-updated="true">Apr 26<span>th</span>, 2009</time>
         
          | <a href="/2009/04/26/how-to-integrate-import-wordpress-content-into-magento-blocks/#disqus_thread">Comments</a>
         
@@ -438,51 +326,12 @@ if(!Mage::getSingleton('customer/session')-&gt;isLoggedIn()) {  // if not logged
   <div class="entry-content"><p>This is the technique I use to integrate <a href="http://wordpress.org/">WordPress</a> content into <a href="http://www.magentocommerce.com/">Magento</a>. This can be useful for bringing in posts related to a product, or having recent blog posts on the Magento home page&#8230; whatever you can dream up. No modules, plugins or extensions are needed for this technique &#8211; just a good grasp of <span class="caps">PHP</span> and the Magento and WordPress theming/templating systems. There are probably many other ways to do this, but this is an easy way that I figured out which works well for my purposes so far.</p>
 <p><strong>First, the WordPress side of the process.</strong></p>
 <p>Step #1 is to create a wordpress page which will have the content we want to show in Magento. The trick is that we don&#8217;t want the WordPress header or footer &#8211; we just want the content. To do this we will create a new page template. In your WordPress theme directory, copy a file with a <a href="http://codex.wordpress.org/The_Loop">Loop</a> in it (<em>index.php</em> or <em>page.php</em> are a good ones to start with) and rename the new file something like <em>MagentoContent.php</em>. Edit this new file, and place at the top something like:</p>
-<pre><code>&lt;?php
-/*
-Template Name: MagentoContent
-*/
-?&gt;</code></pre>
-<p>This declares <em>MagentoContent.php</em> as a page template file. Then remove the function calls that pull in the Header, Footer and Sidebar. They usually look like this:</p>
-<pre><code>&lt;?php get_header(); ?&gt;
-&lt;?php get_sidebar(); ?&gt;
-&lt;?php get_footer(); ?&gt;</code></pre>
-<p>And finally customize the Loop so it retrieves just the content you want. For instance, if you want to get the three most recent posts tagged &#8220;Magento&#8221; and show the title and excerpt it would look something like this:</p>
-<pre><code>&lt;?php query_posts('tag=Magento&amp;limit=3'); ?&gt;
-&lt;?php if (have_posts()) : ?&gt;
-	&lt;?php while (have_posts()) : the_post(); ?&gt;
-		&lt;a href="&lt;?php the_permalink(); ?&gt;" title="&lt;?php the_title(); ?&gt;"&gt;
-			&lt;?php the_title(); ?&gt;
-		&lt;/a&gt;
-		&lt;p&gt;&lt;?php the_excerpt(); ?&gt;&lt;/p&gt;
-		&lt;p&gt;&lt;a href="&lt;?php the_permalink(); ?&gt;"&gt;Read more...&lt;/a&gt;&lt;/p&gt;
-	&lt;?php endwhile; ?&gt;
-&lt;?php else : ?&gt;
-	&lt;p&gt;Sorry no content found.&lt;/p&gt;
-&lt;?php endif; ?&gt;</code></pre>
-<p>Do whatever you want here though. Get to know your way around <a href="http://codex.wordpress.org/Template_Tags/query_posts">query_posts</a> and go to town.</p>
-<p>The final step on the WordPress side is to login to the backend and create a Page. Select the <em>MagentoContent</em> page template we created and Publish the page. If you used a custom post query it doesn&#8217;t matter what it&#8217;s called or what the content is. (If you actually want to bring the page&#8217;s content in to Magento, instead of the custom query, then it does of course.) Make a note of the <span class="caps">URL</span> of this page. If you have nice <a href="http://codex.wordpress.org/Using_Permalinks">Permalinks</a> set up and called the page <em>Mage_content</em> it will probably be something like this: http://example.com/wordpress/Mage_content. Visit the <span class="caps">URL</span> to make sure it&#8217;s returning the content you want. It will be an ugly page without the Header and Footer, but the content is what&#8217;s important. When this content is in Magento the Magento stylesheets can be used to style it.</p>
-<p><strong>Now let&#8217;s do the Magento side of things.</strong></p>
-<p>Create a new Magento template file. For this example, we&#8217;ll create one called <em>wordpress_block.phtml</em> and put it in the <em>/cms</em> folder of our theme directory. The file will just contain a short snippit of <span class="caps">PHP</span> code that uses the <a href="http://us.php.net/curl"><span class="caps">CURL</span></a> library to get the contents of the WordPress page we just created (You can do this other ways, but Magneto already requires the <span class="caps">CURL</span> library so we know it&#8217;s at our disposal).</p>
-<p>Technically code like this should be in a Controller function in a custom Magento extension, but it&#8217;s <strong>way</strong> faster to just throw it in the .phtml file. Here&#8217;s the code, using the WordPress page <span class="caps">URL</span> from our example:</p>
-<pre><code>&lt;?php 
-$content = '';
-$url = "http://example.com/wordpress/Mage_content";
-$ch = curl_init();
-curl_setopt ($ch, CURLOPT_URL, $url);
-curl_setopt ($ch, CURLOPT_HEADER, 0);
-ob_start();
-curl_exec ($ch);
-curl_close ($ch);
-$content = ob_get_contents();
-ob_end_clean();
-echo $content; 
-?&gt;</code></pre>
-<p>Now that we have our block, just add it to a Layout file in your Magento theme (or to the Custom Layout options on an individual <span class="caps">CMS</span> or Category page):</p>
-<pre><code>&lt;block type="core/template" name="wordpress_block" template="cms/wordpress_block.phtml" /&gt;</code></pre>
-<p>And voila &#8211; we are now pulling WordPress content into Magento. It is probably a good idea to install a wordpress caching plugin like <a href="http://wordpress.org/extend/plugins/wp-super-cache/">WP Super Cache</a> to speed up requests for <em>Mage_content</em>. In fact, the proper way to do this would be to also create a Magento module which caches it&#8230; but that&#8217;s beyond the scope of this little tutorial. This is a barebones proof of concept which can be adapted to specific needs.</p>
-<p>Happy coding!</p></div>
+<p></div>
   
+  
+    <footer>
+      <a rel="full-article" href="/2009/04/26/how-to-integrate-import-wordpress-content-into-magento-blocks/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -509,7 +358,7 @@ echo $content;
   
 
 
-<time datetime="2009-03-23T19:57:00-06:00" pubdate data-updated="true">Mar 23<span>rd</span>, 2009</time>
+<time datetime="2009-03-23T19:57:00-05:00" pubdate data-updated="true">Mar 23<span>rd</span>, 2009</time>
         
          | <a href="/2009/03/23/magento-how-to-list-all-the-products-in-a-single-category-in-a-sidebar-block/#disqus_thread">Comments</a>
         
@@ -522,79 +371,12 @@ echo $content;
 <p>I tried to simply use the &#8220;Catalog/Product_List&#8221; controller with a modified view based off of &#8220;catalog/product/list.phtml&#8221;. The problem I ran into is that &#8220;Catalog/Product_List&#8221; uses the session&#8217;s current Category/Layer to populate the list, so I couldn&#8217;t show the products in CategoryX in the sidebar when I was viewing CategoryY. I <a href="http://www.magentocommerce.com/boards/viewthread/14857/">read</a> that you <em>can</em> specify which category it uses, but this only seems to work on pages without a Category/Layer, like the Home/Front page and similar <span class="caps">CMS</span> pages.</p>
 <p>Fortunately I found a nice snippet of code on <a href="http://www.exploremagento.com/magento/some-custom-blocks-to-help-you-show-products.php">exploremagento.com</a>, which gave me a clue about how to do this. I&#8217;ve modified this code to better suit my needs, and make it a little more general at the same time. You will need to know how to create a simple Magento module to implement this, and there is a good guide <a href="http://www.exploremagento.com/magento/simple-custom-module.php">here</a>.</p>
 <p>Anyway, here it is the code:</p>
-<pre><code>class Mycompany_ProdList_Block_Left extends Mage_Catalog_Block_Product_Abstract  
-{  
-    public $_collection;
-    public $_catName;
-    private $_theCat;
- 
-      public function setCat($category) {  
-        $this-&gt;_theCat = $category;
-    }
-    
-    public function getCatName() {  
-        return $this-&gt;_catName;
-    }
- 
-    protected function _getProductCollection() {  
-        $storeId    = Mage::app()-&gt;getStore()-&gt;getId();  
-        $product    = Mage::getModel('catalog/product');  
-        $category   = Mage::getModel('catalog/category')-&gt;load($this-&gt;_theCat);
-        $this-&gt;_catName = $category-&gt;getName();
- 
-        $visibility = array(  
-            Mage_Catalog_Model_Product_Visibility::VISIBILITY_BOTH,  
-            Mage_Catalog_Model_Product_Visibility::VISIBILITY_IN_CATALOG  
-        );  
- 
-        $products   = $product-&gt;setStoreId($storeId)  
-                              -&gt;getCollection()  
-            -&gt;addAttributeToFilter('visibility', $visibility)  
-            -&gt;addCategoryFilter($category)  
-            -&gt;addAttributeToSelect(array('name'), 'inner') //you need to select "name" or you won't be able to call getName() on the product 
-            -&gt;setOrder('name', 'asc')
-        ;  
- 
-        $this-&gt;_collection = $products;  
-        return $this-&gt;_collection;  
-    }  
- 
-    public function getCurrentCategory() {  
-        return Mage::getModel('catalog/category')-&gt;load($this-&gt;_theCat);  
-    }  
- 
-    public function getProductCollection() {  
-        return $this-&gt;_getProductCollection();  
-    }</code></pre>
-<p>And this is how you pass in the category you want to show (in this case, category ID 4), via Layout <span class="caps">XML</span>:</p>
-<pre><code>&lt;block type="mycompany_prodlist/left" name="leftprodlist" template="prodlist/left.phtml" /&gt;
-&lt;reference name="leftprodlist"&gt;
-                &lt;action method="setCat"&gt;&lt;category&gt;4&lt;/category&gt;&lt;/action&gt;
-&lt;/reference&gt;
-</code></pre>
-<p>And finally here is the template file I used to display it (prodlist/left.phtml):</p>
-<pre><code>
-&lt;?php
-$this-&gt;_getProductCollection();
-if(!$this-&gt;_collection-&gt;count()): ?&gt;
-&lt;div class="note-msg"&gt;
-    &lt;?php echo $this-&gt;__('There are no products matching the selection.') ?&gt;
-&lt;/div&gt;
-&lt;?php else: ?&gt;
-&lt;div class="box base-mini mini-list"&gt;
-&lt;div class="head"&gt;
-&lt;h4&gt;&lt;?php echo $this-&gt;getCatName(); ?&gt;&lt;/h4&gt;
-&lt;/div&gt;
-&lt;?php //echo Mage::registry('current_category')-&gt;getId(); ?&gt;
-&lt;ul&gt;
-&lt;?php foreach ($this-&gt;_collection as $_product): ?&gt;
-            &lt;li&gt;&lt;a href="&lt;?php echo $_product-&gt;getProductUrl() ?&gt;" title="&lt;?php echo $this-&gt;htmlEscape($_product-&gt;getName()) ?&gt;"&gt;&lt;?php echo $this-&gt;htmlEscape($_product-&gt;getName()) ?&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;?php endforeach; ?&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;?php endif; ?&gt;</code></pre>
-<p>The &#8220;_product&#8221; model returned is similar to the one used by Catalog/Product_List, so you can work from that example to give your list images, prices, etc. One thing to note though: it looks like you might need to &#8220;select&#8221; all the variables you&#8217;re going use. For instance, the call $_product&#8594;getName() didn&#8217;t work unless I called addAttributeToSelect(array(&#8216;name&#8217;), &#8216;inner&#8217;) when getting the product collection.</p></div>
+<p></div>
   
+  
+    <footer>
+      <a rel="full-article" href="/2009/03/23/magento-how-to-list-all-the-products-in-a-single-category-in-a-sidebar-block/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -621,7 +403,7 @@ if(!$this-&gt;_collection-&gt;count()): ?&gt;
   
 
 
-<time datetime="2009-03-03T23:06:00-07:00" pubdate data-updated="true">Mar 3<span>rd</span>, 2009</time>
+<time datetime="2009-03-03T23:06:00-06:00" pubdate data-updated="true">Mar 3<span>rd</span>, 2009</time>
         
          | <a href="/2009/03/03/how-to-add-dynamic-content-to-magento-static-blocks-and-pages/#disqus_thread">Comments</a>
         
@@ -634,17 +416,12 @@ if(!$this-&gt;_collection-&gt;count()): ?&gt;
 <p>Magento also makes it really easy to create static <span class="caps">SEO</span> landing pages. In just a few clicks you have a new static page, ready to lace with images and tasty keyword laden text, and to link to any product or category in the Store proper.</p>
 <p><strong>But you can&#8217;t put <span class="caps">PHP</span> code in these blocks or pages.</strong></p>
 <p>Not directly at least&#8230;</p>
-<p>Magento Static Blocks and Pages <em>will</em> process some predefined template tags. For instance, to make a link to your Magento store&#8217;s front page you can use the &#8220;store&#8221; template tag:</p>
-<pre><code>&lt;a href=""&gt;Home&lt;/a&gt;</code></pre>
-<p>Similarly, you can use the &#8220;block&#8221; tag to load <em>any dynamic theme template</em> into a static block! This means you <em>can</em> put dynamic content in static blocks and pages. You can use existing Magento template &#8220;blocks&#8221;, or create your own custom ones. Here is an example of inserting the Newsletter Subscribe form template into a static block or page:</p>
-<pre><code></code></pre>
-<p>You can also insert dynamic template blocks from custom modules you wrote. You can basically write any <span class="caps">PHP</span> your heart desires in a custom module, and load it into a static block or page as easy as this:</p>
-<pre><code></code></pre>
-<p>The syntax for these &#8220;block&#8221; tags is basically the same as in the Layout <span class="caps">XML</span> files, with <em>type</em>, <em>template</em> and other parameters:</p>
-<pre><code>&lt;block type="core/template" name="right.permanent.callout" template="callouts/right_col.phtml"/&gt;</code></pre>
-<p>Why would you want to this though? They are called &#8220;static blocks&#8221; after all, so why should they ever need to be dynamic? One example of a situation where I use this trick is to display a category&#8217;s <em>sub</em>-categories as thumbnails under the main category. I wrote a small custom module for this (thanks <a href="http://onerutter.com/web/magento-custom-category-images-listing-block-tutorial.html">Jake Rutter</a> ), which has a template block called &#8220;thumbview.phtml&#8221;. Most of the time, it&#8217;s true, it&#8217;s better practice to add this block via Layout <span class="caps">XML</span>, either directly in the file or though the Layout Update <span class="caps">XML</span> under the Custom Design tab. But if I added that to the catalog.xml layout file then it would appear on <em>all</em> category pages (not just the ones with sub-categories) and I would have to add logic to fix this, etc. I had to add Static Blocks with header images to the categories already, so it was easier to just paste the  tag in at the same time. This way I didn&#8217;t have to alter the core Catalog/List logic and I don&#8217;t have to keep track of Layout Update <span class="caps">XML</span> changes: if the client wants to just show products instead of subcategories they can just turn off the Static Block, removing the header image <em>and</em> the subcategory list in one fell swoop.</p>
-<p>I&#8217;m 99% sure there is always a way to achieve the effect you want in Magento without using this trick/hack, but sometimes it&#8217;s just easier and faster.</p></div>
+<p></div>
   
+  
+    <footer>
+      <a rel="full-article" href="/2009/03/03/how-to-add-dynamic-content-to-magento-static-blocks-and-pages/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -671,7 +448,7 @@ if(!$this-&gt;_collection-&gt;count()): ?&gt;
   
 
 
-<time datetime="2009-02-12T23:42:00-07:00" pubdate data-updated="true">Feb 12<span>th</span>, 2009</time>
+<time datetime="2009-02-12T23:42:00-06:00" pubdate data-updated="true">Feb 12<span>th</span>, 2009</time>
         
          | <a href="/2009/02/12/retrofitting-content-management-systems-cms-on-existing-websites/#disqus_thread">Comments</a>
         
@@ -682,13 +459,12 @@ if(!$this-&gt;_collection-&gt;count()): ?&gt;
 
   <div class="entry-content"><p>This past week I retrofit the <a href="http://www.mtseedtrade.com">Montana Seed Trade Association</a> website with <a href="http://www.cmsmadesimple.org/"><span class="caps">CMS</span> Made Simple</a>. Previously, it was a &#8220;flat&#8221; website that consisted of some basic <span class="caps">HTML</span> and a couple of simple dynamic <span class="caps">PHP</span> pages populated from a mySQL database. Every time they wanted to update the site with new events or meeting dates, they had to call up the original web developer and pay them the standard (not cheap) hourly rate to make the changes.</p>
 <p>Now that I have put a <span class="caps">CMS</span> <a href="http://en.wikipedia.org/wiki/Front-end" title="back-end">administrative back-end</a> behind the website, they can just log in at any time and make the changes themselves, without any <span class="caps">HTML</span> programming. Even though they only need to update their website a couple of times a year, using the <span class="caps">CMS</span> to do it themselves will pay off the cost of the retrofit in just two years. Imagine if they had to update the site weekly, or even daily!</p>
-<p>One of the core web design principles at Chili Pepper Design is <a href="http://www.chilipepperdesign.com/about#design">easy-to-update, maintainable content</a>, because we strive to make good websites and good websites have fresh content. The fastest, easiest and most cost effective way to keep websites up to date is with <a href="http://en.wikipedia.org/wiki/Web_content_management_system" title="CMS">Content Management Systems</a>. CMSs allow website owners to update their sites without any coding or programming, and without the possibility of accidentally screwing up the website design. The modern web design principle of separating the <em>content</em> of a website from its <em>form</em> enables website owners to save time and money by taking the geeks out of the content management process and letting them do what they do best: design, program and build the actual website. This leaves content production to those who do <em>it</em> best: marketers, <span class="caps">SEO</span> experts, copywriters, or <span class="caps">DIY</span> business owners.</p>
-<p>Yes, content needs to be provided to the designer during the initial website production. Good design takes in to account the type of content (images, movies, text), the frequency of updates (daily, yearly), the intended content audience, and much more. But once the nature of the content is known and the design perfected, there is no need for further designer involvement &#8211; until the purpose of the website changes, or the design eventually needs an update (as all designs will).</p>
-<p>Because CMSs allow you to separate the form of a website from its content so well, it&#8217;s possible to take and existing website&#8217;s <em>form</em> and put a <span class="caps">CMS</span> under it. Or  &#8220;put a different engine under the hood&#8221;. I call this &#8220;<span class="caps">CMS</span> retrofitting&#8221;. I can take the design (the <span class="caps">HTML</span> and <span class="caps">CSS</span> code) off of most websites, lay it over a <span class="caps">CMS</span>, and then re-enter the content via the <span class="caps">CMS</span>. The result is a website identical to the original &#8211; but now updating it is a simple task like writing an email!</p>
-<p>For people who want to be able to update their websites more easily but can&#8217;t afford a whole new design (or if they really like their current design) <span class="caps">CMS</span> retrofitting is a great option. Depending on the website size and the number of complex features the existing website has (event calendars, product libraries, etc), retrofitting is usually fast and very affordable.</p>
-<p>To see a <span class="caps">CMS</span> in action, watch this short screencast video I made of <a href="http://www.screentoaster.com/watch/stUEhRQkVIR1pdRF5fXV5eX1FX/short_cms_made_simple_demo" title="CMSMS Screencast Demo"><span class="caps">CMS</span> Made Simple</a>.</p>
-<p>Please, feel free to <a href="contact">contact me</a> if you might be interested in this service. I&#8217;ll be happy to provide you with a free quote.</p></div>
+<p></div>
   
+  
+    <footer>
+      <a rel="full-article" href="/2009/02/12/retrofitting-content-management-systems-cms-on-existing-websites/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -715,7 +491,7 @@ if(!$this-&gt;_collection-&gt;count()): ?&gt;
   
 
 
-<time datetime="2009-02-01T13:14:00-07:00" pubdate data-updated="true">Feb 1<span>st</span>, 2009</time>
+<time datetime="2009-02-01T13:14:00-06:00" pubdate data-updated="true">Feb 1<span>st</span>, 2009</time>
         
          | <a href="/2009/02/01/htaccess-query-string-301s/#disqus_thread">Comments</a>
         
@@ -751,49 +527,9 @@ RewriteRule testpage http://www.example.com/testpage.php\?id=string2 [L,R=301]
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/01/29/the-new-blog/">The New Blog</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-01-29T22:23:00-07:00" pubdate data-updated="true">Jan 29<span>th</span>, 2009</time>
-        
-         | <a href="/2009/01/29/the-new-blog/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>So I&#8217;ve decided to start blogging about web design and development. Look out!</p>
-<p>One reason for doing so is that I love both web design and web development, and have started to want an outlet for this love. Let&#8217;s face it: no one at dinner wants to hear about the new version of Wordpress, or the latest <span class="caps">CSS</span> trick I figured out. But perhaps there are folks out there on the &#8220;intertubes&#8221; who do? Well, I know there are, because these &#8220;folks&#8221; are <em>me</em>. So I hope to have this conversation with other web geeks here.</p>
-<p>The other reason, and perhaps the largest impetus for actually re-vamping my site to allow for a blog, is that I want to give back to the &#8220;intertubes&#8221;. Every time I run into a strange IE bug, or need to figure out how to modify a Drupal View just so, I search on Google for it. And I find the answers on the countless blog and forums that make the Internet such a great resource. It&#8217;s time to stop simply &#8220;taking&#8221; from this resource, and start adding to it. The Internet is great because of how many people contribute to it, so I figure I should do my and contribute so it stays great. :)</p>
-<p>So watch this space for web design and development tips, tricks, how-tos, tutorials, rants and all things inter-web. Don&#8217;t look for Chili Pepper Design news here &#8211; that goes on the <a href="http://www.chilipepperdesign.com/">front page</a> of this website. Also, don&#8217;t look for personal posts and updates here, I have a personal blog for all that over at <a href="http://www.oronaut.com/">oronaut.com</a>. This space is just for seriously nerdy web stuff.</p>
-<p>So wish me luck on this whole &#8220;giving back to the Internet&#8221; thing, and I&#8217;d love to hear what <em>you</em> think about any of my posts so feel free to comment &#8211; I&#8217;ll try my best to get back to you.</p>
-<p>Thanks!</p></div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
+    
+      <a class="prev" href="/blog/page/4/">&larr; Older</a>
     
     <a href="/blog/archives">Blog Archives</a>
     
@@ -811,6 +547,10 @@ RewriteRule testpage http://www.example.com/testpage.php\?id=string2 [L,R=301]
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/12/27/new-hipster-hacker-octopress-blog/">New Hipster Hacker Blog</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/05/15/magento-15-ee-110-windows-command-line-batch-update-script-magebat/">Magento 1.5 / EE 1.10 Windows Command Line Batch Update Script mage.bat</a>
       </li>
     
@@ -826,24 +566,25 @@ RewriteRule testpage http://www.example.com/testpage.php\?id=string2 [L,R=301]
         <a href="/2010/03/24/a-facebook-content-management-system-cms-for-facebook-page-templates/">A Facebook Content Management System (CMS) for Facebook Page Templates</a>
       </li>
     
-      <li class="post">
-        <a href="/2010/03/22/insert-flash-media-embed-code-tinymce-plugin/">Insert Flash Media Embed Code TinyMCE Plugin</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
   <ul id="categories">
-    <li class='category'><a href='/blog/categories/blogs/'>Blogs (2)</a></li>
-<li class='category'><a href='/blog/categories/cms/'>CMS (6)</a></li>
+    <li class='category'><a href='/blog/categories/apache/'>Apache (1)</a></li>
 <li class='category'><a href='/blog/categories/css/'>CSS (2)</a></li>
+<li class='category'><a href='/blog/categories/drupal/'>Drupal (2)</a></li>
+<li class='category'><a href='/blog/categories/facebook/'>Facebook (6)</a></li>
 <li class='category'><a href='/blog/categories/javascript/'>JavaScript (3)</a></li>
+<li class='category'><a href='/blog/categories/linux/'>Linux (3)</a></li>
+<li class='category'><a href='/blog/categories/magento/'>Magento (11)</a></li>
+<li class='category'><a href='/blog/categories/meta/'>Meta (3)</a></li>
+<li class='category'><a href='/blog/categories/nginx/'>Nginx (3)</a></li>
+<li class='category'><a href='/blog/categories/reviews/'>Reviews (1)</a></li>
+<li class='category'><a href='/blog/categories/ruby-/'>Ruby, (1)</a></li>
 <li class='category'><a href='/blog/categories/seo/'>SEO (2)</a></li>
-<li class='category'><a href='/blog/categories/social-media/'>Social-Media (6)</a></li>
-<li class='category'><a href='/blog/categories/web-design/'>Web-Design (2)</a></li>
-<li class='category'><a href='/blog/categories/web-development/'>Web-Development (25)</a></li>
-<li class='category'><a href='/blog/categories/e-commerce/'>e-Commerce (11)</a></li>
+<li class='category'><a href='/blog/categories/web-development/'>Web-Development (19)</a></li>
+<li class='category'><a href='/blog/categories/wordpress/'>WordPress (3)</a></li>
 
   </ul>
 </section>
@@ -944,7 +685,7 @@ RewriteRule testpage http://www.example.com/testpage.php\?id=string2 [L,R=301]
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2012 - Evan Johnson -
+  Copyright &copy; 2013 - Evan Johnson -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

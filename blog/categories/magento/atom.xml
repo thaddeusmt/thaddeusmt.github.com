@@ -1,0 +1,624 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Magento | Chili Pepper Design]]></title>
+  <link href="http://thaddeusmt.github.com/blog/categories/magento/atom.xml" rel="self"/>
+  <link href="http://thaddeusmt.github.com/"/>
+  <updated>2013-01-03T14:07:08-06:00</updated>
+  <id>http://thaddeusmt.github.com/</id>
+  <author>
+    <name><![CDATA[Evan Johnson]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Configuring and compiling Nginx and PHP-FPM on Ubuntu for Magento, Part 3]]></title>
+    <link href="http://thaddeusmt.github.com/2010/01/03/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-3/"/>
+    <updated>2010-01-03T20:47:00-06:00</updated>
+    <id>http://thaddeusmt.github.com/2010/01/03/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-3</id>
+    <content type="html"><![CDATA[<p>This is the 3rd and final article about installing Magento on Nginx with PHP-FPM. <a href="http://www.chilipepperdesign.com/2009/12/14/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-1">Part 1 is here</a>, and <a href="http://www.chilipepperdesign.com/2009/12/18/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-2">Part 2 is here</a>.</p>
+
+
+
+
+<p>This part explains how I set up my public web directories, and how I did the Nginx configuration files for a Magento site. One of the tricky things about switching to Nginx from Apache is that Nginx does not use .htaccess files or the usual Apache mod_rewrite rules for pretty/SEO URLs. You can replicate all of Magento's mod_rewrite rules with Nginx's own rewrite module, but it takes some getting used to and Magento doesn't come with them pre-written (like the mod_rewrite rules in the .htaccess files).</p>
+
+
+
+
+<p>Here are some of the resources I used:</p>
+
+
+<ul>
+<li><a href="http://articles.slicehost.com/2009/3/6/ubuntu-intrepid-nginx-virtual-hosts-1">Slicehost: Nginx Virtual Hosts #1</a></li>
+<li><a href="http://articles.slicehost.com/2009/9/4/ubuntu-intrepid-nginx-virtual-hosts-2-2">Slicehost: Nginx Virtual Hosts #2</a></li>
+<li><a href="http://www.magentocommerce.com/boards/viewthread/7931/">Magento Forum: NginX Web Server with Magento</a></li>
+<li><a href="http://www.magentocommerce.com/boards/viewthread/38134/">Magento Forum: Thread about Fooman Speedster (which I never go to work)</a></li>
+<li><a href="http://markmail.org/message/fdurus5iczudtm62">Random MarkMail post (I needed Google Translate to help me out)</a></li>
+<li><a href="http://varien.com.ua/blog/Fustanovka-magento-dlya-raboty-s-nginx-php-fpm-apc">varien.com.ua (Also needed Google Translate to help me out)</a></li>
+</ul>
+
+
+
+
+<p>First we'll set up the directory structure like we are used to with Apache:</p>
+
+
+
+
+<pre><code>
+# mkdir /usr/local/nginx/sites-available
+# mkdir /usr/local/nginx/sites-enabled
+# mkdir /var/www/example1.com/public
+# mkdir /var/www/example1.com/log
+# cp  /usr/local/nginx/conf/nginx.conf /usr/local/nginx/conf/nginx.conf-original
+</code></pre>
+
+
+
+
+<p>Then set up the base nginx conf file <em>/usr/local/nginx/conf/nginx.conf</em>:</p>
+
+
+
+
+<pre><code>
+user www-data;
+worker_processes 1;
+
+events {
+    worker_connections 1024;
+}
+
+http {
+    include mime.types;
+    default_type application/octet-stream;
+    sendfile on;
+    keepalive_timeout 65;
+    gzip on;
+    include /usr/local/nginx/sites-enabled/*;
+}
+</code></pre>
+
+
+
+
+<p>Then set up the Nginx conf file for your website. I am using the default site in this example <em>/usr/local/nginx/sites-available/default</em>, but if you have multiple sites instead of <em>default</em> you would create files called <em>site1.com</em>, <em>site2.com</em>, etc.</p>
+
+
+
+
+<p>This file is where all of the rewrite magic is. The url in this example is <em>example1.com</em>, which you should replace with your own. The document root is <em>/var/www/example1.com/public</em> which, again, you will need to change to match your own configuration.</p>
+
+
+
+
+<pre><code>
+# fastcgi nodes
+upstream  backend  {
+    server unix:/tmp/fcgi.sock;
+}
+
+# redirect all non-www requests to www requests (it would be easy to reverse this)
+server {
+    listen   80;
+    server_name  example1.com;
+    rewrite ^/(.*) http://www.example1.com/$1 permanent;
+}
+
+server {
+    listen       80;
+    server_name www.example1.com;
+
+    # protection (we have no .htaccess)
+    location ~ (/(app/|includes/|lib/|/pkginfo/|var/|report/config.xml)|/\.svn/|/.hta.+) {
+        deny all;
+    }
+   # pass php files over to PHP-FPM via the socket
+    location ~ (\.php)$ {
+        fastcgi_index index.php;
+        include /etc/nginx/fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        if (-e $request_filename) { # check if requested path exists
+            fastcgi_pass backend;
+        }
+    }
+    # the javascript compressor
+    location ^~ /js/index.php {
+        fastcgi_pass   backend;
+        fastcgi_index index.php;
+        fastcgi_param  SCRIPT_NAME $fastcgi_script_name;
+        fastcgi_param  SCRIPT_FILENAME  /var/www/example1.com/public$fastcgi_script_name;
+        include /etc/nginx/fastcgi_params;
+        access_log off;
+        expires 30d;
+    }
+   # special case for the error "report" pages
+    location /report/ {
+        fastcgi_index index.php;
+        include /etc/nginx/fastcgi_params;
+        fastcgi_param  SCRIPT_NAME /report/index.php;
+        fastcgi_param  SCRIPT_FILENAME  /var/www/example1.com/public/report/index.php;
+        if (!-f $request_filename) {
+            fastcgi_pass backend;
+            break;
+        }
+    }
+    # pass everything else over to PHP-FPM via the socket
+    location / {
+        root /var/www/example1.com/public/; # absolute path doc root
+        index index.php index.html index.htm;
+
+        # set expire headers
+        if ($request_uri ~* "\.(ico|css|js|gif|jpe?g|png)$") {
+            expires max;
+        }
+        # set fastcgi settings, not allowed in the "if" block
+        include /etc/nginx/fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root/index.php;
+        fastcgi_param SCRIPT_NAME /index.php;
+        # rewrite - if file not found, pass it to the backend
+        if (!-f $request_filename) {
+            fastcgi_pass backend;
+            break;
+        }
+        error_page 404 index.php;
+    }
+    access_log /var/www/example1.com/log/access.log;
+    error_log /var/www/example1.com/log/error.log;
+}
+</code></pre>
+
+
+
+
+<p>I am no expert with Nginx, but a lot of Google searching and trial and error gave me the file above, and it seems to work. I hope it is helpful, even if this exact code doesn't work for you.</p>
+
+
+
+
+<p>Finally, activate the site by creating a symbolic link to it and restarting the server:</p>
+
+
+
+
+<pre><code>
+# ln -s /usr/local/nginx/sites-available/default /usr/local/nginx/sites-enabled/default
+# ln -s /usr/local/nginx/sites-enabled /etc/sites
+# /etc/init.d/nginx restart
+</code></pre>
+
+
+
+
+<p>And that's it! You should now have Magento running on Nginx! (<em>After</em>, of course, also installing mysql and a sendmail program, and probably an FTP server, and who knows what else :)</p>
+
+
+
+
+<p>Now, how to make it actually go faster than Apache? There are many settings you can tweak. Look in <em>fastcgi_params</em> to change PHP-FPM settings, <em>php.ini</em> to change APC settings, <em>my.cnf</em> to change mysql settings, <em>nginx.conf</em> to adjust the number of worker processes and the keepalive timeouts... the list goes on. Good luck!</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Configuring and compiling Nginx and PHP-FPM on Ubuntu for Magento, Part 2]]></title>
+    <link href="http://thaddeusmt.github.com/2009/12/18/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-2/"/>
+    <updated>2009-12-18T19:17:00-06:00</updated>
+    <id>http://thaddeusmt.github.com/2009/12/18/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-2</id>
+    <content type="html"><![CDATA[<p>This is the second part of my little guide to get Magento running on Nginx with PHP-FPM and APC. Check out <a href="http://www.chilipepperdesign.com/2009/12/14/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-1">Part 1 here</a> and <a href="http://www.chilipepperdesign.com/2010/01/03/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-3">Part 3 here</a>.</p>
+
+
+
+
+<p>In this part, we compile <a href="http://php-fpm.org/">PHP-FPM</a> and get it working with the <a href="http://php.net/manual/en/book.apc.php">APC</a> "Accelerator" cache for Nginx. The first step is to compile PHP-FPM. Some of this is taken almost verbatim from the FPM <a href="http://github.com/dreamcat4/php-fpm/blob/master/readme.markdown">readme</a>:</p>
+
+
+
+
+<!-- more -->
+
+
+
+
+<pre><code># aptitude install -y libxml2-dev libevent-dev libjpeg-dev
+# export LE_VER=1.4.12-stable
+# wget "http://www.monkey.org/~provos/libevent-$LE_VER.tar.gz"
+# tar -zxvf "libevent-$LE_VER.tar.gz"
+# cd "libevent-$LE_VER"
+# ./configure && make
+# DESTDIR=$PWD make install
+# export LIBEVENT_SEARCH_PATH="$PWD/usr/local"
+# export PHP_VER=5.2.11
+# cd ~/sources
+# wget "http://launchpad.net/php-fpm/master/0.6/+download/php-fpm-0.6~$PHP_VER.tar.gz"
+# tar -zxvf "php-fpm-0.6~$PHP_VER.tar.gz"
+# ./php-fpm-0.6-5.2.11/generate-fpm-patch
+# wget "http://us.php.net/get/php-$PHP_VER.tar.gz/from/us.php.net/mirror"
+# tar xvfz "php-$PHP_VER.tar.gz"
+# cd "php-$PHP_VER"
+# patch -p1 < ../fpm.patch
+# ./buildconf --force
+# mkdir fpm-build && cd fpm-build
+# aptitude install libxml2-dev libbz2-dev libpcre3-dev libmcrypt-dev libmhash-dev libmhash2 libcurl4-openssl-dev libsyck0-dev libgd-dev zlib1g-dev
+# ../configure --with-fpm --with-libevent="$LIBEVENT_SEARCH_PATH" --enable-mbstring --with-zlib --enable-zip --with-mcrypt --with-jpeg-dir=/usr/lib --with-gd --without-sqlite --without-pdo_sqlite --enable-fastcgi --with-curl --with-mhash --with-mysql=/etc/mysql/ --enable-pdo=shared --with-pdo-mysql=shared
+# make all install
+# make test
+# aptitude install m4 autoconf
+# mount -o remount,exec,suid /tmp
+# pecl install apc
+# cp /root/sources/php-5.2.11/php.ini-recommended /usr/local/lib/php.ini
+# ln -s /usr/local/lib/php.ini /etc/php/php.ini
+# ln -s /etc/php-fpm.conf /etc/php/php-fpm.conf
+</code></pre>
+
+
+
+
+<p>At the end of the commands above, you will notice we installed APC. Now, in <em>/etc/php/php-fpm.conf</em> there are four places you need to change the user and group to the correct ones for the web server. On my install, the user and group were both <em>www-data</em>:</p>
+
+
+<pre><code>&lt;value name="owner"&gt;www-data&lt;/value&gt;
+&lt;value name="group"&gt;www-data&lt;/value&gt;
+&lt;value name="user"&gt;www-data&lt;/value&gt;
+&lt;value name="group"&gt;www-data&lt;/value&gt;
+</code></pre>
+
+
+
+
+<p>To set up some basic parameters for the PHP-FPM FastCGI install, create the file <em>/etc/nginx/fastcgi_params</em>. We will be importing this into the Nginx config files later. This is what I am using, but you may need to tweak yours for better performance:</p>
+
+
+<pre><code>fastcgi_connect_timeout 60;
+fastcgi_send_timeout 180;
+fastcgi_read_timeout 180;
+fastcgi_buffer_size 128k;
+fastcgi_buffers 4 256k;
+fastcgi_busy_buffers_size 256k;
+fastcgi_temp_file_write_size 256k;
+fastcgi_intercept_errors on;
+</code></pre>
+
+
+
+
+<p>Lastly, edit your php.ini file <em>/etc/php/php.ini</em> to enable PDO on mySql (which Magento needs) and APC. To do so, add the following lines:</p>
+
+
+<pre><code>extension_dir = /usr/local/lib/php/extensions/no-debug-non-zts-20060613
+extension = pdo.so
+extension = mysql_pdo.so
+extension = apc.so
+apc.enabled = 1
+apc.shm_size = 96
+apc.include_once_override = 1
+</code></pre>
+
+
+
+
+<p>I remember there being some sort of confusion the first time I tried setting the extension_dir, so check and make sure that it's correct for your environment. It might also be <em>/usr/lib/php5/20060613</em>.</p>
+
+
+
+
+<p>There, nothing to it! You should have PHP-FPM running now. The final step is to create the Nginx config files so requests for PHP are passed over to PHP-FPM for processing. This is covered in <a href="http://www.chilipepperdesign.com/2010/01/03/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-3">Part 3</a>, along with some Magento specific Nginx config options.</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Configuring and compiling Nginx and PHP-FPM on Ubuntu for Magento, Part 1]]></title>
+    <link href="http://thaddeusmt.github.com/2009/12/14/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-1/"/>
+    <updated>2009-12-14T21:08:00-06:00</updated>
+    <id>http://thaddeusmt.github.com/2009/12/14/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-1</id>
+    <content type="html"><![CDATA[<p>So, Magento is a huge piece of modular and extensible PHP code. Each request takes a lot of CPU cycles and memory to kick out a Magento page. This means it is <em>slow</em>. The performance of Magento is a frequent complaint, and rightfully so: consumers won't wait around all day for an ecommerce store to load. They will bail out and try another store if a page doesn't load in just a few seconds. A default Magento 1.3 install on budget web hosting can have page load times of up to 10secs, which is unacceptable. </p>
+
+
+
+
+<p>So what can be done to speed up Magento?</p>
+
+
+
+
+<p>There are a <a href="http://www.magentocommerce.com/wiki/groups/168/optimising_your_web_stack_performance_for_magento">number</a> of <a href="http://www.magentocommerce.com/blog/comments/understanding-magento-scalability-and-performance-1/">things</a>. I have tried almost all of them at this point. And I did reduce the page load time greatly, at least on the front end. But all of the AJAXy scripts on the backend (which has no caching, as far as I know) meant store maintenance and order fulfillment remained a tedious process. So I decided to try one final thing: make the switch from trusty old <a href="http://www.apache.org/">Apache</a> to <a href="http://wiki.nginx.org">Nginx</a>.</p>
+
+
+
+
+<!-- more -->
+
+
+
+
+<p>I did have Apache2 tweaked out and running quite fast, but Apache has a big memory footprint (especially when running mod_php), and this Magento install is on a 256MB "slice" in the <a href="http://www.rackspacecloud.com/">Rackspace Cloud</a> so I want to keep the amount of RAM needed to run the store as low possible without sacrificing performance. Nginx is a really lightweight web server, and when paired with <a href="http://php-fpm.org/">PHP-FPM</a> ("FastCGI Process Manager", a patch for FastCGI) supposedly it's the fastest and most memory efficient way around to serve up PHP scripts. Sounds like just what I need!</p>
+
+
+
+
+<p>I got Magento running on Nginx with PHP-FPM and APC and it runs about as fast as my Apache install. I was hoping for a miracle and didn't get it, but considering it's on an anorexic little 256MB Cloud Server I would say it is performing admirably. Perhaps with more time to tune the performance (and bumping up to a bigger slice) it would really be fast, but I worked a long time on the previous Apache install so it was a tough act to follow. This article is the first of three that will explain what I did to get Magento running on this stack.</p>
+
+
+
+
+<p><strong>DISCALIMER:</strong> I am a pretty serious linux n00b. I'm sure I installed unnecessary packages, added extra compile flags, and what have you. <em>You might bork your server trying this stuff, so don't do it in a production environment!!</em> However, I did get Magento running on Nginx with PHP-FPM and APC. It was a struggle, but I did it. So I thought I would share my notes in hopes they will help others. I do not claim that these same commands will work for you in your unique environment, and I probably won't be help troubleshooting when they fail. Also, please add a comment and correct me if anything is wrong here, or if there is a better way to do anything. Thanks!</p>
+
+
+
+
+<p>Here are some of the resources I used to figure this out the first time around:</p>
+
+
+<ul>
+<li><a href="http://articles.slicehost.com/2009/3/4/ubuntu-intrepid-installing-nginx-from-source">Slidehost: Installing Nginx from source</a></li>
+<li><a href="http://interfacelab.com/nginx-php-fpm-apc-awesome/">NGINX + PHP-FPM + APC = Awesome</a></li>
+<li><a href="http://codeshepherd.blogspot.com/2009/05/nginx-phpfpm-memcache-mysql-xcache.html">Nginx + PHPFPM + Memcache + Mysql + XCache + Monit + Logrotate</a></li>
+<li><a href="http://www.yawn.it/2008/04/30/nginx-php-php-fpm-on-debian-etch-40/">Nginx + PHP + PHP-FPM on Debian Etch 4.0</a></li>
+</ul>
+
+
+
+
+<p>And here is the start of the compile and install process (note: you might need to sudo these commands):</p>
+
+
+
+
+<pre><code>
+# aptitude install make bison flex gcc patch autoconf subversion locate libc6 libpcre3 libpcre3-dev libpcrecpp0 libssl0.9.8 zlib1g lsb-base
+# mkdir ~/sources
+# cd ~/sources/
+# wget http://sysoev.ru/nginx/nginx-0.7.63.tar.gz
+# tar -zxvf nginx-0.7.63.tar.gz
+# cd nginx-0.7.63/
+# ./configure --sbin-path=/usr/local/sbin --with-http_ssl_module
+# make
+# make install
+# ln -s /usr/local/nginx/conf /etc/nginx
+# /usr/local/sbin/nginx
+# kill `cat /usr/local/nginx/logs/nginx.pid`
+</code></pre>
+
+
+
+
+<p>Then, I created the following init script at <em>/etc/init.d/nginx</em>.</p>
+
+
+
+
+<pre><code>
+#! /bin/sh
+
+### BEGIN INIT INFO
+# Provides: nginx
+# Required-Start: $all
+# Required-Stop: $all
+# Default-Start: 2 3 4 5
+# Default-Stop: 0 1 6
+# Short-Description: starts the nginx web server
+# Description: starts nginx using start-stop-daemon
+### END INIT INFO
+
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+DAEMON=/usr/local/sbin/nginx
+NAME=nginx
+DESC=nginx
+
+test -x $DAEMON || exit 0
+
+# Include nginx defaults if available
+if [ -f /etc/default/nginx ] ; then
+. /etc/default/nginx
+fi
+
+set -e
+
+. /lib/lsb/init-functions
+
+case "$1" in
+start)
+echo -n "Starting $DESC: "
+start-stop-daemon --start --quiet --pidfile /usr/local/nginx/logs/$NAME.pid \
+--exec $DAEMON -- $DAEMON_OPTS || true
+echo "$NAME."
+;;
+stop)
+echo -n "Stopping $DESC: "
+start-stop-daemon --stop --quiet --pidfile /usr/local/nginx/logs/$NAME.pid \
+--exec $DAEMON || true
+echo "$NAME."
+;;
+restart|force-reload)
+echo -n "Restarting $DESC: "
+start-stop-daemon --stop --quiet --pidfile \
+/usr/local/nginx/logs/$NAME.pid --exec $DAEMON || true
+sleep 1
+start-stop-daemon --start --quiet --pidfile \
+/usr/local/nginx/logs/$NAME.pid --exec $DAEMON -- $DAEMON_OPTS || true
+echo "$NAME."
+;;
+reload)
+echo -n "Reloading $DESC configuration: "
+start-stop-daemon --stop --signal HUP --quiet --pidfile /usr/local/nginx/logs/$NAME.pid \
+--exec $DAEMON || true
+echo "$NAME."
+;;
+status)
+status_of_proc -p /usr/local/nginx/logs/$NAME.pid "$DAEMON" nginx && exit 0 || exit $?
+;;
+*)
+N=/etc/init.d/$NAME
+echo "Usage: $N {start|stop|restart|reload|force-reload|status}" >&2
+exit 1
+;;
+esac
+
+exit 0
+</code></pre>
+
+
+
+
+<p>Now we can easily start and stop Nginx with familiar commands like <em>/etc/init.d/nginx start</em>. To install the init script, do the following:</p>
+
+
+
+
+<pre><code>
+# chmod +x /etc/init.d/nginx
+# /usr/sbin/update-rc.d -f nginx defaults
+</code></pre>
+
+
+
+
+<p>You should have Nginx compiled, installed, and running now. Yay! Next, <a href="http://www.chilipepperdesign.com/2009/12/18/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-2">Part 2</a> will be about installing and compiling PHP-FPM. Finally, <a href="http://www.chilipepperdesign.com/2010/01/03/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-3">Part 3</a> is about setting up Magneto with Nginx and PHP-FPM (including mod-rewrite issues). I will not be covering the other aspects of setting up a Magento server like MySql and sendmail, because these are the same for an Apache stack which has plenty of documentation out on the Internet already.</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Book Review: Magento Beginner's Guide]]></title>
+    <link href="http://thaddeusmt.github.com/2009/11/26/book-review-magento-beginners-guide/"/>
+    <updated>2009-11-26T21:05:00-06:00</updated>
+    <id>http://thaddeusmt.github.com/2009/11/26/book-review-magento-beginners-guide</id>
+    <content type="html"><![CDATA[<p>I was recently approached by "&#91;packt&#93; Publishing":http://www.packtpub.com/ to do a review of their book, the <em>Magento Beginner's Guide</em> (by "William Rice":http://williamriceinc.blogspot.com/). I've been working with Magento a lot over the past year and blog about it here from time to time, so they figured I would be good to review it. After setting up, modifying and maintaining four Magento stores in the last 10 months I don't feel I have much to learn from a "beginners guide", but I figured I could use my experience of what a beginner actually needs to know and see if this book covers all the bases.</p>
+
+<p>I have read parts of the official "Magento User Guide":http://www.magentocommerce.com/support/magento-user-guide-book (and "php/architect's Guide to E-Commerce Programming with Magento":http://www.amazon.com/gp/product/0973862173?ie=UTF8&amp;tag=oronaut-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0973862173) but this book fills a different gap than the others. The User Guide covers all of the features, but it is not a practical guide. (The programming book was great, but did not cover how to actually use Magento). My favorite thing about the Beginner's Guide is that it showed how to use Magento in a practical, day-to-day way. Being just a "beginner's guide" it does not cover all of the features, but it covers a wide swath of the important ones. What really impressed me was the way it provided tips on how to deal with and overcome some of Magento's serious (and occasionally deal-breaking) problems that make the day-to-day administration of an online store difficult.</p>
+
+<!-- more -->
+
+
+<p>An example of this are the confusing order "statuses". Depending on how the order was paid for (PayPal, Check, CC, etc) orders may be marked "Pending" or "Processing" in a confusing way. The book puts in a real effort to make sense of this mess. It even offers a good work-around using the "Hold" feature to overcome this problem. Order fulfillment and management is one of the biggest pain points in Magento, so I'm glad the book took a moment to deal with this, unlike the official User Guide. The book had other good practical tips for setting up Taxes, Shipping, Meta Information, and more.</p>
+
+<p>The content of the book was organized well, covering the setup of a store and all it's components in the best order for ease and speed. For instance, if you added all of your products before sorting out your Tax Classes you would have a lot of unnecessary work later, but the book smartly walks you through setting up the Taxes first.</p>
+
+<p>The topics covered in this book are (in order):</p>
+
+<ul>
+<li>installing and configuring Magento/li>
+<li>setting up categories and attributes</li>
+<li>setting up taxes</li>
+<li>adding products</li>
+<li>customizing the appearance of the storefront</li>
+<li>some advanced product topics, like:
+<ul>
+<li>configurable products</li>
+<li>grouped products</li>
+<li>related products</li>
+<li>quantity based tiered pricing</li>
+</ul>
+</li>
+<li>customer accounts</li>
+<li>payment methods</li>
+<li>shipping methods</li>
+<li>order fulfillment process</li>
+</ul>
+
+
+<p>This is only a beginners guide, so many features of Magento are not covered. This is not necessarily a bad thing, but it's good to know before purchasing. If you were hoping to learn how to create Coupon Codes, for instance, you would be disappointed. Some of the main topics <em>not</em> covered in this book are:</p>
+
+<ul>
+<li>price rules: (a big one)
+<ul>
+<li>sales
+<li>coupon codes
+<li>cart discounts
+</ul>
+</li>
+<li>search</li>
+<li>newsletters</li>
+<li>importing and exporting products and customers</li>
+<li>setting up multiple stores (views, websites, etc)</li>
+<li>upsells and cross sells (although the Related Products are very similar and _are_ covered)</li>
+<li>installing new extensions/modules</li>
+<li>customizing emails</li>
+<li>granular admin permissions (the shipping page, etc)</li>
+<li>bundled products</li>
+<li>downloadable products</li>
+</ul>
+
+
+<p>There are only two places where I think the book fell short of it's goal as a "beginners guide", and the first is the speed issue. In defense of the book fixing the speed problem is outside the abilities of a "beginner", but it is a pretty serious issue that should have been addressed. The book had nothing to say about performance, except a brief mention about the Cache (in the context of turning it off to view changed code). I would like to have seen a few paragraphs about the potential for speed problems, notes on choosing a fast host... something along those lines.</p>
+
+<p>The second complaint I had surprised me: there is <em>no mention</em> of how to customize the emails sent to the customer. The default Magento install sends <em>terrible</em> emails to the customer with things like "555-DEMO" phone numbers, "Magento" alt text, and other sloppy things hard-coded into the email templates that look very unprofessional. You can override these in the "Email Templates" section of the Admin Configuration or hand-edit the files, but the book had no mention of either method. The book <em>did</em> explain how to configure the appropriate email addresses, explained when emails are sent to the customer, and even mentioned how to change the address on the <em>printable</em> invoices and packingslips. But the common problem of editing the email templates was missed. This is my biggest complaint about the book.</p>
+
+<p>Now, back to some praise: this is the first book I've read from &#91;packt&#93;, so I don't know if this is the norm or not, but I like how they divided up chapters into sub-sections like the step-by-step "Time for Action" walkthroughs, and the  "What Just Happened" recap. They served well to guide the "beginner" through the processes explained in the book, and also to explain the "why" behind the actions. Throughout the entire book there were also nice screenshots which illustrated the "whats" and the "wheres" of the user interface, a very important feature of any software beginners guide. And at the end of the book the step-by-step instructions from all of the chapters were summarized (again with screenshots) as a handy quick-reference.</p>
+
+<p>All in all it's a good guide to install, configure, and start selling online with Magento. One can, of course, get familiar with using Magento without it. Through trial and error I eventually came to some of the same conclusions the book did about the best way to fulfill orders, name categories, etc. What this book does is provide a shortcut which will hopefully save some of the inevitable frustration of learning new software. It would be especially useful for the true beginner who has never set up an open source software system (like WordPress, Drupal, etc) on a server before, or who has never run an ecommerce store of any kind before.</p>
+
+<p>Magento is a complex and constantly evolving piece of software, so no matter what you will find yourself on Google eventually learning about topics beyond the scope of <em>any</em> book, but as books go this Beginner's Guide looks like a good place to start.</p>
+
+<p>You can buy it directly from the publisher "here":http://www.packtpub.com/magento-beginners-guide/book, or from Amazon "here":http://www.amazon.com/gp/product/1847195946?ie=UTF8&amp;tag=oronaut-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=1847195946.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Magento - Six Months In]]></title>
+    <link href="http://thaddeusmt.github.com/2009/08/13/magento-six-months-in/"/>
+    <updated>2009-08-13T01:48:00-05:00</updated>
+    <id>http://thaddeusmt.github.com/2009/08/13/magento-six-months-in</id>
+    <content type="html"><![CDATA[<p>Yes, this basically amounts to a good old fashioned rant post. But there is a purpose behind it: to educate those thinking of using Magento to power their ecommerce store about potential concerns and pitfalls. Read on, and enjoy.</p>
+
+<h2>Magento is an ambitious, promising ecommerce platform.</h2>
+
+
+<p>"Magento":http://www.magentocommerce.com/ really is a neat piece of software. "Varien":http://www.varien.com/ has really outdone itself. It is one of the most feature rich ecommerce platforms out right now and =drumroll= it's "Open Source":http://en.wikipedia.org/wiki/Open_source_software!</p>
+
+<p>After comparing prices and features a year ago, Magento was chosen from amongst all of the other ecommerce solutions available for some upcoming projects. I have now helped setup, develop, maintain and run four Magento stores. I've been working with Magento almost exclusively for the past 6 months.</p>
+
+<p>It's pretty great!</p>
+
+<p>But it is not perfect.</p>
+
+<!-- more -->
+
+
+
+
+<h3>Magento, while open source, is not community developed.</h3>
+
+
+<p>If I find a bug in Magento, I can submit it to Varien. Hopefully they will fix it in the next release? I can also fix it myself. This is the beauty of Open Source, right? Except that all development of the core branch is still controlled by Varien. There is no means by which I can patch the core myself, test other patches, etc. The best I  can do is include my fix with the bug report. Perhaps this isn't unusual... but compared to other OSS I'm familiar with like "Drupal":http://drupal.org/, it means that the speed with which bugs are patched is much slower. This lack of collaborative development will hold Magento back, making it more a "good free product" than a "great open source" one.</p>
+
+<h3>Magento is terrible for backend order management and fulfillment.</h3>
+
+
+<p>The biggest issue I've had with Magento is order management and fulfillment in the backend. The slow, restrictive, clunky process of creating an Invoice and then a Shipment to complete an Order is just bad. It is not scalable. Magento runs slow enough as it is - having to click (and wait) 4+ times <em>per order</em> just to print a packing slip is unsustainable. It could take 5 minutes to print 10 packing slips! One of the first things I've had to do to make Magento really usable for a store with any volume of orders is create bulk actions for the order page which allow faster order processing.</p>
+
+<p>But that's not all! If you want to "Edit" and order in Magento because, say, the shipping address was incorrect what Magento actually does is create a whole new order. The comment history is lost, a new email is fired off to the admin account, the order number is even different! And if the order had Configurable or Bundled items in it - Magento doesn't support editing them so it actually removes them from the order. You better remember to re-add them if they were important!</p>
+
+<p>Then there is order management. If you have printed the Invoice and the Packing Slip, the order is automatically marked complete. This is fine - except that if you end up <em>not</em> shipping it out, you cannot change the status back to "Processing". You cannot "Cancel" the order. It is just "Complete". The order status management is terrible. This is just one example of the many problems with it. You cannot do bulk status changes, and you are too restricted about which statuses you can move from and to.</p>
+
+<h3>Magento is still "Beta" buggy.</h3>
+
+
+<p>Magento is at it's 1.3 release now, and Varien even offers their "Enterprise":http://www.magentocommerce.com/product/enterprise-edition version as well, but it's still a Beta release at heart. The problem is that there are just too many features. Any single feature works okay most of the time: configurable products, catalog price rules, pricing tiers, tax calculations, etc. But when you start to utilize multiple features at the same time, you will run into trouble.</p>
+
+<p>An example: "percent off" catalog price rules don't apply properly to Configurable products. "Percent off" catalog price rules and Configurable products work fine <em>on their own</em>, but fail when combined. If one Configurable option is more expensive, the "percent off" of the cheaper base item is still used. Not a bug most people run into most of the time, but if your Magento store has configurable products and you are running a "20% off" sale, the sale price is probably wrong on those items right now. Which is what you expect! From <em>Beta</em> software. Frankly, I'm not sure a monster chunk of code the size of Magento can ever come out of Beta. :)</p>
+
+<h3>Magento is getting faster, but it's still slow.</h3>
+
+
+<p>Varien has been working very hard on this, and its getting faster, but be prepared to deal with speed issues. I've learned how to make Magento fly - but it was long process and I know more now about Apache, KeepAlives, Query Caching and other performance tuning than I ever wanted to. Don't expect speed if you run a default Magento install on cheap shared hosting. The reason Magento is so great is also the reason it's so slow: features, features, features. PHP chews through CPU cycles like crazy to make Magento do all the great stuff it does, and the price paid is long load times.</p>
+
+<h3>Magento is still (too) young.</h3>
+
+
+<p>More than anything, the problem is that Magento is still so young. It's only been a little over a year since the 1.0 release. The whole project is less than three years old. Considering that Varien carries all of the development weight on their shoulders it's impressive how far Magento <em>has</em> come - but it's not "there" yet. I don't mean to sound accusing or disappointed - I just want to give a word of warning to prospective users.</p>
+
+<h2>What does Magento do right?</h2>
+
+
+<p>Everything NOT listed here. <em>Which is a lot.</em> I admit I have very little experience with other ecommerce platforms, but I know most of them have a much longer list of problems than Magento does. Magento will continue to be refined over time, and in the mean time many of the issues here are already addressed (or will be soon) by "community extensions":http://www.magentocommerce.com/magento-connect.</p>
+
+<p>So Magento does a lot right, and is doing more right every day. Just be aware of the pitfalls of running such complicated, young software.</p>
+]]></content>
+  </entry>
+  
+</feed>

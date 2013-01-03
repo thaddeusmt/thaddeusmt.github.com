@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Reviews | Chili Pepper Design]]></title>
+  <link href="http://thaddeusmt.github.com/blog/categories/reviews/atom.xml" rel="self"/>
+  <link href="http://thaddeusmt.github.com/"/>
+  <updated>2013-01-03T14:07:08-06:00</updated>
+  <id>http://thaddeusmt.github.com/</id>
+  <author>
+    <name><![CDATA[Evan Johnson]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Book Review: Magento Beginner's Guide]]></title>
+    <link href="http://thaddeusmt.github.com/2009/11/26/book-review-magento-beginners-guide/"/>
+    <updated>2009-11-26T21:05:00-06:00</updated>
+    <id>http://thaddeusmt.github.com/2009/11/26/book-review-magento-beginners-guide</id>
+    <content type="html"><![CDATA[<p>I was recently approached by "&#91;packt&#93; Publishing":http://www.packtpub.com/ to do a review of their book, the <em>Magento Beginner's Guide</em> (by "William Rice":http://williamriceinc.blogspot.com/). I've been working with Magento a lot over the past year and blog about it here from time to time, so they figured I would be good to review it. After setting up, modifying and maintaining four Magento stores in the last 10 months I don't feel I have much to learn from a "beginners guide", but I figured I could use my experience of what a beginner actually needs to know and see if this book covers all the bases.</p>
+
+<p>I have read parts of the official "Magento User Guide":http://www.magentocommerce.com/support/magento-user-guide-book (and "php/architect's Guide to E-Commerce Programming with Magento":http://www.amazon.com/gp/product/0973862173?ie=UTF8&amp;tag=oronaut-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0973862173) but this book fills a different gap than the others. The User Guide covers all of the features, but it is not a practical guide. (The programming book was great, but did not cover how to actually use Magento). My favorite thing about the Beginner's Guide is that it showed how to use Magento in a practical, day-to-day way. Being just a "beginner's guide" it does not cover all of the features, but it covers a wide swath of the important ones. What really impressed me was the way it provided tips on how to deal with and overcome some of Magento's serious (and occasionally deal-breaking) problems that make the day-to-day administration of an online store difficult.</p>
+
+<!-- more -->
+
+
+<p>An example of this are the confusing order "statuses". Depending on how the order was paid for (PayPal, Check, CC, etc) orders may be marked "Pending" or "Processing" in a confusing way. The book puts in a real effort to make sense of this mess. It even offers a good work-around using the "Hold" feature to overcome this problem. Order fulfillment and management is one of the biggest pain points in Magento, so I'm glad the book took a moment to deal with this, unlike the official User Guide. The book had other good practical tips for setting up Taxes, Shipping, Meta Information, and more.</p>
+
+<p>The content of the book was organized well, covering the setup of a store and all it's components in the best order for ease and speed. For instance, if you added all of your products before sorting out your Tax Classes you would have a lot of unnecessary work later, but the book smartly walks you through setting up the Taxes first.</p>
+
+<p>The topics covered in this book are (in order):</p>
+
+<ul>
+<li>installing and configuring Magento/li>
+<li>setting up categories and attributes</li>
+<li>setting up taxes</li>
+<li>adding products</li>
+<li>customizing the appearance of the storefront</li>
+<li>some advanced product topics, like:
+<ul>
+<li>configurable products</li>
+<li>grouped products</li>
+<li>related products</li>
+<li>quantity based tiered pricing</li>
+</ul>
+</li>
+<li>customer accounts</li>
+<li>payment methods</li>
+<li>shipping methods</li>
+<li>order fulfillment process</li>
+</ul>
+
+
+<p>This is only a beginners guide, so many features of Magento are not covered. This is not necessarily a bad thing, but it's good to know before purchasing. If you were hoping to learn how to create Coupon Codes, for instance, you would be disappointed. Some of the main topics <em>not</em> covered in this book are:</p>
+
+<ul>
+<li>price rules: (a big one)
+<ul>
+<li>sales
+<li>coupon codes
+<li>cart discounts
+</ul>
+</li>
+<li>search</li>
+<li>newsletters</li>
+<li>importing and exporting products and customers</li>
+<li>setting up multiple stores (views, websites, etc)</li>
+<li>upsells and cross sells (although the Related Products are very similar and _are_ covered)</li>
+<li>installing new extensions/modules</li>
+<li>customizing emails</li>
+<li>granular admin permissions (the shipping page, etc)</li>
+<li>bundled products</li>
+<li>downloadable products</li>
+</ul>
+
+
+<p>There are only two places where I think the book fell short of it's goal as a "beginners guide", and the first is the speed issue. In defense of the book fixing the speed problem is outside the abilities of a "beginner", but it is a pretty serious issue that should have been addressed. The book had nothing to say about performance, except a brief mention about the Cache (in the context of turning it off to view changed code). I would like to have seen a few paragraphs about the potential for speed problems, notes on choosing a fast host... something along those lines.</p>
+
+<p>The second complaint I had surprised me: there is <em>no mention</em> of how to customize the emails sent to the customer. The default Magento install sends <em>terrible</em> emails to the customer with things like "555-DEMO" phone numbers, "Magento" alt text, and other sloppy things hard-coded into the email templates that look very unprofessional. You can override these in the "Email Templates" section of the Admin Configuration or hand-edit the files, but the book had no mention of either method. The book <em>did</em> explain how to configure the appropriate email addresses, explained when emails are sent to the customer, and even mentioned how to change the address on the <em>printable</em> invoices and packingslips. But the common problem of editing the email templates was missed. This is my biggest complaint about the book.</p>
+
+<p>Now, back to some praise: this is the first book I've read from &#91;packt&#93;, so I don't know if this is the norm or not, but I like how they divided up chapters into sub-sections like the step-by-step "Time for Action" walkthroughs, and the  "What Just Happened" recap. They served well to guide the "beginner" through the processes explained in the book, and also to explain the "why" behind the actions. Throughout the entire book there were also nice screenshots which illustrated the "whats" and the "wheres" of the user interface, a very important feature of any software beginners guide. And at the end of the book the step-by-step instructions from all of the chapters were summarized (again with screenshots) as a handy quick-reference.</p>
+
+<p>All in all it's a good guide to install, configure, and start selling online with Magento. One can, of course, get familiar with using Magento without it. Through trial and error I eventually came to some of the same conclusions the book did about the best way to fulfill orders, name categories, etc. What this book does is provide a shortcut which will hopefully save some of the inevitable frustration of learning new software. It would be especially useful for the true beginner who has never set up an open source software system (like WordPress, Drupal, etc) on a server before, or who has never run an ecommerce store of any kind before.</p>
+
+<p>Magento is a complex and constantly evolving piece of software, so no matter what you will find yourself on Google eventually learning about topics beyond the scope of <em>any</em> book, but as books go this Beginner's Guide looks like a good place to start.</p>
+
+<p>You can buy it directly from the publisher "here":http://www.packtpub.com/magento-beginners-guide/book, or from Amazon "here":http://www.amazon.com/gp/product/1847195946?ie=UTF8&amp;tag=oronaut-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=1847195946.</p>
+]]></content>
+  </entry>
+  
+</feed>

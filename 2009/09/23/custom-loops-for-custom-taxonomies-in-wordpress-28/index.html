@@ -25,7 +25,7 @@
   <script src="/javascripts/ender.js"></script>
   <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <link href="/atom.xml" rel="alternate" title="Chili Pepper Design" type="application/atom+xml">
-  
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
   
   <script type="text/javascript">
     var _gaq = _gaq || [];
@@ -91,7 +91,7 @@
   
 
 
-<time datetime="2009-09-23T18:24:00-06:00" pubdate data-updated="true">Sep 23<span>rd</span>, 2009</time>
+<time datetime="2009-09-23T18:24:00-05:00" pubdate data-updated="true">Sep 23<span>rd</span>, 2009</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -103,6 +103,7 @@
 <div class="entry-content"><p><a href="http://codex.wordpress.org/Version_2.8">WordPress 2.8</a> saw a big expansion and enhancement of it&#8217;s <a href="http://codex.wordpress.org/WordPress_Taxonomy">Taxonomy <span class="caps">API</span></a>, allowing for easy creation of custom taxonomies. The default WordPress &#8220;category&#8221; and &#8220;tag&#8221; taxonomies are sufficient for most blogs, but the ability to define additional sets of terms (&#8220;vocabularies&#8221;) makes the platform a much more flexible and powerful Content Management System than it was before. Ever since <a href="http://justintadlock.com/archives/2009/05/06/custom-taxonomies-in-wordpress-28">Justin Tadlock</a> opened my eyes to how to create and use additional taxonomies, it seems like every WordPress project I work on needs one or two extra vocabularies. :)</p>
 <p>Working with Drupal as much as I have, I became very accustomed to having multiple taxonomies. It&#8217;s incredibly useful. A classic example is Movies: each movie has a director, some actors, a year it was made, etc. You <em>could</em> just lump all these together with a bunch of &#8220;tags&#8221; in WordPress, but grouping &#8220;Actor&#8221; and &#8220;Year&#8221; tags together into taxonomies makes site organization and navigation much simpler (and more sensible).</p>
 <p>But there are some challenges still to using WordPress taxonomies. While there is some support in the new <span class="caps">API</span> word making queries based on specific taxonomies, there is not a lot. You <em>can</em> filter your Loop by a term in a single taxonomy via the <em>query_posts()</em>, as <a href="http://justintadlock.com/archives/2009/05/06/custom-taxonomies-in-wordpress-28">Justin</a> shows in this example:</p>
+<p><!-- more --></p>
 <pre><code>&lt;?php 
 query_posts( array( 'people' =&gt; 'will-smith', 'showposts' =&gt; 10 ) ); 
 ?&gt;</code></pre>
@@ -201,12 +202,12 @@ endif;
   
 
 
-<time datetime="2009-09-23T18:24:00-06:00" pubdate data-updated="true">Sep 23<span>rd</span>, 2009</time>
+<time datetime="2009-09-23T18:24:00-05:00" pubdate data-updated="true">Sep 23<span>rd</span>, 2009</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/cms/'>CMS</a>, <a class='category' href='/blog/categories/web-development/'>Web-Development</a>
+    <a class='category' href='/blog/categories/web-development/'>Web-Development</a>, <a class='category' href='/blog/categories/wordpress/'>WordPress</a>
   
 </span>
 
@@ -249,6 +250,10 @@ endif;
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/12/27/new-hipster-hacker-octopress-blog/">New Hipster Hacker Blog</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/05/15/magento-15-ee-110-windows-command-line-batch-update-script-magebat/">Magento 1.5 / EE 1.10 Windows Command Line Batch Update Script mage.bat</a>
       </li>
     
@@ -264,24 +269,25 @@ endif;
         <a href="/2010/03/24/a-facebook-content-management-system-cms-for-facebook-page-templates/">A Facebook Content Management System (CMS) for Facebook Page Templates</a>
       </li>
     
-      <li class="post">
-        <a href="/2010/03/22/insert-flash-media-embed-code-tinymce-plugin/">Insert Flash Media Embed Code TinyMCE Plugin</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
   <ul id="categories">
-    <li class='category'><a href='/blog/categories/blogs/'>Blogs (2)</a></li>
-<li class='category'><a href='/blog/categories/cms/'>CMS (6)</a></li>
+    <li class='category'><a href='/blog/categories/apache/'>Apache (1)</a></li>
 <li class='category'><a href='/blog/categories/css/'>CSS (2)</a></li>
+<li class='category'><a href='/blog/categories/drupal/'>Drupal (2)</a></li>
+<li class='category'><a href='/blog/categories/facebook/'>Facebook (6)</a></li>
 <li class='category'><a href='/blog/categories/javascript/'>JavaScript (3)</a></li>
+<li class='category'><a href='/blog/categories/linux/'>Linux (3)</a></li>
+<li class='category'><a href='/blog/categories/magento/'>Magento (11)</a></li>
+<li class='category'><a href='/blog/categories/meta/'>Meta (3)</a></li>
+<li class='category'><a href='/blog/categories/nginx/'>Nginx (3)</a></li>
+<li class='category'><a href='/blog/categories/reviews/'>Reviews (1)</a></li>
+<li class='category'><a href='/blog/categories/ruby-/'>Ruby, (1)</a></li>
 <li class='category'><a href='/blog/categories/seo/'>SEO (2)</a></li>
-<li class='category'><a href='/blog/categories/social-media/'>Social-Media (6)</a></li>
-<li class='category'><a href='/blog/categories/web-design/'>Web-Design (2)</a></li>
-<li class='category'><a href='/blog/categories/web-development/'>Web-Development (25)</a></li>
-<li class='category'><a href='/blog/categories/e-commerce/'>e-Commerce (11)</a></li>
+<li class='category'><a href='/blog/categories/web-development/'>Web-Development (19)</a></li>
+<li class='category'><a href='/blog/categories/wordpress/'>WordPress (3)</a></li>
 
   </ul>
 </section>
@@ -383,7 +389,7 @@ endif;
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2012 - Evan Johnson -
+  Copyright &copy; 2013 - Evan Johnson -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

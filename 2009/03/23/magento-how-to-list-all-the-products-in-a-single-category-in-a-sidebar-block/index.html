@@ -25,7 +25,7 @@
   <script src="/javascripts/ender.js"></script>
   <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <link href="/atom.xml" rel="alternate" title="Chili Pepper Design" type="application/atom+xml">
-  
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
   
   <script type="text/javascript">
     var _gaq = _gaq || [];
@@ -91,7 +91,7 @@
   
 
 
-<time datetime="2009-03-23T19:57:00-06:00" pubdate data-updated="true">Mar 23<span>rd</span>, 2009</time>
+<time datetime="2009-03-23T19:57:00-05:00" pubdate data-updated="true">Mar 23<span>rd</span>, 2009</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -104,6 +104,7 @@
 <p>I tried to simply use the &#8220;Catalog/Product_List&#8221; controller with a modified view based off of &#8220;catalog/product/list.phtml&#8221;. The problem I ran into is that &#8220;Catalog/Product_List&#8221; uses the session&#8217;s current Category/Layer to populate the list, so I couldn&#8217;t show the products in CategoryX in the sidebar when I was viewing CategoryY. I <a href="http://www.magentocommerce.com/boards/viewthread/14857/">read</a> that you <em>can</em> specify which category it uses, but this only seems to work on pages without a Category/Layer, like the Home/Front page and similar <span class="caps">CMS</span> pages.</p>
 <p>Fortunately I found a nice snippet of code on <a href="http://www.exploremagento.com/magento/some-custom-blocks-to-help-you-show-products.php">exploremagento.com</a>, which gave me a clue about how to do this. I&#8217;ve modified this code to better suit my needs, and make it a little more general at the same time. You will need to know how to create a simple Magento module to implement this, and there is a good guide <a href="http://www.exploremagento.com/magento/simple-custom-module.php">here</a>.</p>
 <p>Anyway, here it is the code:</p>
+<p><!-- more --></p>
 <pre><code>class Mycompany_ProdList_Block_Left extends Mage_Catalog_Block_Product_Abstract  
 {  
     public $_collection;
@@ -197,12 +198,12 @@ if(!$this-&gt;_collection-&gt;count()): ?&gt;
   
 
 
-<time datetime="2009-03-23T19:57:00-06:00" pubdate data-updated="true">Mar 23<span>rd</span>, 2009</time>
+<time datetime="2009-03-23T19:57:00-05:00" pubdate data-updated="true">Mar 23<span>rd</span>, 2009</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/web-development/'>Web-Development</a>, <a class='category' href='/blog/categories/e-commerce/'>e-Commerce</a>
+    <a class='category' href='/blog/categories/magento/'>Magento</a>, <a class='category' href='/blog/categories/web-development/'>Web-Development</a>
   
 </span>
 
@@ -245,6 +246,10 @@ if(!$this-&gt;_collection-&gt;count()): ?&gt;
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/12/27/new-hipster-hacker-octopress-blog/">New Hipster Hacker Blog</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/05/15/magento-15-ee-110-windows-command-line-batch-update-script-magebat/">Magento 1.5 / EE 1.10 Windows Command Line Batch Update Script mage.bat</a>
       </li>
     
@@ -260,24 +265,25 @@ if(!$this-&gt;_collection-&gt;count()): ?&gt;
         <a href="/2010/03/24/a-facebook-content-management-system-cms-for-facebook-page-templates/">A Facebook Content Management System (CMS) for Facebook Page Templates</a>
       </li>
     
-      <li class="post">
-        <a href="/2010/03/22/insert-flash-media-embed-code-tinymce-plugin/">Insert Flash Media Embed Code TinyMCE Plugin</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
   <ul id="categories">
-    <li class='category'><a href='/blog/categories/blogs/'>Blogs (2)</a></li>
-<li class='category'><a href='/blog/categories/cms/'>CMS (6)</a></li>
+    <li class='category'><a href='/blog/categories/apache/'>Apache (1)</a></li>
 <li class='category'><a href='/blog/categories/css/'>CSS (2)</a></li>
+<li class='category'><a href='/blog/categories/drupal/'>Drupal (2)</a></li>
+<li class='category'><a href='/blog/categories/facebook/'>Facebook (6)</a></li>
 <li class='category'><a href='/blog/categories/javascript/'>JavaScript (3)</a></li>
+<li class='category'><a href='/blog/categories/linux/'>Linux (3)</a></li>
+<li class='category'><a href='/blog/categories/magento/'>Magento (11)</a></li>
+<li class='category'><a href='/blog/categories/meta/'>Meta (3)</a></li>
+<li class='category'><a href='/blog/categories/nginx/'>Nginx (3)</a></li>
+<li class='category'><a href='/blog/categories/reviews/'>Reviews (1)</a></li>
+<li class='category'><a href='/blog/categories/ruby-/'>Ruby, (1)</a></li>
 <li class='category'><a href='/blog/categories/seo/'>SEO (2)</a></li>
-<li class='category'><a href='/blog/categories/social-media/'>Social-Media (6)</a></li>
-<li class='category'><a href='/blog/categories/web-design/'>Web-Design (2)</a></li>
-<li class='category'><a href='/blog/categories/web-development/'>Web-Development (25)</a></li>
-<li class='category'><a href='/blog/categories/e-commerce/'>e-Commerce (11)</a></li>
+<li class='category'><a href='/blog/categories/web-development/'>Web-Development (19)</a></li>
+<li class='category'><a href='/blog/categories/wordpress/'>WordPress (3)</a></li>
 
   </ul>
 </section>
@@ -379,7 +385,7 @@ if(!$this-&gt;_collection-&gt;count()): ?&gt;
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2012 - Evan Johnson -
+  Copyright &copy; 2013 - Evan Johnson -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

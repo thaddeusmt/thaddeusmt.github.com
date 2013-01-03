@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Meta | Chili Pepper Design]]></title>
+  <link href="http://thaddeusmt.github.com/blog/categories/meta/atom.xml" rel="self"/>
+  <link href="http://thaddeusmt.github.com/"/>
+  <updated>2013-01-03T14:07:08-06:00</updated>
+  <id>http://thaddeusmt.github.com/</id>
+  <author>
+    <name><![CDATA[Evan Johnson]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[New Hipster Hacker Blog]]></title>
+    <link href="http://thaddeusmt.github.com/2012/12/27/new-hipster-hacker-octopress-blog/"/>
+    <updated>2012-12-27T17:16:00-06:00</updated>
+    <id>http://thaddeusmt.github.com/2012/12/27/new-hipster-hacker-octopress-blog</id>
+    <content type="html"><![CDATA[<p>I have not blogged very much the last couple of years, but I am feeling the itch again. I love how blogging makes you more closely research and examine your thoughts and your code. I have missed it. I also miss the positive feedback and ego-reinforcement of blog comments and Google Analytics stats. So for 2013 I am trying to get back on the horse.</p>
+
+<p>It was 4 years ago that I first decided to blog about web design and development on my freelance web design site, Chili Pepper Design. I read some high praise for the <a href="http://textpattern.com/">Textpattern</a> PHP content management system, and installed it. It worked well, but had started to feel dated of late. And besides, none of the cool kids on Hacker News ever talk about Textpattern any more. ;)</p>
+
+<p>So what are the cool kids talking about now? What is the new hotness? Ruby-powered static Jekyll blogs of course! Hosted on GitHub Pages! Thus you see before you the new Chili Pepper Design blog, powered by <a href="http://octopress.org">Octopress</a> (a fork of <a href="http://jekyllrb.com/">Jekyll</a>).</p>
+
+<p>Actually it's not that new or hot anymore, but here are a few reasons why I chose to go the Jekyll/Octopress route regardless:</p>
+
+<ul>
+<li><strong><a href="http://octopress.org/docs/setup/">Short learning curve</a></strong> - I was also comtemplating setting up a custom Rails blog, but have not found the time</li>
+<li><strong><a href="http://jekyllbootstrap.com/lessons/jekyll-introduction.html#how_jekyll_generates_the_final_static_files">Static</a></strong> - fast loading! and no database to set up, migrate or maintain</li>
+<li><strong><a href="http://www.ruby-lang.org/en/">Ruby</a></strong> - I am learning Ruby, so this is a good excuse to squint at some code.</li>
+<li><strong><a href="http://pages.github.com/">GitHub Pages</a> hosting</strong> - free and (fairly) easy to set up</li>
+<li><strong>Easy to theme</strong> - not only is the default Octopress rad, but you have total freedom when styling Jekyll blogs</li>
+<li><strong><a href="https://github.com/imathis/octopress/wiki/3rd-party-plugins">Hipster plugins</a></strong> - easily show off your Coderwall and StackOverflow bling, etc</li>
+</ul>
+
+
+<p>Next up I'm going to stretch out my old blogging muscles with a post about how I migrated my blog from Textpattern to Octopress - on <em>windows</em> (dun dun dun).</p>
+
+<p> Cheers!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Easy SEO: +2,500% page views from a year of casual blogging?]]></title>
+    <link href="http://thaddeusmt.github.com/2010/03/04/easy-seo-2500-page-views-from-a-year-of-casual-blogging/"/>
+    <updated>2010-03-04T00:35:00-06:00</updated>
+    <id>http://thaddeusmt.github.com/2010/03/04/easy-seo-2500-page-views-from-a-year-of-casual-blogging</id>
+    <content type="html"><![CDATA[<p>You know, you always read in SEO articles about how important blogging is for increasing traffic. It's one of the top suggestions around for improving a website's search engine juice. Well, I am here to testify that it truly is a great SEO tool.</p>
+
+<p>Granted, the title of this post is hyperbolic link-bait. ;) But it's true nonetheless!</p>
+
+<p>I've had this site, "http://chilipepperdesign.com":http://www.chilipepperdesign.com, up for probably five years now but only as a static portfolio site for most of that time. Then, a year ago, I upgraded the site and added a blog to it. In that year <em><em>my monthly page views have increased 2,500% and the number of monthly visits has gone up 4,400%</em></em>.</p>
+
+<!-- more -->
+
+
+<p>I don't claim to be a great blogger. I'm not even a prolific blogger. And I had a <em>very</em> small amount of traffic before, so the percent gain is in some ways exaggerated. But it's still an impressive change to me. The idea that casual blogging can increase traffic even <em>just</em> a 1000% would be impressive! But let's get a little perspective:</p>
+
+<h3>Website Traffic Factors</h3>
+
+
+<h1>Even though I have few posts, some of them are on very hot topics like Facebook Fan Page design. One single post accounts for a <em>full 1/3</em> of my site's total traffic!</h1>
+
+<h1>I crafted my blog with very "Search Engine Friendly" markup. Without this, a blog is useless.</h1>
+
+<h1>I have not used <em>any</em> paid advertising, or done <em>any link building to speak of</em>. This is purely organic search engine traffic from the blog.</h1>
+
+<h1>My website's traffic was pretty much negligible last year, and that skews the percentages. I'm sure now that I have real traffic my gain next year will be much smaller in terms of percentage.</h1>
+
+<p>So, take from this what you will, but it is a fact: blogging gives search engines what they need - <em>content</em>. When you provide a search engine with content you will be rewarded.</p>
+
+<p>!http://www.chilipepperdesign.com/images/48.jpg!</p>
+
+<p>Happy blogging!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The New Blog]]></title>
+    <link href="http://thaddeusmt.github.com/2009/01/29/the-new-blog/"/>
+    <updated>2009-01-29T22:23:00-06:00</updated>
+    <id>http://thaddeusmt.github.com/2009/01/29/the-new-blog</id>
+    <content type="html"><![CDATA[<p>So I've decided to start blogging about web design and development. Look out!</p>
+
+<p>One reason for doing so is that I love both web design and web development, and have started to want an outlet for this love. Let's face it: no one at dinner wants to hear about the new version of Wordpress, or the latest CSS trick I figured out. But perhaps there are folks out there on the "intertubes" who do? Well, I know there are, because these "folks" are <em>me</em>. So I hope to have this conversation with other web geeks here.</p>
+
+<p>The other reason, and perhaps the largest impetus for actually re-vamping my site to allow for a blog, is that I want to give back to the "intertubes". Every time I run into a strange IE bug, or need to figure out how to modify a Drupal View just so, I search on Google for it. And I find the answers on the countless blog and forums that make the Internet such a great resource. It's time to stop simply "taking" from this resource, and start adding to it. The Internet is great because of how many people contribute to it, so I figure I should do my and contribute so it stays great. :)</p>
+
+<p>So watch this space for web design and development tips, tricks, how-tos, tutorials, rants and all things inter-web. Don't look for Chili Pepper Design news here - that goes on the "front page":http://www.chilipepperdesign.com/ of this website. Also, don't look for personal posts and updates here, I have a personal blog for all that over at "oronaut.com":http://www.oronaut.com/. This space is just for seriously nerdy web stuff.</p>
+
+<p>So wish me luck on this whole "giving back to the Internet" thing, and I'd love to hear what <em>you</em> think about any of my posts so feel free to comment - I'll try my best to get back to you.</p>
+
+<p>Thanks!</p>
+]]></content>
+  </entry>
+  
+</feed>
