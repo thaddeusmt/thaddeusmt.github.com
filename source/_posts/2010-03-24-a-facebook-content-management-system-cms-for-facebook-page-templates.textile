@@ -2,18 +2,19 @@
 layout: post
 date: 2010-03-24 00:58
 title: "A Facebook Content Management System (CMS) for Facebook Page Templates"
-categories: [CMS, Social-Media]
+categories: [Facebook]
 keywords: [facebook,facebook cms,facebook templates,facebook page templates,facebook tab templates,facebook content management system,custom tab cms]
 # permalink: a-facebook-content-management-system-cms-for-facebook-page-templates
 ---
 
-<a href="http://www.splashlabsocial.com"><img src="http://www.chilipepperdesign.com/images/53t.jpg" style="float: left; margin-right: 10px;" /></a>
-<p style="font-size:1.2em;"><strong>Update: The project is now live and ready for signups! Head over to <a href="http://splashlabsocial.com">SplashLab Social</a> to learn more and get started. It's the easiest way to create and manage content on your Facebook Page's iframe tabs!</strong></p>
 
-<br />
-<br />
-<br />
+<p style="font-size:1.2em;">
+<a href="http://www.splashlabsocial.com"><img src="http://www.chilipepperdesign.com/images/53t.jpg" style="float: left; margin-right: 10px;" /></a>
+<strong>Update: The project is now live and ready for signups! Head over to <a href="http://splashlabsocial.com">SplashLab Social</a> to learn more and get started. It's the easiest way to create and manage content on your Facebook Page's iframe tabs!</strong></p>
+
 <p>There's something big in the works here at Chili Pepper Design I wanted to share on my blog quickly:</p>
+
+<!-- more -->
 
 <h3><strike>Coming Soon:</strike> A Facebook Fan Page CMS!</h3>
 

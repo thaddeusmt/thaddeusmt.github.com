@@ -2,18 +2,20 @@
 layout: post
 date: 2011-02-15 00:37
 title: " Reveal / Fan-Gate / Like-Gate Facebook iframe tab tutorial (with PHP)"
-categories: [Social-Media, Web-Development]
+categories: [Facebook, Web-Development]
 keywords: []
 # permalink: reveal-fan-gate-like-gate-facebook-iframe-tab-tutorial-with-php
 ---
 
 <em><strong>Update: <a href="http://www.splashlabsocial.com">SplashLab Social</a> has been released!</strong> <a href="http://www.splashlabsocial.com">If you are looking for an easier way to set up Fans-only/Reveal tabs, look no further!</a> My new service makes it easy to create custom fan-gate tabs, check it out!</em>
 
-"FBML is going away":http://developers.facebook.com/blog/post/462#fbml_roadmap. Is the popular (and effective) strategy of "fan-gating" content to encourage visitors to Like you page going away with the "&lt;fb:visible-to-connection>":http://developers.facebook.com/docs/reference/fbml/visible-to-connection/ FBML tag?
+"FBML is going away":http://developers.facebook.com/blog/post/462#fbml_roadmap. Is the popular (and effective) strategy of "fan-gating" content to encourage visitors to Like you page going away with the <a href="http://developers.facebook.com/docs/reference/fbml/visible-to-connection/">fb:visible-to-connection</a> FBML tag?
 
 No! Facebook has been kind enough to provide a new method for implementing "reveal tabs" on the new iframe tabs. Follow along in the tutorial below to learn how to do this.
 
 (This tutorial assumes you are creating a PHP Facebook application, but you can follow the spirit of it in any language.)
+
+<!-- more -->
 
 <h3>1. Set up an iframe tab application</h3>
 

@@ -11,6 +11,8 @@ I am using the very slick and enjoyable "jCarousel":http://sorgalla.com/projects
 
 To do this I just had to add a little extra code to the _initCallback_ method I was already using to bind the external controls. Here is the JS needed to unobtrusively create a jCarousel with 4 external control links:
 
+<!-- more -->
+
 <pre><code><script type="text/javascript">
 //this function creates the control links and binds them
 function mycarousel_initCallback(carousel) {

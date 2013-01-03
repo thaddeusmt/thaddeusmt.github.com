@@ -37,19 +37,20 @@ body {
 body > header {
   background: transparent;
   padding-top: .25em;
+  padding-bottom: .6em;
   overflow: hidden;
   @media only screen and (max-width: 992px) {
     padding-bottom: .4em;
   }
 }
 body > header h1 {
-  color: #700202;
-  text-shadow: -1px -1px 0px #A55D6F;
+  color: #AC0505;
+  //text-shadow: -1px -1px 0px #A55D6F;
   font-size: 3em;
 }
 body > header h1 a, body > header h1 a:visited {
-  color: #990000;
-  -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,.6)))
+  color: #AC0505;
+  //-webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,.6)))
 }
 body > header h1 a:hover {
   color: #700202;

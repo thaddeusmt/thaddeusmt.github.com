@@ -2,7 +2,7 @@
 layout: post
 date: 2009-10-06 00:10
 title: "How to make custom Facebook Fan Page tabs with FBML, Part 1"
-categories: [Social-Media, Web-Development]
+categories: [Facebook, Web-Development]
 keywords: [facebook,facebook app,applications,fan page,custom tab,tabbed profile,fan page tab,fbml,static fmlb,html,profile box]
 # permalink: how-to-make-custom-facebook-fan-page-tabs-with-fbml-part-1
 ---
@@ -14,6 +14,8 @@ keywords: [facebook,facebook app,applications,fan page,custom tab,tabbed profile
 If you have started to dabble in the new wave of "social media marketing" you probably made your business/brand/company/band/etc a "Facebook Fan Page":http://www.facebook.com/advertising/?pages. These are basically just like regular Facebook user profiles except instead of a business having "friends", they have what are (more accurately) called "fans". This seems like a good idea since Pages provide a great way for companies to interact with their customers. That part of Fan Pages *is* a good idea, and everyone seems to have a link to "find us on facebook!" now because of it! But there are challenges.
 
 It's hard to brand a Facebook Page. You can change the Profile Picture and upload photos and videos, etc, but it all feels very much like Facebook still. This consistent visual look is one of the great things about Facebook, but if someone finds your company on Facebook before ever visiting your regular website, your ability to educate the visitor about your products or services is extremely limited. And if you send someone to your Facebook Page from your regular website, there is no clear way to route them back to where the sale will actually be made. It can be a problem. Once they hit Facebook you are at the mercy of whatever users post on the Wall or write in the Reviews tab.
+
+<!-- more -->
 
 Again, this is the *good thing* about social media and "the web 2.0". Getting direct feedback from customers and being able to engage in dialog with them in invaluable. But doing so at the expense of your brand seems unnecessary. Fortunately with some planning and effort you can get the best of both worlds from a Facebook Fan Page: branding/sales _and_ customer feedback. The key is using "FBML":http://wiki.developers.facebook.com/index.php/FBML to make custom "Facebook Tabs":http://wiki.developers.facebook.com/index.php/New_Design_Tabbed_Profile and Boxes. Using these you can leave all of the great default Facebook social functionality intact and also:
 

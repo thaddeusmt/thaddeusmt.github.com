@@ -2,7 +2,7 @@
 layout: post
 date: 2009-12-18 19:17
 title: "Configuring and compiling Nginx and PHP-FPM on Ubuntu for Magento, Part 2"
-categories: [Web-Development, e-Commerce]
+categories: [Linux, Magento, Nginx]
 keywords: [php-fpm,nginx,magento]
 # permalink: configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-2
 ---
@@ -10,6 +10,8 @@ keywords: [php-fpm,nginx,magento]
 <p>This is the second part of my little guide to get Magento running on Nginx with PHP-FPM and APC. Check out <a href="http://www.chilipepperdesign.com/2009/12/14/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-1">Part 1 here</a> and <a href="http://www.chilipepperdesign.com/2010/01/03/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-3">Part 3 here</a>.</p>
 
 <p>In this part, we compile <a href="http://php-fpm.org/">PHP-FPM</a> and get it working with the <a href="http://php.net/manual/en/book.apc.php">APC</a> "Accelerator" cache for Nginx. The first step is to compile PHP-FPM. Some of this is taken almost verbatim from the FPM <a href="http://github.com/dreamcat4/php-fpm/blob/master/readme.markdown">readme</a>:</p>
+
+<!-- more -->
 
 <pre><code># aptitude install -y libxml2-dev libevent-dev libjpeg-dev
 # export LE_VER=1.4.12-stable

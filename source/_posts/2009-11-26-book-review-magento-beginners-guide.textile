@@ -2,14 +2,16 @@
 layout: post
 date: 2009-11-26 21:05
 title: "Book Review: Magento Beginner\'s Guide"
-categories: [e-Commerce, ]
-keywords: [magento,beginner's guide]
+categories: [Magento, Reviews]
+keywords: [magento,beginner's guide,book reviews]
 # permalink: book-review-magento-beginners-guide
 ---
 
 I was recently approached by "&#91;packt&#93; Publishing":http://www.packtpub.com/ to do a review of their book, the *Magento Beginner's Guide* (by "William Rice":http://williamriceinc.blogspot.com/). I've been working with Magento a lot over the past year and blog about it here from time to time, so they figured I would be good to review it. After setting up, modifying and maintaining four Magento stores in the last 10 months I don't feel I have much to learn from a "beginners guide", but I figured I could use my experience of what a beginner actually needs to know and see if this book covers all the bases.
 
 I have read parts of the official "Magento User Guide":http://www.magentocommerce.com/support/magento-user-guide-book (and "php/architect's Guide to E-Commerce Programming with Magento":http://www.amazon.com/gp/product/0973862173?ie=UTF8&tag=oronaut-20&linkCode=as2&camp=1789&creative=390957&creativeASIN=0973862173) but this book fills a different gap than the others. The User Guide covers all of the features, but it is not a practical guide. (The programming book was great, but did not cover how to actually use Magento). My favorite thing about the Beginner's Guide is that it showed how to use Magento in a practical, day-to-day way. Being just a "beginner's guide" it does not cover all of the features, but it covers a wide swath of the important ones. What really impressed me was the way it provided tips on how to deal with and overcome some of Magento's serious (and occasionally deal-breaking) problems that make the day-to-day administration of an online store difficult.
+
+<!-- more -->
 
 An example of this are the confusing order "statuses". Depending on how the order was paid for (PayPal, Check, CC, etc) orders may be marked "Pending" or "Processing" in a confusing way. The book puts in a real effort to make sense of this mess. It even offers a good work-around using the "Hold" feature to overcome this problem. Order fulfillment and management is one of the biggest pain points in Magento, so I'm glad the book took a moment to deal with this, unlike the official User Guide. The book had other good practical tips for setting up Taxes, Shipping, Meta Information, and more.
 

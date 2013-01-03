@@ -13,6 +13,8 @@ On one of my latest Drupal websites there are multiple bloggers, none of whom ar
 
 It turns out it is very easy. I was able to just edit the TinyMCE "Example" plug-in, which already did basically exactly what I wanted. So here I provide it to you, Internet. I hope it is useful, and please let me know if it's broken (or could work better). Thanks!
 
+<!-- more -->
+
 *UPDATED*: (9-17-2010) I fixed some bugs with IE. It should work better cross-browse now.
 
 Download the plugin:

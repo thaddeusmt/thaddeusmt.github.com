@@ -2,7 +2,7 @@
 layout: post
 date: 2010-03-04 00:35
 title: "Easy SEO: +2,500% page views from a year of casual blogging?"
-categories: [SEO, Blogs]
+categories: [SEO, Meta]
 keywords: [seo,search engine optimization,blogging,website traffic,increase traffic,page views]
 # permalink: easy-seo-2500-page-views-from-a-year-of-casual-blogging
 ---
@@ -12,6 +12,8 @@ You know, you always read in SEO articles about how important blogging is for in
 Granted, the title of this post is hyperbolic link-bait. ;) But it's true nonetheless!
 
 I've had this site, "http://chilipepperdesign.com":http://www.chilipepperdesign.com, up for probably five years now but only as a static portfolio site for most of that time. Then, a year ago, I upgraded the site and added a blog to it. In that year _*my monthly page views have increased 2,500% and the number of monthly visits has gone up 4,400%*_.
+
+<!-- more -->
 
 I don't claim to be a great blogger. I'm not even a prolific blogger. And I had a _very_ small amount of traffic before, so the percent gain is in some ways exaggerated. But it's still an impressive change to me. The idea that casual blogging can increase traffic even _just_ a 1000% would be impressive! But let's get a little perspective:
 

@@ -2,7 +2,7 @@
 layout: post
 date: 2009-05-03 02:53
 title: "CSS Equal Height Columns with Bottom Border and Margin"
-categories: [CSS, Web-Design]
+categories: [CSS]
 keywords: [css columns,equal height columns,pure css,table-less equal height,no javascript,equal height background,equal height column border,equal height column margin,equal height column padding,overflow hidden,large margin,large padding]
 # permalink: css-equal-height-columns-with-bottom-border-and-margin
 ---
@@ -10,6 +10,8 @@ keywords: [css columns,equal height columns,pure css,table-less equal height,no 
 The saga of CSS "equal height columns" is long and frustrating. It's a common and attractive design element, but ever since we stopped using HTML Tables for our 2 and 3 column web page layouts in favor of Divs containers, it's been a real challenge to implement them using standards based CSS and markup.
 
 My favorite of the many clever techniques so far devised to solve this problem is the "Position Is Everything One True Layout":http://www.positioniseverything.net/articles/onetruelayout/equalheight method (although don't try to use internal anchor links with this!). Another favorite is the "Equal Height Columns with Cross-Browser CSS & No Hacks":http://matthewjamestaylor.com/blog/equal-height-columns-cross-browser-css-no-hacks, but it actually seems a little more complicated and hack-ish to me (despite the name). And if you really want it to _just work_ to no extra markup and don't mind a little inelegance, the good old "Faux Columns":http://www.alistapart.com/articles/fauxcolumns/ approach with a background image works well too.
+
+<!-- more -->
 
 But the P.I.E. One True Layout method is my favorite and that's the one I'm using in this example. To review, the basic gist of the P.I.E. method is that each column has a huge bottom padding to extend it's background color, a huge negative margin to pull the effective bottom of the column back to where it should be, and the container hides the overflow: 
 

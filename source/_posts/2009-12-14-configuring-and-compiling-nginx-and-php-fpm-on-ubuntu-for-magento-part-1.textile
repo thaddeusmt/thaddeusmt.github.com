@@ -2,7 +2,7 @@
 layout: post
 date: 2009-12-14 21:08
 title: "Configuring and compiling Nginx and PHP-FPM on Ubuntu for Magento, Part 1"
-categories: [Web-Development, e-Commerce]
+categories: [Linux, Magento, Nginx]
 keywords: [php-fpm,magento,nginx,performance,speed,fastcgi,apc,ecommerce,apache]
 # permalink: configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-1
 ---
@@ -12,6 +12,8 @@ keywords: [php-fpm,magento,nginx,performance,speed,fastcgi,apc,ecommerce,apache]
 <p>So what can be done to speed up Magento?</p>
 
 <p>There are a <a href="http://www.magentocommerce.com/wiki/groups/168/optimising_your_web_stack_performance_for_magento">number</a> of <a href="http://www.magentocommerce.com/blog/comments/understanding-magento-scalability-and-performance-1/">things</a>. I have tried almost all of them at this point. And I did reduce the page load time greatly, at least on the front end. But all of the AJAXy scripts on the backend (which has no caching, as far as I know) meant store maintenance and order fulfillment remained a tedious process. So I decided to try one final thing: make the switch from trusty old <a href="http://www.apache.org/">Apache</a> to <a href="http://wiki.nginx.org">Nginx</a>.</p>
+
+<!-- more -->
 
 <p>I did have Apache2 tweaked out and running quite fast, but Apache has a big memory footprint (especially when running mod_php), and this Magento install is on a 256MB "slice" in the <a href="http://www.rackspacecloud.com/">Rackspace Cloud</a> so I want to keep the amount of RAM needed to run the store as low possible without sacrificing performance. Nginx is a really lightweight web server, and when paired with <a href="http://php-fpm.org/">PHP-FPM</a> ("FastCGI Process Manager", a patch for FastCGI) supposedly it's the fastest and most memory efficient way around to serve up PHP scripts. Sounds like just what I need!</p>
 

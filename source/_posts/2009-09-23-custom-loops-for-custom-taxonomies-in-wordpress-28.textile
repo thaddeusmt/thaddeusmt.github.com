@@ -2,7 +2,7 @@
 layout: post
 date: 2009-09-23 18:24
 title: "Custom Loops for Custom Taxonomies in WordPress 2.8"
-categories: [CMS, Web-Development]
+categories: [WordPress, Web-Development]
 keywords: [wordpress,the loop,custom taxonomy,taxonomies,custom loop,custom query,sql,where clause,join,custom field,wordpress 2.8]
 # permalink: custom-loops-for-custom-taxonomies-in-wordpress-28
 ---
@@ -12,6 +12,8 @@ keywords: [wordpress,the loop,custom taxonomy,taxonomies,custom loop,custom quer
 Working with Drupal as much as I have, I became very accustomed to having multiple taxonomies. It's incredibly useful. A classic example is Movies: each movie has a director, some actors, a year it was made, etc. You _could_ just lump all these together with a bunch of "tags" in WordPress, but grouping "Actor" and "Year" tags together into taxonomies makes site organization and navigation much simpler (and more sensible).
 
 But there are some challenges still to using WordPress taxonomies. While there is some support in the new API word making queries based on specific taxonomies, there is not a lot. You _can_ filter your Loop by a term in a single taxonomy via the _query_posts()_, as "Justin":http://justintadlock.com/archives/2009/05/06/custom-taxonomies-in-wordpress-28 shows in this example:
+
+<!-- more -->
 
 <pre><code><?php 
 query_posts( array( 'people' => 'will-smith', 'showposts' => 10 ) ); 

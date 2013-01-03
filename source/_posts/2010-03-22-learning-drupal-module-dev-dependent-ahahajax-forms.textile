@@ -2,7 +2,7 @@
 layout: post
 date: 2010-03-22 01:32
 title: "Learning Drupal Module Dev: Dependent AHAH/AJAX Forms"
-categories: [Web-Development, CMS]
+categories: [Web-Development, Drupal]
 keywords: [AHAH,AJAX,Drupal,Forms API,AHAH forms,ajax fields,dependent fields,AJAX forms]
 # permalink: learning-drupal-module-dev-dependent-ahahajax-forms
 ---
@@ -12,6 +12,8 @@ keywords: [AHAH,AJAX,Drupal,Forms API,AHAH forms,ajax fields,dependent fields,AJ
 <p>It also turns out there is a steep learning curve to making "Ajax forms" with the Drupal Forms API. I got it working, but it took a fair amount of effort. So, to help out future Drupal AHAH developers I am providing my code below, along with a list of links to resources that were a great help in unraveling this problem.</p>
 
 <p>First, to help provide an "aerial view" of what's going on here, this is a list of the components involved:</p>
+
+<!-- more -->
 
 <ul>
 <li>A form that has the AHAH fields (<em>ahahtestmodule_admin_settings</em> in this example)</li>

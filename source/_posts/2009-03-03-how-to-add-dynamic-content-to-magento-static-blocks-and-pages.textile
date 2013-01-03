@@ -2,7 +2,7 @@
 layout: post
 date: 2009-03-03 23:06
 title: "How to Add Dynamic Content to Magento Static Blocks and Pages"
-categories: [e-Commerce, Web-Development]
+categories: [Magento, Web-Development]
 keywords: [magento,e-commerce,content management system,Zend Framework,store]
 # permalink: how-to-add-dynamic-content-to-magento-static-blocks-and-pages
 ---
@@ -14,6 +14,8 @@ Magento also makes it really easy to create static SEO landing pages. In just a 
 *But you can't put PHP code in these blocks or pages.*
 
 Not directly at least...
+
+<!-- more -->
 
 Magento Static Blocks and Pages _will_ process some predefined template tags. For instance, to make a link to your Magento store's front page you can use the "store" template tag:
 

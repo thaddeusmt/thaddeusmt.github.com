@@ -2,7 +2,7 @@
 layout: post
 date: 2010-01-15 00:08
 title: "How to programmatically create Views in Drupal 6"
-categories: [CMS, Web-Development]
+categories: [Drupal, Web-Development]
 keywords: [drupal,views,views 2,drupal 6,create view,tutorial,how to,guide]
 # permalink: how-to-programmatically-create-views-in-drupal-6
 ---
@@ -10,6 +10,8 @@ keywords: [drupal,views,views 2,drupal 6,create view,tutorial,how to,guide]
 So, this stumped me for a while. I needed my small custom Drupal module to select a bunch of nodes based on a CCK Date field and the Publish status. It is a pain to query the CCK tables directly, so every forum post I could find told me to do this via Views. That's all well and good, but the instructions for doing this all involved creating a View with the Vuiews UI, _then_ calling it to make my query. 
 
 But I wanted to have some of the View's query parameters change dynamically based on my module's admin settings. Although you could probably do this with some custom Views Argument PHP code, I didn't want to do it this way. It divorced the code from my module too much somehow. It would mean that after I installed my module I would have to create a View and paste in some custom PHP code! Yuck.
+
+<!-- more -->
 
 Looking through the Views 2 documentation I learned how to create "default views" for a module, but still I didn't like this approach. This would mean that the custom view would still appear in the Views list, and could be disabled, modified, and what have you. What I really wanted to do was just create a View programmatically in my module code. How hard could it be?
 

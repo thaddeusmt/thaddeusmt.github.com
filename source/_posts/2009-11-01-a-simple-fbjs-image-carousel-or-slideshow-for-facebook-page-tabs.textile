@@ -2,7 +2,7 @@
 layout: post
 date: 2009-11-01 23:19
 title: "A simple FBJS image carousel (or slideshow) for Facebook page tabs"
-categories: [Social-Media, Web-Development]
+categories: [Facebook]
 keywords: [fbml,fan page tab,facebook app,facebook,fan page,fbjs,javascript,animate,slideshow,carousel]
 # permalink: a-simple-fbjs-image-carousel-or-slideshow-for-facebook-page-tabs
 ---
@@ -12,13 +12,15 @@ keywords: [fbml,fan page tab,facebook app,facebook,fan page,fbjs,javascript,anim
 This little code snippet is really basic, and not actually that good or clever. You can make a much nicer slideshow or carousel if you put a little time into it. But I just want to demonstrate how many of the nice JavaScript effects we are used to on the "Web 2.0" are also possible on a Facebook Page via Facebook's "Animate library":http://wiki.developers.facebook.com/index.php/FBJS/Animation. It's not as robust as "jQuery":http://jquery.com/ or "Scriptaculous":http://script.aculo.us/, but since you can't import those libraries to a Tab the Animate library will have to do. :)
 
 The final result looks like this:
-<img width=" alt="Screenshot of the Chili Pepper Design Facebook image carousel" src="http://www.chilipepperdesign.com/images/46.jpg" />
+<img alt="Screenshot of the Chili Pepper Design Facebook image carousel" src="http://www.chilipepperdesign.com/images/46.jpg" />
 
 <strong>And you can view a <a href="http://www.facebook.com/pages/Bozeman-MT/Chili-Pepper-Design/59282833907?v=app_154473727596">live demo on the CPD Facebook Page</a></strong>
 
 For instructions on how to create your own custom Facebook tabs, "read my tutorial here":http://www.chilipepperdesign.com/2009/10/11/how-to-make-custom-facebook-fan-page-tabs-with-fbml-part-2.
 
 To begin, here is the simple FBJS &lt;script> code:
+
+<!-- more -->
 
 <pre><code>==
 var numslides = 7;

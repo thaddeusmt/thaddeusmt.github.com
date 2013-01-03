@@ -2,7 +2,7 @@
 layout: post
 date: 2009-08-13 01:48
 title: "Magento - Six Months In"
-categories: [e-Commerce, Web-Development]
+categories: [Magento, Web-Development]
 keywords: [ecommerce,e-commerce,magento,experience,rating,warnings,problems,issues]
 # permalink: magento-six-months-in
 ---
@@ -18,6 +18,8 @@ After comparing prices and features a year ago, Magento was chosen from amongst 
 It's pretty great! 
 
 But it is not perfect.
+
+<!-- more -->
 
 <h3>Magento, while open source, is not community developed.</h3>
 

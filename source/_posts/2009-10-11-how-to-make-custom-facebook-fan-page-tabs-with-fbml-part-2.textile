@@ -2,7 +2,7 @@
 layout: post
 date: 2009-10-11 22:26
 title: "How to make custom Facebook Fan Page tabs with FBML, Part 2"
-categories: [Social-Media, Web-Development]
+categories: [Facebook, Web-Development]
 keywords: [facebook,facebook app,applications,fan page,custom tab,tabbed profile,fan page tab,fbml,static fmlb]
 # permalink: how-to-make-custom-facebook-fan-page-tabs-with-fbml-part-2
 ---
@@ -17,6 +17,8 @@ keywords: [facebook,facebook app,applications,fan page,custom tab,tabbed profile
 <h2>Quick and Dirty Custom Facebook Page Tabs and Boxes</h2>
 
 The fastest and easiest way to add custom Tabs to a Page is with the "Static FBML application":http://www.facebook.com/apps/application.php?id=4949752878. A nice visual tutorial of this method is posted on "lorrainesiew.wordpress.com":http://lorrainesiew.wordpress.com/2009/07/04/facebook-pages-introduction-to-fbml/. I will also quickly outline the process here:
+
+<!-- more -->
 
 # Assuming you have a Facebook Fan Page already, you can get started by visiting the "Static FBML App's Page":http://www.facebook.com/apps/application.php?id=4949752878, and click on "Add to my Page" underneath the logo in the top left.
 # Once you have added the application to your Page, go edit the Settings for that Page and you should see "FBML" listed under your _Applications_. Click on the "Admin Options" pencil icon to the right, and then click on "Edit".

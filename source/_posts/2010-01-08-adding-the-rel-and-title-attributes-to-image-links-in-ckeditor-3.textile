@@ -11,6 +11,8 @@ keywords: [ckeditor,javascript,lightbox,rel,title,attribute,wysiwyg]
 
 <p>This is a total hack, since I have not looked in to how to properly make a plugin for the new CKEditor, but it works pretty well. Maybe someone who knows how to make plugins to CKEditor can show me the way.</p>
 
+<!-- more -->
+
 <p>To start hacking, we need to first copy over the minified <em>ckeditor\plugins\image\dialogs\image.js</em> with the indented <em>ckeditor\_source\plugins\image\dialogs\image.js</em>, since it's really hard to work with the minified <em>image.js</em>.</p>
 
 <p>In <em>image.js</em> all of the tabs and fields in the Image popup dialog are defined in the "contents" array (below the onHide function). We will add our new "rel" and "title" fields to the content array, in the "Link" tab's sub-array. I added the new code at the end of the Link tab's definition array after the <em>txtUrl</em>, <em>browse</em>, and <em>cmbTarget</em> fields (around line 1146). The code I added is:</p>
