@@ -181,6 +181,12 @@ Here is the official guide to creating a plugin for TinyMCE 3: <a href="http://w
   </footer>
 </article>
 
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
 </div>
 
 <aside class="sidebar">
@@ -343,7 +349,10 @@ Here is the official guide to creating a plugin for TinyMCE 3: <a href="http://w
       var disqus_shortname = 'chilipepperdesign';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://thaddeusmt.github.com/2010/03/22/insert-flash-media-embed-code-tinymce-plugin/';
+        var disqus_url = 'http://thaddeusmt.github.com/2010/03/22/insert-flash-media-embed-code-tinymce-plugin/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
