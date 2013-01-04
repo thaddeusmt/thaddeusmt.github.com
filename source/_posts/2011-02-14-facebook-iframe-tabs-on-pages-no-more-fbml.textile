@@ -2,6 +2,7 @@
 layout: post
 date: 2011-02-14 23:43
 title: "Facebook iframe tabs on Pages - No more FBML!"
+comments: true
 categories: [Facebook, Web-Development]
 keywords: []
 # permalink: facebook-iframe-tabs-on-pages-no-more-fbml

@@ -2,6 +2,7 @@
 layout: post
 date: 2009-11-01 23:19
 title: "A simple FBJS image carousel (or slideshow) for Facebook page tabs"
+comments: true
 categories: [Facebook]
 keywords: [fbml,fan page tab,facebook app,facebook,fan page,fbjs,javascript,animate,slideshow,carousel]
 # permalink: a-simple-fbjs-image-carousel-or-slideshow-for-facebook-page-tabs

@@ -2,6 +2,7 @@
 layout: post
 date: 2009-02-01 13:14
 title: "htaccess 301 Redirects from one URL query string to another"
+comments: true
 categories: [SEO, Apache]
 keywords: [htaccess,301 redirect,mod_rewrite,moved permanently,query string,dynamic page,dynamic url]
 # permalink: htaccess-query-string-301s

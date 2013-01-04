@@ -2,6 +2,7 @@
 layout: post
 date: 2010-03-04 00:35
 title: "Easy SEO: +2,500% page views from a year of casual blogging?"
+comments: true
 categories: [SEO, Meta]
 keywords: [seo,search engine optimization,blogging,website traffic,increase traffic,page views]
 # permalink: easy-seo-2500-page-views-from-a-year-of-casual-blogging

@@ -2,7 +2,7 @@
 #      Main Configs       #
 # ----------------------- #
 
-url: http://thaddeusmt.github.com
+url: http://chilipepperdesign.com
 title: Chili Pepper Design
 subtitle: "Web development relleno"
 author: Evan Johnson
@@ -27,12 +27,12 @@ email:
 
 # If publishing to a subdirectory as in http://site.com/project set 'root: /project'
 root: /
-permalink: /:year/:month/:day/:title/
+permalink: /:year/:month/:day/:title
 source: source
 destination: public
 plugins: plugins
 code_dir: downloads/code
-category_dir: blog/categories
+category_dir: categories
 markdown: rdiscount
 pygments: false # default python pygments have been replaced by pygments.rb
 
@@ -99,6 +99,7 @@ coderwall_user: thaddeusmt
 # Disqus Comments
 disqus_short_name: chilipepperdesign
 disqus_show_comment_count: true
+disqus_site_url: http://www.chilipepperdesign.com
 
 # Google Analytics
 google_analytics_tracking_id: UA-6058373-2

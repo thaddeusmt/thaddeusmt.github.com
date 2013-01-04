@@ -2,6 +2,7 @@
 layout: post
 date: 2009-02-12 23:42
 title: "Retrofitting Content Management Systems (CMS) on Existing Websites"
+comments: true
 categories: [Web-Development]
 keywords: [cms made simple,content management system,maintainable websites,open source cms,easy to update websites]
 # permalink: retrofitting-content-management-systems-cms-on-existing-websites

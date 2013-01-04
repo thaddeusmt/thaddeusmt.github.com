@@ -2,6 +2,7 @@
 layout: post
 date: 2011-02-15 00:37
 title: " Reveal / Fan-Gate / Like-Gate Facebook iframe tab tutorial (with PHP)"
+comments: true
 categories: [Facebook, Web-Development]
 keywords: []
 # permalink: reveal-fan-gate-like-gate-facebook-iframe-tab-tutorial-with-php
