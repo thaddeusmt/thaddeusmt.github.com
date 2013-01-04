@@ -5,13 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Configuring and compiling Nginx and PHP-FPM on Ubuntu for Magento, Part 3 - Chili Pepper Design</title>
+  <title>Projects - Chili Pepper Design</title>
   <meta name="author" content="Evan Johnson">
 
   
-  <meta name="description" content="This is the 3rd and final article about installing Magento on Nginx with PHP-FPM. Part 1 is here, and Part 2 is here.
-This part explains how I set up &hellip;">
-  <meta name="keywords" content="apcmagnetonginxmod_rewritehtaccess">
+  <meta name="description" content="Projects SplashLab Social SplashLab Social is a Facebook marketing application development company based in Montana. I am a founding partner and &hellip;">
+  
 
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
@@ -19,7 +18,7 @@ This part explains how I set up &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://chilipepperdesign.com/2010/01/03/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-3">
+  <link rel="canonical" href="http://chilipepperdesign.com/projects/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -73,198 +72,46 @@ This part explains how I set up &hellip;">
   <div id="main">
     <div id="content">
       <div>
-<article class="hentry" role="article">
+<article role="article">
   
   <header>
-    
-      <h1 class="entry-title">Configuring and Compiling Nginx and PHP-FPM on Ubuntu for Magento, Part 3</h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-01-03T20:47:00-06:00" pubdate data-updated="true">Jan 3<span>rd</span>, 2010</time>
-        
-         | <a href="#disqus_thread">Comments</a>
-        
-      </p>
+    <h1 class="entry-title">Projects</h1>
     
   </header>
+  
+  <h2><a href="http://splashlabsocial.com">SplashLab Social</a></h2>
 
+<p>SplashLab Social is a Facebook marketing application development company based in Montana. I am a founding partner and currently act as the Chief Software Architect, building and maintaining our application platform.</p>
 
-<div class="entry-content"><p>This is the 3rd and final article about installing Magento on Nginx with <span class="caps">PHP</span>-<span class="caps">FPM</span>. <a href="http://www.chilipepperdesign.com/2009/12/14/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-1">Part 1 is here</a>, and <a href="http://www.chilipepperdesign.com/2009/12/18/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-2">Part 2 is here</a>.</p>
-<p>This part explains how I set up my public web directories, and how I did the Nginx configuration files for a Magento site. One of the tricky things about switching to Nginx from Apache is that Nginx does not use .htaccess files or the usual Apache mod_rewrite rules for pretty/<span class="caps">SEO</span> URLs. You can replicate all of Magento&#8217;s mod_rewrite rules with Nginx&#8217;s own rewrite module, but it takes some getting used to and Magento doesn&#8217;t come with them pre-written (like the mod_rewrite rules in the .htaccess files).</p>
-<p>Here are some of the resources I used:</p>
+<h2><a href="http://www.yiiframework.com/extension/facebook-opengraph/">Yii Facebook Extension</a></h2>
+
+<p>My first attempt at releasing and maintaining a bit of open source code. It&#8217;s a wrapper for the <a href="http://developers.facebook.com/docs/reference/php/">Facebook PHP SDK</a> for use with the <a href="http://www.yiiframework.com/">Yii PHP Framework</a>.</p>
+
 <ul>
-<li><a href="http://articles.slicehost.com/2009/3/6/ubuntu-intrepid-nginx-virtual-hosts-1">Slicehost: Nginx Virtual Hosts #1</a></li>
-<li><a href="http://articles.slicehost.com/2009/9/4/ubuntu-intrepid-nginx-virtual-hosts-2-2">Slicehost: Nginx Virtual Hosts #2</a></li>
-<li><a href="http://www.magentocommerce.com/boards/viewthread/7931/">Magento Forum: NginX Web Server with Magento</a></li>
-<li><a href="http://www.magentocommerce.com/boards/viewthread/38134/">Magento Forum: Thread about Fooman Speedster (which I never go to work)</a></li>
-<li><a href="http://markmail.org/message/fdurus5iczudtm62">Random MarkMail post (I needed Google Translate to help me out)</a></li>
-<li><a href="http://varien.com.ua/blog/Fustanovka-magento-dlya-raboty-s-nginx-php-fpm-apc">varien.com.ua (Also needed Google Translate to help me out)</a></li>
+<li><a href="http://www.yiiframework.com/extension/facebook-opengraph/">Yii Extension Page</a></li>
+<li><a href="https://github.com/splashlab/yii-facebook-opengraph">GitHub Repo</a></li>
 </ul>
-<p>First we&#8217;ll set up the directory structure like we are used to with Apache:</p>
-
-<pre><code>
-# mkdir /usr/local/nginx/sites-available
-# mkdir /usr/local/nginx/sites-enabled
-# mkdir /var/www/example1.com/public
-# mkdir /var/www/example1.com/log
-# cp  /usr/local/nginx/conf/nginx.conf /usr/local/nginx/conf/nginx.conf-original
-</code></pre>
-<p>Then set up the base nginx conf file <em>/usr/local/nginx/conf/nginx.conf</em>:</p>
-
-<pre><code>
-user www-data;
-worker_processes 1;
-
-events {
-    worker_connections 1024;
-}
-
-http {
-    include mime.types;
-    default_type application/octet-stream;
-    sendfile on;
-    keepalive_timeout 65;
-    gzip on;
-    include /usr/local/nginx/sites-enabled/*;
-}
-</code></pre>
-<p>Then set up the Nginx conf file for your website. I am using the default site in this example <em>/usr/local/nginx/sites-available/default</em>, but if you have multiple sites instead of <em>default</em> you would create files called <em>site1.com</em>, <em>site2.com</em>, etc.</p>
-<p>This file is where all of the rewrite magic is. The url in this example is <em>example1.com</em>, which you should replace with your own. The document root is <em>/var/www/example1.com/public</em> which, again, you will need to change to match your own configuration.</p>
-
-<pre><code>
-# fastcgi nodes
-upstream  backend  {
-    server unix:/tmp/fcgi.sock;
-}
-
-# redirect all non-www requests to www requests (it would be easy to reverse this)
-server {
-    listen   80;
-    server_name  example1.com;
-    rewrite ^/(.*) http://www.example1.com/$1 permanent;
-}
-
-server {
-    listen       80;
-    server_name www.example1.com;
-
-    # protection (we have no .htaccess)
-    location ~ (/(app/|includes/|lib/|/pkginfo/|var/|report/config.xml)|/\.svn/|/.hta.+) {
-        deny all;
-    }
-   # pass php files over to PHP-FPM via the socket
-    location ~ (\.php)$ {
-        fastcgi_index index.php;
-        include /etc/nginx/fastcgi_params;
-        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-        if (-e $request_filename) { # check if requested path exists
-            fastcgi_pass backend;
-        }
-    }
-    # the javascript compressor
-    location ^~ /js/index.php {
-        fastcgi_pass   backend;
-        fastcgi_index index.php;
-        fastcgi_param  SCRIPT_NAME $fastcgi_script_name;
-        fastcgi_param  SCRIPT_FILENAME  /var/www/example1.com/public$fastcgi_script_name;
-        include /etc/nginx/fastcgi_params;
-        access_log off;
-        expires 30d;
-    }
-   # special case for the error "report" pages
-    location /report/ {
-        fastcgi_index index.php;
-        include /etc/nginx/fastcgi_params;
-        fastcgi_param  SCRIPT_NAME /report/index.php;
-        fastcgi_param  SCRIPT_FILENAME  /var/www/example1.com/public/report/index.php;
-        if (!-f $request_filename) {
-            fastcgi_pass backend;
-            break;
-        }
-    }
-    # pass everything else over to PHP-FPM via the socket
-    location / {
-        root /var/www/example1.com/public/; # absolute path doc root
-        index index.php index.html index.htm;
-
-        # set expire headers
-        if ($request_uri ~* "\.(ico|css|js|gif|jpe?g|png)$") {
-            expires max;
-        }
-        # set fastcgi settings, not allowed in the "if" block
-        include /etc/nginx/fastcgi_params;
-        fastcgi_param SCRIPT_FILENAME $document_root/index.php;
-        fastcgi_param SCRIPT_NAME /index.php;
-        # rewrite - if file not found, pass it to the backend
-        if (!-f $request_filename) {
-            fastcgi_pass backend;
-            break;
-        }
-        error_page 404 index.php;
-    }
-    access_log /var/www/example1.com/log/access.log;
-    error_log /var/www/example1.com/log/error.log;
-}
-</code></pre>
-<p>I am no expert with Nginx, but a lot of Google searching and trial and error gave me the file above, and it seems to work. I hope it is helpful, even if this exact code doesn&#8217;t work for you.</p>
-<p>Finally, activate the site by creating a symbolic link to it and restarting the server:</p>
-
-<pre><code>
-# ln -s /usr/local/nginx/sites-available/default /usr/local/nginx/sites-enabled/default
-# ln -s /usr/local/nginx/sites-enabled /etc/sites
-# /etc/init.d/nginx restart
-</code></pre>
-<p>And that&#8217;s it! You should now have Magento running on Nginx! (<em>After</em>, of course, also installing mysql and a sendmail program, and probably an <span class="caps">FTP</span> server, and who knows what else :)</p>
-<p>Now, how to make it actually go faster than Apache? There are many settings you can tweak. Look in <em>fastcgi_params</em> to change <span class="caps">PHP</span>-<span class="caps">FPM</span> settings, <em>php.ini</em> to change <span class="caps">APC</span> settings, <em>my.cnf</em> to change mysql settings, <em>nginx.conf</em> to adjust the number of worker processes and the keepalive timeouts&#8230; the list goes on. Good luck!</p></div>
 
 
-  <footer>
-    <p class="meta">
+<h2><a href="http://smallpotatoes.co">SmallPotatoes.co</a></h2>
+
+<p>Small Potatoes is a small project to help local gardeners sell excess produce to their neighbors. It was a product of <a href="http://www.siliconprairienews.com/2012/09/watch-the-eight-pitches-of-startup-weekend-omaha-video">Startup Weekend Omaha 2012</a>, and we are still maintaining it.</p>
+
+<h2><a href="http://craniak.com">Craniak.com</a></h2>
+
+<p>Craniak is a courseware gamification platform, to help instructors create compelling online class materials with integrated game mechanics. This project came out of <a href="http://www.siliconprairienews.com/2011/09/startup-weekend-omaha-the-18-teams-with-links-and-day-3-photos">Startup Weekend Omaha 2011</a>, and is currently on hold.</p>
+
+<h2><a href="http://facebookshowcase.net">FacebookShowcase.net</a></h2>
+
+<p>I created The Facebook Showcase to illustrate the many creative things being done with Facebook Page tab apps. I have not updated it in a long time, but the site is still up.</p>
+
+  
+    <footer>
       
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Evan Johnson</span></span>
-
       
-
-
-
-
-
-
-
-
+        <div class="sharing">
   
-
-
-<time datetime="2010-01-03T20:47:00-06:00" pubdate data-updated="true">Jan 3<span>rd</span>, 2010</time>
-      
-
-<span class="categories">
-  
-    <a class='category' href='/categories/linux/'>Linux</a>, <a class='category' href='/categories/magento/'>Magento</a>, <a class='category' href='/categories/nginx/'>Nginx</a>
-  
-</span>
-
-
-    </p>
-    
-      <div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://chilipepperdesign.com/2010/01/03/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-3" data-via="thaddeusmt" data-counturl="http://chilipepperdesign.com/2010/01/03/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-3" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://chilipepperdesign.com/projects/index.html" data-via="thaddeusmt" data-counturl="http://chilipepperdesign.com/projects/index.html" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -274,23 +121,10 @@ server {
   
 </div>
 
-    
-    <p class="meta">
       
-        <a class="basic-alignment left" href="/2009/12/18/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-2" title="Previous Post: Configuring and compiling Nginx and PHP-FPM on Ubuntu for Magento, Part 2">&laquo; Configuring and compiling Nginx and PHP-FPM on Ubuntu for Magento, Part 2</a>
-      
-      
-        <a class="basic-alignment right" href="/2010/01/08/adding-the-rel-and-title-attributes-to-image-links-in-ckeditor-3" title="Next Post: Adding the "rel" and "title" attributes to image links in CKEditor 3">Adding the "rel" and "title" attributes to image links in CKEditor 3 &raquo;</a>
-      
-    </p>
-  </footer>
+    </footer>
+  
 </article>
-
-  <section>
-    <h1>Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-  </section>
 
 </div>
 
@@ -454,10 +288,7 @@ server {
       var disqus_shortname = 'chilipepperdesign';
       
         
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://www.chilipepperdesign.com/2010/01/03/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-3';
-        var disqus_url = 'http://www.chilipepperdesign.com/2010/01/03/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-3';
-        var disqus_script = 'embed.js';
+        var disqus_script = 'count.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

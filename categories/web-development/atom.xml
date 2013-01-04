@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Web-Development | Chili Pepper Design]]></title>
   <link href="http://chilipepperdesign.com/categories/web-development/atom.xml" rel="self"/>
   <link href="http://chilipepperdesign.com/"/>
-  <updated>2013-01-04T10:21:09-06:00</updated>
+  <updated>2013-01-04T11:11:07-06:00</updated>
   <id>http://chilipepperdesign.com/</id>
   <author>
     <name><![CDATA[Evan Johnson]]></name>
@@ -41,7 +41,7 @@
 <!-- more -->
 
 
-<p>"Download mage.bat - Windows Magento Connect 2.0 Update Script":http://www.chilipepperdesign.com/file_download/1/mage.zip</p>
+<p>"Download mage.bat - Windows Magento Connect 2.0 Update Script":http://www.chilipepperdesign.com/file_download/mage.zip</p>
 
 <p>One you have mage.bat installed in the root directory of your Magento install (right next to the mage bash script), you are ready to go! Just run "mage" from the Windows command line.</p>
 
