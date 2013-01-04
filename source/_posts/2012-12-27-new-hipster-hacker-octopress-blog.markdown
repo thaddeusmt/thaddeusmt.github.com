@@ -3,7 +3,7 @@ layout: post
 title: "New Hipster Hacker Blog"
 date: 2012-12-27 17:16
 comments: true
-categories: Ruby, Meta
+categories: [Ruby, Meta]
 keywords: [blogging,ruby,octopress,jekyll,textpattern]
 ---
 

@@ -26,7 +26,7 @@ Not that anyone is actually hosting Magento on a WAMP setup, but I find it usefu
 
 <!-- more -->
 
-"Download mage.bat - Windows Magento Connect 2.0 Update Script":http://www.chilipepperdesign.com/file_download/1/mage.zip
+"Download mage.bat - Windows Magento Connect 2.0 Update Script":http://www.chilipepperdesign.com/file_download/mage.zip
 
 One you have mage.bat installed in the root directory of your Magento install (right next to the mage bash script), you are ready to go! Just run "mage" from the Windows command line. 
 
