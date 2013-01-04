@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Drupal | Chili Pepper Design]]></title>
   <link href="http://chilipepperdesign.com/categories/drupal/atom.xml" rel="self"/>
   <link href="http://chilipepperdesign.com/"/>
-  <updated>2013-01-04T10:14:16-06:00</updated>
+  <updated>2013-01-04T10:21:09-06:00</updated>
   <id>http://chilipepperdesign.com/</id>
   <author>
     <name><![CDATA[Evan Johnson]]></name>
@@ -15,7 +15,7 @@
   
   <entry>
     <title type="html"><![CDATA[Learning Drupal Module Dev: Dependent AHAH/AJAX Forms]]></title>
-    <link href="http://chilipepperdesign.com/2010/03/22/learning-drupal-module-dev-dependent-ahahajax-forms/"/>
+    <link href="http://chilipepperdesign.com/2010/03/22/learning-drupal-module-dev-dependent-ahahajax-forms"/>
     <updated>2010-03-22T01:32:00-05:00</updated>
     <id>http://chilipepperdesign.com/2010/03/22/learning-drupal-module-dev-dependent-ahahajax-forms</id>
     <content type="html"><![CDATA[<p>So, I've been working on a simple module for a Drupal project lately. I wanted to have two administrator settings for the module, the second of which depends on the first. A "dependent dropdown". It would be cool if it was "AJAXy" too, I thought. Well, it just so turns out that in Drupal 6 there are built in <a href="http://ajax.phpmagazine.net/2005/11/ahah_asychronous_html_and_http.html">AHAH</a> (Asychronous HTML and HTTP) functions in the Forms API to do just this. Easy! Or is it?</p>
@@ -195,7 +195,7 @@ function ahahtestmodule_menu() {
   
   <entry>
     <title type="html"><![CDATA[How to programmatically create Views in Drupal 6]]></title>
-    <link href="http://chilipepperdesign.com/2010/01/15/how-to-programmatically-create-views-in-drupal-6/"/>
+    <link href="http://chilipepperdesign.com/2010/01/15/how-to-programmatically-create-views-in-drupal-6"/>
     <updated>2010-01-15T00:08:00-06:00</updated>
     <id>http://chilipepperdesign.com/2010/01/15/how-to-programmatically-create-views-in-drupal-6</id>
     <content type="html"><![CDATA[<p>So, this stumped me for a while. I needed my small custom Drupal module to select a bunch of nodes based on a CCK Date field and the Publish status. It is a pain to query the CCK tables directly, so every forum post I could find told me to do this via Views. That's all well and good, but the instructions for doing this all involved creating a View with the Vuiews UI, <em>then</em> calling it to make my query.</p>

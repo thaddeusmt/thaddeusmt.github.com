@@ -4,7 +4,7 @@
   <title><![CDATA[Category: CSS | Chili Pepper Design]]></title>
   <link href="http://chilipepperdesign.com/categories/css/atom.xml" rel="self"/>
   <link href="http://chilipepperdesign.com/"/>
-  <updated>2013-01-04T10:14:16-06:00</updated>
+  <updated>2013-01-04T10:21:09-06:00</updated>
   <id>http://chilipepperdesign.com/</id>
   <author>
     <name><![CDATA[Evan Johnson]]></name>
@@ -15,7 +15,7 @@
   
   <entry>
     <title type="html"><![CDATA[Magento 1.5 / EE 1.10 Windows Command Line Batch Update Script mage.bat]]></title>
-    <link href="http://chilipepperdesign.com/2011/05/15/magento-15-ee-110-windows-command-line-batch-update-script-magebat/"/>
+    <link href="http://chilipepperdesign.com/2011/05/15/magento-15-ee-110-windows-command-line-batch-update-script-magebat"/>
     <updated>2011-05-15T23:00:00-05:00</updated>
     <id>http://chilipepperdesign.com/2011/05/15/magento-15-ee-110-windows-command-line-batch-update-script-magebat</id>
     <content type="html"><![CDATA[<p>So, this might be for kind of a narrow audience, but I'm pretty stoked on it so I wanted to share.</p>
@@ -66,7 +66,7 @@
   
   <entry>
     <title type="html"><![CDATA[CSS Equal Height Columns with Bottom Border and Margin]]></title>
-    <link href="http://chilipepperdesign.com/2009/05/03/css-equal-height-columns-with-bottom-border-and-margin/"/>
+    <link href="http://chilipepperdesign.com/2009/05/03/css-equal-height-columns-with-bottom-border-and-margin"/>
     <updated>2009-05-03T02:53:00-05:00</updated>
     <id>http://chilipepperdesign.com/2009/05/03/css-equal-height-columns-with-bottom-border-and-margin</id>
     <content type="html"><![CDATA[<p>The saga of CSS "equal height columns" is long and frustrating. It's a common and attractive design element, but ever since we stopped using HTML Tables for our 2 and 3 column web page layouts in favor of Divs containers, it's been a real challenge to implement them using standards based CSS and markup.</p>

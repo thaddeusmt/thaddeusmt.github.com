@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Nginx | Chili Pepper Design]]></title>
   <link href="http://chilipepperdesign.com/categories/nginx/atom.xml" rel="self"/>
   <link href="http://chilipepperdesign.com/"/>
-  <updated>2013-01-04T10:14:16-06:00</updated>
+  <updated>2013-01-04T10:21:09-06:00</updated>
   <id>http://chilipepperdesign.com/</id>
   <author>
     <name><![CDATA[Evan Johnson]]></name>
@@ -15,7 +15,7 @@
   
   <entry>
     <title type="html"><![CDATA[Configuring and compiling Nginx and PHP-FPM on Ubuntu for Magento, Part 3]]></title>
-    <link href="http://chilipepperdesign.com/2010/01/03/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-3/"/>
+    <link href="http://chilipepperdesign.com/2010/01/03/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-3"/>
     <updated>2010-01-03T20:47:00-06:00</updated>
     <id>http://chilipepperdesign.com/2010/01/03/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-3</id>
     <content type="html"><![CDATA[<p>This is the 3rd and final article about installing Magento on Nginx with PHP-FPM. <a href="http://www.chilipepperdesign.com/2009/12/14/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-1">Part 1 is here</a>, and <a href="http://www.chilipepperdesign.com/2009/12/18/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-2">Part 2 is here</a>.</p>
@@ -205,7 +205,7 @@ server {
   
   <entry>
     <title type="html"><![CDATA[Configuring and compiling Nginx and PHP-FPM on Ubuntu for Magento, Part 2]]></title>
-    <link href="http://chilipepperdesign.com/2009/12/18/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-2/"/>
+    <link href="http://chilipepperdesign.com/2009/12/18/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-2"/>
     <updated>2009-12-18T19:17:00-06:00</updated>
     <id>http://chilipepperdesign.com/2009/12/18/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-2</id>
     <content type="html"><![CDATA[<p>This is the second part of my little guide to get Magento running on Nginx with PHP-FPM and APC. Check out <a href="http://www.chilipepperdesign.com/2009/12/14/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-1">Part 1 here</a> and <a href="http://www.chilipepperdesign.com/2010/01/03/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-3">Part 3 here</a>.</p>
@@ -312,7 +312,7 @@ apc.include_once_override = 1
   
   <entry>
     <title type="html"><![CDATA[Configuring and compiling Nginx and PHP-FPM on Ubuntu for Magento, Part 1]]></title>
-    <link href="http://chilipepperdesign.com/2009/12/14/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-1/"/>
+    <link href="http://chilipepperdesign.com/2009/12/14/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-1"/>
     <updated>2009-12-14T21:08:00-06:00</updated>
     <id>http://chilipepperdesign.com/2009/12/14/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-1</id>
     <content type="html"><![CDATA[<p>So, Magento is a huge piece of modular and extensible PHP code. Each request takes a lot of CPU cycles and memory to kick out a Magento page. This means it is <em>slow</em>. The performance of Magento is a frequent complaint, and rightfully so: consumers won't wait around all day for an ecommerce store to load. They will bail out and try another store if a page doesn't load in just a few seconds. A default Magento 1.3 install on budget web hosting can have page load times of up to 10secs, which is unacceptable. </p>

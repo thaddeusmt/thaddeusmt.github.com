@@ -4,7 +4,7 @@
   <title><![CDATA[Category: SEO | Chili Pepper Design]]></title>
   <link href="http://chilipepperdesign.com/categories/seo/atom.xml" rel="self"/>
   <link href="http://chilipepperdesign.com/"/>
-  <updated>2013-01-04T10:14:16-06:00</updated>
+  <updated>2013-01-04T10:21:09-06:00</updated>
   <id>http://chilipepperdesign.com/</id>
   <author>
     <name><![CDATA[Evan Johnson]]></name>
@@ -15,7 +15,7 @@
   
   <entry>
     <title type="html"><![CDATA[Easy SEO: +2,500% page views from a year of casual blogging?]]></title>
-    <link href="http://chilipepperdesign.com/2010/03/04/easy-seo-2500-page-views-from-a-year-of-casual-blogging/"/>
+    <link href="http://chilipepperdesign.com/2010/03/04/easy-seo-2500-page-views-from-a-year-of-casual-blogging"/>
     <updated>2010-03-04T00:35:00-06:00</updated>
     <id>http://chilipepperdesign.com/2010/03/04/easy-seo-2500-page-views-from-a-year-of-casual-blogging</id>
     <content type="html"><![CDATA[<p>You know, you always read in SEO articles about how important blogging is for increasing traffic. It's one of the top suggestions around for improving a website's search engine juice. Well, I am here to testify that it truly is a great SEO tool.</p>
@@ -50,7 +50,7 @@
   
   <entry>
     <title type="html"><![CDATA[htaccess 301 Redirects from one URL query string to another]]></title>
-    <link href="http://chilipepperdesign.com/2009/02/01/htaccess-query-string-301s/"/>
+    <link href="http://chilipepperdesign.com/2009/02/01/htaccess-query-string-301s"/>
     <updated>2009-02-01T13:14:00-06:00</updated>
     <id>http://chilipepperdesign.com/2009/02/01/htaccess-query-string-301s</id>
     <content type="html"><![CDATA[<p>The other day I was trying to set up a "301 Moved Permanently":http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.3 redirect that took one dynamic url and redirected to <em>another</em> dynamic url.</p>

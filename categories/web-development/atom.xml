@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Web-Development | Chili Pepper Design]]></title>
   <link href="http://chilipepperdesign.com/categories/web-development/atom.xml" rel="self"/>
   <link href="http://chilipepperdesign.com/"/>
-  <updated>2013-01-04T10:14:16-06:00</updated>
+  <updated>2013-01-04T10:21:09-06:00</updated>
   <id>http://chilipepperdesign.com/</id>
   <author>
     <name><![CDATA[Evan Johnson]]></name>
@@ -15,7 +15,7 @@
   
   <entry>
     <title type="html"><![CDATA[Magento 1.5 / EE 1.10 Windows Command Line Batch Update Script mage.bat]]></title>
-    <link href="http://chilipepperdesign.com/2011/05/15/magento-15-ee-110-windows-command-line-batch-update-script-magebat/"/>
+    <link href="http://chilipepperdesign.com/2011/05/15/magento-15-ee-110-windows-command-line-batch-update-script-magebat"/>
     <updated>2011-05-15T23:00:00-05:00</updated>
     <id>http://chilipepperdesign.com/2011/05/15/magento-15-ee-110-windows-command-line-batch-update-script-magebat</id>
     <content type="html"><![CDATA[<p>So, this might be for kind of a narrow audience, but I'm pretty stoked on it so I wanted to share.</p>
@@ -66,7 +66,7 @@
   
   <entry>
     <title type="html"><![CDATA[ Reveal / Fan-Gate / Like-Gate Facebook iframe tab tutorial (with PHP)]]></title>
-    <link href="http://chilipepperdesign.com/2011/02/15/reveal-fan-gate-like-gate-facebook-iframe-tab-tutorial-with-php/"/>
+    <link href="http://chilipepperdesign.com/2011/02/15/reveal-fan-gate-like-gate-facebook-iframe-tab-tutorial-with-php"/>
     <updated>2011-02-15T00:37:00-06:00</updated>
     <id>http://chilipepperdesign.com/2011/02/15/reveal-fan-gate-like-gate-facebook-iframe-tab-tutorial-with-php</id>
     <content type="html"><![CDATA[<p><em><strong>Update: <a href="http://www.splashlabsocial.com">SplashLab Social</a> has been released!</strong> <a href="http://www.splashlabsocial.com">If you are looking for an easier way to set up Fans-only/Reveal tabs, look no further!</a> My new service makes it easy to create custom fan-gate tabs, check it out!</em></p>
@@ -198,7 +198,7 @@
   
   <entry>
     <title type="html"><![CDATA[Facebook iframe tabs on Pages - No more FBML!]]></title>
-    <link href="http://chilipepperdesign.com/2011/02/14/facebook-iframe-tabs-on-pages-no-more-fbml/"/>
+    <link href="http://chilipepperdesign.com/2011/02/14/facebook-iframe-tabs-on-pages-no-more-fbml"/>
     <updated>2011-02-14T23:43:00-06:00</updated>
     <id>http://chilipepperdesign.com/2011/02/14/facebook-iframe-tabs-on-pages-no-more-fbml</id>
     <content type="html"><![CDATA[<p>The long awaited transition from FBML tabs to iframe tabs has finally happened. As of this writing on Feb 14th 2011 (Valentines Day!) you can choose the "iframe" option for Facebook application tabs. The official word from the "Facebook developer roadmap":http://developers.facebook.com/roadmap/ is that "as of March 11th developers will no longer be able to create FBML tabs":http://developers.facebook.com/blog/post/462#fbml_roadmap (although existing FBML apps will be supported indefinitely - or at least until the end of 2011 I heard in the comments).</p>
@@ -256,7 +256,7 @@
   
   <entry>
     <title type="html"><![CDATA[Insert Flash Media Embed Code TinyMCE Plugin]]></title>
-    <link href="http://chilipepperdesign.com/2010/03/22/insert-flash-media-embed-code-tinymce-plugin/"/>
+    <link href="http://chilipepperdesign.com/2010/03/22/insert-flash-media-embed-code-tinymce-plugin"/>
     <updated>2010-03-22T16:19:00-05:00</updated>
     <id>http://chilipepperdesign.com/2010/03/22/insert-flash-media-embed-code-tinymce-plugin</id>
     <content type="html"><![CDATA[<p>I've run into a problem providing my clients good, easy-to-use media embed functionality with the existing JavaScript WYSIWYG editors. The big players, "CKEditor":http://ckeditor.com/ (formery FCKEditor) and "TinyMCE":http://tinymce.moxiecode.com/ both provide a "Flash" button which works okay with YouTube and other large video providers, but what about embedding a Picasa slideshow? None of the WYSIWYG editors come with plugin to just insert some HTML code. If you want to embed something like a Picasa slideshow,  customized YouTube player, or Google Map you have open up the source code, find the location you want to insert it, and paste in the code. Fine for some, but difficult and scary for most as it breaks the WYSIWYG paradigm.</p>
@@ -301,7 +301,7 @@ Here is the official guide to creating a plugin for TinyMCE 3: "TinyMCE:Create p
   
   <entry>
     <title type="html"><![CDATA[Learning Drupal Module Dev: Dependent AHAH/AJAX Forms]]></title>
-    <link href="http://chilipepperdesign.com/2010/03/22/learning-drupal-module-dev-dependent-ahahajax-forms/"/>
+    <link href="http://chilipepperdesign.com/2010/03/22/learning-drupal-module-dev-dependent-ahahajax-forms"/>
     <updated>2010-03-22T01:32:00-05:00</updated>
     <id>http://chilipepperdesign.com/2010/03/22/learning-drupal-module-dev-dependent-ahahajax-forms</id>
     <content type="html"><![CDATA[<p>So, I've been working on a simple module for a Drupal project lately. I wanted to have two administrator settings for the module, the second of which depends on the first. A "dependent dropdown". It would be cool if it was "AJAXy" too, I thought. Well, it just so turns out that in Drupal 6 there are built in <a href="http://ajax.phpmagazine.net/2005/11/ahah_asychronous_html_and_http.html">AHAH</a> (Asychronous HTML and HTTP) functions in the Forms API to do just this. Easy! Or is it?</p>

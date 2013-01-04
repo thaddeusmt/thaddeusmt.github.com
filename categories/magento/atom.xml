@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Magento | Chili Pepper Design]]></title>
   <link href="http://chilipepperdesign.com/categories/magento/atom.xml" rel="self"/>
   <link href="http://chilipepperdesign.com/"/>
-  <updated>2013-01-04T10:14:16-06:00</updated>
+  <updated>2013-01-04T10:21:09-06:00</updated>
   <id>http://chilipepperdesign.com/</id>
   <author>
     <name><![CDATA[Evan Johnson]]></name>
@@ -15,7 +15,7 @@
   
   <entry>
     <title type="html"><![CDATA[Configuring and compiling Nginx and PHP-FPM on Ubuntu for Magento, Part 3]]></title>
-    <link href="http://chilipepperdesign.com/2010/01/03/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-3/"/>
+    <link href="http://chilipepperdesign.com/2010/01/03/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-3"/>
     <updated>2010-01-03T20:47:00-06:00</updated>
     <id>http://chilipepperdesign.com/2010/01/03/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-3</id>
     <content type="html"><![CDATA[<p>This is the 3rd and final article about installing Magento on Nginx with PHP-FPM. <a href="http://www.chilipepperdesign.com/2009/12/14/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-1">Part 1 is here</a>, and <a href="http://www.chilipepperdesign.com/2009/12/18/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-2">Part 2 is here</a>.</p>
@@ -205,7 +205,7 @@ server {
   
   <entry>
     <title type="html"><![CDATA[Configuring and compiling Nginx and PHP-FPM on Ubuntu for Magento, Part 2]]></title>
-    <link href="http://chilipepperdesign.com/2009/12/18/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-2/"/>
+    <link href="http://chilipepperdesign.com/2009/12/18/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-2"/>
     <updated>2009-12-18T19:17:00-06:00</updated>
     <id>http://chilipepperdesign.com/2009/12/18/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-2</id>
     <content type="html"><![CDATA[<p>This is the second part of my little guide to get Magento running on Nginx with PHP-FPM and APC. Check out <a href="http://www.chilipepperdesign.com/2009/12/14/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-1">Part 1 here</a> and <a href="http://www.chilipepperdesign.com/2010/01/03/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-3">Part 3 here</a>.</p>
@@ -312,7 +312,7 @@ apc.include_once_override = 1
   
   <entry>
     <title type="html"><![CDATA[Configuring and compiling Nginx and PHP-FPM on Ubuntu for Magento, Part 1]]></title>
-    <link href="http://chilipepperdesign.com/2009/12/14/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-1/"/>
+    <link href="http://chilipepperdesign.com/2009/12/14/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-1"/>
     <updated>2009-12-14T21:08:00-06:00</updated>
     <id>http://chilipepperdesign.com/2009/12/14/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-1</id>
     <content type="html"><![CDATA[<p>So, Magento is a huge piece of modular and extensible PHP code. Each request takes a lot of CPU cycles and memory to kick out a Magento page. This means it is <em>slow</em>. The performance of Magento is a frequent complaint, and rightfully so: consumers won't wait around all day for an ecommerce store to load. They will bail out and try another store if a page doesn't load in just a few seconds. A default Magento 1.3 install on budget web hosting can have page load times of up to 10secs, which is unacceptable. </p>
@@ -484,7 +484,7 @@ exit 0
   
   <entry>
     <title type="html"><![CDATA[Book Review: Magento Beginner's Guide]]></title>
-    <link href="http://chilipepperdesign.com/2009/11/26/book-review-magento-beginners-guide/"/>
+    <link href="http://chilipepperdesign.com/2009/11/26/book-review-magento-beginners-guide"/>
     <updated>2009-11-26T21:05:00-06:00</updated>
     <id>http://chilipepperdesign.com/2009/11/26/book-review-magento-beginners-guide</id>
     <content type="html"><![CDATA[<p>I was recently approached by "&#91;packt&#93; Publishing":http://www.packtpub.com/ to do a review of their book, the <em>Magento Beginner's Guide</em> (by "William Rice":http://williamriceinc.blogspot.com/). I've been working with Magento a lot over the past year and blog about it here from time to time, so they figured I would be good to review it. After setting up, modifying and maintaining four Magento stores in the last 10 months I don't feel I have much to learn from a "beginners guide", but I figured I could use my experience of what a beginner actually needs to know and see if this book covers all the bases.</p>
@@ -560,7 +560,7 @@ exit 0
   
   <entry>
     <title type="html"><![CDATA[Magento - Six Months In]]></title>
-    <link href="http://chilipepperdesign.com/2009/08/13/magento-six-months-in/"/>
+    <link href="http://chilipepperdesign.com/2009/08/13/magento-six-months-in"/>
     <updated>2009-08-13T01:48:00-05:00</updated>
     <id>http://chilipepperdesign.com/2009/08/13/magento-six-months-in</id>
     <content type="html"><![CDATA[<p>Yes, this basically amounts to a good old fashioned rant post. But there is a purpose behind it: to educate those thinking of using Magento to power their ecommerce store about potential concerns and pitfalls. Read on, and enjoy.</p>
