@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Nginx | Chili Pepper Design]]></title>
+  <link href="http://chilipepperdesign.com/categories/nginx/atom.xml" rel="self"/>
+  <link href="http://chilipepperdesign.com/"/>
+  <updated>2013-01-04T10:01:06-06:00</updated>
+  <id>http://chilipepperdesign.com/</id>
+  <author>
+    <name><![CDATA[Evan Johnson]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Configuring and compiling Nginx and PHP-FPM on Ubuntu for Magento, Part 3]]></title>
+    <link href="http://chilipepperdesign.com/2010/01/03/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-3/"/>
+    <updated>2010-01-03T20:47:00-06:00</updated>
+    <id>http://chilipepperdesign.com/2010/01/03/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-3</id>
+    <content type="html"><![CDATA[<p>This is the 3rd and final article about installing Magento on Nginx with PHP-FPM. <a href="http://www.chilipepperdesign.com/2009/12/14/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-1">Part 1 is here</a>, and <a href="http://www.chilipepperdesign.com/2009/12/18/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-2">Part 2 is here</a>.</p>
+
+
+
+
+<p>This part explains how I set up my public web directories, and how I did the Nginx configuration files for a Magento site. One of the tricky things about switching to Nginx from Apache is that Nginx does not use .htaccess files or the usual Apache mod_rewrite rules for pretty/SEO URLs. You can replicate all of Magento's mod_rewrite rules with Nginx's own rewrite module, but it takes some getting used to and Magento doesn't come with them pre-written (like the mod_rewrite rules in the .htaccess files).</p>
+
+
+
+
+<p>Here are some of the resources I used:</p>
+
+
+<ul>
+<li><a href="http://articles.slicehost.com/2009/3/6/ubuntu-intrepid-nginx-virtual-hosts-1">Slicehost: Nginx Virtual Hosts #1</a></li>
+<li><a href="http://articles.slicehost.com/2009/9/4/ubuntu-intrepid-nginx-virtual-hosts-2-2">Slicehost: Nginx Virtual Hosts #2</a></li>
+<li><a href="http://www.magentocommerce.com/boards/viewthread/7931/">Magento Forum: NginX Web Server with Magento</a></li>
+<li><a href="http://www.magentocommerce.com/boards/viewthread/38134/">Magento Forum: Thread about Fooman Speedster (which I never go to work)</a></li>
+<li><a href="http://markmail.org/message/fdurus5iczudtm62">Random MarkMail post (I needed Google Translate to help me out)</a></li>
+<li><a href="http://varien.com.ua/blog/Fustanovka-magento-dlya-raboty-s-nginx-php-fpm-apc">varien.com.ua (Also needed Google Translate to help me out)</a></li>
+</ul>
+
+
+
+
+<p>First we'll set up the directory structure like we are used to with Apache:</p>
+
+
+
+
+<pre><code>
+# mkdir /usr/local/nginx/sites-available
+# mkdir /usr/local/nginx/sites-enabled
+# mkdir /var/www/example1.com/public
+# mkdir /var/www/example1.com/log
+# cp  /usr/local/nginx/conf/nginx.conf /usr/local/nginx/conf/nginx.conf-original
+</code></pre>
+
+
+
+
+<p>Then set up the base nginx conf file <em>/usr/local/nginx/conf/nginx.conf</em>:</p>
+
+
+
+
+<pre><code>
+user www-data;
+worker_processes 1;
+
+events {
+    worker_connections 1024;
+}
+
+http {
+    include mime.types;
+    default_type application/octet-stream;
+    sendfile on;
+    keepalive_timeout 65;
+    gzip on;
+    include /usr/local/nginx/sites-enabled/*;
+}
+</code></pre>
+
+
+
+
+<p>Then set up the Nginx conf file for your website. I am using the default site in this example <em>/usr/local/nginx/sites-available/default</em>, but if you have multiple sites instead of <em>default</em> you would create files called <em>site1.com</em>, <em>site2.com</em>, etc.</p>
+
+
+
+
+<p>This file is where all of the rewrite magic is. The url in this example is <em>example1.com</em>, which you should replace with your own. The document root is <em>/var/www/example1.com/public</em> which, again, you will need to change to match your own configuration.</p>
+
+
+
+
+<pre><code>
+# fastcgi nodes
+upstream  backend  {
+    server unix:/tmp/fcgi.sock;
+}
+
+# redirect all non-www requests to www requests (it would be easy to reverse this)
+server {
+    listen   80;
+    server_name  example1.com;
+    rewrite ^/(.*) http://www.example1.com/$1 permanent;
+}
+
+server {
+    listen       80;
+    server_name www.example1.com;
+
+    # protection (we have no .htaccess)
+    location ~ (/(app/|includes/|lib/|/pkginfo/|var/|report/config.xml)|/\.svn/|/.hta.+) {
+        deny all;
+    }
+   # pass php files over to PHP-FPM via the socket
+    location ~ (\.php)$ {
+        fastcgi_index index.php;
+        include /etc/nginx/fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        if (-e $request_filename) { # check if requested path exists
+            fastcgi_pass backend;
+        }
+    }
+    # the javascript compressor
+    location ^~ /js/index.php {
+        fastcgi_pass   backend;
+        fastcgi_index index.php;
+        fastcgi_param  SCRIPT_NAME $fastcgi_script_name;
+        fastcgi_param  SCRIPT_FILENAME  /var/www/example1.com/public$fastcgi_script_name;
+        include /etc/nginx/fastcgi_params;
+        access_log off;
+        expires 30d;
+    }
+   # special case for the error "report" pages
+    location /report/ {
+        fastcgi_index index.php;
+        include /etc/nginx/fastcgi_params;
+        fastcgi_param  SCRIPT_NAME /report/index.php;
+        fastcgi_param  SCRIPT_FILENAME  /var/www/example1.com/public/report/index.php;
+        if (!-f $request_filename) {
+            fastcgi_pass backend;
+            break;
+        }
+    }
+    # pass everything else over to PHP-FPM via the socket
+    location / {
+        root /var/www/example1.com/public/; # absolute path doc root
+        index index.php index.html index.htm;
+
+        # set expire headers
+        if ($request_uri ~* "\.(ico|css|js|gif|jpe?g|png)$") {
+            expires max;
+        }
+        # set fastcgi settings, not allowed in the "if" block
+        include /etc/nginx/fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root/index.php;
+        fastcgi_param SCRIPT_NAME /index.php;
+        # rewrite - if file not found, pass it to the backend
+        if (!-f $request_filename) {
+            fastcgi_pass backend;
+            break;
+        }
+        error_page 404 index.php;
+    }
+    access_log /var/www/example1.com/log/access.log;
+    error_log /var/www/example1.com/log/error.log;
+}
+</code></pre>
+
+
+
+
+<p>I am no expert with Nginx, but a lot of Google searching and trial and error gave me the file above, and it seems to work. I hope it is helpful, even if this exact code doesn't work for you.</p>
+
+
+
+
+<p>Finally, activate the site by creating a symbolic link to it and restarting the server:</p>
+
+
+
+
+<pre><code>
+# ln -s /usr/local/nginx/sites-available/default /usr/local/nginx/sites-enabled/default
+# ln -s /usr/local/nginx/sites-enabled /etc/sites
+# /etc/init.d/nginx restart
+</code></pre>
+
+
+
+
+<p>And that's it! You should now have Magento running on Nginx! (<em>After</em>, of course, also installing mysql and a sendmail program, and probably an FTP server, and who knows what else :)</p>
+
+
+
+
+<p>Now, how to make it actually go faster than Apache? There are many settings you can tweak. Look in <em>fastcgi_params</em> to change PHP-FPM settings, <em>php.ini</em> to change APC settings, <em>my.cnf</em> to change mysql settings, <em>nginx.conf</em> to adjust the number of worker processes and the keepalive timeouts... the list goes on. Good luck!</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Configuring and compiling Nginx and PHP-FPM on Ubuntu for Magento, Part 2]]></title>
+    <link href="http://chilipepperdesign.com/2009/12/18/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-2/"/>
+    <updated>2009-12-18T19:17:00-06:00</updated>
+    <id>http://chilipepperdesign.com/2009/12/18/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-2</id>
+    <content type="html"><![CDATA[<p>This is the second part of my little guide to get Magento running on Nginx with PHP-FPM and APC. Check out <a href="http://www.chilipepperdesign.com/2009/12/14/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-1">Part 1 here</a> and <a href="http://www.chilipepperdesign.com/2010/01/03/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-3">Part 3 here</a>.</p>
+
+
+
+
+<p>In this part, we compile <a href="http://php-fpm.org/">PHP-FPM</a> and get it working with the <a href="http://php.net/manual/en/book.apc.php">APC</a> "Accelerator" cache for Nginx. The first step is to compile PHP-FPM. Some of this is taken almost verbatim from the FPM <a href="http://github.com/dreamcat4/php-fpm/blob/master/readme.markdown">readme</a>:</p>
+
+
+
+
+<!-- more -->
+
+
+
+
+<pre><code># aptitude install -y libxml2-dev libevent-dev libjpeg-dev
+# export LE_VER=1.4.12-stable
+# wget "http://www.monkey.org/~provos/libevent-$LE_VER.tar.gz"
+# tar -zxvf "libevent-$LE_VER.tar.gz"
+# cd "libevent-$LE_VER"
+# ./configure && make
+# DESTDIR=$PWD make install
+# export LIBEVENT_SEARCH_PATH="$PWD/usr/local"
+# export PHP_VER=5.2.11
+# cd ~/sources
+# wget "http://launchpad.net/php-fpm/master/0.6/+download/php-fpm-0.6~$PHP_VER.tar.gz"
+# tar -zxvf "php-fpm-0.6~$PHP_VER.tar.gz"
+# ./php-fpm-0.6-5.2.11/generate-fpm-patch
+# wget "http://us.php.net/get/php-$PHP_VER.tar.gz/from/us.php.net/mirror"
+# tar xvfz "php-$PHP_VER.tar.gz"
+# cd "php-$PHP_VER"
+# patch -p1 < ../fpm.patch
+# ./buildconf --force
+# mkdir fpm-build && cd fpm-build
+# aptitude install libxml2-dev libbz2-dev libpcre3-dev libmcrypt-dev libmhash-dev libmhash2 libcurl4-openssl-dev libsyck0-dev libgd-dev zlib1g-dev
+# ../configure --with-fpm --with-libevent="$LIBEVENT_SEARCH_PATH" --enable-mbstring --with-zlib --enable-zip --with-mcrypt --with-jpeg-dir=/usr/lib --with-gd --without-sqlite --without-pdo_sqlite --enable-fastcgi --with-curl --with-mhash --with-mysql=/etc/mysql/ --enable-pdo=shared --with-pdo-mysql=shared
+# make all install
+# make test
+# aptitude install m4 autoconf
+# mount -o remount,exec,suid /tmp
+# pecl install apc
+# cp /root/sources/php-5.2.11/php.ini-recommended /usr/local/lib/php.ini
+# ln -s /usr/local/lib/php.ini /etc/php/php.ini
+# ln -s /etc/php-fpm.conf /etc/php/php-fpm.conf
+</code></pre>
+
+
+
+
+<p>At the end of the commands above, you will notice we installed APC. Now, in <em>/etc/php/php-fpm.conf</em> there are four places you need to change the user and group to the correct ones for the web server. On my install, the user and group were both <em>www-data</em>:</p>
+
+
+<pre><code>&lt;value name="owner"&gt;www-data&lt;/value&gt;
+&lt;value name="group"&gt;www-data&lt;/value&gt;
+&lt;value name="user"&gt;www-data&lt;/value&gt;
+&lt;value name="group"&gt;www-data&lt;/value&gt;
+</code></pre>
+
+
+
+
+<p>To set up some basic parameters for the PHP-FPM FastCGI install, create the file <em>/etc/nginx/fastcgi_params</em>. We will be importing this into the Nginx config files later. This is what I am using, but you may need to tweak yours for better performance:</p>
+
+
+<pre><code>fastcgi_connect_timeout 60;
+fastcgi_send_timeout 180;
+fastcgi_read_timeout 180;
+fastcgi_buffer_size 128k;
+fastcgi_buffers 4 256k;
+fastcgi_busy_buffers_size 256k;
+fastcgi_temp_file_write_size 256k;
+fastcgi_intercept_errors on;
+</code></pre>
+
+
+
+
+<p>Lastly, edit your php.ini file <em>/etc/php/php.ini</em> to enable PDO on mySql (which Magento needs) and APC. To do so, add the following lines:</p>
+
+
+<pre><code>extension_dir = /usr/local/lib/php/extensions/no-debug-non-zts-20060613
+extension = pdo.so
+extension = mysql_pdo.so
+extension = apc.so
+apc.enabled = 1
+apc.shm_size = 96
+apc.include_once_override = 1
+</code></pre>
+
+
+
+
+<p>I remember there being some sort of confusion the first time I tried setting the extension_dir, so check and make sure that it's correct for your environment. It might also be <em>/usr/lib/php5/20060613</em>.</p>
+
+
+
+
+<p>There, nothing to it! You should have PHP-FPM running now. The final step is to create the Nginx config files so requests for PHP are passed over to PHP-FPM for processing. This is covered in <a href="http://www.chilipepperdesign.com/2010/01/03/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-3">Part 3</a>, along with some Magento specific Nginx config options.</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Configuring and compiling Nginx and PHP-FPM on Ubuntu for Magento, Part 1]]></title>
+    <link href="http://chilipepperdesign.com/2009/12/14/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-1/"/>
+    <updated>2009-12-14T21:08:00-06:00</updated>
+    <id>http://chilipepperdesign.com/2009/12/14/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-1</id>
+    <content type="html"><![CDATA[<p>So, Magento is a huge piece of modular and extensible PHP code. Each request takes a lot of CPU cycles and memory to kick out a Magento page. This means it is <em>slow</em>. The performance of Magento is a frequent complaint, and rightfully so: consumers won't wait around all day for an ecommerce store to load. They will bail out and try another store if a page doesn't load in just a few seconds. A default Magento 1.3 install on budget web hosting can have page load times of up to 10secs, which is unacceptable. </p>
+
+
+
+
+<p>So what can be done to speed up Magento?</p>
+
+
+
+
+<p>There are a <a href="http://www.magentocommerce.com/wiki/groups/168/optimising_your_web_stack_performance_for_magento">number</a> of <a href="http://www.magentocommerce.com/blog/comments/understanding-magento-scalability-and-performance-1/">things</a>. I have tried almost all of them at this point. And I did reduce the page load time greatly, at least on the front end. But all of the AJAXy scripts on the backend (which has no caching, as far as I know) meant store maintenance and order fulfillment remained a tedious process. So I decided to try one final thing: make the switch from trusty old <a href="http://www.apache.org/">Apache</a> to <a href="http://wiki.nginx.org">Nginx</a>.</p>
+
+
+
+
+<!-- more -->
+
+
+
+
+<p>I did have Apache2 tweaked out and running quite fast, but Apache has a big memory footprint (especially when running mod_php), and this Magento install is on a 256MB "slice" in the <a href="http://www.rackspacecloud.com/">Rackspace Cloud</a> so I want to keep the amount of RAM needed to run the store as low possible without sacrificing performance. Nginx is a really lightweight web server, and when paired with <a href="http://php-fpm.org/">PHP-FPM</a> ("FastCGI Process Manager", a patch for FastCGI) supposedly it's the fastest and most memory efficient way around to serve up PHP scripts. Sounds like just what I need!</p>
+
+
+
+
+<p>I got Magento running on Nginx with PHP-FPM and APC and it runs about as fast as my Apache install. I was hoping for a miracle and didn't get it, but considering it's on an anorexic little 256MB Cloud Server I would say it is performing admirably. Perhaps with more time to tune the performance (and bumping up to a bigger slice) it would really be fast, but I worked a long time on the previous Apache install so it was a tough act to follow. This article is the first of three that will explain what I did to get Magento running on this stack.</p>
+
+
+
+
+<p><strong>DISCALIMER:</strong> I am a pretty serious linux n00b. I'm sure I installed unnecessary packages, added extra compile flags, and what have you. <em>You might bork your server trying this stuff, so don't do it in a production environment!!</em> However, I did get Magento running on Nginx with PHP-FPM and APC. It was a struggle, but I did it. So I thought I would share my notes in hopes they will help others. I do not claim that these same commands will work for you in your unique environment, and I probably won't be help troubleshooting when they fail. Also, please add a comment and correct me if anything is wrong here, or if there is a better way to do anything. Thanks!</p>
+
+
+
+
+<p>Here are some of the resources I used to figure this out the first time around:</p>
+
+
+<ul>
+<li><a href="http://articles.slicehost.com/2009/3/4/ubuntu-intrepid-installing-nginx-from-source">Slidehost: Installing Nginx from source</a></li>
+<li><a href="http://interfacelab.com/nginx-php-fpm-apc-awesome/">NGINX + PHP-FPM + APC = Awesome</a></li>
+<li><a href="http://codeshepherd.blogspot.com/2009/05/nginx-phpfpm-memcache-mysql-xcache.html">Nginx + PHPFPM + Memcache + Mysql + XCache + Monit + Logrotate</a></li>
+<li><a href="http://www.yawn.it/2008/04/30/nginx-php-php-fpm-on-debian-etch-40/">Nginx + PHP + PHP-FPM on Debian Etch 4.0</a></li>
+</ul>
+
+
+
+
+<p>And here is the start of the compile and install process (note: you might need to sudo these commands):</p>
+
+
+
+
+<pre><code>
+# aptitude install make bison flex gcc patch autoconf subversion locate libc6 libpcre3 libpcre3-dev libpcrecpp0 libssl0.9.8 zlib1g lsb-base
+# mkdir ~/sources
+# cd ~/sources/
+# wget http://sysoev.ru/nginx/nginx-0.7.63.tar.gz
+# tar -zxvf nginx-0.7.63.tar.gz
+# cd nginx-0.7.63/
+# ./configure --sbin-path=/usr/local/sbin --with-http_ssl_module
+# make
+# make install
+# ln -s /usr/local/nginx/conf /etc/nginx
+# /usr/local/sbin/nginx
+# kill `cat /usr/local/nginx/logs/nginx.pid`
+</code></pre>
+
+
+
+
+<p>Then, I created the following init script at <em>/etc/init.d/nginx</em>.</p>
+
+
+
+
+<pre><code>
+#! /bin/sh
+
+### BEGIN INIT INFO
+# Provides: nginx
+# Required-Start: $all
+# Required-Stop: $all
+# Default-Start: 2 3 4 5
+# Default-Stop: 0 1 6
+# Short-Description: starts the nginx web server
+# Description: starts nginx using start-stop-daemon
+### END INIT INFO
+
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+DAEMON=/usr/local/sbin/nginx
+NAME=nginx
+DESC=nginx
+
+test -x $DAEMON || exit 0
+
+# Include nginx defaults if available
+if [ -f /etc/default/nginx ] ; then
+. /etc/default/nginx
+fi
+
+set -e
+
+. /lib/lsb/init-functions
+
+case "$1" in
+start)
+echo -n "Starting $DESC: "
+start-stop-daemon --start --quiet --pidfile /usr/local/nginx/logs/$NAME.pid \
+--exec $DAEMON -- $DAEMON_OPTS || true
+echo "$NAME."
+;;
+stop)
+echo -n "Stopping $DESC: "
+start-stop-daemon --stop --quiet --pidfile /usr/local/nginx/logs/$NAME.pid \
+--exec $DAEMON || true
+echo "$NAME."
+;;
+restart|force-reload)
+echo -n "Restarting $DESC: "
+start-stop-daemon --stop --quiet --pidfile \
+/usr/local/nginx/logs/$NAME.pid --exec $DAEMON || true
+sleep 1
+start-stop-daemon --start --quiet --pidfile \
+/usr/local/nginx/logs/$NAME.pid --exec $DAEMON -- $DAEMON_OPTS || true
+echo "$NAME."
+;;
+reload)
+echo -n "Reloading $DESC configuration: "
+start-stop-daemon --stop --signal HUP --quiet --pidfile /usr/local/nginx/logs/$NAME.pid \
+--exec $DAEMON || true
+echo "$NAME."
+;;
+status)
+status_of_proc -p /usr/local/nginx/logs/$NAME.pid "$DAEMON" nginx && exit 0 || exit $?
+;;
+*)
+N=/etc/init.d/$NAME
+echo "Usage: $N {start|stop|restart|reload|force-reload|status}" >&2
+exit 1
+;;
+esac
+
+exit 0
+</code></pre>
+
+
+
+
+<p>Now we can easily start and stop Nginx with familiar commands like <em>/etc/init.d/nginx start</em>. To install the init script, do the following:</p>
+
+
+
+
+<pre><code>
+# chmod +x /etc/init.d/nginx
+# /usr/sbin/update-rc.d -f nginx defaults
+</code></pre>
+
+
+
+
+<p>You should have Nginx compiled, installed, and running now. Yay! Next, <a href="http://www.chilipepperdesign.com/2009/12/18/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-2">Part 2</a> will be about installing and compiling PHP-FPM. Finally, <a href="http://www.chilipepperdesign.com/2010/01/03/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-3">Part 3</a> is about setting up Magneto with Nginx and PHP-FPM (including mod-rewrite issues). I will not be covering the other aspects of setting up a Magento server like MySql and sendmail, because these are the same for an Apache stack which has plenty of documentation out on the Internet already.</p>
+
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,515 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Facebook | Chili Pepper Design]]></title>
+  <link href="http://chilipepperdesign.com/categories/facebook/atom.xml" rel="self"/>
+  <link href="http://chilipepperdesign.com/"/>
+  <updated>2013-01-04T10:01:06-06:00</updated>
+  <id>http://chilipepperdesign.com/</id>
+  <author>
+    <name><![CDATA[Evan Johnson]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[ Reveal / Fan-Gate / Like-Gate Facebook iframe tab tutorial (with PHP)]]></title>
+    <link href="http://chilipepperdesign.com/2011/02/15/reveal-fan-gate-like-gate-facebook-iframe-tab-tutorial-with-php/"/>
+    <updated>2011-02-15T00:37:00-06:00</updated>
+    <id>http://chilipepperdesign.com/2011/02/15/reveal-fan-gate-like-gate-facebook-iframe-tab-tutorial-with-php</id>
+    <content type="html"><![CDATA[<p><em><strong>Update: <a href="http://www.splashlabsocial.com">SplashLab Social</a> has been released!</strong> <a href="http://www.splashlabsocial.com">If you are looking for an easier way to set up Fans-only/Reveal tabs, look no further!</a> My new service makes it easy to create custom fan-gate tabs, check it out!</em></p>
+
+<p>"FBML is going away":http://developers.facebook.com/blog/post/462#fbml_roadmap. Is the popular (and effective) strategy of "fan-gating" content to encourage visitors to Like you page going away with the <a href="http://developers.facebook.com/docs/reference/fbml/visible-to-connection/">fb:visible-to-connection</a> FBML tag?</p>
+
+<p>No! Facebook has been kind enough to provide a new method for implementing "reveal tabs" on the new iframe tabs. Follow along in the tutorial below to learn how to do this.</p>
+
+<p>(This tutorial assumes you are creating a PHP Facebook application, but you can follow the spirit of it in any language.)</p>
+
+<!-- more -->
+
+
+
+
+<h3>1. Set up an iframe tab application</h3>
+
+
+<p>I won't cover all of the details here, but you need to set up an iframe tab application on Facebook first. Assuming you have access to put PHP files up on a public server, follow these steps:</p>
+
+<h1>Go to the "Facebook Developer application":http://www.facebook.com/apps/application.php?id=2345053339</h1>
+
+<h1>Create a new application</h1>
+
+<h1>On the <em>"Facebook Integration"</em> tab of the application settings:</h1>
+
+<h2>Set the <em>Canvas Page</em> URL slug</h2>
+
+<h2>Point the <em>Canvas URL</em> to your PHP script's base URL</h2>
+
+<h2>Set the <em>Tab Name</em> to something (Welcome!)</h2>
+
+<h2><em>Make sure the </em>Page Tab Type<em> is set to iframe</em></h2>
+
+<h2>Set the <em>Tab URL</em> to the specific PHP file for this tab</h2>
+
+<h1>On the <em>"Advanced"</em> tab of the application settings:</h1>
+
+<h2>Make sure the <em>"OAuth 2.0 for Canvas"</em> option is set</h2>
+
+<h1>Save the application</h1>
+
+<h1>Add the application to a Page to test it out</h1>
+
+<p><em>NOTE:</em> There is some confusion about Canvas URL and the Tab URL. The Canvas URL is the PHP file that get's hit when the users views the Canvas app. This is different than the PHP script which generates the Tab, which is defined by the Tab URL. The Tab URL has to be relative to the Canvas URL. What I usually do is have the Canvas PHP file be "index.php" and point the Canvas URL to the directory it's in. Then I make a "tab.php" file for the Tab URL in the same directory.</p>
+
+<ul>
+<li><em>Canvas URL</em>: http://mysite.com/myfbappdirectory/
+** This points to the file http://mysite.com/myfbappdirectory/index.php</li>
+<li><em>Tab URL</em>: tab.php
+** This points to the file http://mysite.com/myfbappdirectory/tab.php</li>
+</ul>
+
+
+<h3>2. Get the signed_request</h3>
+
+
+<p>Facebook now passes an encoded POST variable to tab applications, called the "signed_request":http://developers.facebook.com/docs/authentication/signed_request. The content of a tab's signed_request is covered "here in the canvas guide":http://developers.facebook.com/docs/guides/canvas#tabs. General details about Facebook's signed requests can be found "here":http://developers.facebook.com/docs/authentication/signed_request.</p>
+
+<p>To get the signed_request, make sure the "OAuth 2.0 for Canvas" option is set in your application's settings. Then just grab it out of PHP's $_REQUEST array global.</p>
+
+<pre><code>$signed_request = $_REQUEST['signed_request'];</code></pre>
+
+
+
+
+<h3>3. Decode the signed_request</h3>
+
+
+<p>The signed request is encoded for security. "Read more about this here.":http://developers.facebook.com/docs/authentication/signed_request. We are not really interested in security on this app though. We just want to tell if a visitor is a fan or not. So we are going to do the "cheater" method of decoding the signed_request, which ignores some of the security features (like the signature). Here is the cheater code (you will need the PHP json_decode() method!):</p>
+
+<pre><code>function parsePageSignedRequest() {
+    if (isset($_REQUEST['signed_request'])) {
+      $encoded_sig = null;
+      $payload = null;
+      list($encoded_sig, $payload) = explode('.', $_REQUEST['signed_request'], 2);
+      $sig = base64_decode(strtr($encoded_sig, '-_', '+/'));
+      $data = json_decode(base64_decode(strtr($payload, '-_', '+/'), true));
+      return $data;
+    }
+    return false;
+  }
+  print_r(parsePageSignedRequest());</code></pre>
+
+
+
+
+<h3>4. Switch content based on the signed_request</h3>
+
+
+<p>The signed_request on iframe tabs has a "pages" object, which holds a "liked" variable. If the user viewing your tab has Liked your page, it is set to TRUE. If they have not, it is set to FALSE. So:</p>
+
+<pre><code>function parsePageSignedRequest() {
+    if (isset($_REQUEST['signed_request'])) {
+      $encoded_sig = null;
+      $payload = null;
+      list($encoded_sig, $payload) = explode('.', $_REQUEST['signed_request'], 2);
+      $sig = base64_decode(strtr($encoded_sig, '-_', '+/'));
+      $data = json_decode(base64_decode(strtr($payload, '-_', '+/'), true));
+      return $data;
+    }
+    return false;
+  }
+  if($signed_request = parsePageSignedRequest()) {
+    if($signed_request->page->liked) {
+      echo "This content is for Fans only!";
+    } else {
+      echo "Please click on the Like button to view this tab!";
+    }
+  }</code></pre>
+
+
+
+
+<h3>You now have a reveal tab with fans-only content!</h3>
+
+
+<p>This new method is actually better than the old method in a couple of ways:</p>
+
+<h1>You no longer need to do devious "position: absolute" CSS hacks to get your fan and non-fan content to look nice! With &lt;fb:visible-to-connection>, the content for BOTH was printed out, the non-fan content was just "hidden", which was a nightmare to style.</h1>
+
+<h1>The page doesn't blow up when viewed as an Admin</h1>
+
+<h1>Your content for fans-only is REALLY for <em>fans-only</em> - clever folks can no longer "View Source" to see the hidden content.</h1>
+
+<p>Good luck, and happy Facebook developing!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Facebook iframe tabs on Pages - No more FBML!]]></title>
+    <link href="http://chilipepperdesign.com/2011/02/14/facebook-iframe-tabs-on-pages-no-more-fbml/"/>
+    <updated>2011-02-14T23:43:00-06:00</updated>
+    <id>http://chilipepperdesign.com/2011/02/14/facebook-iframe-tabs-on-pages-no-more-fbml</id>
+    <content type="html"><![CDATA[<p>The long awaited transition from FBML tabs to iframe tabs has finally happened. As of this writing on Feb 14th 2011 (Valentines Day!) you can choose the "iframe" option for Facebook application tabs. The official word from the "Facebook developer roadmap":http://developers.facebook.com/roadmap/ is that "as of March 11th developers will no longer be able to create FBML tabs":http://developers.facebook.com/blog/post/462#fbml_roadmap (although existing FBML apps will be supported indefinitely - or at least until the end of 2011 I heard in the comments).</p>
+
+<p><img src="http://www.chilipepperdesign.com/images/52.jpg" style="width: 415px" /></p>
+
+<!-- more -->
+
+
+
+
+<h3>The Good</h3>
+
+
+<p>The great thing about iframe tabs is that you are working with a real webpage now. No more fighting with FBJS and finicky FBML tags!</p>
+
+<h1><em>External JS like JQuery and TinyMCE</em> - You can finally do all of the things that Canvas iframe apps have been able to do for a while, like include handy JavaScript libraries!</h1>
+
+<h1><em>onLoad JS events</em> - One of the frustrating things with FBML apps was always that you couldn't start JS on the page load, so things like automatic slideshows were impossible. You should be able to have content auto-play now!</h1>
+
+<h1><em>Facebook JS SDK for XFBML Social Plugins</em> - You can import the JavaScript SDK and still have Request popups, Like buttons, make Open Graph API requests... the whole 9 yards.</h1>
+
+<h3>The Bad</h3>
+
+
+<p>One of the interesting things is that the ubiquitous "Static FBML":http://www.facebook.com/apps/application.php?id=4949752878 app is going away too, apparently. This application has a been a great shortcut for many developers and page owners, allowing them to just install the app and paste in HTML and FBML code without creating a special custom application. (Hopefully more people will use the "custom facebook tab creation":http://www.splashlabsocial.com service I built, "SplashLab Social":http://www.splashlabsocial.com ;)</p>
+
+<p>This will be a pain for many users. It's a big leap to have to create a custom application and host the code on your own server! I will be curious to see if Facebook creates a new app that does some of the same things?</p>
+
+<h3>The Ugly</h3>
+
+
+<p>Naturally, like any new (and many old) Facebook features iframe tabs have bugs still. My preliminary tests turned up the following problems:</p>
+
+<h1><s><em>Tabs not visible to logged-out users</em> - If a user is not logged in to Facebook they cannot see your tab. Official bug is here: "http://bugs.developers.facebook.net/show_bug.cgi?id=15166":http://bugs.developers.facebook.net/show_bug.cgi?id=15166</s> <br />This has been fixed now!</h1>
+
+<h1><s><em>SSL/https problems</em> - My iframe tabs do not load properly when using Facebook over https. Here is the bug on Facebook if you want to track progress: "http://bugs.developers.facebook.net/show_bug.cgi?id=15200":http://bugs.developers.facebook.net/show_bug.cgi?id=15200</s><br /> This has been fixed now</h1>
+
+<h1><s><em>Renaming tab titles not working</em></s> - Changing the "Tab name" does not appear to working at this time. The official bug is here: "http://bugs.developers.facebook.net/show_bug.cgi?id=15155":http://bugs.developers.facebook.net/show_bug.cgi?id=15155 UPDATE: Apparently this is a feature, not a bug! Users can now set custom Tab Titles for each tab!</h1>
+
+<h1><s><em>Max height scrollbar issues</em></s> (my mistake) - The iframe tabs appear to have a maximum height of 800px, which gives a scrollbar for taller content. The problem with this is that when the scroll bar appears the tab is width is now smaller than 520px, essentially. This means if you have images which are 520px wide, you get a horizontal scroll bar at the bottom. It's kind of ugly right now, hopefully Facebook will enable and auto-resize like regular Canvas apps have.</h1>
+
+<p><em>Iframe tab height:</em> This is not a bug, but I DO think it's a little weird and not very obvious. You can fix this with the FB.Canvas.setAutoResize() method, as "detailed in the bug I filed":http://bugs.developers.facebook.net/show_bug.cgi?id=15210.</p>
+
+<h3>Beyond Static FBML</h3>
+
+
+<p>In summary, the new iframe tabs are more powerful and flexible than the FBML ones, and open up a lot of great new possibilities. There are a LOT of FBML apps out there, however, so it will be interesting to watch the transition.</p>
+
+<p>Please, post any comments or corrections you have below! Are there any other new features of iframe tabs you are excited for? Anything you will miss from FBML?</p>
+
+<p><em><strong>Update: <a href="http://www.splashlabsocial.com">SplashLab Social</a> has been released!</strong> <a href="http://www.splashlabsocial.com">If you are looking for an easier way to set up iframe tabs, look no further!</a> My new service makes it easy - check it out!</em></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[A Facebook Content Management System (CMS) for Facebook Page Templates]]></title>
+    <link href="http://chilipepperdesign.com/2010/03/24/a-facebook-content-management-system-cms-for-facebook-page-templates/"/>
+    <updated>2010-03-24T00:58:00-05:00</updated>
+    <id>http://chilipepperdesign.com/2010/03/24/a-facebook-content-management-system-cms-for-facebook-page-templates</id>
+    <content type="html"><![CDATA[<p style="font-size:1.2em;">
+<a href="http://www.splashlabsocial.com"><img src="http://www.chilipepperdesign.com/images/53t.jpg" style="float: left; margin-right: 10px;" /></a>
+<strong>Update: The project is now live and ready for signups! Head over to <a href="http://splashlabsocial.com">SplashLab Social</a> to learn more and get started. It's the easiest way to create and manage content on your Facebook Page's iframe tabs!</strong></p>
+
+
+
+
+<p>There's something big in the works here at Chili Pepper Design I wanted to share on my blog quickly:</p>
+
+
+
+
+<!-- more -->
+
+
+
+
+<h3><strike>Coming Soon:</strike> A Facebook Fan Page CMS!</h3>
+
+
+
+
+<p>Right now the social networking site <a href="http://www.facebook.com">Facebook</a> is quickly becoming the king of the web. Some sources claim that Facebook has <a href="http://www.guardian.co.uk/technology/blog/2010/mar/15/facebook-passes-google-share-us">passed Google</a> as the most visited website on the web. For this reason <a href="http://www.facebook.com/advertising/?pages">Fan Pages</a> are becoming an important part of the marketing strategies of small businesses and large corporations alike. Setting up a Fan Page is faster and cheaper than setting up a website, and allows customers to interact with the business/brand (and share it with their friends) in ways that traditional web pages do not.</p>
+
+
+
+
+<p>These Facebook Fan Pages consist of a series of "tabs". In addition to the Wall, and the usual Photos, Videos, Discussion and Reviews tabs, many businesses are adding custom FBML tabs. These provide additional information and a touch of that business' personality and brand. These nicely designed tabs offer special promotions, games, contests, product information, shopping options, blog and twitter feeds, and much more. For some great examples of what can be accomplished with custom FBML tabs check out the <a href="http://facebookshowcase.net">Facebook Showcase</a>.</p>
+
+
+
+
+<p>The one drawback to these otherwise-awesome custom page tabs is that they require a bit of technical savvy to set up. Some require the creation of a custom application, and even making a simple tab with the <a href="http://www.facebook.com/apps/application.php?id=4949752878">Static FBML</a> application requires FBML coding. There are many tutorials that cover how to set up custom tabs (like my own <a href="http://www.chilipepperdesign.com/2009/10/11/how-to-make-custom-facebook-fan-page-tabs-with-fbml-part-2">FBML tab tutorial here</a>), but frankly it's easier to set up an <em>entire new website</em> with services like <a href="http://wordpress.com">WordPress.com</a> and <a href="http://www.blogger.com/">Blogger</a> than to set up a custom FBML tab.</p>
+
+
+
+
+<p>And even once a tab is set up, it is difficult to update it. The FBML code must be edited again, just like when it was first set up. This is one area where websites running Content Management Systems (CMSs) like Drupal and Wordpress are far ahead of custom facebook tabs. Editing a page in Drupal is as easy as composing an email - no coding needed!
+
+<p><em>But what if creating a custom FBML tab was just as simple as setting up blog on Blogger? Just sign up, choose a design template, enter the content, and you're done?</em></p>
+
+<p><em>What if updating a custom FBML tab was as simple as updating a page on a Drupal website? Just log in, change the content, and hit "Update"?</em></p>
+
+<h2>Enter the Facebook CMS</h2>
+
+<p>This is exactly the problem that Chili Pepper Design is working on addressing. With the <strong>Facebook Content Management System</strong> currently in development it will be easy as pie to create and update custom FBML tabs with nice templates on a Fan Page.</p>
+
+<p>Here's how it will work:</p>
+
+<ol>
+<li>Create a Facebook Fan Page</li>
+<li>Go to the Facebook CMS website and create an account</li>
+<li>Choose a template for your tab</li>
+<li>Enter the content for the tab (using an easy WYSIWYG editor like Word)</li>
+<li>Save the new Tab</li>
+<li>Add the Facebook Application to the Fan Page (one click "Add to Page")</li>
+<li>DONE!</li>
+</ol>
+
+<p>Here are some of the many components that the templates will have (in various combinations):</p>
+
+<ul>
+<li>company logo</li>
+<li>multiple tabs/sub navigation</li>
+<li>body content</li>
+<li>custom images</li>
+<li>flash videos</li>
+<li>sidebar blocks</li>
+<li>Twitter feeds</li>
+<li>blog feeds</li>
+<li>comment area</li>
+<li>share buttons</li>
+<li>invite fiends</li>
+</ul>
+
+<p>The templates will be professionally designed, optimized for SEO, and have the ability to customize some of the colors.</p>
+
+<h3>For Facebook Designers</h3>
+
+<p>Are you a Facebook designer? Would like to provide your clients with an easy way to update the pages you have created for them? In addition to the standard templates, the Facebook CMS will offer a special product for designers to plug the CMS into their designs. The details on this have not been worked out, but it is a service I very much want to offer, along the lines of <a href="http://cushycms.com/">Cushy CMS</a> or <a href="http://surrealcms.com/">Surreal CMS</a>.</p>
+
+<p><strong>Check out <a href="http://www.splashlabsocial.com">SplashLab Social</a> to learn more!</strong></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[A simple FBJS image carousel (or slideshow) for Facebook page tabs]]></title>
+    <link href="http://chilipepperdesign.com/2009/11/01/a-simple-fbjs-image-carousel-or-slideshow-for-facebook-page-tabs/"/>
+    <updated>2009-11-01T23:19:00-06:00</updated>
+    <id>http://chilipepperdesign.com/2009/11/01/a-simple-fbjs-image-carousel-or-slideshow-for-facebook-page-tabs</id>
+    <content type="html"><![CDATA[<p><span style="font-size: .9em; font-style: italic;">(<em>Plug</em>: Looking for an easy, fast, affordable way to create custom Facebook landing tabs? Check out my new product: "http://splashtab.com":http://www.splashtab.com Thanks!)</span></p>
+
+<p>This little code snippet is really basic, and not actually that good or clever. You can make a much nicer slideshow or carousel if you put a little time into it. But I just want to demonstrate how many of the nice JavaScript effects we are used to on the "Web 2.0" are also possible on a Facebook Page via Facebook's "Animate library":http://wiki.developers.facebook.com/index.php/FBJS/Animation. It's not as robust as "jQuery":http://jquery.com/ or "Scriptaculous":http://script.aculo.us/, but since you can't import those libraries to a Tab the Animate library will have to do. :)</p>
+
+<p>The final result looks like this:
+<img alt="Screenshot of the Chili Pepper Design Facebook image carousel" src="http://www.chilipepperdesign.com/images/46.jpg" /></p>
+
+<p><strong>And you can view a <a href="http://www.facebook.com/pages/Bozeman-MT/Chili-Pepper-Design/59282833907?v=app_154473727596">live demo on the CPD Facebook Page</a></strong></p>
+
+<p>For instructions on how to create your own custom Facebook tabs, "read my tutorial here":http://www.chilipepperdesign.com/2009/10/11/how-to-make-custom-facebook-fan-page-tabs-with-fbml-part-2.</p>
+
+<p>To begin, here is the simple FBJS &lt;script> code:</p>
+
+<!-- more -->
+
+
+
+
+<pre><code>==
+var numslides = 7;
+var slidesvisible = 3;
+var currentslide = 0;
+var slidewidth = 147;==
+function goright() {
+    if (currentslide <= (numslides-slidesvisible-1)) {
+        Animation(document.getElementById('slideshow_inner')).by('right', slidewidth+'px').by('left', '-'+slidewidth+'px').go();
+        if (currentslide ====== (numslides-slidesvisible-1)) {
+            Animation(document.getElementById('right_button')).to('opacity', '0.3').go();
+            Animation(document.getElementById('left_button')).to('opacity', '1').go();
+        } 
+        if (currentslide < (numslides-slidesvisible-1)) { Animation(document.getElementById('left_button')).to('opacity', '1').go(); }
+        currentslide++;
+    }
+}
+function goleft() {
+    if (currentslide > 0) {
+        Animation(document.getElementById('slideshow_inner')).by('left', slidewidth+'px').by('right', '-'+slidewidth+'px').go();
+        if (currentslide ====== 1) {
+            Animation(document.getElementById('left_button')).to('opacity', '0.3').go();
+            Animation(document.getElementById('right_button')).to('opacity', '1').go();
+        }
+        if (currentslide > 1) { Animation(document.getElementById('right_button')).to('opacity', '1').go(); }
+        currentslide--;
+    }
+}
+</code></pre>
+
+
+<p>Here is the CSS:</p>
+
+<pre><code>
+    #slideshow_wrapper { width:530px; clear: both; margin-bottom: 20px; }
+    #slideshow { overflow: hidden; width: 435px; float: left; position:relative; margin-right: 5px; }
+    #slideshow_inner { position: relative; width: 1250px; }
+    #slideshow_inner a { opacity:0.7; margin: 0 7px; }
+    #slideshow_inner a:hover { opacity: 1; }
+</code></pre>
+
+
+<p>And finally, here is the markup:</p>
+
+<pre><code>
+<div id="slideshow_wrapper">
+            <img id="left_button" src="http:/yoururl.com/images/left_button.gif" onclick="goleft(); return false;" style="float: left; display: block; width: 41px; cursor: pointer; opacity: 0.3;" />
+            <div id="slideshow">
+                <div id="slideshow_inner">
+                    <a id="slide1" href="http://yoururl.com/link1" title="Oronaut Outdoor Blog"><img src="<?php echo $basepath ?>images/slide1.jpg" /></a> 
+                    <a id="slide2" href="http://yoururl.com/link2" title="Colorado Ski Mountaineering Cup"><img src="<?php echo $basepath ?>images/slide2.jpg" /></a> 
+                    <a id="slide3" href="http://yoururl.com/link3" title="PowderBlog"><img src="<?php echo $basepath ?>images/slide3.jpg" /></a> 
+                    <a id="slide4" href="yoururl.com/link4" title="Highland Meadows HOA"><img src="http:/yoururl.com/images/slide4.jpg" /></a> 
+                    <a id="slide5" href="http://yoururl.com/link5" title="United State Ski Mountaineering Association"><img src="http:/yoururl.com/images/slide5.jpg" /></a> 
+                    <a id="slide6" href="http://yoururl.com/link6" title="Circle S Seeds"><img src="http:/yoururl.com/images/slide6.jpg" /></a> 
+                    <a id="slide7" href="http://yoururl.com/link7" title="Rita Designs"><img src="http:/yoururl.com/images/slide7.jpg" /></a> 
+                </div>
+            </div>
+            <img id="right_button" src="http:/yoururl.com/images/right_button2.gif" onclick="goright(); return false;" style="float: left; display: block; width: 41px; cursor: pointer;" />
+            <p>Click on an image to leave Facebook and visit the Portfolio.</p>
+        </div>
+</code></pre>
+
+
+<p>(One thing to note when scripting FBJS for Tabs: onLoad does not work. All JS must be started with a trigger event of some sort, even if it is as simple as a mouseOver.)</p>
+
+<p>This is just a starting point. My code is not very generalized, the opacity effects have IE issues (as usual), and there are probably other issues besides. But have fun building on this, and create some sexy animated Facebook tabs!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How to make custom Facebook Fan Page tabs with FBML, Part 2]]></title>
+    <link href="http://chilipepperdesign.com/2009/10/11/how-to-make-custom-facebook-fan-page-tabs-with-fbml-part-2/"/>
+    <updated>2009-10-11T22:26:00-05:00</updated>
+    <id>http://chilipepperdesign.com/2009/10/11/how-to-make-custom-facebook-fan-page-tabs-with-fbml-part-2</id>
+    <content type="html"><![CDATA[<p><strong style="font-size: 1.1em;">UPDATE 2-14-2011: "FBML is going away - learn about Facebook iframe tabs on Facebook Pages here":http://www.chilipepperdesign.com/2011/02/14/facebook-iframe-tabs-on-pages-no-more-fbml </strong></p>
+
+<p><strong style="font-size: 1.1em;">UPDATE 3-10-2011: "Easily create and manage custom Facebook Page Tabs with SplashLab Social - Now available!":http://www.splashlabsocial.com </strong></p>
+
+<ul>
+<li>"Read Part 1 Here":http://www.chilipepperdesign.com/2009/10/06/how-to-make-custom-facebook-fan-page-tabs-with-fbml-part-1.</li>
+<li>Check out some "<em>great custom Facebook Pages</em>":http://facebookshowcase.net</li>
+</ul>
+
+
+<h2>Quick and Dirty Custom Facebook Page Tabs and Boxes</h2>
+
+
+<p>The fastest and easiest way to add custom Tabs to a Page is with the "Static FBML application":http://www.facebook.com/apps/application.php?id=4949752878. A nice visual tutorial of this method is posted on "lorrainesiew.wordpress.com":http://lorrainesiew.wordpress.com/2009/07/04/facebook-pages-introduction-to-fbml/. I will also quickly outline the process here:</p>
+
+<!-- more -->
+
+
+<h1>Assuming you have a Facebook Fan Page already, you can get started by visiting the "Static FBML App's Page":http://www.facebook.com/apps/application.php?id=4949752878, and click on "Add to my Page" underneath the logo in the top left.</h1>
+
+<h1>Once you have added the application to your Page, go edit the Settings for that Page and you should see "FBML" listed under your <em>Applications</em>. Click on the "Admin Options" pencil icon to the right, and then click on "Edit".</h1>
+
+<h1>On the next page enter the name you want for your Tab, then enter some simple HTML to test it out. Click on "Save Changes".</h1>
+
+<h1>View your Fan Page. Click on the "+" sign to the right of your Tabs to add the new Tab you just created to the list of visible Tabs. You can drag it around to reorder your Tabs.</h1>
+
+<p>It's hard to beat the Static FBML app in terms of speed and simplicity. The only problem with it is that it really is <em>static</em>. When I tried to add a Comments form with the &lt;fb:comments> tag it threw errors. Other dynamic FBML tags have the same problem. This is fine most of the time since you can do a <em>lot</em> with static images, links and videos. (Web 1.0!) But if you want to have a Comment area or import Twitter or RSS feeds you'll need a dynamic page. A "dynamic tab" requires  it's own special Facebook Application to be created. Next I cover how to make a Facebook app that adds a Tab to your Page.</p>
+
+<h2>Advanced Custom Facebook Page Tabs</h2>
+
+
+<p>To make a "fancy", dynamic Tab like I did for the "Chili Pepper page on Facebook":http://www.facebook.com/pages/Bozeman-MT/Chili-Pepper-Design/59282833907?v=app_154473727596, you need to create a new Facebook Application. A Facebook App is, at it's core, just a web page hosted on a server which is loaded into Facebook via AJAX. You can make very advanced apps that hook into the Facebook Feed and other things, but all I want to talk about here is making a very simple one that just displays HTML on a Tab. The basic process of creating an App are:</p>
+
+<h1>Download a "Facebook API Client Library":http://wiki.developers.facebook.com/index.php/Client_Libraries in the language of your choice</h1>
+
+<h1>Upload the library to your web host</h1>
+
+<h1>Create a basic "index" page to test that your app is working</h1>
+
+<h1>Create a new App using the "Facebook Developer Application":http://www.facebook.com/developers/</h1>
+
+<h1>Change your App's settings on Facebook to point to the URL where you uploaded your App's "index" page</h1>
+
+<h1>Add your new App to your Page as a Tab to test it out</h1>
+
+<p>There are many great tutorials that provide detailed instructions on how to do all this, so rather than reinvent the wheel I'll provide some links to these resources:</p>
+
+<ul>
+<li>"Official Facebook 'Get Started' Page":http://developers.facebook.com/get_started.php</li>
+<li>"Anatomy of a Facebook App":http://wiki.developers.facebook.com/index.php/Anatomy_of_a_Facebook_App</li>
+<li>"Write Your Own Facebook App in 5 Minutes":http://www.labnol.org/internet/tutorial-write-a-facebook-application/10116/</li>
+<li>Good "Facebook PHP Tutorial":http://www.merchantos.com/makebeta/facebook/facebook-php-tutorial/</li>
+<li>NetTuts "Build Your First Facebook App":http://net.tutsplus.com/tutorials/tools-and-tips/build-your-first-facebook-app/</li>
+<li>"Write a FaceBook App in 10 mintures":http://gathadams.com/2007/06/18/how-to-write-a-facebook-application-in-10-minutes/</li>
+<li>"10 Things To Know About Facebook Apps Before Starting":http://padrenel.blogs.experienceproject.com/3459.html</li>
+</ul>
+
+
+<p>All you really need is the official "Get Started":http://developers.facebook.com/get_started.php page, in my opinion. But even with all the tutorials in the world you'll find yourself searching through the "Forums":http://forum.developers.facebook.com/ to figure out errors and problems, since the Documentation is just so-so.</p>
+
+<p>Using the resources above you can create a Facebook App. Here are the steps necessary to create a Tab with yourApp and add it to your Page:</p>
+
+<h1>To create a Tab, create another file (such as <em>tab.php</em>) in your App's "Canvas Callback URL" directory on your host.</h1>
+
+<h1>In your App's settings, under the <em>Canvas</em> section, <em>make sure that your Canvas Callback URL has a trailing slash on it</em>.</h1>
+
+<h1>Make sure that, under the <em>Authentication</em> section, <em>Facebook Pages</em> is checked as "Installable To".</h1>
+
+<h1>Then, still in your Settings page, under the <em>Profile</em> section, fill out the <em>Tab URL</em> field. In this example we would just add <em>tab.php</em>.</h1>
+
+<h1>If you have not done this already, add your App to your Page. This is done by going to your App's "Application Profile" (which is linked off of your App dashboard page at the bottom, after the links to Edit Settings, Feed Template, etc). On the right side the screen on your Application Profile page, under the "Go To Application" button, there is a link to "Add to Page". (If it's not visible, click the "More" arrow).</h1>
+
+<h1>Now visit your <em>Page's</em> Settings page. Under the Applications heading you should see your App listed. Click on the "Edit" Pencil to the right of it, and select "Application Settings". In the little lightbox/popup-window you should see "Tab (+Add+)". Click on "Add" to add the Tab to your page!</h1>
+
+<p>You now have a custom App Tab on your Page! Creating a nice Tab with dynamic content is beyond the scope of this post, but I hope to give some short tutorials in later posts about that. To help you start out making your Tab though, here are two things to remember:</p>
+
+<ul>
+<li>Tabs don't need to including <em>facebook.php</em> and instantiate the $facebook object. Also, they don't need (or want) <em>require_login()</em> to be called. If you call <em>require_login()</em> you may get an error, or users may be forced to "install" your app to view the tab, neither of which make a good first impression. For <em>most</em> applications you need the $facebook object, but not for a simple Tab-centric one like this.</li>
+<li>Remember that a Tab is not a regular Canvas. You cannot us &lt;fb:iframe> and some other FBML tags. Tab pages have to be FBML applications, and a limited subset of FBML at that. On the "Test console":http://developers.facebook.com/tools.php?fbml you can select "Tab" from the <em>Position</em> dropdown to test which tags will work.</li>
+<li>To check if your tab is really being viewed as a Tab, use this code:</li>
+</ul>
+
+
+<pre><code>if( !isset($_POST['fb_sig_in_profile_tab']) ) { echo "tab only code here"; }</code></pre>
+
+
+<ul>
+<li>To check if the user viewing your Tab is logged in to Facebook or not, use this code:</li>
+</ul>
+
+
+<pre><code>if ($_REQUEST['fb_sig_logged_out_facebook']) { echo "code for logged out users"; }</code></pre>
+
+
+<ul>
+<li>To display something only to Fans of your page:</li>
+</ul>
+
+
+<pre><code><fb:visible-to-connection>Welcome, fans!</fb:visible-to-connection></code></pre>
+
+
+
+
+<h3>Bonus Points: Make your custom tab the default "landing" tab</h3>
+
+
+<h1>On your Page's Settings, click the Pencil icon to the right of <em>Wall Settings</em> and select "Edit".</h1>
+
+<h1>Look for the <em>Default Landing Tab for Everyone Else</em> dropdown. Select the landing Tab of your choice from the list! Assuming you have successfully created and added your Tab to your Page, you can choose your custom Tab as the default "landing page".</h1>
+
+<h3>Inspiration</h3>
+
+
+<p>And finally, for some inspiration for your own custom page check out the great things designers are doing with Facebook Pages over on the<strong> "Facebook Showcase":http://facebookshowcase.net </strong></p>
+
+<div style="color: #808080; font-size: .9em;">Facebook is a registered trademark of Facebook, Inc.</div>
+
+]]></content>
+  </entry>
+  
+</feed>

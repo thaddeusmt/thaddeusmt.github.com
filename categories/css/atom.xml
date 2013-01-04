@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: CSS | Chili Pepper Design]]></title>
+  <link href="http://chilipepperdesign.com/categories/css/atom.xml" rel="self"/>
+  <link href="http://chilipepperdesign.com/"/>
+  <updated>2013-01-04T10:01:06-06:00</updated>
+  <id>http://chilipepperdesign.com/</id>
+  <author>
+    <name><![CDATA[Evan Johnson]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Magento 1.5 / EE 1.10 Windows Command Line Batch Update Script mage.bat]]></title>
+    <link href="http://chilipepperdesign.com/2011/05/15/magento-15-ee-110-windows-command-line-batch-update-script-magebat/"/>
+    <updated>2011-05-15T23:00:00-05:00</updated>
+    <id>http://chilipepperdesign.com/2011/05/15/magento-15-ee-110-windows-command-line-batch-update-script-magebat</id>
+    <content type="html"><![CDATA[<p>So, this might be for kind of a narrow audience, but I'm pretty stoked on it so I wanted to share.</p>
+
+<p>In the newest version of the Magento ecommerce platform, Magento 1.5, they have redone their update script. In "Magento Connect 2.0":http://www.yireo.com/blog/1294-magento-15-mage-command-line, what was called "pear" is now "mage".</p>
+
+<p>Old and busted:</p>
+
+<pre><code>./pear mage-setup .</code></pre>
+
+
+<p>New Hotness:</p>
+
+<pre><code>./mage mage-setup .</code></pre>
+
+
+<p>They basically work the same, but the name has changed and - more importantly if you are reading this - there is no windows batch file to run. There is a Bash shell script, so you can download and update Magento and it's many Extensions via the command line in <em>Linux</em>, but not Windows.</p>
+
+<p>So, looking at the mage.sh script and working from the pear.bat script, I made mage.bat. It lets you do command line downloads and updates of Magento in Windows, just like you can on Linux.</p>
+
+<p>Not that anyone is actually hosting Magento on a WAMP setup, but I find it useful to be able to download and install Extensions and modules on my Windows development box.</p>
+
+<!-- more -->
+
+
+<p>"Download mage.bat - Windows Magento Connect 2.0 Update Script":http://www.chilipepperdesign.com/file_download/1/mage.zip</p>
+
+<p>One you have mage.bat installed in the root directory of your Magento install (right next to the mage bash script), you are ready to go! Just run "mage" from the Windows command line.</p>
+
+<pre><code>mage help</code></pre>
+
+
+<p>The Yiero blog has a nice article about "using Magento Connect 2.0 over command line":http://www.yireo.com/blog/1294-magento-15-mage-command-line.</p>
+
+<p>Here is a good article about "upgrading Magento from 1.4 to 1.5":http://blog.nexcess.net/2011/03/11/upgrading-to-magento-1-5-0-1 as well.</p>
+
+<p>TROUBLESHOOTING TIPS:</p>
+
+<ul>
+<li>Make sure you have "PEAR installed":http://pear.php.net/manual/en/installation.getting.php on the machine you are running this on</li>
+<li>Make sure PEAR is in your Windows Path</li>
+<li>Be sure to install mage.bat in your Magento root directory</li>
+<li>In the command line, make sure you are in your Magento root when you run mage.bat</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[CSS Equal Height Columns with Bottom Border and Margin]]></title>
+    <link href="http://chilipepperdesign.com/2009/05/03/css-equal-height-columns-with-bottom-border-and-margin/"/>
+    <updated>2009-05-03T02:53:00-05:00</updated>
+    <id>http://chilipepperdesign.com/2009/05/03/css-equal-height-columns-with-bottom-border-and-margin</id>
+    <content type="html"><![CDATA[<p>The saga of CSS "equal height columns" is long and frustrating. It's a common and attractive design element, but ever since we stopped using HTML Tables for our 2 and 3 column web page layouts in favor of Divs containers, it's been a real challenge to implement them using standards based CSS and markup.</p>
+
+<p>My favorite of the many clever techniques so far devised to solve this problem is the "Position Is Everything One True Layout":http://www.positioniseverything.net/articles/onetruelayout/equalheight method (although don't try to use internal anchor links with this!). Another favorite is the "Equal Height Columns with Cross-Browser CSS &amp; No Hacks":http://matthewjamestaylor.com/blog/equal-height-columns-cross-browser-css-no-hacks, but it actually seems a little more complicated and hack-ish to me (despite the name). And if you really want it to <em>just work</em> to no extra markup and don't mind a little inelegance, the good old "Faux Columns":http://www.alistapart.com/articles/fauxcolumns/ approach with a background image works well too.</p>
+
+<!-- more -->
+
+
+<p>But the P.I.E. One True Layout method is my favorite and that's the one I'm using in this example. To review, the basic gist of the P.I.E. method is that each column has a huge bottom padding to extend it's background color, a huge negative margin to pull the effective bottom of the column back to where it should be, and the container hides the overflow:</p>
+
+<pre><code><style type="text/css">
+.column-1, .column-2 {
+    padding-bottom: 32767px;
+    margin-bottom: -32767px;
+    }
+.column-container {
+    overflow: hidden;
+    }
+</style>
+<div class="column-container">
+    <div class="column-1">
+        ...
+    </div>
+    <div class="column-2">
+        ...
+    </div>
+</div></code></pre>
+
+
+<p>Pretty simple, and easy to implement. But because of the way the overflow is hidden, you can't add a border or margin (without the background color) to the bottom of your columns! You can add padding (with the background color), but no border or margin because it's hidden. So to add a bottom border or margin you have to cheat a little and add an extra div for each column with some special css sauce. But it <em>is</em> possible, and without any actual "hacks", JavaScript or images! Take a look:</p>
+
+<p>"EXAMPLE: CSS Equal Height Columns 5px Bottom Border":http://www.chilipepperdesign.com/examples/eq-height-col-borders/5px-example.html</p>
+
+<p>Taking care of the bottom margin problem is easy: just add some extra margin to the top of the footer. If you care about IE6, be sure to add "zoom: 1;" to the column-container element (the one with <em>overflow</em> set to <em>hidden</em>). It would be nice if this extra margin property was on the column-container like it <em>should</em> be, but it's not awful to have to add it to the footer instead.</p>
+
+<p>But what about the bottom border? The top, left, and right column borders are fine, it's just the bottom one that get's hidden. One extra div and a little absolute positioning is all it takes to give us a bottom border. Here is an outline of the additions we need to make to the original P.I.E. method:</p>
+
+<pre><code><style type="text/css">
+.column-1, .column-2 {
+    padding-bottom: 32767px;
+    margin-bottom: -32767px;
+    width: 200px;
+    border: #fff 1px solid;
+    }
+.column-container {
+    position: relative; /* put this here on the container, NOT the column! */
+    overflow: hidden;
+    zoom: 1;
+    }
+.column-1-bottom {
+    position: absolute; /* relative to the container, NOT the column! */
+    bottom: 0;
+    left: 0; /* if column-1 is floated left */
+    height: 1px;  /* same size as border on column-1 */
+    width: 202px;  /* (width of column-1) + (2 * (border size of column-1))  */
+    background: #fff; /* same color as border on column-1 */
+} 
+.column-2-bottom { 
+    position: absolute; /* relative to the container, NOT the column! */
+    bottom: 0;
+    right: 0; /* if column-2 is floated right */
+    height: 1px;  /* same size as border on column-2 */
+    width: 202px;  /* (width of column-2) + (2 * (border size of column-2))  */
+    background: #fff; /* same color as border on column-2 */
+} 
+</style>
+<div class="column-container">
+    <div class="column-1">
+        ...
+        <div class="column-1-bottom"><!-- ie needs this comment for small div heights --></div>
+    </div>
+    <div class="column-2">
+        ...
+        <div class="column-2-bottom"><!-- ie needs this comment for small div heights --></div>
+    </div>
+</div></code></pre>
+
+
+<p>And there you have it. Equal height columns surrounded by borders without using any images. Here is another example of the technique in action:</p>
+
+<p>"EXAMPLE: CSS Equal Height Columns 1px Bottom Border":http://www.chilipepperdesign.com/examples/eq-height-col-borders/1px-example.html</p>
+
+<p>I've tested this in Firefox 3, IE6, IE7, Chrome 1 and Safari 3. Just make sure the page is being displayed in "standards mode" and not "quirks mode"! With that in mind the only glitch I can't seem to get around is that the bottom div is 1px too high in IE6, making the bottom border look a tiny bit off (the left and right borders go 1px past the "bottom border").</p>
+]]></content>
+  </entry>
+  
+</feed>

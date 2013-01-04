@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: WordPress | Chili Pepper Design]]></title>
+  <link href="http://chilipepperdesign.com/categories/wordpress/atom.xml" rel="self"/>
+  <link href="http://chilipepperdesign.com/"/>
+  <updated>2013-01-04T10:01:06-06:00</updated>
+  <id>http://chilipepperdesign.com/</id>
+  <author>
+    <name><![CDATA[Evan Johnson]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Custom Loops for Custom Taxonomies in WordPress 2.8]]></title>
+    <link href="http://chilipepperdesign.com/2009/09/23/custom-loops-for-custom-taxonomies-in-wordpress-28/"/>
+    <updated>2009-09-23T18:24:00-05:00</updated>
+    <id>http://chilipepperdesign.com/2009/09/23/custom-loops-for-custom-taxonomies-in-wordpress-28</id>
+    <content type="html"><![CDATA[<p>"WordPress 2.8":http://codex.wordpress.org/Version_2.8 saw a big expansion and enhancement of it's "Taxonomy API":http://codex.wordpress.org/WordPress_Taxonomy, allowing for easy creation of custom taxonomies. The default WordPress "category" and "tag" taxonomies are sufficient for most blogs, but the ability to define additional sets of terms ("vocabularies") makes the platform a much more flexible and powerful Content Management System than it was before. Ever since "Justin Tadlock":http://justintadlock.com/archives/2009/05/06/custom-taxonomies-in-wordpress-28 opened my eyes to how to create and use additional taxonomies, it seems like every WordPress project I work on needs one or two extra vocabularies. :)</p>
+
+<p>Working with Drupal as much as I have, I became very accustomed to having multiple taxonomies. It's incredibly useful. A classic example is Movies: each movie has a director, some actors, a year it was made, etc. You <em>could</em> just lump all these together with a bunch of "tags" in WordPress, but grouping "Actor" and "Year" tags together into taxonomies makes site organization and navigation much simpler (and more sensible).</p>
+
+<p>But there are some challenges still to using WordPress taxonomies. While there is some support in the new API word making queries based on specific taxonomies, there is not a lot. You <em>can</em> filter your Loop by a term in a single taxonomy via the <em>query_posts()</em>, as "Justin":http://justintadlock.com/archives/2009/05/06/custom-taxonomies-in-wordpress-28 shows in this example:</p>
+
+<!-- more -->
+
+
+
+
+<pre><code><?php 
+query_posts( array( 'people' => 'will-smith', 'showposts' => 10 ) ); 
+?></code></pre>
+
+
+<p>Only posts tagged with actor "Will Smith" in the "people" taxonomy will be returned. But what if you want to return posts that tagged with multiple tags in your taxonomy? Or if you want to return posts that are tagged in <em>two</em> custom taxonomies? What about posts with a specific custom field <em>and</em> custom taxonomy?</p>
+
+<p>For advanced WordPress post ("Loop") queries it's necessary to roll up your sleeves and write some SQL. There are two ways to do this. The first is to add a filter function to the regular <em>query_posts()</em> method:</p>
+
+<pre><code><?php
+function filter_where($where = '') {
+    $where .= " AND post_date <= '".date('Y-m-d')."'";
+    return $where;
+}
+add_filter('posts_where', 'filter_where');
+query_posts($query_string);
+if (have_posts()) : 
+    while (have_posts()) : 
+        the_post();
+        //display your post data with the usual functions like the_title(), etc
+    endwhile;
+endif;
+?></code></pre>
+
+
+<p>The other way - which is less verbose and easier to comprehend - is to straight-up write your own SQL statement, a la this WordPress Codex "article on Custom Queries":http://codex.wordpress.org/Custom_Queries. Rather than try to teach any SQL, I'll just provide a couple examples.</p>
+
+<p>Here is a query that selects posts which have the MyCustomField custom field value set to "my custom value" <em>and</em> are tagged "mytag" in the custom "mytaxonomy":</p>
+
+<pre><code><?php
+$querystr = "
+    SELECT *
+    FROM $wpdb->posts as wpost
+    INNER JOIN $wpdb->postmeta  ON (wpost.ID = $wpdb->postmeta.post_id)
+    AND $wpdb->postmeta.meta_key = 'MyCustomField' 
+    AND $wpdb->postmeta.meta_value = 'my custom value' 
+    INNER JOIN $wpdb->term_relationships  ON (wpost.ID = $wpdb->term_relationships.object_id)
+    INNER JOIN $wpdb->term_taxonomy ON ($wpdb->term_relationships.term_taxonomy_id = $wpdb->term_taxonomy.term_taxonomy_id)
+    AND $wpdb->term_taxonomy.taxonomy = 'mytaxonomy'
+    AND $wpdb->term_taxonomy.term_id IN (mytag)
+    WHERE wpost.post_status IN ('publish')
+    ORDER BY wpost.post_date ASC
+    ";
+$pageposts = $wpdb->get_results($querystr, OBJECT);
+if ($pageposts): 
+    foreach ($pageposts as $post): 
+        setup_postdata($post);
+        //display your post data with the usual functions like the_title(), etc
+    endforeach;
+endif;
+?></code></pre>
+
+
+<p><em>Notice that the Loop is set up differently! It is a </em>foreach<em> instead of a </em>while<em>, and you must call </em>setup_postdata($post)<em> instead of </em>just the_post()<em> to set up the global post variables.</em></p>
+
+<p>Here is one more example that queries posts with terms in <em>two</em> different custom taxonomies, and with which the MyCustomField custom field value is set to anything <em>but</em> "my custom value" (just to make it interesting):</p>
+
+<pre><code><?php
+$querystr = "
+SELECT *
+    FROM $wpdb->posts as wpost      
+    INNER JOIN $wpdb->term_relationships r1
+    ON (wpost.ID = r1.object_id)
+    INNER JOIN $wpdb->term_taxonomy t1
+    ON (r1.term_taxonomy_id = t1.term_taxonomy_id)
+    AND t1.taxonomy IN ('firstcustomtaxonomy')
+    AND t1.term_id IN ('aTaxonomyTerm')
+    INNER JOIN $wpdb->term_relationships r2
+    ON (wpost.ID = r2.object_id)
+    INNER JOIN $wpdb->term_taxonomy t2
+    ON (r2.term_taxonomy_id = t2.term_taxonomy_id)
+    AND t2.taxonomy IN ('secondcustomtaxonomy')
+    AND t2.term_id IN ('anotherTaxonomyTerm')
+    WHERE wpost.ID NOT IN 
+        (SELECT m.post_id FROM wp_postmeta m 
+         WHERE m.meta_key = 'MyCustomField' 
+         AND m.meta_value = 'my custom value')
+    AND post_status IN ('publish')
+    ORDER BY wpost.post_date ASC
+    ";
+$pageposts = $wpdb->get_results($querystr, OBJECT);
+if ($pageposts): 
+    foreach ($pageposts as $post): 
+        setup_postdata($post);
+        //display your post data with the usual functions like the_title(), etc
+    endforeach;
+endif;
+?></code></pre>
+
+
+<p>Have fun making powerful, custom websites with the new WordPress 2.8 and it's custom taxonomies!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[WordPress: A Loop inside of a Loop with working Comments]]></title>
+    <link href="http://chilipepperdesign.com/2009/08/25/wordpress-a-loop-inside-of-a-loop-with-working-comments/"/>
+    <updated>2009-08-25T15:32:00-05:00</updated>
+    <id>http://chilipepperdesign.com/2009/08/25/wordpress-a-loop-inside-of-a-loop-with-working-comments</id>
+    <content type="html"><![CDATA[<p>I was faced with a problem while creating a WordPress theme the other day. I was grouping posts together using a 2.8 "custom taxonomy":http://justintadlock.com/archives/2009/05/06/custom-taxonomies-in-wordpress-28 (which is my new favorite thing in WordPress), and wanted to display a list of all related posts above the Comments template. Basically wanted a small "Loop":http://codex.wordpress.org/The_Loop inside of the main Loop - a loop within a loop.</p>
+
+<p>I found a few pages online which address this, such as "WordPress Loop Inside of a Loop":http://lohmantrading.com/Fourced/2009/08/wordpress-loop-inside-of-a-loop/ and "Calling a WordPress Loop from inside a WordPress Loop":http://www.tyssendesign.com.au/articles/calling-a-wordpress-loop-from-inside-a-wordpress-loop/. The idea is pretty simple, and these techniques work fine most of the time.</p>
+
+<p>Everything looked fine to me, as well, until I hit "Submit Comment" to test it... <em>and the comment appeared on the wrong post</em>.</p>
+
+<p>The problem is that inner loop sets the global <em>$post</em> object to the last item in that loop. The methods <em>the_post()</em> and <em>setup_postdata($post)</em> set up the global variables which are needed by <em>the_permalink()</em>, <em>the_title()</em>, <em>comments_template()</em>, etc. So if you call any of these usual "Loop" methods again AFTER the inner loop, they are operating on the <em>last post in the inner loop</em> instead of the <em>current post in the main loop</em>.</p>
+
+<p>The trick is to save the <em>$post</em> objects before the inner loop and to reset them again after the inner loop. To do this, change the Loop structure to follow this template:</p>
+
+<br />
+
+
+<p>notextile.. <div><pre><code>$posts = get_posts($wp_query->query);  //get the posts
+foreach($posts as $post) :   // cycle through them in the main loop</p>
+
+<pre><code>$currentPost = $post;  // save the current "main loop" post 
+setup_postdata($post);  // instantiate the global post variables to the main loop post
+the_title();    // use your usual Loop methods 
+the_content();
+
+$innerposts = get_posts('order=asc&amp;mytaxonomy=mycustomerterm);  //get the posts from my custom taxonomy
+foreach($innerposts as $post) :   // cycle through them in the main loop
+    setup_postdata($post);  // instantiate the global post variables to the inner loop post
+    the_title();    // the inner loop post's title
+endforeach;  // end of inner loop
+
+$post = $currentPost;  // reset the post from the main loop
+$id = $post-&gt;ID;  // reset the post from the main loop
+comments_template();  // now, the comments for the post in the main loop
+</code></pre>
+
+<p>endforeach;  // end of main loop</code></pre></div></p>
+
+<p>p.  Another way to do this might be to NOT set the global variables in the inner loop, thus avoiding this issue with the comments entirely. You would just have to directly access the post variables in the inner loop, i.e. <em>$rel_post->post_title</em> instead of <em>the_title()</em>. It would work for simple things, like the title and slug. Check out "custom select query":http://codex.wordpress.org/Displaying_Posts_Using_a_Custom_Select_Query in the WordPress Codex to figure out how to get all of the fields you need from the DB to use this method.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How to Integrate (Import) WordPress Content into Magento Blocks]]></title>
+    <link href="http://chilipepperdesign.com/2009/04/26/how-to-integrate-import-wordpress-content-into-magento-blocks/"/>
+    <updated>2009-04-26T23:10:00-05:00</updated>
+    <id>http://chilipepperdesign.com/2009/04/26/how-to-integrate-import-wordpress-content-into-magento-blocks</id>
+    <content type="html"><![CDATA[<p>This is the technique I use to integrate "WordPress":http://wordpress.org/ content into "Magento":http://www.magentocommerce.com/. This can be useful for bringing in posts related to a product, or having recent blog posts on the Magento home page... whatever you can dream up. No modules, plugins or extensions are needed for this technique - just a good grasp of PHP and the Magento and WordPress theming/templating systems. There are probably many other ways to do this, but this is an easy way that I figured out which works well for my purposes so far.</p>
+
+<p><em>First, the WordPress side of the process.</em></p>
+
+<p>Step #1 is to create a wordpress page which will have the content we want to show in Magento. The trick is that we don't want the WordPress header or footer - we just want the content. To do this we will create a new page template. In your WordPress theme directory, copy a file with a "Loop":http://codex.wordpress.org/The_Loop in it (<em>index.php</em> or <em>page.php</em> are a good ones to start with) and rename the new file something like <em>MagentoContent.php</em>. Edit this new file, and place at the top something like:</p>
+
+<!-- more -->
+
+
+
+
+<pre><code><?php
+/*
+Template Name: MagentoContent
+*/
+?></code></pre>
+
+
+<p>This declares <em>MagentoContent.php</em> as a page template file. Then remove the function calls that pull in the Header, Footer and Sidebar. They usually look like this:</p>
+
+<pre><code><?php get_header(); ?>
+<?php get_sidebar(); ?>
+<?php get_footer(); ?></code></pre>
+
+
+<p>And finally customize the Loop so it retrieves just the content you want. For instance, if you want to get the three most recent posts tagged "Magento" and show the title and excerpt it would look something like this:</p>
+
+<pre><code><?php query_posts('tag=Magento&limit=3'); ?>
+<?php if (have_posts()) : ?>
+    <?php while (have_posts()) : the_post(); ?>
+        <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
+            <?php the_title(); ?>
+        </a>
+        <p><?php the_excerpt(); ?></p>
+        <p><a href="<?php the_permalink(); ?>">Read more...</a></p>
+    <?php endwhile; ?>
+<?php else : ?>
+    <p>Sorry no content found.</p>
+<?php endif; ?></code></pre>
+
+
+<p>Do whatever you want here though. Get to know your way around "query_posts":http://codex.wordpress.org/Template_Tags/query_posts and go to town.</p>
+
+<p>The final step on the WordPress side is to login to the backend and create a Page. Select the <em>MagentoContent</em> page template we created and Publish the page. If you used a custom post query it doesn't matter what it's called or what the content is. (If you actually want to bring the page's content in to Magento, instead of the custom query, then it does of course.) Make a note of the URL of this page. If you have nice "Permalinks":http://codex.wordpress.org/Using_Permalinks set up and called the page <em>Mage_content</em> it will probably be something like this: http://example.com/wordpress/Mage_content. Visit the URL to make sure it's returning the content you want. It will be an ugly page without the Header and Footer, but the content is what's important. When this content is in Magento the Magento stylesheets can be used to style it.</p>
+
+<p><em>Now let's do the Magento side of things.</em></p>
+
+<p>Create a new Magento template file. For this example, we'll create one called <em>wordpress_block.phtml</em> and put it in the <em>/cms</em> folder of our theme directory. The file will just contain a short snippit of PHP code that uses the "CURL":http://us.php.net/curl library to get the contents of the WordPress page we just created (You can do this other ways, but Magneto already requires the CURL library so we know it's at our disposal).</p>
+
+<p>Technically code like this should be in a Controller function in a custom Magento extension, but it's <em>way</em> faster to just throw it in the .phtml file. Here's the code, using the WordPress page URL from our example:</p>
+
+<pre><code><?php 
+$content = '';
+$url = "http://example.com/wordpress/Mage_content";
+$ch = curl_init();
+curl_setopt ($ch, CURLOPT_URL, $url);
+curl_setopt ($ch, CURLOPT_HEADER, 0);
+ob_start();
+curl_exec ($ch);
+curl_close ($ch);
+$content = ob_get_contents();
+ob_end_clean();
+echo $content; 
+?></code></pre>
+
+
+<p>Now that we have our block, just add it to a Layout file in your Magento theme (or to the Custom Layout options on an individual CMS or Category page):</p>
+
+<pre><code><block type="core/template" name="wordpress_block" template="cms/wordpress_block.phtml" /></code></pre>
+
+
+<p>And voila - we are now pulling WordPress content into Magento. It is probably a good idea to install a wordpress caching plugin like "WP Super Cache":http://wordpress.org/extend/plugins/wp-super-cache/ to speed up requests for <em>Mage_content</em>. In fact, the proper way to do this would be to also create a Magento module which caches it... but that's beyond the scope of this little tutorial. This is a barebones proof of concept which can be adapted to specific needs.</p>
+
+<p>Happy coding!</p>
+]]></content>
+  </entry>
+  
+</feed>
