@@ -348,12 +348,18 @@
   
 
 <script type="text/javascript">
+    function stripTrailingSlash(str) {
+        if(str.substr(-1) == '/') {
+            return str.substr(0, str.length - 1);
+        }
+        return str;
+    }
       var disqus_shortname = 'chilipepperdesign';
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://www.chilipepperdesign.com/2011/02/14/facebook-iframe-tabs-on-pages-no-more-fbml/';
-        var disqus_url = 'http://www.chilipepperdesign.com/2011/02/14/facebook-iframe-tabs-on-pages-no-more-fbml/';
+        var disqus_identifier = stripTrailingSlash('http://www.chilipepperdesign.com/2011/02/14/facebook-iframe-tabs-on-pages-no-more-fbml/');
+        var disqus_url = stripTrailingSlash('http://www.chilipepperdesign.com/2011/02/14/facebook-iframe-tabs-on-pages-no-more-fbml/');
         var disqus_script = 'embed.js';
       
     (function () {

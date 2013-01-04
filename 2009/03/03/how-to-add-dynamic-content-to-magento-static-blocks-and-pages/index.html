@@ -337,12 +337,18 @@
   
 
 <script type="text/javascript">
+    function stripTrailingSlash(str) {
+        if(str.substr(-1) == '/') {
+            return str.substr(0, str.length - 1);
+        }
+        return str;
+    }
       var disqus_shortname = 'chilipepperdesign';
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://www.chilipepperdesign.com/2009/03/03/how-to-add-dynamic-content-to-magento-static-blocks-and-pages/';
-        var disqus_url = 'http://www.chilipepperdesign.com/2009/03/03/how-to-add-dynamic-content-to-magento-static-blocks-and-pages/';
+        var disqus_identifier = stripTrailingSlash('http://www.chilipepperdesign.com/2009/03/03/how-to-add-dynamic-content-to-magento-static-blocks-and-pages/');
+        var disqus_url = stripTrailingSlash('http://www.chilipepperdesign.com/2009/03/03/how-to-add-dynamic-content-to-magento-static-blocks-and-pages/');
         var disqus_script = 'embed.js';
       
     (function () {

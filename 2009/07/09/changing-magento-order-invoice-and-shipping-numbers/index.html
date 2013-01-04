@@ -357,12 +357,18 @@ There has been one report that this DB hack does not work with Magento 1.4, and 
   
 
 <script type="text/javascript">
+    function stripTrailingSlash(str) {
+        if(str.substr(-1) == '/') {
+            return str.substr(0, str.length - 1);
+        }
+        return str;
+    }
       var disqus_shortname = 'chilipepperdesign';
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://www.chilipepperdesign.com/2009/07/09/changing-magento-order-invoice-and-shipping-numbers/';
-        var disqus_url = 'http://www.chilipepperdesign.com/2009/07/09/changing-magento-order-invoice-and-shipping-numbers/';
+        var disqus_identifier = stripTrailingSlash('http://www.chilipepperdesign.com/2009/07/09/changing-magento-order-invoice-and-shipping-numbers/');
+        var disqus_url = stripTrailingSlash('http://www.chilipepperdesign.com/2009/07/09/changing-magento-order-invoice-and-shipping-numbers/');
         var disqus_script = 'embed.js';
       
     (function () {

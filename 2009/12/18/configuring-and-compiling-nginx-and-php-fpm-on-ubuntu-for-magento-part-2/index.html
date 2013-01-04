@@ -383,12 +383,18 @@ apc.include_once_override = 1
   
 
 <script type="text/javascript">
+    function stripTrailingSlash(str) {
+        if(str.substr(-1) == '/') {
+            return str.substr(0, str.length - 1);
+        }
+        return str;
+    }
       var disqus_shortname = 'chilipepperdesign';
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://www.chilipepperdesign.com/2009/12/18/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-2/';
-        var disqus_url = 'http://www.chilipepperdesign.com/2009/12/18/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-2/';
+        var disqus_identifier = stripTrailingSlash('http://www.chilipepperdesign.com/2009/12/18/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-2/');
+        var disqus_url = stripTrailingSlash('http://www.chilipepperdesign.com/2009/12/18/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-2/');
         var disqus_script = 'embed.js';
       
     (function () {

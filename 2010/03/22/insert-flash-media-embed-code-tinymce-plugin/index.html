@@ -346,12 +346,18 @@ Here is the official guide to creating a plugin for TinyMCE 3: <a href="http://w
   
 
 <script type="text/javascript">
+    function stripTrailingSlash(str) {
+        if(str.substr(-1) == '/') {
+            return str.substr(0, str.length - 1);
+        }
+        return str;
+    }
       var disqus_shortname = 'chilipepperdesign';
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://www.chilipepperdesign.com/2010/03/22/insert-flash-media-embed-code-tinymce-plugin/';
-        var disqus_url = 'http://www.chilipepperdesign.com/2010/03/22/insert-flash-media-embed-code-tinymce-plugin/';
+        var disqus_identifier = stripTrailingSlash('http://www.chilipepperdesign.com/2010/03/22/insert-flash-media-embed-code-tinymce-plugin/');
+        var disqus_url = stripTrailingSlash('http://www.chilipepperdesign.com/2010/03/22/insert-flash-media-embed-code-tinymce-plugin/');
         var disqus_script = 'embed.js';
       
     (function () {

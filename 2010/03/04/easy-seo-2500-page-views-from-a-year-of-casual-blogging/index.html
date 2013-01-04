@@ -337,12 +337,18 @@
   
 
 <script type="text/javascript">
+    function stripTrailingSlash(str) {
+        if(str.substr(-1) == '/') {
+            return str.substr(0, str.length - 1);
+        }
+        return str;
+    }
       var disqus_shortname = 'chilipepperdesign';
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://www.chilipepperdesign.com/2010/03/04/easy-seo-2500-page-views-from-a-year-of-casual-blogging/';
-        var disqus_url = 'http://www.chilipepperdesign.com/2010/03/04/easy-seo-2500-page-views-from-a-year-of-casual-blogging/';
+        var disqus_identifier = stripTrailingSlash('http://www.chilipepperdesign.com/2010/03/04/easy-seo-2500-page-views-from-a-year-of-casual-blogging/');
+        var disqus_url = stripTrailingSlash('http://www.chilipepperdesign.com/2010/03/04/easy-seo-2500-page-views-from-a-year-of-casual-blogging/');
         var disqus_script = 'embed.js';
       
     (function () {
