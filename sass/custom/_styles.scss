@@ -114,3 +114,17 @@ body > nav ul.subscription {
 pre {
   padding-bottom: .5em;
 }
+
+article aside {
+  font-size: .9em;
+  margin: -.5em 1em 1em;
+  background: #fff;
+  padding: .5em 1em;
+  @include border-radius(.5em);
+}
+article aside p {
+  margin-bottom: .9em;
+}
+article aside.protip {
+  background: #eee;
+}
