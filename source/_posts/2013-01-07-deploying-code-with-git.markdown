@@ -8,9 +8,9 @@ keywords: git, deploy, version control, git hooks, post-receive
 description: A couple of ways to deploy code via Git to a remote server.
 ---
 
-This past year I finally committed to using Git. One of the benefits I was looking forward to was using it's distributed architecture for easy-peasy remote code deployment to multiple remote environments. It has indeed been a wonderful change which has made my life much easier, so I thought I would write up a quick blog post about it.
+This past year I finally committed (heh) to using Git. One of the reasons was using it's distributed architecture for easy-peasy remote code deployment to multiple remote environments. It has been a wonderful change which has made my life much easier, so I thought I would write up a  blog post about it.
 
-First let me just say that deploying with any kind of version control system (VCS) is a nice step up from deploying with an old school file transfer (usually over FTP). Here are couple of reasons why deploying with Git is nice:
+First let me just say that deploying with any kind of version control system (VCS) is a nice step up from deploying with an old school file transfer (e.g. FTP). Here are couple of reasons why deploying with Git is nice:
 
  1. Fast, differential file transfer (only updates modified files)
  2. Easy to rollback to previous code

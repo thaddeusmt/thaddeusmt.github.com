@@ -18,7 +18,7 @@ My first attempt at releasing and maintaining a bit of open source code. It's a 
 
 ## [SmallPotatoes.co](http://smallpotatoes.co)
 
-Small Potatoes is a small project to help local gardeners sell excess produce to their neighbors. It was a product of [Startup Weekend Omaha 2012](http://www.siliconprairienews.com/2012/09/watch-the-eight-pitches-of-startup-weekend-omaha-video), and we are still maintaining it.
+Small Potatoes is a project to help local gardeners sell excess produce to their neighbors. It was a product of [Startup Weekend Omaha 2012](http://www.siliconprairienews.com/2012/09/watch-the-eight-pitches-of-startup-weekend-omaha-video), and we are still maintaining it.
 
 ## [Craniak.com](http://craniak.com)
 
