@@ -3,7 +3,7 @@ layout: post
 date: 2009-08-25 15:32
 title: "WordPress: A Loop inside of a Loop with working Comments"
 comments: true
-categories: [Web-Development, WordPress]
+categories: [WordPress]
 keywords: [wordpress,the loop,loop in a loop,loop inside of a loop,loop hack,list posts in post,wordpress php,blogs,blog customization,wordpress themes]
 # permalink: wordpress-a-loop-inside-of-a-loop-with-working-comments
 ---

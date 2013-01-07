@@ -3,7 +3,7 @@ layout: post
 date: 2010-03-22 01:32
 title: "Learning Drupal Module Dev: Dependent AHAH/AJAX Forms"
 comments: true
-categories: [Web-Development, Drupal]
+categories: [Drupal]
 keywords: [AHAH,AJAX,Drupal,Forms API,AHAH forms,ajax fields,dependent fields,AJAX forms]
 # permalink: learning-drupal-module-dev-dependent-ahahajax-forms
 ---

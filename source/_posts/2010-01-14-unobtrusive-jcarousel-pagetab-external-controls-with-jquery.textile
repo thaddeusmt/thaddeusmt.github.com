@@ -3,7 +3,7 @@ layout: post
 date: 2010-01-14 12:49
 title: "Unobtrusive jCarousel page/tab external controls with jQuery"
 comments: true
-categories: [JavaScript, Web-Development]
+categories: [JavaScript,jQuery]
 keywords: [jquery,jcarousel,unobtrusive,progressive enhancement]
 # permalink: unobtrusive-jcarousel-pagetab-external-controls-with-jquery
 ---

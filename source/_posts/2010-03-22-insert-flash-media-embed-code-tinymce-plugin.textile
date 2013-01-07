@@ -3,7 +3,7 @@ layout: post
 date: 2010-03-22 16:19
 title: "Insert Flash Media Embed Code TinyMCE Plugin"
 comments: true
-categories: [Web-Development, JavaScript]
+categories: [JavaScript]
 keywords: [tinymce,media embed,embed code,youtube embed,video embed,insert video,embed object,tincymce plugin,flash embed plugin,google maps]
 # permalink: insert-flash-media-embed-code-tinymce-plugin
 ---

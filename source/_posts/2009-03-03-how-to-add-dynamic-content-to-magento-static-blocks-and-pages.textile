@@ -3,7 +3,7 @@ layout: post
 date: 2009-03-03 23:06
 title: "How to Add Dynamic Content to Magento Static Blocks and Pages"
 comments: true
-categories: [Magento, Web-Development]
+categories: [Magento]
 keywords: [magento,e-commerce,content management system,Zend Framework,store]
 # permalink: how-to-add-dynamic-content-to-magento-static-blocks-and-pages
 ---

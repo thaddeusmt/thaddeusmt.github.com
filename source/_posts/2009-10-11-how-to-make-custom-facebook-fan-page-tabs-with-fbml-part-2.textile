@@ -3,7 +3,7 @@ layout: post
 date: 2009-10-11 22:26
 title: "How to make custom Facebook Fan Page tabs with FBML, Part 2"
 comments: true
-categories: [Facebook, Web-Development]
+categories: [Facebook]
 keywords: [facebook,facebook app,applications,fan page,custom tab,tabbed profile,fan page tab,fbml,static fmlb]
 # permalink: how-to-make-custom-facebook-fan-page-tabs-with-fbml-part-2
 ---
