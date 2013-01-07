@@ -3,7 +3,7 @@ layout: post
 date: 2009-08-13 01:48
 title: "Magento - Six Months In"
 comments: true
-categories: [Magento]
+categories: [Magento, Meta]
 keywords: [ecommerce,e-commerce,magento,experience,rating,warnings,problems,issues]
 # permalink: magento-six-months-in
 ---
