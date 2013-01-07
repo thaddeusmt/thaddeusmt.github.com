@@ -3,7 +3,7 @@ layout: post
 title: "Beginner jQuery Plugins"
 date: 2013-01-09 16:16
 comments: true
-categories: [JavaScript,Web-Development]
+categories: [JavaScript, jQuery]
 keywords: [jquery,js,plugins,javascript,jquery plugins]
 published: false
 ---

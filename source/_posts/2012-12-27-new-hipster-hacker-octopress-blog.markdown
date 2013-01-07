@@ -11,14 +11,14 @@ I have not blogged very much the last couple of years, but I am feeling the itch
 
 It was 4 years ago that I first decided to blog about web design and development on my freelance web design site, Chili Pepper Design. I read some high praise for the [Textpattern](http://textpattern.com/) PHP content management system, and installed it. It worked well, but had started to feel dated of late. And besides, none of the cool kids on Hacker News ever talk about Textpattern any more. ;)
 
-So what are the cool kids talking about now? What is the new hotness? Ruby-powered static Jekyll blogs of course! Hosted on GitHub Pages! Thus you see before you the new Chili Pepper Design blog, powered by [Octopress](http://octopress.org) (a fork of [Jekyll](http://jekyllrb.com/)).
+So what are the cool kids talking about now? What is the new hotness? Ruby-powered static Jekyll blogs of course! Thus you see before you the new Chili Pepper Design blog, powered by [Octopress](http://octopress.org) (a fork of [Jekyll](http://jekyllrb.com/)).
 
 Actually it's not that new or hot anymore, but here are a few reasons why I chose to go the Jekyll/Octopress route regardless:
 
 * __[Short learning curve](http://octopress.org/docs/setup/)__ - I was also comtemplating setting up a custom Rails blog, but have not found the time
 * __[Static](http://jekyllbootstrap.com/lessons/jekyll-introduction.html#how_jekyll_generates_the_final_static_files)__ - fast loading! and no database to set up, migrate or maintain
 * __[Ruby](http://www.ruby-lang.org/en/)__ - I am learning Ruby, so this is a good excuse to squint at some code.
-* __[GitHub Pages](http://pages.github.com/) hosting__ - free and (fairly) easy to set up
+* __Easy hosting__ - can even be used on [GitHub Pages](http://pages.github.com/) for free
 * __Easy to theme__ - not only is the default Octopress rad, but you have total freedom when styling Jekyll blogs
 * __[Hipster plugins](https://github.com/imathis/octopress/wiki/3rd-party-plugins)__ - easily show off your Coderwall and StackOverflow bling, etc
 
