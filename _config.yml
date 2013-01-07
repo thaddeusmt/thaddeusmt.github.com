@@ -7,6 +7,7 @@ title: Chili Pepper Design
 subtitle: "Web development relleno"
 author: Evan Johnson
 simple_search: http://google.com/search
+keywords: web development, web design, programming, code
 description: "Thoughts, tutorials and code snippets about web development using PHP, jQuery, mySql, MongoDB, and friends."
 
 # Default date format is "ordinal" (resulting in "July 22nd 2007")
