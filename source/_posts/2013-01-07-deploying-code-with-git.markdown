@@ -23,6 +23,7 @@ There are a couple drawbacks to using pure Git to deploy however:
  3. No built in database deployment and migration tools
 
 For many purposes however it is a nice, simple solution that falls between basic file transfers and more advanced deployment options (mentioned at the end).
+<!-- more -->
 
 ##Strategy #1: SSH in to server, then `git pull`
 
