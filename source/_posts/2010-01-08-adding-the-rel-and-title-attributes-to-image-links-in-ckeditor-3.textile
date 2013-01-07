@@ -4,7 +4,7 @@ date: 2010-01-08 14:37
 title: "Adding the \"rel\" and \"title\" attributes to image links in CKEditor 3"
 comments: true
 categories: [JavaScript]
-keywords: [ckeditor,javascript,lightbox,rel,title,attribute,wysiwyg]
+keywords: ckeditor,javascript,lightbox,rel,title,attribute,wysiwyg
 # permalink: adding-the-rel-and-title-attributes-to-image-links-in-ckeditor-3
 ---
 

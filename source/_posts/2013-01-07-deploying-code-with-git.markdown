@@ -4,7 +4,7 @@ title: "Deploying code with Git"
 date: 2013-01-07 11:35
 comments: true
 categories: [Git, Sysadmin]
-keywords: [git, deploy, version control, git hooks, post-receive]
+keywords: git, deploy, version control, git hooks, post-receive
 description: A couple of ways to deploy code via Git to a remote server.
 ---
 

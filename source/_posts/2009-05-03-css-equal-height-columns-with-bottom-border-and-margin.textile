@@ -4,7 +4,7 @@ date: 2009-05-03 02:53
 title: "CSS Equal Height Columns with Bottom Border and Margin"
 comments: true
 categories: [CSS]
-keywords: [css columns,equal height columns,pure css,table-less equal height,no javascript,equal height background,equal height column border,equal height column margin,equal height column padding,overflow hidden,large margin,large padding]
+keywords: css columns,equal height columns,pure css,table-less equal height,no javascript,equal height background,equal height column border,equal height column margin,equal height column padding,overflow hidden,large margin,large padding
 # permalink: css-equal-height-columns-with-bottom-border-and-margin
 ---
 

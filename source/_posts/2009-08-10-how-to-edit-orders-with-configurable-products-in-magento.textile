@@ -4,7 +4,7 @@ date: 2009-08-10 19:35
 title: "How to edit orders with Configurable Products in Magento"
 comments: true
 categories: [Magento]
-keywords: [magento,ecommerce,configurable products,edit order,simple products,edit configurable product,order management,tutorial,how to]
+keywords: magento,ecommerce,configurable products,edit order,simple products,edit configurable product,order management,tutorial,how to
 # permalink: how-to-edit-orders-with-configurable-products-in-magento
 ---
 

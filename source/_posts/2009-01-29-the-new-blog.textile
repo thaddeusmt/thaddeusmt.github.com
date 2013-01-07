@@ -4,7 +4,7 @@ date: 2009-01-29 22:23
 title: "The New Blog"
 comments: true
 categories: [Meta]
-keywords: [blogs,Chili Pepper Design]
+keywords: blogs, Chili Pepper Design
 # permalink: the-new-blog
 ---
 

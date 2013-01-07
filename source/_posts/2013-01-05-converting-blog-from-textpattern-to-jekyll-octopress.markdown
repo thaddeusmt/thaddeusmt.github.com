@@ -4,7 +4,7 @@ title: "Converting my blog from Textpattern to Jekyll/Octopress"
 date: 2013-01-05 12:16
 comments: true
 categories: [Meta]
-keywords: [octopress,jekyll,textpattern,github pages,blog,blogging]
+keywords: octopress,jekyll,textpattern,github pages,blog,blogging
 published: false
 ---
 

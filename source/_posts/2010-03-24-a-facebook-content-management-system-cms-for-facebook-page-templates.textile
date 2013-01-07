@@ -4,7 +4,7 @@ date: 2010-03-24 00:58
 title: "A Facebook Content Management System (CMS) for Facebook Page Templates"
 comments: true
 categories: [Facebook]
-keywords: [facebook,facebook cms,facebook templates,facebook page templates,facebook tab templates,facebook content management system,custom tab cms]
+keywords: facebook,facebook cms,facebook templates,facebook page templates,facebook tab templates,facebook content management system,custom tab cms
 # permalink: a-facebook-content-management-system-cms-for-facebook-page-templates
 ---
 

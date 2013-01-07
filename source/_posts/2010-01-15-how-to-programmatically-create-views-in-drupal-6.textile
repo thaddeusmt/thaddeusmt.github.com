@@ -4,7 +4,7 @@ date: 2010-01-15 00:08
 title: "How to programmatically create Views in Drupal 6"
 comments: true
 categories: [Drupal]
-keywords: [drupal,views,views 2,drupal 6,create view,tutorial,how to,guide]
+keywords: drupal,views,views 2,drupal 6,create view,tutorial,how to,guide
 # permalink: how-to-programmatically-create-views-in-drupal-6
 ---
 

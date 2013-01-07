@@ -4,7 +4,7 @@ date: 2009-07-08 23:03
 title: "Magento: How to protect pages so only logged in users can view them"
 comments: true
 categories: [Magento]
-keywords: [magento,ecommerce,private pages,logged in,authorized,wholesale,only logged in,protection,security]
+keywords: magento,ecommerce,private pages,logged in,authorized,wholesale,only logged in,protection,security
 # permalink: magento-how-to-protect-pages-so-only-logged-in-users-can-view-them
 ---
 

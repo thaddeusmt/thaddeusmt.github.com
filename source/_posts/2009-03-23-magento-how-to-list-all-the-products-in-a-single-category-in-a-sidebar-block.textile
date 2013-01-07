@@ -4,7 +4,7 @@ date: 2009-03-23 19:57
 title: "Magento: How to list all the products in a single category in a sidebar block"
 comments: true
 categories: [Magento]
-keywords: [magento,zend framework,e-commerce,store,custom module,product list,static block,sidebar]
+keywords: magento,zend framework,e-commerce,store,custom module,product list,static block,sidebar
 # permalink: magento-how-to-list-all-the-products-in-a-single-category-in-a-sidebar-block
 ---
 

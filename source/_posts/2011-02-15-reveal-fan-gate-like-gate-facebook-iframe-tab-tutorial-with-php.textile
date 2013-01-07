@@ -4,7 +4,7 @@ date: 2011-02-15 00:37
 title: " Reveal / Fan-Gate / Like-Gate Facebook iframe tab tutorial (with PHP)"
 comments: true
 categories: [Facebook]
-keywords: []
+keywords: facebook,iframe app,iframe tab,fbml,facebook app,facebook apps,fan gate,reveal tab,like gate
 # permalink: reveal-fan-gate-like-gate-facebook-iframe-tab-tutorial-with-php
 ---
 

@@ -4,7 +4,7 @@ date: 2009-04-26 23:10
 title: "How to Integrate (Import) WordPress Content into Magento Blocks"
 comments: true
 categories: [Magento, WordPress]
-keywords: [magento,maintainable websites,blogs,content management system,e-commerce,static block,wordpress,integration,wordpress integration,import content,ecommerce]
+keywords: magento,maintainable websites,blogs,content management system,e-commerce,static block,wordpress,integration,wordpress integration,import content,ecommerce
 # permalink: how-to-integrate-import-wordpress-content-into-magento-blocks
 ---
 

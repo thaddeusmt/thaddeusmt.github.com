@@ -4,7 +4,7 @@ date: 2010-01-03 20:47
 title: "Configuring and compiling Nginx and PHP-FPM on Ubuntu for Magento, Part 3"
 comments: true
 categories: [Linux, Magento, Nginx, Sysadmin]
-keywords: [apc,magneto,nginx,mod_rewrite,htaccess]
+keywords: apc,magneto,nginx,mod_rewrite,htaccess
 # permalink: configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-3
 ---
 

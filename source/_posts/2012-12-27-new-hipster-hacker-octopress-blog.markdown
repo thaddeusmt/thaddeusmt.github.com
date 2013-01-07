@@ -4,7 +4,7 @@ title: "New Hipster Hacker Blog"
 date: 2012-12-27 17:16
 comments: true
 categories: [Ruby, Meta]
-keywords: [blogging,ruby,octopress,jekyll,textpattern]
+keywords: blogging,ruby,octopress,jekyll,textpattern
 ---
 
 I have not blogged very much the last couple of years, but I am feeling the itch again. I love how blogging makes you more closely research and examine your thoughts and your code. I have missed it. I also miss the positive feedback and ego-reinforcement of blog comments and Google Analytics stats. So for 2013 I am trying to get back on the horse.

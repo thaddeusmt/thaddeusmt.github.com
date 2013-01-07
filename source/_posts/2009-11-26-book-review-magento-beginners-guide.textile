@@ -4,7 +4,7 @@ date: 2009-11-26 21:05
 title: "Book Review: Magento Beginner\'s Guide"
 comments: true
 categories: [Magento, Reviews]
-keywords: [magento,beginner's guide,book reviews]
+keywords: magento,beginner's guide,book reviews
 # permalink: book-review-magento-beginners-guide
 ---
 

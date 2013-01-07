@@ -4,7 +4,7 @@ title: "Beginner jQuery Plugins"
 date: 2013-01-09 16:16
 comments: true
 categories: [JavaScript, jQuery]
-keywords: [jquery,js,plugins,javascript,jquery plugins]
+keywords: jquery,js,plugins,javascript,jquery plugins
 published: false
 ---
 

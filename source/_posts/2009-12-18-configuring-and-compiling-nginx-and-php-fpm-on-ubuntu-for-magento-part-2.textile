@@ -4,7 +4,7 @@ date: 2009-12-18 19:17
 title: "Configuring and compiling Nginx and PHP-FPM on Ubuntu for Magento, Part 2"
 comments: true
 categories: [Linux, Magento, Nginx, Sysadmin]
-keywords: [php-fpm,nginx,magento]
+keywords: php-fpm,nginx,magento
 # permalink: configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-2
 ---
 
