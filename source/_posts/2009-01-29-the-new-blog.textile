@@ -5,7 +5,7 @@ title: "The New Blog"
 comments: true
 categories: [Meta]
 keywords: blogs, Chili Pepper Design
-# permalink: the-new-blog
+disqus_identifier: /2009/01/29/the-new-blog
 ---
 
 So I've decided to start blogging about web design and development. Look out!

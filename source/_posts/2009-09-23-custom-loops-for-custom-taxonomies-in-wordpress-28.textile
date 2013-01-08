@@ -5,7 +5,7 @@ title: "Custom Loops for Custom Taxonomies in WordPress 2.8"
 comments: true
 categories: [WordPress]
 keywords: wordpress,the loop,custom taxonomy,taxonomies,custom loop,custom query,sql,where clause,join,custom field,wordpress 2.8
-# permalink: custom-loops-for-custom-taxonomies-in-wordpress-28
+disqus_identifier: /2009/09/23/custom-loops-for-custom-taxonomies-in-wordpress-28
 ---
 
 "WordPress 2.8":http://codex.wordpress.org/Version_2.8 saw a big expansion and enhancement of it's "Taxonomy API":http://codex.wordpress.org/WordPress_Taxonomy, allowing for easy creation of custom taxonomies. The default WordPress "category" and "tag" taxonomies are sufficient for most blogs, but the ability to define additional sets of terms ("vocabularies") makes the platform a much more flexible and powerful Content Management System than it was before. Ever since "Justin Tadlock":http://justintadlock.com/archives/2009/05/06/custom-taxonomies-in-wordpress-28 opened my eyes to how to create and use additional taxonomies, it seems like every WordPress project I work on needs one or two extra vocabularies. :)

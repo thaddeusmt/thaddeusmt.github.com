@@ -5,7 +5,7 @@ title: "How to make custom Facebook Fan Page tabs with FBML, Part 1"
 comments: true
 categories: [Facebook]
 keywords: facebook,facebook app,applications,fan page,custom tab,tabbed profile,fan page tab,fbml,static fmlb,html,profile box
-# permalink: how-to-make-custom-facebook-fan-page-tabs-with-fbml-part-1
+disqus_identifier: /2009/10/06/how-to-make-custom-facebook-fan-page-tabs-with-fbml-part-1
 ---
 
 <strong style="font-size: 1.1em;">UPDATE 2-14-2011: "FBML is going away - learn about Facebook iframe tabs on Facebook Pages here":http://www.chilipepperdesign.com/2011/02/14/facebook-iframe-tabs-on-pages-no-more-fbml </strong>

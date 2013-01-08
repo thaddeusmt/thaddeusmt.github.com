@@ -5,7 +5,7 @@ title: "Configuring and compiling Nginx and PHP-FPM on Ubuntu for Magento, Part 
 comments: true
 categories: [Linux, Magento, Nginx, Sysadmin]
 keywords: php-fpm,nginx,magento
-# permalink: configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-2
+disqus_identifier: /2009/12/18/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-2
 ---
 
 <p>This is the second part of my little guide to get Magento running on Nginx with PHP-FPM and APC. Check out <a href="http://www.chilipepperdesign.com/2009/12/14/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-1">Part 1 here</a> and <a href="http://www.chilipepperdesign.com/2010/01/03/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-3">Part 3 here</a>.</p>

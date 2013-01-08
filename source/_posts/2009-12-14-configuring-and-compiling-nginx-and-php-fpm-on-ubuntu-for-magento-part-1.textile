@@ -5,7 +5,7 @@ title: "Configuring and compiling Nginx and PHP-FPM on Ubuntu for Magento, Part 
 comments: true
 categories: [Linux, Magento, Nginx, Sysadmin]
 keywords: php-fpm,magento,nginx,performance,speed,fastcgi,apc,ecommerce,apache
-# permalink: configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-1
+disqus_identifier: /2009/12/14/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-1
 ---
 
 <p>So, Magento is a huge piece of modular and extensible PHP code. Each request takes a lot of CPU cycles and memory to kick out a Magento page. This means it is <em>slow</em>. The performance of Magento is a frequent complaint, and rightfully so: consumers won't wait around all day for an ecommerce store to load. They will bail out and try another store if a page doesn't load in just a few seconds. A default Magento 1.3 install on budget web hosting can have page load times of up to 10secs, which is unacceptable. </p>

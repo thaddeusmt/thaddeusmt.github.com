@@ -5,7 +5,7 @@ title: "Magento - Six Months In"
 comments: true
 categories: [Magento, Meta]
 keywords: ecommerce,e-commerce,magento,experience,rating,warnings,problems,issues
-# permalink: magento-six-months-in
+disqus_identifier: /2009/08/13/magento-six-months-in
 ---
 
 Yes, this basically amounts to a good old fashioned rant post. But there is a purpose behind it: to educate those thinking of using Magento to power their ecommerce store about potential concerns and pitfalls. Read on, and enjoy.

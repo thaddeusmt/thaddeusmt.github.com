@@ -5,7 +5,7 @@ title: "htaccess 301 Redirects from one URL query string to another"
 comments: true
 categories: [SEO, Apache]
 keywords: htaccess,301 redirect,mod_rewrite,moved permanently,query string,dynamic page,dynamic url
-# permalink: htaccess-query-string-301s
+disqus_identifier: /2009/02/01/htaccess-query-string-301s
 ---
 
 The other day I was trying to set up a "301 Moved Permanently":http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.3 redirect that took one dynamic url and redirected to _another_ dynamic url.

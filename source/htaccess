@@ -2,5 +2,5 @@ ErrorDocument 404 /404.html
 
 <IfModule mod_rewrite.c>
 	RewriteEngine On
-  RewriteRule ^rss/.*$ http://www.chilipepperdesign.com/atom.xml? [R=301,L]
+  RewriteRule ^rss.*$ http://www.chilipepperdesign.com/atom.xml? [R=301,L]
 </IfModule>

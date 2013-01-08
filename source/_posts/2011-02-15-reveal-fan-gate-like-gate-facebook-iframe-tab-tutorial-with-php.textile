@@ -5,7 +5,7 @@ title: " Reveal / Fan-Gate / Like-Gate Facebook iframe tab tutorial (with PHP)"
 comments: true
 categories: [Facebook]
 keywords: facebook,iframe app,iframe tab,fbml,facebook app,facebook apps,fan gate,reveal tab,like gate
-# permalink: reveal-fan-gate-like-gate-facebook-iframe-tab-tutorial-with-php
+disqus_identifier: /2011/02/15/reveal-fan-gate-like-gate-facebook-iframe-tab-tutorial-with-php
 ---
 
 <em><strong>Update: <a href="http://www.splashlabsocial.com">SplashLab Social</a> has been released!</strong> <a href="http://www.splashlabsocial.com">If you are looking for an easier way to set up Fans-only/Reveal tabs, look no further!</a> My new service makes it easy to create custom fan-gate tabs, check it out!</em>

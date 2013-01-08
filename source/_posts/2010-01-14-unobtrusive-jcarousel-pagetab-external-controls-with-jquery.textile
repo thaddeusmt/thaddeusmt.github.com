@@ -5,7 +5,7 @@ title: "Unobtrusive jCarousel page/tab external controls with jQuery"
 comments: true
 categories: [JavaScript,jQuery]
 keywords: jquery,jcarousel,unobtrusive,progressive enhancement
-# permalink: unobtrusive-jcarousel-pagetab-external-controls-with-jquery
+disqus_identifier: /2010/01/14/unobtrusive-jcarousel-pagetab-external-controls-with-jquery
 ---
 
 I am using the very slick and enjoyable "jCarousel":http://sorgalla.com/projects/jcarousel/ plugin for "jQuery":http://jquery.com/ on a new project to display featured content on the front page. I wanted to use the "external controls":http://sorgalla.com/projects/jcarousel/examples/static_controls.html to allow users to easily jump between slides. However, all the examples I found required hard-coding the control links into the document HTML. This is not best practice because when JavaScript is disabled and the carousel degrades to a simple list you have a bunch of control links that do nothing sitting there on the page. Better to create the controls in JS and append them to the DOM with jQuery! This way the controls only appear when the jCarousel script is loaded and ready to use them.

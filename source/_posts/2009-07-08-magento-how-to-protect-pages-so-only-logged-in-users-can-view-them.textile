@@ -5,7 +5,7 @@ title: "Magento: How to protect pages so only logged in users can view them"
 comments: true
 categories: [Magento]
 keywords: magento,ecommerce,private pages,logged in,authorized,wholesale,only logged in,protection,security
-# permalink: magento-how-to-protect-pages-so-only-logged-in-users-can-view-them
+disqus_identifier: /2009/07/08/magento-how-to-protect-pages-so-only-logged-in-users-can-view-them
 ---
 
 There are times when you want all or part of your Magento online store to only be visible to customers who are logged in to the website. Once such example is a "wholesale" website where only approved wholesale users should be able to view products and checkout. This functionality is not built in to Magento, but it's a just a few simple little code hacks away.

@@ -5,7 +5,7 @@ title: "How to edit orders with Configurable Products in Magento"
 comments: true
 categories: [Magento]
 keywords: magento,ecommerce,configurable products,edit order,simple products,edit configurable product,order management,tutorial,how to
-# permalink: how-to-edit-orders-with-configurable-products-in-magento
+disqus_identifier: /2009/08/10/how-to-edit-orders-with-configurable-products-in-magento
 ---
 
 Up to and including the current release of Magento (1.3.2.3), an admin cannot properly edit an order containing configurable products. Magento warns you of this when you click the "Edit" button, and if you proceed the order appears on the edit screen containing only the Simple and Virtual products. _Configurable, Bundled, and other products are removed from the order._

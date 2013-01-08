@@ -5,7 +5,7 @@ title: "Easy SEO: +2,500% page views from a year of casual blogging?"
 comments: true
 categories: [SEO, Meta]
 keywords: seo,search engine optimization,blogging,website traffic,increase traffic,page views
-# permalink: easy-seo-2500-page-views-from-a-year-of-casual-blogging
+disqus_identifier: /2010/03/04/easy-seo-2500-page-views-from-a-year-of-casual-blogging
 ---
 
 You know, you always read in SEO articles about how important blogging is for increasing traffic. It's one of the top suggestions around for improving a website's search engine juice. Well, I am here to testify that it truly is a great SEO tool.

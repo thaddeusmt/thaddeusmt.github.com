@@ -5,7 +5,7 @@ title: "Book Review: Magento Beginner\'s Guide"
 comments: true
 categories: [Magento, Reviews]
 keywords: magento,beginner's guide,book reviews
-# permalink: book-review-magento-beginners-guide
+disqus_identifier: /2009/11/26/book-review-magento-beginners-guide
 ---
 
 I was recently approached by "&#91;packt&#93; Publishing":http://www.packtpub.com/ to do a review of their book, the *Magento Beginner's Guide* (by "William Rice":http://williamriceinc.blogspot.com/). I've been working with Magento a lot over the past year and blog about it here from time to time, so they figured I would be good to review it. After setting up, modifying and maintaining four Magento stores in the last 10 months I don't feel I have much to learn from a "beginners guide", but I figured I could use my experience of what a beginner actually needs to know and see if this book covers all the bases.

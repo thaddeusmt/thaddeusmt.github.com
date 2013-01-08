@@ -5,7 +5,7 @@ title: "Configuring and compiling Nginx and PHP-FPM on Ubuntu for Magento, Part 
 comments: true
 categories: [Linux, Magento, Nginx, Sysadmin]
 keywords: apc,magneto,nginx,mod_rewrite,htaccess
-# permalink: configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-3
+disqus_identifier: /2010/01/03/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-3
 ---
 
 <p>This is the 3rd and final article about installing Magento on Nginx with PHP-FPM. <a href="http://www.chilipepperdesign.com/2009/12/14/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-1">Part 1 is here</a>, and <a href="http://www.chilipepperdesign.com/2009/12/18/configuring-and-compiling-nginx-and-php-fpm-on-ubuntu-for-magento-part-2">Part 2 is here</a>.</p>
@@ -23,6 +23,8 @@ keywords: apc,magneto,nginx,mod_rewrite,htaccess
 </ul>
 
 <p>First we'll set up the directory structure like we are used to with Apache:</p>
+
+<!-- more -->
 
 <pre><code>
 # mkdir /usr/local/nginx/sites-available
