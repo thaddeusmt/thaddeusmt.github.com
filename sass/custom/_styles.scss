@@ -5,7 +5,7 @@ html {
   background: $page-bg url(images/background.jpg);
 }
 body {
-	> header {
+  > header {
     @media only screen and (min-width: 992px) {
       float: left;
       height: 100px;
@@ -13,21 +13,21 @@ body {
       padding-top: 1em;
       padding-bottom: 1em;
     }
-	}
-	> nav {
-		@media only screen and (min-width: 992px) {
-		  padding-left: $pad-wide;
-		  padding-right: $pad-wide;
+  }
+  > nav {
+    @media only screen and (min-width: 992px) {
+      padding-left: $pad-wide;
+      padding-right: $pad-wide;
       float: right;
       padding-top: 1em;
       padding-left: 1em;
       border: 0;
-		}
-	}
+    }
+  }
   #main {
     @media only screen and (min-width: 992px) {
-		  clear: both;
-		}
+      clear: both;
+    }
   }
 }
 @media only screen and (min-width: 992px) {
@@ -61,7 +61,7 @@ body > header h2 {
 body > nav {
   background: transparent;
   @media only screen and (max-width: 992px) {
-    border: 0 none; 
+    border: 0 none;
   }
 }
 #main, #content, #content .blog-index {
@@ -78,6 +78,15 @@ aside.sidebar {
   float: left;
   margin-right: .6em;
   width: 82px;
+}
+
+aside.sidebar .twitter-link, aside.sidebar .googleplus-link {
+  margin-right: 10px;
+}
+aside.sidebar .twitter-link img, aside.sidebar .googleplus-link img {
+  width:16px;
+  height:16px;
+  border: 0 none;
 }
 #stackoverflow-badge {
   display: block;

@@ -9,6 +9,7 @@ author: Evan Johnson
 simple_search: http://google.com/search
 keywords: web development, web design, programming, code, hacking
 description: "Tutorials, how-tos, musings, and code snippets about web development and technology. Using PHP, jQuery, mySql, MongoDB and more."
+cover: /square-logo.jpg
 
 # Default date format is "ordinal" (resulting in "July 22nd 2007")
 # You can customize the format as defined in
@@ -86,7 +87,7 @@ coderwall_user: thaddeusmt
 
 # Google Plus Profile
 # Hidden: No visible button, just add author information to search results
-# googleplus_user:
+googleplus_user: 115669497324630841356
 # googleplus_hidden: false
 
 # Pinboard
