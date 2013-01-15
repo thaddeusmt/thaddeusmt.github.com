@@ -2,6 +2,7 @@
 layout: post
 title: "Deploying code with Git"
 date: 2013-01-07 11:35
+updated: 2013-01-15 11:35
 comments: true
 categories: [Git, Sysadmin]
 keywords: git, deploy, version control, git hooks, post-receive
@@ -65,6 +66,8 @@ This file will run after the repo has received (_post_-receive, see?) new code f
 <aside>
 ### Strategy #2.b (slight tweak):
 
+#### UPDATE:
+
 I found [another](http://someguyjeremy.com/blog/quick-and-dirty-git-deployment) [version](http://caiustheory.com/automatically-deploying-website-from-remote-git-repository) of this technique, which does things a little differently. It sets the work tree (your webroot) in the config file, instead of setting it in the hook script. And instead of using a bare repo, it sets the `denycurrentbranch = ignore` option, which basically overrides errors normally caused by pushing to a non-bare repo. I'm not positive why this is better, I'd love to hear if anyone knows!
 
 So for this technique, after setting up your bare repo you just adjust the Git config like so:
@@ -76,6 +79,24 @@ So for this technique, after setting up your bare repo you just adjust the Git c
 Then your post-receive hook looks just like this (since the worktree is already set):
 
     git checkout -f
+</aside>
+
+<aside>
+### Strategy #2.c-g (more options):
+
+I found a very in-depth article by Sitaram Chamart which outlines [6 different ways to deploy using a Git `post-receive` hook](http://sitaramc.github.com/the-list-and-irc/deploy.html), which is worth checking out. It covers the main `checkout` technique I'm showing here, plus a few others. For instance one method uses fetch:
+
+    cd /path/to/webroot/of/website
+    unset GIT_DIR
+    git fetch origin
+    git reset --hard origin/master
+
+And a few methods use the [Git Archive dump](http://www.kernel.org/pub/software/scm/git/docs/git-archive.html) feature, for instance:
+
+    git archive master | tar -C /path/to/webroot/of/website -xf -
+
+Really, check out [the article](http://sitaramc.github.com/the-list-and-irc/deploy.html), it's great.
+
 </aside>
 
 Regardless which of the two techniques you use above, make sure your post-receive hook is executable so it will run properly:
@@ -110,7 +131,7 @@ You may need to to a `which git-receivepack` on your remote host to find the pat
 
 ## Strategy #3: Use other deployment software
 
-Deploying with Git hooks is nice, and it's met my needs so far. But there are more powerful tools availible, like [Capistrano](https://github.com/capistrano/capistrano) and [Fabric](http://docs.fabfile.org). I have not used any of these tools, but it looks like they allow you do the same one-line deployment commands (which also pull from your git repo), as well as providing extra tasks to adjust file permissions, clear cache directories, make database changes, etc. If you have a complex deployment process you want to automate I would suggest looking at one of these.
+Deploying with Git hooks is nice, and it's met my needs so far. But there are more powerful tools available, like [Capistrano](https://github.com/capistrano/capistrano) and [Fabric](http://docs.fabfile.org). I have not used any of these tools, but it looks like they allow you do the same one-line deployment commands (which also pull from your git repo), as well as providing extra tasks to adjust file permissions, clear cache directories, make database changes, etc. If you have a complex deployment process you want to automate I would suggest looking at one of these.
 
 <aside class="protip">
 ### Pro-Tip: Use your Git `post-receive` hook to run extra deployment tasks
