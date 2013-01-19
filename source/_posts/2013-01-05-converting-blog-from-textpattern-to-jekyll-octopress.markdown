@@ -53,3 +53,5 @@ Comments migration
 RSS
 
 http://www.chilipepperdesign.com/rss/?section=blog
+
+/sigh Pygments on Windows issues

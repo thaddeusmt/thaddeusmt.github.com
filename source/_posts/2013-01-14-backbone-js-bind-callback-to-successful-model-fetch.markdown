@@ -1,7 +1,8 @@
 ---
 layout: post
 title: "Backbone.js: Bind Callback to Successful Model Fetch"
-date: 2013-01-14 10:48
+date: 2013-01-15 07:48
+updated: 2013-01-17 15:58
 comments: true
 categories: [JavaScript, jQuery, Backbone.js]
 keywords: javascript,callbacks,asynchronous,backbone,deferred,js
@@ -15,7 +16,7 @@ I am learning the [Backbone.js JavaScript framework](http://backbonejs.org/) rig
 
  var View = Backbone.View.extend({
    initialize: function () {
-     this.model.bind('change', this.render); // binding to change event on the View's model
+     this.model.on('change', this.render); // attempt to bind to model change event
      this.model.fetch(); // fetching the model data from /my/url
    },
    render: function () {
@@ -27,7 +28,11 @@ I am learning the [Backbone.js JavaScript framework](http://backbonejs.org/) rig
  var myView = new View({ model: myModel });
 ```
 
-Well, it turns out I was making a simple mistake about one of JavaScript's trickier points: `this` context in the callback function. A substantial amount of reading later ([this article](http://yehudakatz.com/2011/08/11/understanding-javascript-function-invocation-and-this/) in particular was helpful) I realized I needed to pass in the `this` context as a third parameter to the `bind()` method. There is actually a whole section on `this` in the [Backbone documentation](http://backbonejs.org/#FAQ-this). So below is the working method of binding to a successful Model load.
+NOTE: the `.on()` method was formerly called `.bind()` apparently, so some older online examples use `this.model.bind()`, and this still works, presumably calling the underscore.js `bind()` method?
+
+Well, it turns out I was making a simple mistake about one of JavaScript's trickier points: `this` context in the callback function. A substantial amount of reading later ([this article](http://yehudakatz.com/2011/08/11/understanding-javascript-function-invocation-and-this/) in particular was helpful) I realized I needed to pass in the `this` context as a third parameter to the `on()` method. There is actually a whole section on `this` in the [Backbone documentation](http://backbonejs.org/#FAQ-this).
+
+More research showed me that since Backbone version 0.9.9 a new method was added to make it more foolproof to bind callbacks with the right context: `listenTo()`. This method is on the _object that has the callback_, instead of on the object you are binding to. This way it assumes the correct context and you don't need to worry about binding it correctly. Below is the working method of binding to a successful Model load, with the new `listenTo()` syntax.
 
 <!-- more -->
 
@@ -38,7 +43,10 @@ Well, it turns out I was making a simple mistake about one of JavaScript's trick
 
  var View = Backbone.View.extend({
    initialize: function () {
-     this.model.bind('change', this.render, this); // **** pass in 'this' as the third parameter
+     /** here is the fixed, correct way to use `on()` **/
+     //this.model.on('change', this.render, this); //**** pass in 'this' as the third parameter
+     /** here is the new way to bind using the `listenTO()` convenience method, since Backbone version 0.9.9 **/
+     this.listenTo(this.model,'change', this.render); // new bind technique, to change event on the View's model
      this.model.fetch(); // fetching the model data from /my/url
    },
    render: function () {
@@ -98,13 +106,15 @@ The final method uses [jQuery's Deferred object](http://api.jquery.com/category/
  var myView = new View({ model: myModel });
 ```
 
+These last two methods are particularly useful when you only want to bind to the initial Model load event, and not subsequent `change` events (i.e. `change:attribute_name`) which are fired every time `model.set()` is called. For instance maybe you have some initial view rendering you want to do when the model first loads, and then have separate callbacks to update the view when model attributes change.
+
 **[Here is a JsFiddle of all three Backbone Model fetch() bind methods](http://jsfiddle.net/thaddeusmt/DWzBq/) to play with.**
 
 <iframe style="width: 100%; height: 300px" src="http://jsfiddle.net/thaddeusmt/DWzBq/embedded/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
 ## Waiting for multiple models to load with Deferred
 
-Since I did eventually figure out the Model's `change` event, I can see no reason to use the other two methods in most cases. Except for the case of binding a _single_ callback which needs to wait for _multiple Models_ to load! This is a cool thing that the Deferred object can do with the `when()` method.
+Using jQuery Deferreds in Backbone is great for binding _single_ callbacks that depend on _multiple_ Models loading. It is much cleaner than chaining a series of callbacks, and allows the load events to run in parallel. You can easily do multiple-dependency callbacks with the `when()` method, like so:
 
 ```
 var Model1 = Backbone.Model.extend({ url: '/my/url/id/1' });
