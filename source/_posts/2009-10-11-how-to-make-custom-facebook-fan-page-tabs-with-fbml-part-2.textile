@@ -13,7 +13,6 @@ disqus_identifier: /2009/10/11/how-to-make-custom-facebook-fan-page-tabs-with-fb
 <strong style="font-size: 1.1em;">UPDATE 3-10-2011: "Easily create and manage custom Facebook Page Tabs with SplashLab Social - Now available!":http://www.splashlabsocial.com </strong>
 
 * "Read Part 1 Here":http://www.chilipepperdesign.com/2009/10/06/how-to-make-custom-facebook-fan-page-tabs-with-fbml-part-1.
-* Check out some "*great custom Facebook Pages*":http://facebookshowcase.net
 
 <h2>Quick and Dirty Custom Facebook Page Tabs and Boxes</h2>
 
@@ -82,7 +81,5 @@ You now have a custom App Tab on your Page! Creating a nice Tab with dynamic con
 # Look for the _Default Landing Tab for Everyone Else_ dropdown. Select the landing Tab of your choice from the list! Assuming you have successfully created and added your Tab to your Page, you can choose your custom Tab as the default "landing page".
 
 <h3>Inspiration</h3>
-
-And finally, for some inspiration for your own custom page check out the great things designers are doing with Facebook Pages over on the<strong> "Facebook Showcase":http://facebookshowcase.net </strong>
 
 <div style="color: #808080; font-size: .9em;">Facebook is a registered trademark of Facebook, Inc.</div>

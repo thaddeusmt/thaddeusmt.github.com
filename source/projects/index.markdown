@@ -23,7 +23,3 @@ Small Potatoes is a project to help local gardeners sell excess produce to their
 ## [Craniak.com](http://craniak.com)
 
 Craniak is a courseware gamification platform, to help instructors create compelling online class materials with integrated game mechanics. This project came out of [Startup Weekend Omaha 2011](http://www.siliconprairienews.com/2011/09/startup-weekend-omaha-the-18-teams-with-links-and-day-3-photos), and is currently on hold.
-
-## [FacebookShowcase.net](http://facebookshowcase.net)
-
-I created The Facebook Showcase to illustrate the many creative things being done with Facebook Page tab apps. I have not updated it in a long time, but the site is still up.
