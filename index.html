@@ -9,8 +9,8 @@
   <meta name="author" content="Evan Johnson">
 
   
-  <meta name="description" content="I have not blogged very much the last couple of years, but I am feeling the itch again. I love how blogging makes you more closely research and &hellip;">
-  
+  <meta name="description" content="Tutorials, how-tos, musings, and code snippets about web development and technology. Using PHP, jQuery, mySql, MongoDB and more.">
+  <meta name="keywords" content="web development, web design, programming, code, hacking">
 
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
@@ -26,6 +26,24 @@
   <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <link href="/atom.xml" rel="alternate" title="Chili Pepper Design" type="application/atom+xml">
   <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+  <meta property="og:type" content="website" />
+
+    <meta property="og:url" content="http://chilipepperdesign.com">
+    <meta property="og:title" content="Chili Pepper Design">
+
+
+    
+        <meta property="og:image" content="http://chilipepperdesign.com/square-logo.jpg">
+    
+
+
+    
+        <meta property="og:description" content="Tutorials, how-tos, musings, and code snippets about web development and technology. Using PHP, jQuery, mySql, MongoDB and more.">
+    
+
+
+<meta property="fb:app_id" content="171392359587743" />
+
   
   <script type="text/javascript">
     var _gaq = _gaq || [];
@@ -79,7 +97,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2012/12/27/new-hipster-hacker-octopress-blog">New Hipster Hacker Blog</a></h1>
+      <h1 class="entry-title"><a href="/2013/11/11/versioned-data-model-definitions-with-mongodb/">A Use Case for MongoDb: Versioned Static Data Model Definitions</a></h1>
     
     
       <p class="meta">
@@ -95,9 +113,300 @@
   
 
 
-<time datetime="2012-12-27T17:16:00-06:00" pubdate data-updated="true">Dec 27<span>th</span>, 2012</time>
+<time class="published updated" datetime="2013-11-11T13:53:00-07:00" pubdate data-updated="true">Nov 11<span>th</span>, 2013</time>
         
-         | <a href="http://www.chilipepperdesign.com/2012/12/27/new-hipster-hacker-octopress-blog#disqus_thread">Comments</a>
+         | <a href="http://www.chilipepperdesign.com/2013/11/11/versioned-data-model-definitions-with-mongodb/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>At SplashLab, our CMS application supports custom web forms. Each form has a different set of fields which hold different types of data. Email addresses, multi-select radio buttons, text areas, etc. Some forms only get submitted a couple of times. Some are submitted many thousands of times. The best way to store this data is something we are still working on, but I thought I would share how we are using <a href="http://www.mongodb.org/">MongoDb</a> to solve this problem currently.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2013/11/11/versioned-data-model-definitions-with-mongodb/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/06/27/javascript-unit-testing-with-jamine-phantomjs-karma/">JavaScript Unit Testing With Jasmine, PhantomJs and Karma</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time class="published updated" datetime="2013-06-27T08:53:00-06:00" pubdate data-updated="true">Jun 27<span>th</span>, 2013</time>
+        
+         | <a href="http://www.chilipepperdesign.com/2013/06/27/javascript-unit-testing-with-jamine-phantomjs-karma/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><!-- Notes: alternative to Karma? https://github.com/airportyh/testem -->
+
+
+<p>NOTE: This article was accidentally published before it was completed. It&#8217;s still not complete,
+but it&#8217;s close, so rather than take it down I&#8217;ll leave it up.</p>
+
+<p>I do not practice Test Drive Design (TDD). I do try to fill in unit tests to code if I have time, for regression testing, but that is far from the ideals of TDD. I keep hearing great things about it though, and enjoyed a little crash course put on by the UtahJS user group. Part of a project I am working on at SplashLab is a standalone JS app for collecting web analytics. This seemed like a good time to try out some TDD.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2013/06/27/javascript-unit-testing-with-jamine-phantomjs-karma/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/01/18/facebook-graph-search-facebook-page-optimization/">Facebook Page Optimization for Graph Search</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time class="published updated" datetime="2013-01-18T15:48:00-07:00" pubdate data-updated="true">Jan 18<span>th</span>, 2013</time>
+        
+         | <a href="http://www.chilipepperdesign.com/2013/01/18/facebook-graph-search-facebook-page-optimization/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Facebook is currently working on their new <a href="https://www.facebook.com/about/graphsearch">Graph Search</a> product. It&#8217;s in invite-only Beta right now, but it will be rolled out to all users eventually. Facebook has a crack team of <a href="http://techcrunch.com/2013/01/15/here-is-the-ex-googler-dream-team-that-led-facebooks-new-graph-search-tool/">ex-Google employees</a> working on it, and the demos are impressive.</p>
+
+<p>Currently, Graph Search does not complete directly with Google and is not intended for general &#8220;informational&#8221;, keyword-based web searches. Rather, the idea is to tease interesting data out of social graph connections and relations, such as &#8220;who as likes to mountain bike where I work&#8221;, &#8220;what games do my friends play&#8221; and &#8220;best pizza place near me&#8221;. The Google+ &#8220;Search Plus Your World&#8221; product has a similar goal, enhancing search results with information from Google+, but it doesn&#8217;t support relational queries. The number of brands and restaurants on Facebook actually positions Graph Search more as a competitor to Yelp and Foursquare than Google.</p>
+
+<p>Facebook has not announced a monetization strategy for Graph Search yet (to the <a href="http://beta.fool.com/mariecabural/2013/01/18/facebook-graph-search-fails-impress-threatens-yelp/21787/">disappointment of shareholders</a>), but one obvious route looks to be selling search ads that are targeted by combining &#8220;search intent&#8221; - which is what Google has built it&#8217;s business on - with Facebook&#8217;s valuable social data.</p>
+
+<p>Privacy is an immediate concern with Graph Search, so much so that Facebook tried to allay in their <a href="http://newsroom.fb.com/News/562/Introducing-Graph-Search-Beta">initial announcement</a>. The effectiveness of social search relies of the amount of public data users share, putting it at odds with user&#8217;s privacy needs. It will be interesting to see how this plays out.</p>
+
+<p>It is early days still and speculation about Graph Search is rampant. But it will be a valuable discovery tool for businesses with Facebook Pages and Applications, and because of that Facebook has already released a <a href="https://developers.facebook.com/blog/post/2013/01/16/platform-updates--operation-developer-love/">few</a> <a href="http://www.facebook-studio.com/news/item/introducing-graph-search-help-people-discover-your-business">resources</a> that provide a basic outline of how the search will work, and how businesses can optimize for it.</p>
+
+<p> The goal of this post if for me to synthesize the changes for my own understanding, but I thought I would share it with the world as well. I will hopefully update this page as more information becomes available and my understanding improves.</p>
+
+<p> </div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2013/01/18/facebook-graph-search-facebook-page-optimization/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/01/15/backbone-js-bind-callback-to-successful-model-fetch/">Backbone.js: Bind Callback to Successful Model Fetch</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+<time class="published" datetime="2013-01-15T07:48:00-07:00" pubdate data-updated="true">Jan 15<span>th</span>, 2013</time>
+        
+         | <a href="http://www.chilipepperdesign.com/2013/01/15/backbone-js-bind-callback-to-successful-model-fetch/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I am learning the <a href="http://backbonejs.org/">Backbone.js JavaScript framework</a> right now, and ran into a problem. Backbone <a href="http://backbonejs.org/#Collection">Collections</a> and <a href="http://backbonejs.org/#Model">Models</a> can be set up to asynchronously load data from the server with the <a href="http://backbonejs.org/#Model-fetch"><code>fetch()</code></a> method, which fires off an Ajax <code>sync</code> call. You can bind a callback method to a Collection&#8217;s <a href="http://backbonejs.org/#Collection-reset"><code>reset</code></a> event, which Backbone provides. It was my impression that the <a href="http://backbonejs.org/#Model-change"><code>change</code></a> event on a Model would do the same thing. But when I bound to the Model&#8217;s <code>change</code> event in a View, it did not work as expected. Here is the code that was not working:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> var Model = Backbone.Model.extend({ url: '/my/url' });
+</span><span class='line'>
+</span><span class='line'> var View = Backbone.View.extend({
+</span><span class='line'>   initialize: function () {
+</span><span class='line'>     this.model.on('change', this.render); // attempt to bind to model change event
+</span><span class='line'>     this.model.fetch(); // fetching the model data from /my/url
+</span><span class='line'>   },
+</span><span class='line'>   render: function () {
+</span><span class='line'>     console.log(this.model); // this.model has not been populated!
+</span><span class='line'>   }
+</span><span class='line'> });
+</span><span class='line'>
+</span><span class='line'> var myModel = new Model();
+</span><span class='line'> var myView = new View({ model: myModel });</span></code></pre></td></tr></table></div></figure>
+
+
+<p>NOTE: the <code>.on()</code> method was formerly called <code>.bind()</code> apparently, so some older online examples use <code>this.model.bind()</code>, and this still works, presumably calling the underscore.js <code>bind()</code> method?</p>
+
+<p>Well, it turns out I was making a simple mistake about one of JavaScript&#8217;s trickier points: <code>this</code> context in the callback function. A substantial amount of reading later (<a href="http://yehudakatz.com/2011/08/11/understanding-javascript-function-invocation-and-this/">this article</a> in particular was helpful) I realized I needed to pass in the <code>this</code> context as a third parameter to the <code>on()</code> method. There is actually a whole section on <code>this</code> in the <a href="http://backbonejs.org/#FAQ-this">Backbone documentation</a>.</p>
+
+<p>More research showed me that since Backbone version 0.9.9 a new method was added to make it more foolproof to bind callbacks with the right context: <code>listenTo()</code>. This method is on the <em>object that has the callback</em>, instead of on the object you are binding to. This way it assumes the correct context and you don&#8217;t need to worry about binding it correctly. Below is the working method of binding to a successful Model load, with the new <code>listenTo()</code> syntax.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2013/01/15/backbone-js-bind-callback-to-successful-model-fetch/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/01/07/deploying-code-with-git/">Deploying Code With Git</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+<time class="published" datetime="2013-01-07T11:35:00-07:00" pubdate data-updated="true">Jan 7<span>th</span>, 2013</time>
+        
+         | <a href="http://www.chilipepperdesign.com/2013/01/07/deploying-code-with-git/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>This past year I finally committed (heh) to using Git. One of the reasons was using it&#8217;s distributed architecture for easy-peasy remote code deployment to multiple remote environments. It has been a wonderful change which has made my life much easier, so I thought I would write up a  blog post about it.</p>
+
+<p>First let me just say that deploying with any kind of version control system (VCS) is a nice step up from deploying with an old school file transfer (e.g. FTP). Here are couple of reasons why deploying with Git is nice:</p>
+
+<ol>
+<li>Fast, differential file transfer (only updates modified files)</li>
+<li>Easy to rollback to previous code</li>
+<li>Git &#8220;hook&#8221; scripts can run additional deployment tasks (see last Pro-Tip below)</li>
+</ol>
+
+
+<p>There are a couple drawbacks to using pure Git to deploy however:</p>
+
+<ol>
+<li>Git does <em>not</em> track file permissions, which could cause problems if some files or directories need special permissions</li>
+<li>Git does <em>not</em> track empty directories. If you want it to, you have to use the hacky trick of placing an empty <code>.gitignore</code> in any empty directories you want to deploy</li>
+<li>No built in database deployment and migration tools</li>
+</ol>
+
+
+<p>For many purposes however it is a nice, simple solution that falls between basic file transfers and more advanced deployment options (mentioned at the end).</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2013/01/07/deploying-code-with-git/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/12/27/new-hipster-hacker-octopress-blog/">New Hipster Hacker Blog</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time class="published updated" datetime="2012-12-27T17:16:00-07:00" pubdate data-updated="true">Dec 27<span>th</span>, 2012</time>
+        
+         | <a href="http://www.chilipepperdesign.com/2012/12/27/new-hipster-hacker-octopress-blog/#disqus_thread">Comments</a>
         
       </p>
     
@@ -108,7 +417,7 @@
 
 <p>It was 4 years ago that I first decided to blog about web design and development on my freelance web design site, Chili Pepper Design. I read some high praise for the <a href="http://textpattern.com/">Textpattern</a> PHP content management system, and installed it. It worked well, but had started to feel dated of late. And besides, none of the cool kids on Hacker News ever talk about Textpattern any more. ;)</p>
 
-<p>So what are the cool kids talking about now? What is the new hotness? Ruby-powered static Jekyll blogs of course! Hosted on GitHub Pages! Thus you see before you the new Chili Pepper Design blog, powered by <a href="http://octopress.org">Octopress</a> (a fork of <a href="http://jekyllrb.com/">Jekyll</a>).</p>
+<p>So what are the cool kids talking about now? What is the new hotness? Ruby-powered static Jekyll blogs of course! Thus you see before you the new Chili Pepper Design blog, powered by <a href="http://octopress.org">Octopress</a> (a fork of <a href="http://jekyllrb.com/">Jekyll</a>).</p>
 
 <p>Actually it&#8217;s not that new or hot anymore, but here are a few reasons why I chose to go the Jekyll/Octopress route regardless:</p>
 
@@ -116,7 +425,7 @@
 <li><strong><a href="http://octopress.org/docs/setup/">Short learning curve</a></strong> - I was also comtemplating setting up a custom Rails blog, but have not found the time</li>
 <li><strong><a href="http://jekyllbootstrap.com/lessons/jekyll-introduction.html#how_jekyll_generates_the_final_static_files">Static</a></strong> - fast loading! and no database to set up, migrate or maintain</li>
 <li><strong><a href="http://www.ruby-lang.org/en/">Ruby</a></strong> - I am learning Ruby, so this is a good excuse to squint at some code.</li>
-<li><strong><a href="http://pages.github.com/">GitHub Pages</a> hosting</strong> - free and (fairly) easy to set up</li>
+<li><strong>Easy hosting</strong> - can even be used on <a href="http://pages.github.com/">GitHub Pages</a> for free</li>
 <li><strong>Easy to theme</strong> - not only is the default Octopress rad, but you have total freedom when styling Jekyll blogs</li>
 <li><strong><a href="https://github.com/imathis/octopress/wiki/3rd-party-plugins">Hipster plugins</a></strong> - easily show off your Coderwall and StackOverflow bling, etc</li>
 </ul>
@@ -137,7 +446,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2011/05/15/magento-15-ee-110-windows-command-line-batch-update-script-magebat">Magento 1.5 / EE 1.10 Windows Command Line Batch Update Script mage.bat</a></h1>
+      <h1 class="entry-title"><a href="/2011/05/15/magento-15-ee-110-windows-command-line-batch-update-script-magebat/">Magento 1.5 / EE 1.10 Windows Command Line Batch Update Script mage.bat</a></h1>
     
     
       <p class="meta">
@@ -153,7 +462,7 @@
   
 
 
-<time datetime="2011-05-15T23:00:00-05:00" pubdate data-updated="true">May 15<span>th</span>, 2011</time>
+<time class="published updated" datetime="2011-05-15T23:00:00-06:00" pubdate data-updated="true">May 15<span>th</span>, 2011</time>
         
          | <a href="http://www.chilipepperdesign.com/2011/05/15/magento-15-ee-110-windows-command-line-batch-update-script-magebat#disqus_thread">Comments</a>
         
@@ -175,7 +484,7 @@
   
   
     <footer>
-      <a rel="full-article" href="/2011/05/15/magento-15-ee-110-windows-command-line-batch-update-script-magebat">Read on &rarr;</a>
+      <a rel="full-article" href="/2011/05/15/magento-15-ee-110-windows-command-line-batch-update-script-magebat/">Read on &rarr;</a>
     </footer>
   
 
@@ -187,7 +496,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2011/02/15/reveal-fan-gate-like-gate-facebook-iframe-tab-tutorial-with-php">Reveal / Fan-Gate / Like-Gate Facebook Iframe Tab Tutorial (With PHP)</a></h1>
+      <h1 class="entry-title"><a href="/2011/02/15/reveal-fan-gate-like-gate-facebook-iframe-tab-tutorial-with-php/">Reveal / Fan-Gate / Like-Gate Facebook Iframe Tab Tutorial (With PHP)</a></h1>
     
     
       <p class="meta">
@@ -203,7 +512,7 @@
   
 
 
-<time datetime="2011-02-15T00:37:00-06:00" pubdate data-updated="true">Feb 15<span>th</span>, 2011</time>
+<time class="published updated" datetime="2011-02-15T00:37:00-07:00" pubdate data-updated="true">Feb 15<span>th</span>, 2011</time>
         
          | <a href="http://www.chilipepperdesign.com/2011/02/15/reveal-fan-gate-like-gate-facebook-iframe-tab-tutorial-with-php#disqus_thread">Comments</a>
         
@@ -220,7 +529,7 @@
   
   
     <footer>
-      <a rel="full-article" href="/2011/02/15/reveal-fan-gate-like-gate-facebook-iframe-tab-tutorial-with-php">Read on &rarr;</a>
+      <a rel="full-article" href="/2011/02/15/reveal-fan-gate-like-gate-facebook-iframe-tab-tutorial-with-php/">Read on &rarr;</a>
     </footer>
   
 
@@ -232,7 +541,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2011/02/14/facebook-iframe-tabs-on-pages-no-more-fbml">Facebook Iframe Tabs on Pages - No More FBML!</a></h1>
+      <h1 class="entry-title"><a href="/2011/02/14/facebook-iframe-tabs-on-pages-no-more-fbml/">Facebook Iframe Tabs on Pages - No More FBML!</a></h1>
     
     
       <p class="meta">
@@ -248,7 +557,7 @@
   
 
 
-<time datetime="2011-02-14T23:43:00-06:00" pubdate data-updated="true">Feb 14<span>th</span>, 2011</time>
+<time class="published updated" datetime="2011-02-14T23:43:00-07:00" pubdate data-updated="true">Feb 14<span>th</span>, 2011</time>
         
          | <a href="http://www.chilipepperdesign.com/2011/02/14/facebook-iframe-tabs-on-pages-no-more-fbml#disqus_thread">Comments</a>
         
@@ -263,7 +572,7 @@
   
   
     <footer>
-      <a rel="full-article" href="/2011/02/14/facebook-iframe-tabs-on-pages-no-more-fbml">Read on &rarr;</a>
+      <a rel="full-article" href="/2011/02/14/facebook-iframe-tabs-on-pages-no-more-fbml/">Read on &rarr;</a>
     </footer>
   
 
@@ -275,7 +584,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2010/03/24/a-facebook-content-management-system-cms-for-facebook-page-templates">A Facebook Content Management System (CMS) for Facebook Page Templates</a></h1>
+      <h1 class="entry-title"><a href="/2010/03/24/a-facebook-content-management-system-cms-for-facebook-page-templates/">A Facebook Content Management System (CMS) for Facebook Page Templates</a></h1>
     
     
       <p class="meta">
@@ -291,7 +600,7 @@
   
 
 
-<time datetime="2010-03-24T00:58:00-05:00" pubdate data-updated="true">Mar 24<span>th</span>, 2010</time>
+<time class="published updated" datetime="2010-03-24T00:58:00-06:00" pubdate data-updated="true">Mar 24<span>th</span>, 2010</time>
         
          | <a href="http://www.chilipepperdesign.com/2010/03/24/a-facebook-content-management-system-cms-for-facebook-page-templates#disqus_thread">Comments</a>
         
@@ -308,225 +617,7 @@
   
   
     <footer>
-      <a rel="full-article" href="/2010/03/24/a-facebook-content-management-system-cms-for-facebook-page-templates">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/03/22/insert-flash-media-embed-code-tinymce-plugin">Insert Flash Media Embed Code TinyMCE Plugin</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-03-22T16:19:00-05:00" pubdate data-updated="true">Mar 22<span>nd</span>, 2010</time>
-        
-         | <a href="http://www.chilipepperdesign.com/2010/03/22/insert-flash-media-embed-code-tinymce-plugin#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I&#8217;ve run into a problem providing my clients good, easy-to-use media embed functionality with the existing JavaScript <span class="caps">WYSIWYG</span> editors. The big players, <a href="http://ckeditor.com/">CKEditor</a> (formery FCKEditor) and <a href="http://tinymce.moxiecode.com/">TinyMCE</a> both provide a &#8220;Flash&#8221; button which works okay with YouTube and other large video providers, but what about embedding a Picasa slideshow? None of the <span class="caps">WYSIWYG</span> editors come with plugin to just insert some <span class="caps">HTML</span> code. If you want to embed something like a Picasa slideshow,  customized YouTube player, or Google Map you have open up the source code, find the location you want to insert it, and paste in the code. Fine for some, but difficult and scary for most as it breaks the <span class="caps">WYSIWYG</span> paradigm.</p>
-<p>On one of my latest Drupal websites there are multiple bloggers, none of whom are particularly tech savvy. I set up the <span class="caps">CMS</span> with TinyMCE because I like how they can drag and drop images around (I just wish Drupal had an image embed uploader like WordPress!). After a while they complained that the Insert Flash button in TinyMCE just wasn&#8217;t cutting it. So I set about fixing it. How hard could it be to make a plugin that just inserts some <span class="caps">HTML</span> code where your cursor is? Like it already does for images?</p>
-<p>It turns out it is very easy. I was able to just edit the TinyMCE &#8220;Example&#8221; plug-in, which already did basically exactly what I wanted. So here I provide it to you, Internet. I hope it is useful, and please let me know if it&#8217;s broken (or could work better). Thanks!</p>
-<p></div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2010/03/22/insert-flash-media-embed-code-tinymce-plugin">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/03/22/learning-drupal-module-dev-dependent-ahahajax-forms">Learning Drupal Module Dev: Dependent AHAH/AJAX Forms</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-03-22T01:32:00-05:00" pubdate data-updated="true">Mar 22<span>nd</span>, 2010</time>
-        
-         | <a href="http://www.chilipepperdesign.com/2010/03/22/learning-drupal-module-dev-dependent-ahahajax-forms#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>So, I&#8217;ve been working on a simple module for a Drupal project lately. I wanted to have two administrator settings for the module, the second of which depends on the first. A &#8220;dependent dropdown&#8221;. It would be cool if it was &#8220;AJAXy&#8221; too, I thought. Well, it just so turns out that in Drupal 6 there are built in <a href="http://ajax.phpmagazine.net/2005/11/ahah_asychronous_html_and_http.html"><span class="caps">AHAH</span></a> (Asychronous <span class="caps">HTML</span> and <span class="caps">HTTP</span>) functions in the Forms <span class="caps">API</span> to do just this. Easy! Or is it?</p>
-<p>It also turns out there is a steep learning curve to making &#8220;Ajax forms&#8221; with the Drupal Forms <span class="caps">API</span>. I got it working, but it took a fair amount of effort. So, to help out future Drupal <span class="caps">AHAH</span> developers I am providing my code below, along with a list of links to resources that were a great help in unraveling this problem.</p>
-<p>First, to help provide an &#8220;aerial view&#8221; of what&#8217;s going on here, this is a list of the components involved:</p>
-<p></div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2010/03/22/learning-drupal-module-dev-dependent-ahahajax-forms">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/03/04/easy-seo-2500-page-views-from-a-year-of-casual-blogging">Easy SEO: +2,500% Page Views From a Year of Casual Blogging?</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-03-04T00:35:00-06:00" pubdate data-updated="true">Mar 4<span>th</span>, 2010</time>
-        
-         | <a href="http://www.chilipepperdesign.com/2010/03/04/easy-seo-2500-page-views-from-a-year-of-casual-blogging#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>You know, you always read in <span class="caps">SEO</span> articles about how important blogging is for increasing traffic. It&#8217;s one of the top suggestions around for improving a website&#8217;s search engine juice. Well, I am here to testify that it truly is a great <span class="caps">SEO</span> tool.</p>
-<p>Granted, the title of this post is hyperbolic link-bait. ;) But it&#8217;s true nonetheless!</p>
-<p>I&#8217;ve had this site, <a href="http://www.chilipepperdesign.com">http://chilipepperdesign.com</a>, up for probably five years now but only as a static portfolio site for most of that time. Then, a year ago, I upgraded the site and added a blog to it. In that year <em><strong>my monthly page views have increased 2,500% and the number of monthly visits has gone up 4,400%</strong></em>.</p>
-<p></div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2010/03/04/easy-seo-2500-page-views-from-a-year-of-casual-blogging">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/01/15/how-to-programmatically-create-views-in-drupal-6">How to Programmatically Create Views in Drupal 6</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-01-15T00:08:00-06:00" pubdate data-updated="true">Jan 15<span>th</span>, 2010</time>
-        
-         | <a href="http://www.chilipepperdesign.com/2010/01/15/how-to-programmatically-create-views-in-drupal-6#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>So, this stumped me for a while. I needed my small custom Drupal module to select a bunch of nodes based on a <span class="caps">CCK</span> Date field and the Publish status. It is a pain to query the <span class="caps">CCK</span> tables directly, so every forum post I could find told me to do this via Views. That&#8217;s all well and good, but the instructions for doing this all involved creating a View with the Vuiews UI, <em>then</em> calling it to make my query.</p>
-<p>But I wanted to have some of the View&#8217;s query parameters change dynamically based on my module&#8217;s admin settings. Although you could probably do this with some custom Views Argument <span class="caps">PHP</span> code, I didn&#8217;t want to do it this way. It divorced the code from my module too much somehow. It would mean that after I installed my module I would have to create a View and paste in some custom <span class="caps">PHP</span> code! Yuck.</p>
-<p></div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2010/01/15/how-to-programmatically-create-views-in-drupal-6">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/01/14/unobtrusive-jcarousel-pagetab-external-controls-with-jquery">Unobtrusive jCarousel Page/tab External Controls With jQuery</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-01-14T12:49:00-06:00" pubdate data-updated="true">Jan 14<span>th</span>, 2010</time>
-        
-         | <a href="http://www.chilipepperdesign.com/2010/01/14/unobtrusive-jcarousel-pagetab-external-controls-with-jquery#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I am using the very slick and enjoyable <a href="http://sorgalla.com/projects/jcarousel/">jCarousel</a> plugin for <a href="http://jquery.com/">jQuery</a> on a new project to display featured content on the front page. I wanted to use the <a href="http://sorgalla.com/projects/jcarousel/examples/static_controls.html">external controls</a> to allow users to easily jump between slides. However, all the examples I found required hard-coding the control links into the document <span class="caps">HTML</span>. This is not best practice because when JavaScript is disabled and the carousel degrades to a simple list you have a bunch of control links that do nothing sitting there on the page. Better to create the controls in JS and append them to the <span class="caps">DOM</span> with jQuery! This way the controls only appear when the jCarousel script is loaded and ready to use them.</p>
-<p>To do this I just had to add a little extra code to the <em>initCallback</em> method I was already using to bind the external controls. Here is the JS needed to unobtrusively create a jCarousel with 4 external control links:</p>
-<p></div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2010/01/14/unobtrusive-jcarousel-pagetab-external-controls-with-jquery">Read on &rarr;</a>
+      <a rel="full-article" href="/2010/03/24/a-facebook-content-management-system-cms-for-facebook-page-templates/">Read on &rarr;</a>
     </footer>
   
 
@@ -544,30 +635,31 @@
 <aside class="sidebar">
   
     <section>
-  <h1>About Me</h1>
-  <p><img id="profile-image" src="http://www.gravatar.com/avatar/02bee2f91e0a8c3aefbfa6bfb5304c51" alt="Gravatar of thaddeusmt " title="Gravatar of thaddeusmt" />My name is Evan Johnson. I&#8217;m a software developer from Montana, who spent some time in Nebraska. I&#8217;m the chief software architect at <a href="http://splashlabsocial.com">SplashLab Social</a>, but I am blogging here on my old freelance web design URL for fun. I hope you find something useful here, thanks for visiting! Cheers</p>
+    <h1>About Me</h1>
+    <p><img id="profile-image" src="http://www.gravatar.com/avatar/02bee2f91e0a8c3aefbfa6bfb5304c51" alt="Gravatar of thaddeusmt"  />My name is Evan Johnson. I&#8217;m a software developer from Montana, who spent some time in Nebraska. I&#8217;m the chief software architect at <a href="http://splashlabsocial.com">SplashLab Social</a>, but I am blogging here on my old freelance web design URL for fun. I hope you find something useful here, thanks for visiting! Cheers</p>
+    <p><a class="twitter-link" href="http://twitter.com/thaddeusmt" title="@thaddeusmt on Twitter"><img src="/images/twitter-bird-16x16.png" /></a> <a class="googleplus-link" href="//plus.google.com/115669497324630841356?prsrc=3" rel="author" title="Evan Johnson on Google+"><img src="//ssl.gstatic.com/images/icons/gplus-16.png" alt="Google+" /></a></p>
 </section><section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/2012/12/27/new-hipster-hacker-octopress-blog">New Hipster Hacker Blog</a>
+        <a href="/2013/11/11/versioned-data-model-definitions-with-mongodb/">A use case for MongoDb: Versioned static data model definitions</a>
       </li>
     
       <li class="post">
-        <a href="/2011/05/15/magento-15-ee-110-windows-command-line-batch-update-script-magebat">Magento 1.5 / EE 1.10 Windows Command Line Batch Update Script mage.bat</a>
+        <a href="/2013/06/27/javascript-unit-testing-with-jamine-phantomjs-karma/">JavaScript unit testing with Jasmine, PhantomJs and Karma</a>
       </li>
     
       <li class="post">
-        <a href="/2011/02/15/reveal-fan-gate-like-gate-facebook-iframe-tab-tutorial-with-php"> Reveal / Fan-Gate / Like-Gate Facebook iframe tab tutorial (with PHP)</a>
+        <a href="/2013/01/18/facebook-graph-search-facebook-page-optimization/">Facebook Page Optimization for Graph Search</a>
       </li>
     
       <li class="post">
-        <a href="/2011/02/14/facebook-iframe-tabs-on-pages-no-more-fbml">Facebook iframe tabs on Pages - No more FBML!</a>
+        <a href="/2013/01/15/backbone-js-bind-callback-to-successful-model-fetch/">Backbone.js: Bind Callback to Successful Model Fetch</a>
       </li>
     
       <li class="post">
-        <a href="/2010/03/24/a-facebook-content-management-system-cms-for-facebook-page-templates">A Facebook Content Management System (CMS) for Facebook Page Templates</a>
+        <a href="/2013/01/07/deploying-code-with-git/">Deploying code with Git</a>
       </li>
     
   </ul>
@@ -576,36 +668,36 @@
   <h1>Categories</h1>
   <ul id="categories">
     <li class='category'><a href='/categories/apache/'>Apache (1)</a></li>
+<li class='category'><a href='/categories/backbone-js/'>Backbone.js (1)</a></li>
 <li class='category'><a href='/categories/css/'>CSS (2)</a></li>
+<li class='category'><a href='/categories/databases/'>Databases (1)</a></li>
 <li class='category'><a href='/categories/drupal/'>Drupal (2)</a></li>
-<li class='category'><a href='/categories/facebook/'>Facebook (6)</a></li>
-<li class='category'><a href='/categories/javascript/'>JavaScript (3)</a></li>
+<li class='category'><a href='/categories/facebook/'>Facebook (7)</a></li>
+<li class='category'><a href='/categories/git/'>Git (1)</a></li>
+<li class='category'><a href='/categories/javascript/'>JavaScript (5)</a></li>
 <li class='category'><a href='/categories/linux/'>Linux (3)</a></li>
 <li class='category'><a href='/categories/magento/'>Magento (11)</a></li>
-<li class='category'><a href='/categories/meta/'>Meta (3)</a></li>
+<li class='category'><a href='/categories/meta/'>Meta (5)</a></li>
+<li class='category'><a href='/categories/mongodb/'>MongoDB (1)</a></li>
 <li class='category'><a href='/categories/nginx/'>Nginx (3)</a></li>
 <li class='category'><a href='/categories/reviews/'>Reviews (1)</a></li>
 <li class='category'><a href='/categories/ruby/'>Ruby (1)</a></li>
-<li class='category'><a href='/categories/seo/'>SEO (2)</a></li>
-<li class='category'><a href='/categories/web-development/'>Web-Development (19)</a></li>
+<li class='category'><a href='/categories/seo/'>SEO (3)</a></li>
+<li class='category'><a href='/categories/sysadmin/'>Sysadmin (4)</a></li>
 <li class='category'><a href='/categories/wordpress/'>WordPress (3)</a></li>
+<li class='category'><a href='/categories/jquery/'>jQuery (2)</a></li>
 
   </ul>
 </section>
 <section>
   <h1>Latest Tweets</h1>
-  <ul id="tweets">
-    <li class="loading">Status updating&#8230;</li>
-  </ul>
-  <script type="text/javascript">
-    $.domReady(function(){
-      getTwitterFeed("thaddeusmt", 4, false);
-    });
-  </script>
-  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
-  
+    <p>
+    
     <a href="http://twitter.com/thaddeusmt" class="twitter-follow-button" data-show-count="false">Follow @thaddeusmt</a>
-  
+    
+    <a class="twitter-timeline" href="https://twitter.com/thaddeusmt" data-widget-id="400042347972395008"
+       data-link-color="#750000" height="300" data-chrome="noheader transparent" lang="EN">Tweets by @thaddeusmt</a>
+    </p>
 </section>
 
 <section>
@@ -689,7 +781,7 @@
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - Evan Johnson -
+  Copyright &copy; 2014 - Evan Johnson -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

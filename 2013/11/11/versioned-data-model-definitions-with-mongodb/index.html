@@ -1,0 +1,598 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>A use case for MongoDb: Versioned static data model definitions - Chili Pepper Design</title>
+  <meta name="author" content="Evan Johnson">
+
+  
+  <meta name="description" content="">
+  <meta name="keywords" content="mongodb,databases,data modelling,ORM,object relational mapping,entity attribute value,eav,document database,nosql">
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://chilipepperdesign.com/2013/11/11/versioned-data-model-definitions-with-mongodb/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Chili Pepper Design" type="application/atom+xml">
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+  <meta property="og:type" content="website" />
+
+    <meta property="og:url" content="http://chilipepperdesign.com/2013/11/11/versioned-data-model-definitions-with-mongodb/">
+    <meta property="og:title" content="A use case for MongoDb: Versioned static data model definitions">
+
+
+    
+        <meta property="og:image" content="http://chilipepperdesign.com/square-logo.jpg">
+    
+
+
+    <meta property="og:description" content="">
+
+
+<meta property="fb:app_id" content="171392359587743" />
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-6058373-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Chili Pepper Design</a></h1>
+  
+    <h2>Web development relleno</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:chilipepperdesign.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/projects">Projects</a></li>
+  <li><a href="/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">A Use Case for MongoDb: Versioned Static Data Model Definitions</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time class="published updated" datetime="2013-11-11T13:53:00-07:00" pubdate data-updated="true">Nov 11<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>At SplashLab, our CMS application supports custom web forms. Each form has a different set of fields which hold different types of data. Email addresses, multi-select radio buttons, text areas, etc. Some forms only get submitted a couple of times. Some are submitted many thousands of times. The best way to store this data is something we are still working on, but I thought I would share how we are using <a href="http://www.mongodb.org/">MongoDb</a> to solve this problem currently.</p>
+
+<!-- more -->
+
+
+<h2>Relational Database Solutions</h2>
+
+<p>To store both the form definition and the submitted data in a normal relational database you either need many tables (one for each form), or you need to normalize your data schema, usually in the <a href="http://en.wikipedia.org/wiki/Entity%E2%80%93attribute%E2%80%93value_model">Entity-Attribute-Value</a> (EAV) style. (This is a common problem in ecommerce or other catalog applications, where products have arbitrary numbers and types of attributes.)</p>
+
+<p>Creating many tables is not desirable. Constantly modifying your relational database schemas by adding new tables is a pain, takes a significant amount of extra application code (dynamic table names?), and can be difficult to manage thousands of tables on the RDBMS side. Another issue is that you have to alter existing tables if attributes are added or removed (or create another new table for this version of the form!), which could involve losing column data or adding lots of null values to rows.</p>
+
+<p>EAV normalization is a hassle as well (<a href="http://magento.com/">Magento</a> anyone?). To review, this is where each data type (text, int, double, blob, etc) is stored in it&#8217;s own table. Text values are held in one table, integers in another table, etc, and all rows are keyed by the Attribute and Entity name they belong to. You need an ungodly number of joins to build the final object from the value tables. Inserting new objects requires breaking them apart and saving each value to the correct table. It&#8217;s also hard to view the data, since it&#8217;s spread out in multiple tables, making development and debugging more difficult.</p>
+
+<h2>Document Database Solution</h2>
+
+<p>Enter MongoDb. (Or another document database?) We store form definitions in one collection. Each document consists of the name of the form, and a sub-array of each attribute which includes it&#8217;s name, type, position, validation rules, etc. This form definition can be versioned, so if you update the form you can still decode old submission data. Creating another form (or another version of a form) involves simply inserting another document into the collection.</p>
+
+<h3>Example Form Definition Collection</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{
+</span><span class='line'>  _id : ObjectId("xxxxx123"),  // Mongo Id
+</span><span class='line'>  label : "Form 1",
+</span><span class='line'>  name : "form1",  // unique, immutable id, enforced in app
+</span><span class='line'>  version : 1,
+</span><span class='line'>  fields: {
+</span><span class='line'>    0 : {
+</span><span class='line'>      name : "name",
+</span><span class='line'>      label : "Name",
+</span><span class='line'>      type : "text",
+</span><span class='line'>      length : 128,
+</span><span class='line'>      order : 0
+</span><span class='line'>    },
+</span><span class='line'>    1 : {
+</span><span class='line'>      name : "email",
+</span><span class='line'>      label : "Email",
+</span><span class='line'>      type : "email",
+</span><span class='line'>      length : 256,
+</span><span class='line'>      order : 1
+</span><span class='line'>    }
+</span><span class='line'>  }
+</span><span class='line'>},
+</span><span class='line'>{
+</span><span class='line'>  _id : ObjectId("xxxxx123"),
+</span><span class='line'>  label : "Form 2",
+</span><span class='line'>  name : "form2",
+</span><span class='line'>  version : 1,
+</span><span class='line'>  fields: {
+</span><span class='line'>    0 : {
+</span><span class='line'>      name : "name",
+</span><span class='line'>      label : "Name",
+</span><span class='line'>      type : "text",
+</span><span class='line'>      length : 128,
+</span><span class='line'>      order : 0
+</span><span class='line'>    },
+</span><span class='line'>    1 : {
+</span><span class='line'>      name : "color",
+</span><span class='line'>      label : "Favorite Color",
+</span><span class='line'>      type : "radio",
+</span><span class='line'>      options : {
+</span><span class='line'>        "red" : "Red",
+</span><span class='line'>        "green" : "Green",
+</span><span class='line'>        "blue" : "Blue"
+</span><span class='line'>      },
+</span><span class='line'>      order : 1
+</span><span class='line'>    },
+</span><span class='line'>    2 : {
+</span><span class='line'>      name : "state",
+</span><span class='line'>      label : "State",
+</span><span class='line'>      type : "us_states",
+</span><span class='line'>      order : 2
+</span><span class='line'>    }
+</span><span class='line'>  }
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Then we have a collection that holds all of the form submissions. Each submission is stored in a single document, with a sub-array of all of the data submitted for each field. No matter how different the data is it can all go in to one collection. But unlike a serialized field you can query the data (so long as you also include the form definition ID in the criteria).</p>
+
+<h3>Example Form Submission Collection</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{
+</span><span class='line'>  _id : ObjectId("xxxxx456"),
+</span><span class='line'>  form_name : "form1",
+</span><span class='line'>  form_version : 1,
+</span><span class='line'>  values: {
+</span><span class='line'>    name : "Testy McTesterson",
+</span><span class='line'>    email : "testy@test.com"
+</span><span class='line'>  }
+</span><span class='line'>},
+</span><span class='line'>{
+</span><span class='line'>  _id : ObjectId("yyyyy456"),
+</span><span class='line'>  form_name : "form2",
+</span><span class='line'>  form_version : 1,
+</span><span class='line'>  values: {
+</span><span class='line'>    name : "Tester Testopherson",
+</span><span class='line'>    color : "blue",
+</span><span class='line'>    state : "CA"
+</span><span class='line'>  }
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In theory, record insertion from form submits is simple. Generate the document from the form (including the form_name and form_version), and save it. Done. But if you need to do server-side validation it requires one database read to retrieve the form definition to get the validation rules.</p>
+
+<p>The one piece of data that a form submission is tied to is the form definition, <em>but</em> these definitions should never be deleted or updated, making each form submission is atomic. In the worst case scenario the web form has already been generated when the form is updated to a new version. Then form is submitted. As long as the version number if submitted along with the form data the new submission will be associated with the old form, but should be no other issues. This means we don&#8217;t need transactions, which is something that rules out using MongoDb in other use cases.</p>
+
+<p>Retrieval of form submissions is fairly efficient since only one extra read is required to get the form definition out of the database (for the presentation logic, so this is sort of optional actually&#8230;), then one more database read queries out all submissions that match that form&#8217;s name and version (be sure you have Indexed those fields!).</p>
+
+<h2>Caveats and Drawbacks</h2>
+
+<p>This works well since the form submissions are never going to be updated. They represent the data collected from the a specific form version, and should never have additional data added or removed. If you did need to update the submissions due to a change in the form definition, you would have to do a full scan of the collection and update each document. MongoDb supports multiple document updates, but it would be slow at &#8220;big data&#8221; scale (remember the <a href="http://stackoverflow.com/questions/17456671/to-what-level-does-mongodb-lock-on-writes-or-what-does-it-mean-by-per-connec">write-lock</a>!). But updates to a new version of the form should only affect <em>new</em> submissions, so this issue is avoided.</p>
+
+<p>If you wanted to request <em>all</em> submissions, and <em>then</em> attempted to &#8220;JOIN&#8221; the form definitions for each one, it would be pretty awful - but that doesn&#8217;t really make sense to do. Generally you start with the form, and get the submissions for that form, not the other way around.</p>
+
+<p>If you are enforcing unique value validation on individual forms, be sure that you have the proper Indexes set on the form_name field in the submission collection, so a <code>find()</code> command to assert that the new value is unique only scans through the submissions for that specific form. With all forms using the same collection, it will get large and indexing is important. If a single form has a huge number of entries it might be necessary to add another index just for that form&#8217;s unique field, but we have not run in to this yet.</p>
+
+<p>One particularly tricky thing you may want to do is retrieve all of the data from multiple versions of a form, <em>which do not have exactly the same field definitions</em>. If you store the entries with the form ID and version, you can easily query them all by just omitting the version number (just like you would when checking for unique field values, etc). The challenge is displaying the data. Since we are not updating existing submissions to reflect form definition changes, some submissions will have missing fields or incorrect types. To handle this, we basically join all of the form&#8217;s version&#8217;s schemas together into a mega-schema, and make sure we have null checks and loose type coercions in our presentation code for the submissions. This is definitely more &#8220;art&#8221; (er, &#8220;hack&#8221;) than science.</p>
+
+<p>One way to help with the issue above is to enforce form definition rules in the application code so that you can&#8217;t make a drastic change to a field definition, like to start using a text field called &#8220;first_name&#8221; to store a date. You could have a rule where you can&#8217;t change field definition types, perhaps, so you have to delete the &#8220;first_name&#8221; field and create a new &#8220;date&#8221; field, to avoid data type mis-matching. (Or you could just restrict queries to single form versions.)</p>
+
+<p>Something else to watch out for is that if you lose a form definition (bad backup?), then the submission data for that form looses it&#8217;s meaning. Or if you accidentally modify the form definition for a version, the submissions for that version start to become incoherent (&#8220;What was &#8216;option1&#8217; defined as in the form definition? How many options were there?&#8221;).</p>
+
+<p>Finally (although I haven&#8217;t done a comparison), I assume this is not as space efficient as normalizing the data into a relational DB since you are duplicating the form name and version in each submission, as well as the field key names. Perhaps MongoDb handles this in some clever way, but I&#8217;m not aware of it.</p>
+
+<h2>Conclusion</h2>
+
+<p>You could still argue that it would be better to normalize this into a Entity-Attribute-Value style relational store with a de-normalized caching layer on top holding the final JOINed object. There are, after all, relations between each submission&#8217;s data values and the form&#8217;s definition. But this has been easier to develop, and so far we have not run in to any show stopping issues.</p>
+
+<p>There are trade-offs with any ORM, and giant pitfalls to look out for whenever you have lots of dynamic schema data like this. Most of our application runs on SQL, but we plan to continue to use MongoDb for this component - at least until we don&#8217;t. ;)</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Evan Johnson</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time class="published updated" datetime="2013-11-11T13:53:00-07:00" pubdate data-updated="true">Nov 11<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/categories/databases/'>Databases</a>, <a class='category' href='/categories/mongodb/'>MongoDB</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://chilipepperdesign.com/2013/11/11/versioned-data-model-definitions-with-mongodb/" data-via="thaddeusmt" data-counturl="http://chilipepperdesign.com/2013/11/11/versioned-data-model-definitions-with-mongodb/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2013/06/27/javascript-unit-testing-with-jamine-phantomjs-karma/" title="Previous Post: JavaScript unit testing with Jasmine, PhantomJs and Karma">&laquo; JavaScript unit testing with Jasmine, PhantomJs and Karma</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+    <h1>About Me</h1>
+    <p><img id="profile-image" src="http://www.gravatar.com/avatar/02bee2f91e0a8c3aefbfa6bfb5304c51" alt="Gravatar of thaddeusmt"  />My name is Evan Johnson. I'm a software developer from Montana, who spent some time in Nebraska. I'm the chief software architect at <a href="http://splashlabsocial.com">SplashLab Social</a>, but I am blogging here on my old freelance web design URL for fun. I hope you find something useful here, thanks for visiting! Cheers</p>
+    <p><a class="twitter-link" href="http://twitter.com/thaddeusmt" title="@thaddeusmt on Twitter"><img src="/images/twitter-bird-16x16.png" /></a> <a class="googleplus-link" href="//plus.google.com/115669497324630841356?prsrc=3" rel="author" title="Evan Johnson on Google+"><img src="//ssl.gstatic.com/images/icons/gplus-16.png" alt="Google+" /></a></p>
+</section><section>
+  <h1>Related Posts</h1>
+  <ul id="related_posts">
+    
+      <li class="post">
+        <a href="/2013/06/27/javascript-unit-testing-with-jamine-phantomjs-karma/">JavaScript unit testing with Jasmine, PhantomJs and Karma</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/01/18/facebook-graph-search-facebook-page-optimization/">Facebook Page Optimization for Graph Search</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/01/15/backbone-js-bind-callback-to-successful-model-fetch/">Backbone.js: Bind Callback to Successful Model Fetch</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/01/07/deploying-code-with-git/">Deploying code with Git</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/12/27/new-hipster-hacker-octopress-blog/">New Hipster Hacker Blog</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/categories/apache/'>Apache (1)</a></li>
+<li class='category'><a href='/categories/backbone-js/'>Backbone.js (1)</a></li>
+<li class='category'><a href='/categories/css/'>CSS (2)</a></li>
+<li class='category'><a href='/categories/databases/'>Databases (1)</a></li>
+<li class='category'><a href='/categories/drupal/'>Drupal (2)</a></li>
+<li class='category'><a href='/categories/facebook/'>Facebook (7)</a></li>
+<li class='category'><a href='/categories/git/'>Git (1)</a></li>
+<li class='category'><a href='/categories/javascript/'>JavaScript (5)</a></li>
+<li class='category'><a href='/categories/linux/'>Linux (3)</a></li>
+<li class='category'><a href='/categories/magento/'>Magento (11)</a></li>
+<li class='category'><a href='/categories/meta/'>Meta (5)</a></li>
+<li class='category'><a href='/categories/mongodb/'>MongoDB (1)</a></li>
+<li class='category'><a href='/categories/nginx/'>Nginx (3)</a></li>
+<li class='category'><a href='/categories/reviews/'>Reviews (1)</a></li>
+<li class='category'><a href='/categories/ruby/'>Ruby (1)</a></li>
+<li class='category'><a href='/categories/seo/'>SEO (3)</a></li>
+<li class='category'><a href='/categories/sysadmin/'>Sysadmin (4)</a></li>
+<li class='category'><a href='/categories/wordpress/'>WordPress (3)</a></li>
+<li class='category'><a href='/categories/jquery/'>jQuery (2)</a></li>
+
+  </ul>
+</section>
+<section>
+  <h1>Latest Tweets</h1>
+    <p>
+    
+    <a href="http://twitter.com/thaddeusmt" class="twitter-follow-button" data-show-count="false">Follow @thaddeusmt</a>
+    
+    <a class="twitter-timeline" href="https://twitter.com/thaddeusmt" data-widget-id="400042347972395008"
+       data-link-color="#750000" height="300" data-chrome="noheader transparent" lang="EN">Tweets by @thaddeusmt</a>
+    </p>
+</section>
+
+<section>
+  <h1>StackOverflow</h1>
+  <a id="stackoverflow-badge" href="http://stackoverflow.com/users/164439/thaddeusmt"><img src="http://stackoverflow.com/users/flair/164439.png" width="208" height="58" alt="profile for thaddeusmt at Stack Overflow, Q&amp;A for professional and enthusiast programmers" title="profile for thaddeusmt at Stack Overflow, Q&amp;A for professional and enthusiast programmers"></a>
+</section>
+<section>
+  <h1>Coderwall</h1>
+  <ul id="cw_badges">
+    <li class="loading">Status updating...</li>
+  </ul>
+
+  <script type="text/javascript">
+    var coderwall = (function(){
+      function render(options, badges){
+        var fragment = '',
+            t = $(options.target)[0],
+            height = 65,
+            width = 65,
+            index;
+
+        for (index in badges) {
+          fragment += '<a class="cw_badge"title="' + badges[index].description + '" href="http://coderwall.com/' + options.user + '">';
+          fragment +=   '<img alt="' + badges[index].description + '" height="' + width + '" width="' + height + '" src="' + badges[index].badge + '"/>';
+          fragment += '</a>';
+        }
+
+        t.innerHTML = fragment;
+      }
+      return {
+        showBadges: function(options){
+          $.ajax({
+              url: 'http://coderwall.com/' + options.user + '.json?callback=?'
+            , type: 'jsonp'
+            , error: function (err) { $(options.target + ' li.loading').addClass('error').text("Error loading feed"); }
+            , success: function(res) {
+                render(options, res.data.badges);
+            }
+          });
+        }
+      };
+    })();
+
+    $.domReady(function(){
+      if (!window.jXHR){
+        var jxhr = document.createElement('script');
+        jxhr.type = 'text/javascript';
+        jxhr.src = '/javascripts/libs/jXHR.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(jxhr, s);
+      }
+      if (!window.$){
+        var b = document.createElement('script');
+        b.type = 'text/javascript';
+        b.src = '/javascripts/ender.js';
+        var sc = document.getElementsByTagName('script')[0];
+        sc.parentNode.insertBefore(jxhr, s);
+      }
+      coderwall.showBadges({
+        user: 'thaddeusmt',
+        target: '#cw_badges'
+      });
+    });
+  </script>
+  <style type="text/css">
+    .cw_badge img {
+      padding: 5px;
+      border: 0 none !important;
+      -moz-box-shadow: none !important;
+      -webkit-box-shadow: none !important;
+      -o-box-shadow: none !important;
+      box-shadow: none !important;
+    }
+  </style>
+</section>
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Evan Johnson -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'chilipepperdesign';
+      
+        
+              // var disqus_developer = 1;
+        
+           var disqus_identifier = 'http://www.chilipepperdesign.com/2013/11/11/versioned-data-model-definitions-with-mongodb/';
+        
+
+        var disqus_url = 'http://www.chilipepperdesign.com/2013/11/11/versioned-data-model-definitions-with-mongodb/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

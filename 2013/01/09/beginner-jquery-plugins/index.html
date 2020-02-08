@@ -1,0 +1,405 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Beginner jQuery Plugins - Chili Pepper Design</title>
+  <meta name="author" content="Evan Johnson">
+
+  
+  <meta name="description" content="Tutorials, how-tos, musings, and code snippets about web development and technology. Using PHP, jQuery, mySql, MongoDB and more.">
+  <meta name="keywords" content="jquery,js,plugins,javascript,jquery plugins">
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://chilipepperdesign.com/2013/01/09/beginner-jquery-plugins/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Chili Pepper Design" type="application/atom+xml">
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+  <meta property="og:type" content="website" />
+
+    <meta property="og:url" content="http://chilipepperdesign.com/2013/01/09/beginner-jquery-plugins/">
+    <meta property="og:title" content="Beginner jQuery Plugins">
+
+
+    
+        <meta property="og:image" content="http://chilipepperdesign.com/square-logo.jpg">
+    
+
+
+    
+        <meta property="og:description" content="Tutorials, how-tos, musings, and code snippets about web development and technology. Using PHP, jQuery, mySql, MongoDB and more.">
+    
+
+
+<meta property="fb:app_id" content="171392359587743" />
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-6058373-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Chili Pepper Design</a></h1>
+  
+    <h2>Web development relleno</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:chilipepperdesign.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/projects">Projects</a></li>
+  <li><a href="/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Beginner jQuery Plugins</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time class="published updated" datetime="2013-01-09T16:16:00-07:00" pubdate data-updated="true">Jan 9<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>This post is about my attempts to write modular JavaScript with a semblance of organization, learned about jQuery plugins along the way, and am pretty sure that there is a better way I&#8217;ll try next.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Evan Johnson</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time class="published updated" datetime="2013-01-09T16:16:00-07:00" pubdate data-updated="true">Jan 9<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/categories/javascript/'>JavaScript</a>, <a class='category' href='/categories/jquery/'>jQuery</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://chilipepperdesign.com/2013/01/09/beginner-jquery-plugins/" data-via="thaddeusmt" data-counturl="http://chilipepperdesign.com/2013/01/09/beginner-jquery-plugins/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2013/01/07/deploying-code-with-git/" title="Previous Post: Deploying code with Git">&laquo; Deploying code with Git</a>
+      
+      
+        <a class="basic-alignment right" href="/2013/01/15/backbone-js-bind-callback-to-successful-model-fetch/" title="Next Post: Backbone.js: Bind Callback to Successful Model Fetch">Backbone.js: Bind Callback to Successful Model Fetch &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+    <h1>About Me</h1>
+    <p><img id="profile-image" src="http://www.gravatar.com/avatar/02bee2f91e0a8c3aefbfa6bfb5304c51" alt="Gravatar of thaddeusmt"  />My name is Evan Johnson. I'm a software developer from Montana, who spent some time in Nebraska. I'm the chief software architect at <a href="http://splashlabsocial.com">SplashLab Social</a>, but I am blogging here on my old freelance web design URL for fun. I hope you find something useful here, thanks for visiting! Cheers</p>
+    <p><a class="twitter-link" href="http://twitter.com/thaddeusmt" title="@thaddeusmt on Twitter"><img src="/images/twitter-bird-16x16.png" /></a> <a class="googleplus-link" href="//plus.google.com/115669497324630841356?prsrc=3" rel="author" title="Evan Johnson on Google+"><img src="//ssl.gstatic.com/images/icons/gplus-16.png" alt="Google+" /></a></p>
+</section><section>
+  <h1>Related Posts</h1>
+  <ul id="related_posts">
+    
+      <li class="post">
+        <a href="/2013/11/11/versioned-data-model-definitions-with-mongodb/">A use case for MongoDb: Versioned static data model definitions</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/06/27/deploying-php-code-with-fabric/">Deploying PHP code with Fabric</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/06/27/twitter-streaming-api-with-php/">The Twitter Streaming API with PHP</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/06/27/mvc-view-render-modes/"></a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/06/27/multi-tenant-mongodb/">Multi-tenant MongoDb</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/categories/apache/'>Apache (1)</a></li>
+<li class='category'><a href='/categories/backbone-js/'>Backbone.js (1)</a></li>
+<li class='category'><a href='/categories/css/'>CSS (2)</a></li>
+<li class='category'><a href='/categories/data-science/'>Data Science (1)</a></li>
+<li class='category'><a href='/categories/databases/'>Databases (1)</a></li>
+<li class='category'><a href='/categories/drupal/'>Drupal (2)</a></li>
+<li class='category'><a href='/categories/facebook/'>Facebook (7)</a></li>
+<li class='category'><a href='/categories/git/'>Git (1)</a></li>
+<li class='category'><a href='/categories/javascript/'>JavaScript (6)</a></li>
+<li class='category'><a href='/categories/linux/'>Linux (3)</a></li>
+<li class='category'><a href='/categories/magento/'>Magento (11)</a></li>
+<li class='category'><a href='/categories/meta/'>Meta (6)</a></li>
+<li class='category'><a href='/categories/mongodb/'>MongoDB (3)</a></li>
+<li class='category'><a href='/categories/nginx/'>Nginx (3)</a></li>
+<li class='category'><a href='/categories/php/'>PHP (6)</a></li>
+<li class='category'><a href='/categories/reviews/'>Reviews (1)</a></li>
+<li class='category'><a href='/categories/ruby/'>Ruby (1)</a></li>
+<li class='category'><a href='/categories/seo/'>SEO (3)</a></li>
+<li class='category'><a href='/categories/sysadmin/'>Sysadmin (7)</a></li>
+<li class='category'><a href='/categories/wordpress/'>WordPress (3)</a></li>
+<li class='category'><a href='/categories/jquery/'>jQuery (3)</a></li>
+
+  </ul>
+</section>
+<section>
+  <h1>Latest Tweets</h1>
+    <p>
+    
+    <a href="http://twitter.com/thaddeusmt" class="twitter-follow-button" data-show-count="false">Follow @thaddeusmt</a>
+    
+    <a class="twitter-timeline" href="https://twitter.com/thaddeusmt" data-widget-id="400042347972395008"
+       data-link-color="#750000" height="300" data-chrome="noheader transparent" lang="EN">Tweets by @thaddeusmt</a>
+    </p>
+</section>
+
+<section>
+  <h1>StackOverflow</h1>
+  <a id="stackoverflow-badge" href="http://stackoverflow.com/users/164439/thaddeusmt"><img src="http://stackoverflow.com/users/flair/164439.png" width="208" height="58" alt="profile for thaddeusmt at Stack Overflow, Q&amp;A for professional and enthusiast programmers" title="profile for thaddeusmt at Stack Overflow, Q&amp;A for professional and enthusiast programmers"></a>
+</section>
+<section>
+  <h1>Coderwall</h1>
+  <ul id="cw_badges">
+    <li class="loading">Status updating...</li>
+  </ul>
+
+  <script type="text/javascript">
+    var coderwall = (function(){
+      function render(options, badges){
+        var fragment = '',
+            t = $(options.target)[0],
+            height = 65,
+            width = 65,
+            index;
+
+        for (index in badges) {
+          fragment += '<a class="cw_badge"title="' + badges[index].description + '" href="http://coderwall.com/' + options.user + '">';
+          fragment +=   '<img alt="' + badges[index].description + '" height="' + width + '" width="' + height + '" src="' + badges[index].badge + '"/>';
+          fragment += '</a>';
+        }
+
+        t.innerHTML = fragment;
+      }
+      return {
+        showBadges: function(options){
+          $.ajax({
+              url: 'http://coderwall.com/' + options.user + '.json?callback=?'
+            , type: 'jsonp'
+            , error: function (err) { $(options.target + ' li.loading').addClass('error').text("Error loading feed"); }
+            , success: function(res) {
+                render(options, res.data.badges);
+            }
+          });
+        }
+      };
+    })();
+
+    $.domReady(function(){
+      if (!window.jXHR){
+        var jxhr = document.createElement('script');
+        jxhr.type = 'text/javascript';
+        jxhr.src = '/javascripts/libs/jXHR.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(jxhr, s);
+      }
+      if (!window.$){
+        var b = document.createElement('script');
+        b.type = 'text/javascript';
+        b.src = '/javascripts/ender.js';
+        var sc = document.getElementsByTagName('script')[0];
+        sc.parentNode.insertBefore(jxhr, s);
+      }
+      coderwall.showBadges({
+        user: 'thaddeusmt',
+        target: '#cw_badges'
+      });
+    });
+  </script>
+  <style type="text/css">
+    .cw_badge img {
+      padding: 5px;
+      border: 0 none !important;
+      -moz-box-shadow: none !important;
+      -webkit-box-shadow: none !important;
+      -o-box-shadow: none !important;
+      box-shadow: none !important;
+    }
+  </style>
+</section>
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Evan Johnson -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'chilipepperdesign';
+      
+        
+              // var disqus_developer = 1;
+        
+           var disqus_identifier = 'http://www.chilipepperdesign.com/2013/01/09/beginner-jquery-plugins/';
+        
+
+        var disqus_url = 'http://www.chilipepperdesign.com/2013/01/09/beginner-jquery-plugins/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
